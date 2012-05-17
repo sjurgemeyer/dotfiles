@@ -1,5 +1,4 @@
 sudo ln -s ~/projects/dotfiles/.ctags ~/.ctags
-sudo ln -s ~/projects/dotfiles/.git ~/.git
 sudo ln -s ~/projects/dotfiles/.gitconfig ~/.gitconfig
 sudo ln -s ~/projects/dotfiles/.gitignore_global ~/.gitignore_global
 sudo ln -s ~/projects/dotfiles/.gvimrc ~/.gvimrc
