@@ -1,0 +1,78 @@
+
+[ui]
+merge = splice
+# merge = kdiff3
+username=Shaun Jurgemeyer  <sjurgemeyer@gmail.com>
+editor = mvim 
+ignore=/Users/sjurgemeyer/.hgignore
+
+[extensions]
+hgext.extdiff =
+extdiff =
+fetch =
+hgk=
+color=
+hgext.graphlog =
+# hgshelve=/Users/ted/Documents/workspace/hgshelve/hgshelve.py
+bookmarks=
+# refer to a parent using ^, or ^-N
+parentrevspec =
+#pager=
+hgext.mq =
+hgext.record=
+# zeroconf=   # share via bonjour, use paths to see what's available
+transplant=
+# progress= # part of hg 1.5
+churn=
+rebase=
+prompt = /Users/sjurgemeyer/projects/reference/hg-prompt/prompt.py
+
+#[pager]
+#pager = LESS='FSRX' less
+#attend = log
+#version, help, update, push, pull, merge, fetch, convert, clone, record, crecord, grep, add, addremove
+
+
+[diff]
+git = 1
+
+[extdiff]
+cmd.dw = /Applications/DeltaWalker.app/Contents/MacOS/hg
+cmd.vimdiff = mvim
+cmd.chdiff=
+opts.chdiff= --wait
+cmd.kdiff3=
+cmd.ksdiff = /usr/local/bin/ksdiff-wrapper
+opts.ksdiff = hg
+
+cmd.sourcetreediff=opendiff
+opts.sourcetreediff=
+[merge-tools]
+vimdiff.executable = mvim
+vimdiff.args = -df $base $local $output $other -c "wincmd J"
+#dw.executable = /Applications/DeltaWalker.app/Contents/MacOS/hg
+#dw.args = $local $other $base -merged=$output
+#filemerge.executable = chmerge.sh
+#kdiff3.args = $base $local $other -o $output
+#vimdiff.args = -d $base $local $output $other +close +close
+splice.executable = mvim
+splice.args = -f $base $local $other $output -c 'SpliceInit'
+splice.premerge = keep
+splice.priority = 1
+
+sourcetreemerge.gui=False
+sourcetreebulkmerge.gui=False
+sourcetreemerge.binary=False
+sourcetreebulkmerge.executable=/Applications/SourceTree.app/Contents/Resources/hg-merge.sh
+sourcetreemerge.args=$local $other -ancestor $base -merge $output
+sourcetreemerge.checkconflicts=True
+sourcetreemerge.premerge=True
+sourcetreemerge.executable=/Applications/SourceTree.app/Contents/Resources/opendiff-w.sh
+sourcetreebulkmerge.premerge=False
+sourcetreebulkmerge.binary=True
+[alias]
+nudge = push --rev .
+slog = log --style=/Users/sjurgemeyer/.mercurial-cli-templates/map-cmdline.slog
+nlog = log --style=/Users/sjurgemeyer/.mercurial-cli-templates/map-cmdline.nlog
+sglog = glog --style=/Users/sjurgemeyer/.mercurial-cli-templates/map-cmdline.sglog
+
