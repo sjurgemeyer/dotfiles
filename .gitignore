@@ -9,4 +9,6 @@
 .vim/bundle/vcscommand/*
 .vim/bundle/vim-pathogen/*
 .vim/bundle/vim-powerline/*
+.vim/backup/*
+.vim/undo/*
 
