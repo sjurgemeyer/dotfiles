@@ -1,0 +1,91 @@
+snippet main
+	public static void main (String [] args)
+	{
+		${1:/* code */}
+	}
+snippet de
+	default:
+		${1}
+snippet ca
+	catch(${1:Exception} ${2:e}) ${3}
+snippet th
+	throw new ${1:Exception}()${2}
+snippet if
+	if (${1}) ${2}
+snippet el
+	else 
+snippet elif
+	else if (${1}) ${2}
+snippet wh
+	while (${1}) ${2}
+snippet for
+	for (${1}; ${2}; ${3}) ${4}
+snippet fore
+	for (${1} : ${2}) ${3}
+snippet sw
+	switch (${1}) ${2}
+snippet cs
+	case ${1}:
+		${2}
+	${3}
+snippet tc
+	public class ${1:`Filename()`} extends ${2:TestCase}
+snippet t
+	void test${1:Method}() {
+		${2}
+	}
+snippet su 
+	void setUp() {
+		super.setUp()
+		${1}
+	}
+snippet tb
+	def ${1:object} = ${2:$1}.build(${3})
+snippet cl
+	package com.bloomhealthco.${1}
+	class ${2:`Filename("", "untitled")`} {
+		${3}
+	}
+snippet in
+	interface ${1:`Filename("", "untitled")`} ${2:extends Parent}${3}
+snippet v
+	${1:String} ${2:var}${3: = null}${4};${5}
+snippet co
+	public static final ${1:String} ${2:var} = ${3};${4}
+snippet cos
+	public static final String ${1:var} = "${2}";${3}
+snippet as
+	assert ${1:test} : "${2:Failure message}";${3}
+snippet ib
+	import com.bloomhealthco.
+snippet ibd
+	import com.bloomhealthco.domain.*
+snippet ij
+	import org.joda.time.LocalDate
+snippet ea
+	each { ${1:it} ->
+		$1${2}
+	}
+snippet ts
+	public String toString() {
+		${1}
+	}
+snippet pl
+	println "${1:it} $$1"
+snippet spec
+	package com.opi
+	import spock.lang.Specification
+
+	class ${1:`Filename("", "untitled")`} extends Specification {
+		${2}
+	}
+snippet mf 
+	def ${1:myService}Mock = mockFor($1)
+	$1Mock.demand.${2} { ${3} ->
+		${4}	
+	}
+	${5:def} $1 = $1Mock.createMock()
+	$1Mock.verify()
+snippet ai
+	assert ${1:member}.is($1_) 
+
