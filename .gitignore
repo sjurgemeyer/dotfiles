@@ -1,0 +1,12 @@
+.vim/bundle/VimClojure/*
+.vim/bundle/clam.vim/*
+.vim/bundle/ctrlp.vim/*
+.vim/bundle/gundo.vim/*
+.vim/bundle/nerdtree/*
+.vim/bundle/snipmate.vim/*
+.vim/bundle/splice.vim/*
+.vim/bundle/syntastic/*
+.vim/bundle/vcscommand/*
+.vim/bundle/vim-pathogen/*
+.vim/bundle/vim-powerline/*
+
