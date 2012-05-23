@@ -9,3 +9,5 @@ sudo ln -s ~/projects/dotfiles/.ted_grails_complete ~/.ted_grails_complete
 sudo ln -s ~/projects/dotfiles/.vim ~/.vim
 sudo ln -s ~/projects/dotfiles/.vimrc ~/.vimrc
 sudo ln -s ~/projects/dotfiles/.zshrc ~/.zshrc
+sudo ln -s ~/projects/dotfiles/z-zsh/z.sh /usr/local/bin/z.sh
+

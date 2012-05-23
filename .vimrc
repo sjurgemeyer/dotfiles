@@ -64,16 +64,15 @@ let g:SuperTabMappingForward = '<c-space>'
 let g:SuperTabMappingBackward = '<s-c-space>'
 let g:SuperTabLongestEnhanced = 1
 
-"quick switch to last edited file (Using bufexplorer)
-map <C-tab> <Esc>,bej<CR>
-"when file list is open
-map <A-tab> <Esc>,bejj<CR>
-"open buffer explorer
-map <C-S-tab> <Esc>,be
+"quick switch to last edited file (Using buffergator)
+map <C-tab> <Esc>,bj<CR>
+"Skip over one
+map <A-tab> <Esc>,bjj<CR>
 
 "NERDTree
 map <F2> <Esc>:NERDTreeToggle<CR>
-map <F3> <Esc>:TlistToggle<CR>
+map <F4> <Esc>:TlistToggle<CR>
+nmap <F3> :TagbarToggle<CR>
 map <A-F1> <Esc>:NERDTreeFind<CR>
 
 "EasyGrep
@@ -232,3 +231,27 @@ function! RemoveSwapFile()
 endfunction
 command! RemoveSwapFile :call RemoveSwapFile()
 
+function! LookupJavadoc()
+    let word = expand("<cword>")
+    :execute "!open https://www.google.com/search?q=" . word . "+javadoc"
+endfunction 
+command! LookupJavadoc :call LookupJavadoc()
+map <A-j> <Esc>:LookupJavadoc<CR>
+
+let g:buffergator_sort_regime="mru"
+let g:tagbar_type_groovy= {
+    \ 'ctagstype' : 'groovy',
+    \ 'kinds'     : [
+        \ 'p:packages:1',
+        \ 'V:values',
+        \ 'v:variables',
+        \ 'T:types',
+        \ 'f:function',
+        \ 't:traits',
+        \ 'o:objects',
+        \ 'a:aclasses',
+        \ 'c:classes',
+        \ 'r:cclasses',
+        \ 'm:methods'
+    \ ]
+\ }

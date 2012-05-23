@@ -11,4 +11,5 @@
 .vim/bundle/vim-powerline/*
 .vim/backup/*
 .vim/undo/*
+z-zsh/*
 
