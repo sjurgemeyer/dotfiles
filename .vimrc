@@ -255,3 +255,7 @@ let g:tagbar_type_groovy= {
         \ 'm:methods'
     \ ]
 \ }
+
+"NerdCOmmenter
+let NERDCreateDefaultMappings=0
+map <leader>/ <plug>NERDCommenterToggle
