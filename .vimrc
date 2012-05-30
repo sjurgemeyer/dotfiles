@@ -98,17 +98,6 @@ vmap <D-]> :s/,\n/, /g<CR>
 "clear current highlighting
 map <C-c> :nohlsearch<CR>
 
-"ctags
-command! Tag :call GenerateCTags()
-function! GenerateCTags() 
-   let file = expand("%:p:h")
-   execute ":!ctags -f " . file . "/.tags " . file . "/*"
-endfunction
-map <Leader>g <C-]>
-"Taglist plugin
-let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
-let Tlist_File_Fold_Auto_Close = 1
-
 "Toggle case (UPPER, lower, Mixed) for visual selection
 function! TwiddleCase(str)
   if a:str ==# toupper(a:str)
@@ -259,3 +248,11 @@ let g:tagbar_type_groovy= {
 "NerdCOmmenter
 let NERDCreateDefaultMappings=0
 map <leader>/ <plug>NERDCommenterToggle
+
+"Shortcuts to change background color
+command! Green :colorscheme shaun-green
+command! Red :colorscheme shaun-red
+command! Blue :colorscheme shaun-blue
+command! Black :colorscheme shaun
+command! Ses :mks! ~/session.vim
+

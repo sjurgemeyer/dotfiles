@@ -137,4 +137,4 @@ killit() {
 function precmd () {
  z --add "$(pwd -P)"
 }
-
+alias vs=v -S ~/session.vim
