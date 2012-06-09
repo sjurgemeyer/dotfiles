@@ -10,4 +10,5 @@ sudo ln -s ~/projects/dotfiles/.vim ~/.vim
 sudo ln -s ~/projects/dotfiles/.vimrc ~/.vimrc
 sudo ln -s ~/projects/dotfiles/.zshrc ~/.zshrc
 sudo ln -s ~/projects/dotfiles/z-zsh/z.sh /usr/local/bin/z.sh
+sudo ln -s ~/projects/dotfiles/.oh-my-zsh/themes/shaun.zsh-theme ~/.oh-my-zsh/themes/shaun.zsh-theme
 
