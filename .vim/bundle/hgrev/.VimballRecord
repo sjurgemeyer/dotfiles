@@ -1,0 +1,2 @@
+hgrev.vba.gz: call delete('/Users/sjurgemeyer/.vim/bundle/hgrev//plugin/hgrev.vim')|call delete('/Users/sjurgemeyer/.vim/bundle/hgrev//doc/hgrev.txt')
+hgrev.vba.gz: call delete('/Users/sjurgemeyer/.vim/bundle/hgrev/plugin/hgrev.vim')|call delete('/Users/sjurgemeyer/.vim/bundle/hgrev/doc/hgrev.txt')

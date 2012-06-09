@@ -96,7 +96,7 @@ function! RunGrailsTest(testName)
         let flag = "unit:unit"
     endif
     ":call RunInTerminal ("grails -classpath /Users/sjurgemeyer/projects/groovy-debugger/build/libs/gdb.jar -Dprintln.test.logs=true test-app " . flag . " " . a:testName) 
-    :call RunInTerminal ("test-app " . flag . " " . a:testName) 
+    :call RunInTerminal ("grails test-app " . flag . " " . a:testName) 
     ":call RunInVim ("grails -Dprintln.test.logs=true test-app " . flag . " " . a:testName) 
 endfunction
 

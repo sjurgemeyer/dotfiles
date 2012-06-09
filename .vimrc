@@ -29,7 +29,7 @@ set backspace=indent,eol,start
 set laststatus=2
 " set relativenumber
 set undofile
-
+"set winwidth=120
 set wildignore+=*.class,.git,.hg,.svn,test-integration/**,test-unit/**,**/target/**
 
 set tags=./.tags
@@ -65,7 +65,7 @@ let g:SuperTabMappingBackward = '<s-c-space>'
 let g:SuperTabLongestEnhanced = 1
 
 "quick switch to last edited file (Using buffergator)
-map <C-tab> <Esc>,bj<CR>
+map <C-tab> <C-^>
 "Skip over one
 map <A-tab> <Esc>,bjj<CR>
 
@@ -256,3 +256,6 @@ command! Blue :colorscheme shaun-blue
 command! Black :colorscheme shaun
 command! Ses :mks! ~/session.vim
 
+"Powerline
+let g:Powerline_symbols='unicode'
+let g:Powerline_stl_path_style='full'
