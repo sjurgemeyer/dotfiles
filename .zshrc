@@ -135,6 +135,6 @@ killit() {
 #z.sh - most recent dirs
 . /usr/local/bin/z.sh
 function precmd () {
- z --add "$(pwd -P)"
+# z --add "$(pwd -P)"
 }
 alias vs=v -S ~/session.vim

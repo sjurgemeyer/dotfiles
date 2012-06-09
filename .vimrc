@@ -1,10 +1,11 @@
-set nocompatible
-set shell=/bin/bash\ -li
 " set shell=/bin/zsh\ -i
-filetype plugin on
-filetype plugin indent on
-syntax on
+filetype off
+set nocompatible
 call pathogen#infect()
+filetype off
+syntax on
+filetype plugin indent on
+set shell=/bin/bash\ -li
 " set modelines=0
 set number
 set nowrap
