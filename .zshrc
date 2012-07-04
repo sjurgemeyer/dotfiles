@@ -70,6 +70,9 @@ alias gtaif=grailsTestAppIntegrationFailed
 alias gtaidf=grailsTestAppIntegrationDebugFailed
 alias results='open target/test-reports/html/index.html'
 
+#aiases for artifactory
+alias mi='grails maven-install'
+
 ############################### Mysql ###############################
 alias mysqlstart='sudo /Library/StartupItems/MySQLCOM/MySQLCOM start'
 alias mysqlstop='sudo /Library/StartupItems/MySQLCOM/MySQLCOM stop'
@@ -110,6 +113,7 @@ hgdiffrevs() {
 ###################### Generic Shell stuff ###########################
 
 alias v='mvim'
+alias b="mvim -c 'cd ~/projects/bloom'"
 
 #export HISTIGNORE="&:ls:exit:ll:v:hs:cdb:history"
 alias mkdir='mkdir -p' #create intermediate directories
@@ -138,3 +142,6 @@ function precmd () {
 # z --add "$(pwd -P)"
 }
 alias vs=v -S ~/session.vim
+source $HOME/projects/reference/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/projects/reference/zsh-history-substring-search/zsh-history-substring-search.zsh
+

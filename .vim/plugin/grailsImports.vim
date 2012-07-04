@@ -1,39 +1,55 @@
 function! InsertImport()
     let classToFind = expand("<cword>")
-    let pathList = split(globpath('.', '**/' . classToFind . '.groovy'), '/')
+    let paths = globpath('.', '**/' . classToFind . '.groovy')
+    let multiplePaths = split(paths, '\n')
+    let filePathList = []
+    for p in multiplePaths
+        :call add(filePathList, split(p, '/'))
+    endfor
     let idx = 0
     
+    let pathList = []
     "Looking up class in text file
-    if pathList == []
+    if filePathList == []
        for line in s:loaded_data
            let tempClassList = split(line, '\.')
            if len(tempClassList) && tempClassList[-1] == classToFind
-               let pathList = tempClassList
-               :call add(pathList, 'groovy') " Little bit of a hack to make the paths the same length
+               :call add(tempClassList, 'groovy') " Little bit of a hack to make the paths the same length
+               :call add(pathList, tempClassList)
            endif
        endfor
     "Found file in current path, so determine package by path
     else 
-        let seperators = ['domain', 'services', 'groovy', 'taglib', 'controllers', 'integration', 'unit']
-        let idx = len(pathList)
-        for sep in seperators
-           let tempIdx = index(pathList, sep) 
-           if tempIdx > 0
-               if tempIdx < idx
-                    let idx = tempIdx + 1
+        for f in filePathList
+            let seperators = ['domain', 'services', 'groovy', 'taglib', 'controllers', 'integration', 'unit']
+
+            let idx = len(f)
+            for sep in seperators
+               let tempIdx = index(f, sep) 
+               if tempIdx > 0
+                   if tempIdx < idx
+                        let idx = tempIdx + 1
+                   endif
                endif
-           endif
+            endfor
+            let trimmedPath = f[idx :-1]
+            :call add(pathList, trimmedPath)
         endfor
     endif
     if pathList == []
         echoerr "no file found"
     else
-        let import = 'import ' . join(split(join(pathList[idx :-1], '.'),'\.')[0:-2], '.')
-        :let pos = getpos('.')
-        :execute "normal ggo"
-        :execute "normal I" . import . "\<Esc>"
-        :execute "normal " . (pos[1] + 1) . "G"
+        for pa in pathList
+            let import = 'import ' . join(split(join(pa, '.'),'\.')[0:-2], '.')
+            :let pos = getpos('.')
+            :execute "normal ggo"
+            :execute "normal I" . import . "\<Esc>"
+            :execute "normal " . (pos[1] + 1) . "G"
+        endfor
         :call OrganizeImports() 
+        if len(pathList) > 1
+            echoerr "Warning: Multiple imports created!"
+        endif
     endif
 
 endfunction

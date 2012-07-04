@@ -26,3 +26,6 @@ cd ../vim-pathogen
 git pull
 cd ../vim-powerline
 git pull
+cd ../linediff.vim
+git pull
+
