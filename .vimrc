@@ -40,6 +40,8 @@ let g:vim_terminal="/dev/ttys000"
 let g:run_script = "!osascript ~/.vim/tools/run_command.applescript" 
 
 set ic
+set smartcase
+set incsearch 
 set hls
 set clipboard=unnamed
 

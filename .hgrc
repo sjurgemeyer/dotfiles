@@ -26,7 +26,7 @@ transplant=
 churn=
 rebase=
 prompt = /Users/sjurgemeyer/projects/reference/hg-prompt/prompt.py
-hgshelve=/Users/sjurgemeyer/projects/reference/hgshelve/hgshelve.py
+# hgshelve=/Users/sjurgemeyer/projects/reference/hgshelve/hgshelve.py
 
 #[pager]
 #pager = LESS='FSRX' less

@@ -142,6 +142,6 @@ function precmd () {
 # z --add "$(pwd -P)"
 }
 alias vs=v -S ~/session.vim
-source $HOME/projects/reference/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $HOME/projects/reference/zsh-history-substring-search/zsh-history-substring-search.zsh
+source $HOME/projects/dotfiles/dependencies/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/projects/dotfiles/dependencies/zsh-history-substring-search/zsh-history-substring-search.zsh
 
