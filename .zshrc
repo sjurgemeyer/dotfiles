@@ -136,12 +136,6 @@ killit() {
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
 
-#z.sh - most recent dirs
-. /usr/local/bin/z.sh
-function precmd () {
-# z --add "$(pwd -P)"
-}
-alias vs=v -S ~/session.vim
 source $HOME/projects/dotfiles/dependencies/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $HOME/projects/dotfiles/dependencies/zsh-history-substring-search/zsh-history-substring-search.zsh
 
