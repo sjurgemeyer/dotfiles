@@ -17,6 +17,8 @@ set path+=**
 set encoding=utf-8
 set scrolloff=20
 set autoindent
+set autoread 
+set shiftround
 set showmode
 set showcmd
 set hidden
@@ -28,9 +30,10 @@ set ttyfast
 set ruler
 set backspace=indent,eol,start
 set laststatus=2
+set macmeta "use Mac option key as a meta key
 " set relativenumber
 set undofile
-"set winwidth=120
+"set winwidth=119
 set wildignore+=*.class,.git,.hg,.svn,test-integration/**,test-unit/**,**/target/**
 set guifont=Source\ Code\ Pro\ Semibold:h13
 
@@ -78,6 +81,9 @@ map <F2> <Esc>:NERDTreeToggle<CR>
 map <F4> <Esc>:TlistToggle<CR>
 nmap <F3> :TagbarToggle<CR>
 map <A-F1> <Esc>:NERDTreeFind<CR>
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+let NERDTreeQuitOnOpen = 1
 
 "Close all navigation windows
 map <F13> :call CloseNavigation()<CR>
@@ -273,3 +279,8 @@ command! Ses :mks! ~/session.vim
 "Powerline
 let g:Powerline_symbols='unicode'
 let g:Powerline_stl_path_style='full'
+
+"Cleanup quickfix
+au Filetype qf setl nolist 
+au Filetype qf setl nocursorline 
+au Filetype qf setl nowrap

@@ -27,6 +27,7 @@ churn=
 rebase=
 purge=
 prompt = /Users/sjurgemeyer/projects/reference/hg-prompt/prompt.py
+purge =
 # hgshelve=/Users/sjurgemeyer/projects/reference/hgshelve/hgshelve.py
 sst = !hg status $($HG root) $HG_ARGS
 #[pager]

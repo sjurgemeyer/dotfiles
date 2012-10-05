@@ -24,4 +24,6 @@ rm -Rf /usr/local/bin/z.sh
 sudo ln -s ~/projects/dotfiles/z-zsh/z.sh /usr/local/bin/z.sh
 rm -Rf ~/.oh-my-zsh/themes/shaun.zsh-theme
 sudo ln -s ~/projects/dotfiles/.oh-my-zsh/themes/shaun.zsh-theme ~/.oh-my-zsh/themes/shaun.zsh-theme
+rm /Users/sjurgemeyer/Library/Application\ Support/KeyRemap4MacBook/private.xml
+sudo ln -s ~/projects/dotfiles/dependencies/private.xml ~/Library/Application\ Support/KeyRemap4MacBook/private.xml
 
