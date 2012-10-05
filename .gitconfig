@@ -9,10 +9,13 @@
 [mergetool "mvim"]
     cmd = mvim -df $BASE $LOCAL $MERGED $REMOTE -c \"wincmd J\"
     mvim
+[mergetool "splice"]
+    cmd = "mvim -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
+    trustExitCode = true
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [color]
 	ui = true
 [merge]
-	tool = mvim
+	tool = splice
