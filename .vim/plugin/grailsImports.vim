@@ -55,7 +55,7 @@ function! InsertImport()
 endfunction
 
 command! InsertImport :call InsertImport() 
-map <D-y> :InsertImport <CR>
+map <D-i> :InsertImport <CR>
 
 function! OrganizeImports()
     :let pos = getpos('.')

@@ -135,7 +135,7 @@ function! OpenTest()
 endfunction
 
 "Open file under cursor
-map <D-i> :call OpenFileUnderCursor(expand("<cword>"))<CR>
+map <D-y> :call OpenFileUnderCursor(expand("<cword>"))<CR>
 map <Leader>h :call FindSubClasses(expand("<cword>"))<CR>
 
 function! FindSubClasses(filename) 
@@ -144,7 +144,8 @@ endfunction
 
 function! OpenFileUnderCursor(filename)
    let ext = fnamemodify(expand("%:p"), ":t:e")
-   execute ":find " . a:filename . "." . ext 
+   let fname = toupper(strpart(a:filename, 0, 1)) . strpart(a:filename, 1, strlen(a:filename))
+   execute ":find " . fname . "." . ext 
 endfunction
 
 

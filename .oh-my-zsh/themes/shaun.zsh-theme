@@ -1,4 +1,4 @@
-PROMPT='%{$fg[blue]%}✘%{$fg[green]%}%p %{$fg[white]%}%c %{$fg[blue]%}$(git_prompt_info)$(hg_prompt_info)%{$fg[blue]%} ✘ % %{$reset_color%}'
+PROMPT='%{$fg[blue]%}✘%{$fg[white]%} %t %{$fg[blue]%}✘%{$fg[green]%}%p %{$fg[white]%}%c %{$fg[blue]%}$(git_prompt_info)$(hg_prompt_info)%{$fg[blue]%} ✘ % %{$reset_color%}'
 #PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
 #RPROMPT='%{$bg[$(vim_prompt)]%}%{$fg[white]%}$VIMODE%{$reset_color%}'
 # Ξ ⏣ ♫ ☢

@@ -25,9 +25,10 @@ transplant=
 # progress= # part of hg 1.5
 churn=
 rebase=
+purge=
 prompt = /Users/sjurgemeyer/projects/reference/hg-prompt/prompt.py
 # hgshelve=/Users/sjurgemeyer/projects/reference/hgshelve/hgshelve.py
-
+sst = !hg status $($HG root) $HG_ARGS
 #[pager]
 #pager = LESS='FSRX' less
 #attend = log

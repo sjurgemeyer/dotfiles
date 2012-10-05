@@ -32,6 +32,7 @@ set laststatus=2
 set undofile
 "set winwidth=120
 set wildignore+=*.class,.git,.hg,.svn,test-integration/**,test-unit/**,**/target/**
+set guifont=Source\ Code\ Pro\ Semibold:h13
 
 set tags=./.tags
 let mapleader = ","
@@ -77,6 +78,14 @@ map <F2> <Esc>:NERDTreeToggle<CR>
 map <F4> <Esc>:TlistToggle<CR>
 nmap <F3> :TagbarToggle<CR>
 map <A-F1> <Esc>:NERDTreeFind<CR>
+
+"Close all navigation windows
+map <F13> :call CloseNavigation()<CR>
+function! CloseNavigation()
+    :BuffergatorClose
+    :NERDTreeClose
+    :ccl
+endfunction
 
 "EasyGrep
 let g:EasyGrepMode=2

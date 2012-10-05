@@ -13,4 +13,4 @@ git clone https://github.com/vim-scripts/VimClojure.git
 git clone https://github.com/jeetsukumaran/vim-buffergator.git
 git clone https://github.com/majutsushi/tagbar.git
 git clone https://github.com/AndrewRadev/linediff.vim
-
+git clone git://github.com/Raimondi/delimitMate.git

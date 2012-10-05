@@ -28,4 +28,5 @@ cd ../vim-powerline
 git pull
 cd ../linediff.vim
 git pull
-
+cd ../delimitMate
+git pull
