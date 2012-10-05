@@ -144,12 +144,8 @@ p() {
 source $HOME/projects/dotfiles/dependencies/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $HOME/projects/dotfiles/dependencies/zsh-history-substring-search/zsh-history-substring-search.zsh
 
-#let XIKI_DIR=/Library/Ruby/Gems/1.8/gems/xiki-0.6.3
-#source $XIKI_DIR/etc/vim/xiki.vim
 # mkdir and cd
 mkcd () { mkdir -p "$@" && cd "$@"; }
 
-=======
-let XIKI_DIR=/Library/Ruby/Gems/1.8/gems/xiki-0.6.3
-source $XIKI_DIR/etc/vim/xiki.vim
->>>>>>> 5bc8745750a5d6c93688b6950d75c43ef7dfe800
+#let XIKI_DIR=/Library/Ruby/Gems/1.8/gems/xiki-0.6.3
+#source $XIKI_DIR/etc/vim/xiki.vim
