@@ -26,6 +26,7 @@ transplant=
 churn=
 rebase=
 prompt = /Users/sjurgemeyer/projects/reference/hg-prompt/prompt.py
+purge =
 # hgshelve=/Users/sjurgemeyer/projects/reference/hgshelve/hgshelve.py
 
 #[pager]

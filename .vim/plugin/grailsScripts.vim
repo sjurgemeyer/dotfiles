@@ -135,7 +135,7 @@ function! OpenTest()
 endfunction
 
 "Open file under cursor
-map <D-i> :call OpenFileUnderCursor(expand("<cword>"))<CR>
+map <D-y> :call OpenFileUnderCursor(expand("<cword>"))<CR>
 map <Leader>h :call FindSubClasses(expand("<cword>"))<CR>
 
 function! FindSubClasses(filename) 

@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<root>
+<item>
+    <name>Shifts to Parentheses</name>
+    <appendix>Shifts, when pressed alone, type parentheses.  When used with other keys they're normal shifts.</appendix>
+
+    <identifier>private.shifts_to_parens</identifier>
+
+    <!-- This is the basic mapping. -->
+    <autogen>--KeyOverlaidModifier-- KeyCode::SHIFT_R, ModifierFlag::SHIFT_R | ModifierFlag::NONE, KeyCode::SHIFT_R, KeyCode::KEY_0, ModifierFlag::SHIFT_L</autogen>
+    <autogen>--KeyOverlaidModifier-- KeyCode::SHIFT_L, ModifierFlag::SHIFT_L | ModifierFlag::NONE, KeyCode::SHIFT_L, KeyCode::KEY_9, ModifierFlag::SHIFT_R</autogen>
+
+    <!--
+        Remap the "rolls" of () and )( because it's too easy to hit one
+        before finishing the other, and there's no other reason to be
+        pressing both shift keys at once anyway
+    -->
+    <autogen>--KeyToKey-- KeyCode::SHIFT_L, ModifierFlag::SHIFT_R, KeyCode::KEY_0, ModifierFlag::SHIFT_L, KeyCode::KEY_9, ModifierFlag::SHIFT_L</autogen>
+    <autogen>--KeyToKey-- KeyCode::SHIFT_R, ModifierFlag::SHIFT_L, KeyCode::KEY_9, ModifierFlag::SHIFT_L, KeyCode::KEY_0, ModifierFlag::SHIFT_L</autogen>
+
+    <!--
+        Remap Rshift+Space to ') ', because when typing an end paren and
+        then a space I tend to hit space before I let go of rshift.
+    -->
+    <autogen>--KeyToKey-- KeyCode::SPACE, ModifierFlag::SHIFT_R, KeyCode::KEY_0, ModifierFlag::SHIFT_L, KeyCode::SPACE</autogen>
+</item>
+<item>
+    <name>Esc to Hyper</name>
+    <appendix>Let Esc act like Esc when pressed by itself, otherwise map it to CTRL-SHIFT-CMD-ALT</appendix>
+
+    <identifier>private.esc_to_hyper</identifier>
+    <autogen>
+        --KeyOverlaidModifier--
+        KeyCode::ESCAPE,
+        KeyCode::COMMAND_L, ModifierFlag::OPTION_L | ModifierFlag::SHIFT_L | ModifierFlag::CONTROL_L,
+        KeyCode::ESCAPE, ModifierFlag::NONE,
+    </autogen>
+</item>
+<item>
+    <name>Right modifiers to curly braces</name>
+	<appendix>Use the right option and Command keys as curly braces</appendix>
+
+    <identifier>private.right_modifiers_to_braces</identifier>
+    <autogen>
+        --KeyToKey--
+        KeyCode::COMMAND_R,
+        KeyCode::BRACKET_LEFT, ModifierFlag::SHIFT_L,
+    </autogen>
+	<autogen>
+        --KeyToKey--
+        KeyCode::OPTION_R,
+        KeyCode::BRACKET_RIGHT, ModifierFlag::SHIFT_L,
+    </autogen>
+
+</item>
+
+</root>
