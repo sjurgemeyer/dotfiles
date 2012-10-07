@@ -3,9 +3,14 @@
 	email = sjurgemeyer@gmail.com
 [core]
 	excludesfile = /Users/sjurgemeyer/.gitignore_global
+[difftool]
+    prompt = false
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
+[difftool "mvim"]
+    cmd = mvim -df \"$LOCAL\" \"$REMOTE\"
+    mvim
 [mergetool "mvim"]
     cmd = mvim -df $BASE $LOCAL $MERGED $REMOTE -c \"wincmd J\"
     mvim
@@ -19,3 +24,5 @@
 	ui = true
 [merge]
 	tool = splice
+[diff]
+    tool = mvim

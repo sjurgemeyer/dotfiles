@@ -36,6 +36,7 @@ set undofile
 "set winwidth=119
 set wildignore+=*.class,.git,.hg,.svn,test-integration/**,test-unit/**,**/target/**
 set guifont=Source\ Code\ Pro\ Semibold:h13
+set diffopt=filler,vertical
 
 set tags=./.tags
 let mapleader = ","
