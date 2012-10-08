@@ -31,7 +31,7 @@
     <identifier>private.esc_to_hyper</identifier>
     <autogen>
         --KeyOverlaidModifier--
-        KeyCode::ESCAPE,
+        KeyCode::PC_APPLICATION,
         KeyCode::COMMAND_L, ModifierFlag::OPTION_L | ModifierFlag::SHIFT_L | ModifierFlag::CONTROL_L,
         KeyCode::ESCAPE, ModifierFlag::NONE,
     </autogen>
