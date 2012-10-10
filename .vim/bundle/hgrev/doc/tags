@@ -1,0 +1,11 @@
+HGRev	hgrev.txt	/*HGRev*
+HGRevAuthor	hgrev.txt	/*HGRevAuthor*
+HGRevContents	hgrev.txt	/*HGRevContents*
+HGRevIntro	hgrev.txt	/*HGRevIntro*
+HGRevLicense	hgrev.txt	/*HGRevLicense*
+HGRevOptions	hgrev.txt	/*HGRevOptions*
+g:hgrevAddStatus	hgrev.txt	/*g:hgrevAddStatus*
+g:hgrevAutoUpdate	hgrev.txt	/*g:hgrevAutoUpdate*
+g:hgrevFlags	hgrev.txt	/*g:hgrevFlags*
+g:hgrevNoRepoChar	hgrev.txt	/*g:hgrevNoRepoChar*
+hgrev.txt	hgrev.txt	/*hgrev.txt*

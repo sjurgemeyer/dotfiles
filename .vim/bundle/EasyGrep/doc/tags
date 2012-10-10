@@ -1,3 +1,10 @@
+:Grep	EasyGrep.txt	/*:Grep*
+:GrepAdd	EasyGrep.txt	/*:GrepAdd*
+:GrepOptions	EasyGrep.txt	/*:GrepOptions*
+:Replace	EasyGrep.txt	/*:Replace*
+:ReplaceUndo	EasyGrep.txt	/*:ReplaceUndo*
+:ResultListFilter	EasyGrep.txt	/*:ResultListFilter*
+:ResultListOpen	EasyGrep.txt	/*:ResultListOpen*
 EasyGrep	EasyGrep.txt	/*EasyGrep*
 EasyGrep.txt	EasyGrep.txt	/*EasyGrep.txt*
 EasyGrepAllOptionsInExplorer	EasyGrep.txt	/*EasyGrepAllOptionsInExplorer*
