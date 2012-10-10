@@ -67,10 +67,10 @@ set undodir=~/.vim/undo
 colorscheme shaun
 
 "supertab
-set completeopt=menu,longest
-let g:SuperTabMappingForward = '<c-space>'
-let g:SuperTabMappingBackward = '<s-c-space>'
-let g:SuperTabLongestEnhanced = 1
+" set completeopt=menu,longest
+" let g:SuperTabMappingForward = '<c-space>'
+" let g:SuperTabMappingBackward = '<s-c-space>'
+" let g:SuperTabLongestEnhanced = 1
 
 "quick switch to last edited file (Using buffergator)
 map <C-tab> <C-^>
@@ -285,3 +285,22 @@ let g:Powerline_stl_path_style='full'
 au Filetype qf setl nolist 
 au Filetype qf setl nocursorline 
 au Filetype qf setl nowrap
+"NeoComplCache
+let g:acp_enableAtStartup = 0
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_smart_case = 1
+let g:neocomplcache_enable_camel_case_completion = 1
+let g:neocomplcache_fuzzy_completion_start_length=2
+" let g:neocomplcache_enable_underbar_completion = 1
+let g:neocomplcache_min_syntax_length = 2
+let g:neocomplcache_enable_insert_char_pre = 1
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplcache#close_popup()
+inoremap <expr><C-e>  neocomplcache#cancel_popup()
