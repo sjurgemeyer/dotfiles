@@ -82,7 +82,7 @@ alias redisstart='sudo launchctl start io.redis.redis-server'
 alias redisstop='sudo launchctl stop io.redis.redis-server'
 
 ################################ Rabbit ###############################
-alias rabbit='sudo /usr/local/Cellar/rabbitmq/2.8.4/sbin/rabbitmq-server'
+alias rabbit='sudo /usr/local/Cellar/rabbitmq/2.8.7/sbin/rabbitmq-server'
 
 ################################ Mercurial ###############################
 alias hs="hg status -S"
@@ -120,7 +120,7 @@ alias mkdir='mkdir -p' #create intermediate directories
 alias ll='ls -la'
 
 
-export VIMCLOJURE_SERVER_JAR="$HOME/Dropbox/lib/server-2.3.0.jar"
+export VIMCLOJURE_SERVER_JAR="$HOME/projects/dotfiles/dependencies/lib/nailgun/server-2.3.6.jar"
 
 source ~/.otherFunctions
 

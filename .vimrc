@@ -261,7 +261,7 @@ let g:syntastic_mode_map = { 'mode': 'passive',
                                \ 'passive_filetypes': ['groovy'] }
 
 let g:splice_initial_diff_grid=1
-
+map <S-CR> <Esc>i<CR><Esc>k$
 function! RemoveSwapFile()
     let backupdir = &backupdir
     let file = expand("%:t:r")
@@ -313,6 +313,7 @@ let g:Powerline_stl_path_style='full'
 au Filetype qf setl nolist 
 au Filetype qf setl nocursorline 
 au Filetype qf setl nowrap
+
 "NeoComplCache
 "" Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
