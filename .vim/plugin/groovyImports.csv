@@ -3004,3 +3004,4 @@ org.junit.After
 org.junit.Ignore
 org.junit.rules.ExpectedException
 grails.test.GrailsUnitTestCase
+grails.test.mixin.support.GrailsUnitTestMixin

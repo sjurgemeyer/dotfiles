@@ -3,8 +3,6 @@ filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-" let Vundle manage Vundle
-" required! 
 Bundle 'gmarik/vundle'
 Bundle 'vcscommand.vim'
 Bundle 'Lokaltog/vim-powerline.git'
@@ -23,7 +21,7 @@ Bundle 'AndrewRadev/linediff.vim'
 Bundle 'Shougo/neocomplcache.git'
 Bundle 'Align'
 Bundle 'EasyGrep'
-Bundle 'YankRing.vim'
+" Bundle 'YankRing.vim'
 Bundle 'ZoomWin'
 Bundle 'hgrev'
 Bundle 'scrooloose/nerdcommenter.git'
@@ -256,9 +254,11 @@ vnoremap ! :ClamVisual<space>
 
 map <D-0> :GundoToggle
 
+"Syntastic
 let g:syntastic_mode_map = { 'mode': 'passive',
                                \ 'active_filetypes': [],
                                \ 'passive_filetypes': ['groovy'] }
+map <Leader>c :SyntasticCheck<CR>
 
 let g:splice_initial_diff_grid=1
 
