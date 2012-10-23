@@ -12,6 +12,8 @@ rm -Rf ~/.hgignore_global
 sudo ln -s ~/projects/dotfiles/.hgignore_global ~/.hgignore_global
 rm -Rf ~/.hgrc
 sudo ln -s ~/projects/dotfiles/.hgrc ~/.hgrc
+rm -Rf ~/.slate
+sudo ln -s ~/projects/dotfiles/.slate ~/.slate
 rm -Rf ~/.ted_grails_complete
 sudo ln -s ~/projects/dotfiles/.ted_grails_complete ~/.ted_grails_complete
 rm -Rf ~/.vim
