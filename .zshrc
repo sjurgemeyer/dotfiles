@@ -114,6 +114,7 @@ hgdiffrevs() {
 
 alias v='mvim'
 alias b="mvim -c 'cd ~/projects/bloom'"
+alias dot='cd $PROJECT_DIR/dotfiles'
 
 #export HISTIGNORE="&:ls:exit:ll:v:hs:cdb:history"
 alias mkdir='mkdir -p' #create intermediate directories
