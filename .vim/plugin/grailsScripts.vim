@@ -53,6 +53,7 @@ au BufNewFile,BufRead *.groovy imap <silent> <S-F7> <Esc><S-F7>a
 let g:grails_user = $DEFAULT_GRAILS_USER
 let g:grails_password = $DEFAULT_GRAILS_PASSWORD
 let g:grails_base_url = $DEFAULT_GRAILS_BASE_URL
+let g:grails_interactive = "grails -Duser.timezone=UTC "
  
 function! Grails_eval_vsplit() range
   let temp_source = s:copy_groovy_buffer_to_temp(a:firstline, a:lastline)
@@ -95,10 +96,20 @@ function! RunGrailsTest(testName)
     else
         let flag = "unit:unit"
     endif
-    ":call RunInTerminal ("grails -classpath /Users/sjurgemeyer/projects/groovy-debugger/build/libs/gdb.jar -Dprintln.test.logs=true test-app " . flag . " " . a:testName) 
-    :call RunInTerminal ("grails -Duser.timezone=UTC test-app " . flag . " " . a:testName) 
+    :call RunInTerminal (g:grails_interactive . "test-app " . flag . " " . a:testName) 
     ":call RunInVim ("grails -Dprintln.test.logs=true test-app " . flag . " " . a:testName) 
 endfunction
+
+command! Interactive :call Interactive()
+function! Interactive()
+    let g:grails_interactive = ""
+endfunction
+
+command! NoInteractive :call NoInteractive()
+function! NoInteractive()
+    let g:grails_interactive = "grails -Duser.timezone=UTC "
+endfunction
+
 
 "Function to run command in external terminal"
 function! RunInTerminal(command)
