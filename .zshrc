@@ -49,29 +49,29 @@ export GROOVY_HOME='/usr/local/groovy'
 export SVN_EDITOR=vim
 
 alias gr='grails run-app'
-alias gd='grails-debug'
-alias gu='grails test-app unit:'
-alias gi='grails test-app integration:'
+alias gd='grails-debug run-app'
+alias gta='grails test run-app'
+alias gdta='grails-debug test run-app'
+alias gf='grails run-fitnesse'
+alias gt='grails -Duser.timezone=UTC test-app'
+alias gu='grails -Duser.timezone=UTC test-app unit:'
+alias gi='grails -Duser.timezone=UTC test-app integration:'
 
-# aliases where you can optionally pass in a set of tests to run (or no argument to run all tests in that group)
-alias gta=grailsTestApp
-alias gtad=grailsTestAppDebug
-alias gtau=grailsTestAppUnit
-alias gtaud=grailsTestAppUnitDebug
-alias gtai=grailsTestAppIntegration
-alias gtaid=grailsTestAppIntegrationDebug
+#TODO - actually use this stuff someday
+GRAILS_SINGLE_TEST_DIR='target-single'
+alias gst="grails -Dgrails.work.dir=$GRAILS_SINGLE_TEST_DIR
+	    -Dgrails.project.class.dir=$GRAILS_SINGLE_TEST_DIR
+	    -Dgrails.project.test.class.dir=$GRAILS_SINGLE_TEST_DIR
+	    -Dgrails.project.test.reports.dir=$GRAILS_SINGLE_TEST_DIR
+        -Duser.timezone=UTC"
 
-# aliases that will rerun any failed tests (or all tests if there aren't any failed tests)
-alias gtaf=grailsTestAppFailed
-alias gtadf=grailsTestAppDebugFailed
-alias gtauf=grailsTestAppUnitFailed
-alias gtaudf=grailsTestAppUnitDebugFailed
-alias gtaif=grailsTestAppIntegrationFailed
-alias gtaidf=grailsTestAppIntegrationDebugFailed
-alias results='open target/test-reports/html/index.html'
-
-#aiases for artifactory
-alias mi='grails maven-install'
+GRAILS_SINGLE_TEST_DIR='target-single'
+alias gst="grails -Dgrails.work.dir=$GRAILS_SINGLE_TEST_DIR
+	    -Dgrails.project.class.dir=$GRAILS_SINGLE_TEST_DIR
+	    -Dgrails.project.test.class.dir=$GRAILS_SINGLE_TEST_DIR
+	    -Dgrails.project.test.reports.dir=$GRAILS_SINGLE_TEST_DIR
+        -Duser.timezone=UTC"
+#END TODO
 
 ############################### Mysql ###############################
 alias mysqlstart='sudo /Library/StartupItems/MySQLCOM/MySQLCOM start'
