@@ -84,13 +84,11 @@ alias redisstop='sudo launchctl stop io.redis.redis-server'
 ################################ Rabbit ###############################
 alias rabbit='sudo /usr/local/Cellar/rabbitmq/2.8.7/sbin/rabbitmq-server'
 
+################################ Git ###############################
+
 ################################ Mercurial ###############################
 alias hs="hg status -S"
 alias hb="hg branch"
-alias ha="hg add -S"
-alias ho="hg outgoing -S"
-alias hi="hg incoming -S"
-alias hd="hg diff -S"
 alias hgdr=hgdiffrevs
 
 alias ic="hg incoming -v | lf"
@@ -150,3 +148,5 @@ mkcd () { mkdir -p "$@" && cd "$@"; }
 
 #let XIKI_DIR=/Library/Ruby/Gems/1.8/gems/xiki-0.6.3
 #source $XIKI_DIR/etc/vim/xiki.vim
+
+[ -s "/Users/sjurgemeyer/.scm_breeze/scm_breeze.sh" ] && source "/Users/sjurgemeyer/.scm_breeze/scm_breeze.sh"
