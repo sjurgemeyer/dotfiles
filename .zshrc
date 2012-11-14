@@ -118,6 +118,9 @@ source $HOME/projects/dotfiles/dependencies/zsh-history-substring-search/zsh-his
 
 ## Friendly find alias
 alias ff=ffind
+infiles() {
+    egrep -ir "$@" .
+}
 
 export VIMCLOJURE_SERVER_JAR="$HOME/projects/dotfiles/dependencies/lib/nailgun/server-2.3.6.jar"
 
