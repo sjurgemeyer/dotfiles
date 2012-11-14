@@ -37,7 +37,19 @@ setopt NO_BEEP
 # Customize to your needs...
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/opt/local/bin:/opt/local/sbin:/usr/local/sbin:/usr/local/groovy/bin:/usr/local/mysql/bin:/usr/local/tomcat/bin:/usr/local/scripts:/usr/local/gradle/bin:$HOME/.rvm/bin
 export JAVA_OPTS="-XX:PermSize=128m -XX:MaxPermSize=384m -XX:NewSize=256m -Xmx1024m -server -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled"
+
+#For the love of god make sure everything acts like vim
 export EDITOR=vim
+export SVN_EDITOR=vim
+alias v='mvim'
+
+#VI Mode
+bindkey -v
+bindkey -M main '\C-r' history-incremental-search-backward
+
+PROJECT_DIR=$HOME/projects
+
+source ~/.otherFunctions
 
 #Start web server
 alias http='python -m SimpleHTTPServer'
@@ -46,32 +58,15 @@ alias http='python -m SimpleHTTPServer'
 source ~/.ted_grails_complete
 export GRAILS_HOME='/usr/local/grails'
 export GROOVY_HOME='/usr/local/groovy'
-export SVN_EDITOR=vim
 
 alias gr='grails run-app'
 alias gd='grails-debug run-app'
-alias gta='grails test run-app'
+alias gtr='grails test run-app'
 alias gdta='grails-debug test run-app'
 alias gf='grails run-fitnesse'
 alias gt='grails -Duser.timezone=UTC test-app'
-alias gu='grails -Duser.timezone=UTC test-app unit:'
-alias gi='grails -Duser.timezone=UTC test-app integration:'
-
-#TODO - actually use this stuff someday
-GRAILS_SINGLE_TEST_DIR='target-single'
-alias gst="grails -Dgrails.work.dir=$GRAILS_SINGLE_TEST_DIR
-	    -Dgrails.project.class.dir=$GRAILS_SINGLE_TEST_DIR
-	    -Dgrails.project.test.class.dir=$GRAILS_SINGLE_TEST_DIR
-	    -Dgrails.project.test.reports.dir=$GRAILS_SINGLE_TEST_DIR
-        -Duser.timezone=UTC"
-
-GRAILS_SINGLE_TEST_DIR='target-single'
-alias gst="grails -Dgrails.work.dir=$GRAILS_SINGLE_TEST_DIR
-	    -Dgrails.project.class.dir=$GRAILS_SINGLE_TEST_DIR
-	    -Dgrails.project.test.class.dir=$GRAILS_SINGLE_TEST_DIR
-	    -Dgrails.project.test.reports.dir=$GRAILS_SINGLE_TEST_DIR
-        -Duser.timezone=UTC"
-#END TODO
+alias gtu='grails -Duser.timezone=UTC test-app unit:'
+alias gti='grails -Duser.timezone=UTC test-app integration:'
 
 ############################### Mysql ###############################
 alias mysqlstart='sudo /Library/StartupItems/MySQLCOM/MySQLCOM start'
@@ -103,50 +98,34 @@ alias hga='hg annotate -un'
 alias icdiff="hg diff --reverse http://hg/direct \$(ic)"
 alias ogdiff="hg diff --reverse http://hg/direct \$(og)"
 
-
 hgdiffrevs() {
 	diff <(hg slog --rev $1:0 --follow) <(hg slog --rev $2:0 --follow)
 }
 
 ###################### Generic Shell stuff ###########################
 
-alias v='mvim'
-alias b="mvim -c 'cd ~/projects/bloom'"
 alias dot='cd $PROJECT_DIR/dotfiles'
 
-#export HISTIGNORE="&:ls:exit:ll:v:hs:cdb:history"
 alias mkdir='mkdir -p' #create intermediate directories
-alias ll='ls -la'
-
-
-export VIMCLOJURE_SERVER_JAR="$HOME/projects/dotfiles/dependencies/lib/nailgun/server-2.3.6.jar"
-
-source ~/.otherFunctions
-
-#VI Mode
-bindkey -v
-bindkey -M main '\C-r' history-incremental-search-backward
-
-# kill a process that matches a regex
-killit() {
-    # Kills any process that matches a regexp passed to it
-    ps aux | grep -v "grep" | grep "$@" | awk '{print $2}' | xargs sudo kill
-}
-
-p() {
-    ps -el | grep "$@"
-}
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
-source $HOME/projects/dotfiles/dependencies/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $HOME/projects/dotfiles/dependencies/zsh-history-substring-search/zsh-history-substring-search.zsh
+alias lla='ll -a' # ll is created by scm breeze
 
 # mkdir and cd
 mkcd () { mkdir -p "$@" && cd "$@"; }
 
-#let XIKI_DIR=/Library/Ruby/Gems/1.8/gems/xiki-0.6.3
-#source $XIKI_DIR/etc/vim/xiki.vim
+#Easier ZSH history
+source $HOME/projects/dotfiles/dependencies/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/projects/dotfiles/dependencies/zsh-history-substring-search/zsh-history-substring-search.zsh
 
+export VIMCLOJURE_SERVER_JAR="$HOME/projects/dotfiles/dependencies/lib/nailgun/server-2.3.6.jar"
+
+# grep for process
+p() {
+    ps -el | grep "$@"
+}
+
+#RVM
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
+
+#SCM Breeze
 [ -s "/Users/sjurgemeyer/.scm_breeze/scm_breeze.sh" ] && source "/Users/sjurgemeyer/.scm_breeze/scm_breeze.sh"
