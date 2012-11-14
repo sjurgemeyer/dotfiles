@@ -116,6 +116,9 @@ mkcd () { mkdir -p "$@" && cd "$@"; }
 source $HOME/projects/dotfiles/dependencies/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $HOME/projects/dotfiles/dependencies/zsh-history-substring-search/zsh-history-substring-search.zsh
 
+## Friendly find alias
+alias ff=ffind
+
 export VIMCLOJURE_SERVER_JAR="$HOME/projects/dotfiles/dependencies/lib/nailgun/server-2.3.6.jar"
 
 # grep for process

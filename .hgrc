@@ -29,7 +29,6 @@ purge=
 prompt = /Users/sjurgemeyer/projects/reference/hg-prompt/prompt.py
 purge =
 # hgshelve=/Users/sjurgemeyer/projects/reference/hgshelve/hgshelve.py
-sst = !hg status $($HG root) $HG_ARGS
 #[pager]
 #pager = LESS='FSRX' less
 #attend = log
@@ -78,4 +77,5 @@ nudge = push --rev .
 slog = log --style=/Users/sjurgemeyer/.mercurial-cli-templates/map-cmdline.slog
 nlog = log --style=/Users/sjurgemeyer/.mercurial-cli-templates/map-cmdline.nlog
 sglog = glog --style=/Users/sjurgemeyer/.mercurial-cli-templates/map-cmdline.sglog
+sst = !hg status $($HG root) $HG_ARGS
 

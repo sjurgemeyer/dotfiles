@@ -20,6 +20,8 @@ rm -Rf ~/.vim
 sudo ln -s ~/projects/dotfiles/.vim ~/.vim
 rm -Rf ~/.vimrc
 sudo ln -s ~/projects/dotfiles/.vimrc ~/.vimrc
+rm -Rf ~/.git.scmbrc
+sudo ln -s ~/projects/dotfiles/.git.scmbrc ~/.git.scmbrc
 rm -Rf ~/.zshrc
 sudo ln -s ~/projects/dotfiles/.zshrc ~/.zshrc
 rm -Rf /usr/local/bin/z.sh
@@ -36,3 +38,6 @@ rm -Rf /usr/local/bin/grails-compile-file
 sudo ln -s ~/projects/dotfiles/dependencies/grails-compile-file /usr/local/bin/grails-compile-file
 rm -Rf /usr/local/bin/grails-version
 sudo ln -s ~/projects/dotfiles/dependencies/grails-version /usr/local/bin/grails-version
+rm -Rf /usr/local/bin/ffind
+sudo ln -s ~/projects/dotfiles/dependencies/friendly-find/ffind /usr/local/bin/ffind
+
