@@ -31,6 +31,7 @@ Eiffel=*.[eE]
 Erlang=*.erl *.hrl *.yaws
 Forth=*.fs *.ft *.frt
 Fortran=*.[fF] *.for *.FOR *.fortran *.fpp *.FPP *.ftn *.FTN *.[fF]77 *.[fF]90 *.[fF]95
+Groovy=*.groovy *.gsp *.properties
 HDL=*.hdl *.vhd *.vhdl *.vbe *.vst *.v *.va *.vams *.tdf
 Haskell=*.hs *.lhs *.chs
 Image=*.xpm *.xpm2

@@ -34,6 +34,13 @@ function! TestResults()
     silent execute ":!open target/test-reports/html/index.html" 
 endfunction
 
+function! GrailsSearch(pattern)
+    :execute "vimgrep /" . a:pattern . "/j **/*.groovy **/*.gsp **/*.properties"
+    :copen
+endfunction
+command! -nargs=* GGrep :call GrailsSearch(<q-args>)
+map <Leader>vv :call GrailsSearch(expand("<cword>"))<CR>
+
 function! Groovy_eval_vsplit() range
   let temp_source = s:copy_groovy_buffer_to_temp(a:firstline, a:lastline)
   let temp_file = s:select_new_temp_buffer()
