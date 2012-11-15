@@ -9,49 +9,72 @@ function! InsertImport()
     let idx = 0
     
     let pathList = []
+    let currentpackage = GetCurrentPackage()
     "Looking up class in text file
     if filePathList == []
        for line in s:loaded_data
            let tempClassList = split(line, '\.')
            if len(tempClassList) && tempClassList[-1] == classToFind
-               :call add(tempClassList, 'groovy') " Little bit of a hack to make the paths the same length
-               :call add(pathList, tempClassList)
+               " :call add(tempClassList, 'groovy') " Little bit of a hack to make the paths the same length
+               :call add(pathList, line)
            endif
        endfor
     "Found file in current path, so determine package by path
     else 
         for f in filePathList
-            let seperators = ['domain', 'services', 'groovy', 'taglib', 'controllers', 'integration', 'unit']
-
-            let idx = len(f)
-            for sep in seperators
-               let tempIdx = index(f, sep) 
-               if tempIdx > 0
-                   if tempIdx < idx
-                        let idx = tempIdx + 1
-                   endif
-               endif
-            endfor
-            let trimmedPath = f[idx :-1]
-            :call add(pathList, trimmedPath)
+            let trimmedPath = ConvertPathToPackage(f)
+            let importPackage = RemoveFileFromPackage(trimmedPath)
+            if importPackage != currentpackage
+                :call add(pathList, trimmedPath)
+            else 
+                echoerr "File is in the same package"
+                return
+            endif
         endfor
     endif
     if pathList == []
         echoerr "no file found"
     else
         for pa in pathList
-            let import = 'import ' . join(split(join(pa, '.'),'\.')[0:-2], '.')
+            let import = 'import ' . pa
             :let pos = getpos('.')
             :execute "normal ggo"
             :execute "normal I" . import . "\<Esc>"
             :execute "normal " . (pos[1] + 1) . "G"
         endfor
+        :call RemoveUnneededImports()
         :call OrganizeImports() 
         if len(pathList) > 1
             echoerr "Warning: Multiple imports created!"
         endif
     endif
 
+endfunction
+
+function! GetCurrentPackage()
+    return ConvertPathToPackage(split(expand("%:r"),'/'))
+endfunction
+
+function! RemoveFileFromPackage(fullpath)
+    return join(split(a:fullpath,'\.')[0:-2],'.')
+endfunction
+
+function! ConvertPathToPackage(filePath)
+    let seperators = ['domain', 'services', 'groovy', 'taglib', 'controllers', 'integration', 'unit']
+
+    let f = a:filePath
+    let idx = len(f)
+    for sep in seperators
+        let tempIdx = index(f, sep) 
+        if tempIdx > 0
+            if tempIdx < idx
+                let idx = tempIdx + 1
+            endif
+        endif
+    endfor
+    let trimmedPath = f[idx :-1]
+
+    return join(split(join(trimmedPath, '.'),'\.')[0:-2], '.')
 endfunction
 
 command! InsertImport :call InsertImport() 
@@ -89,6 +112,37 @@ endfunction
 
 command! OrganizeImports :call OrganizeImports()
 
+function! CountOccurances(searchstring)
+    let co = [] 
+    :execute "normal gg"
+	while search(a:searchstring, "W") > 0
+        :call add(co, 'a') 
+    endwhile
+    return len(co)
+endfunction
+
+function! RemoveUnneededImports()
+    :let end = search("^import", 'b')
+    :let lines = getline(2, end)
+    :let updatedLines = []
+
+    :execute "normal 2G"
+    :execute "normal d" . (end-2) . "j"
+    for line in lines
+
+        if len(line) > 0
+            let classname = split(line, '\.')[-1]
+            " echoerr classname . " " . CountOccurances(classname)
+            if CountOccurances(classname) > 0
+                :call add(updatedLines, line)
+            endif
+        endif
+    endfor
+    :execute "normal 2G"
+    for line in updatedLines 
+        :execute "normal I" . line . "\<CR>" 
+    endfor
+endfunction
 
 let s:data_file = $HOME . '/.vim/plugin/groovyImports.csv'
 let s:loaded_data = []

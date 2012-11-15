@@ -19,6 +19,7 @@ Bundle 'jeetsukumaran/vim-buffergator.git'
 Bundle 'majutsushi/tagbar.git'
 Bundle 'AndrewRadev/linediff.vim'
 Bundle 'Shougo/neocomplcache.git'
+Bundle 'Shougo/neosnippet.git'
 Bundle 'Align'
 Bundle 'EasyGrep'
 " Bundle 'YankRing.vim'
@@ -144,6 +145,26 @@ vmap <D-]> :s/,\n/, /g<CR>
 
 "clear current highlighting
 map <C-c> :nohlsearch<CR>
+
+"neosnippet
+let g:neosnippet#snippets_directory='~/.vim/snippets'
+
+" Plugin key-mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
+
+function! Filename()
+    return expand("%:t:r")
+endfunction
 
 "Toggle case (UPPER, lower, Mixed) for visual selection
 function! TwiddleCase(str)

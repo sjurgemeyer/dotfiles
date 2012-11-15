@@ -42,12 +42,12 @@ snippet su
 snippet tb
 	def ${1:object} = ${2:$1}.build(${3})
 snippet cl
-	package com.bloomhealthco.${1}
-	class ${2:`Filename("", "untitled")`} {
+	package `GetCurrentPackage()`
+	class ${2:`Filename()`} {
 		${3}
 	}
 snippet in
-	interface ${1:`Filename("", "untitled")`} ${2:extends Parent}${3}
+	interface ${1:`Filename()`} ${2:extends Parent}${3}
 snippet v
 	${1:String} ${2:var}${3: = null}${4};${5}
 snippet co
