@@ -1,3 +1,6 @@
+let g:vim_terminal="/dev/ttys000"
+let g:run_script = "!osascript ~/.vim/tools/run_command.applescript" 
+
 " Pulled from http://naleid.com/blog/2011/04/25/replace-grails-console-with-the-editor-of-your-choice/
 function! s:copy_groovy_buffer_to_temp(first, last)
   " groovy/java scripts can't start with a # and tempname's normally do
