@@ -26,7 +26,7 @@
 </item>
 <item>
     <name>Esc to Hyper</name>
-    <appendix>Let Esc act like Esc when pressed by itself, otherwise map it to CTRL-SHIFT-CMD-ALT</appendix>
+   <appendix>Let Esc act like Esc when pressed by itself, otherwise map it to CTRL-SHIFT-CMD-ALT</appendix>
 
     <identifier>private.esc_to_hyper</identifier>
     <autogen>
@@ -51,6 +51,35 @@
         KeyCode::OPTION_R,
         KeyCode::BRACKET_RIGHT, ModifierFlag::SHIFT_L,
     </autogen>
+
+</item>
+<item>
+   <name>Hyper Arrows</name>
+   <appendix>hjkl act like arrow keys when holding CTRL-SHIFT-CMD-ALT</appendix>
+
+    <identifier>private.hyper-arrows</identifier>
+    <autogen>
+        --KeyToKey--
+        KeyCode::K, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::SHIFT_L | ModifierFlag::CONTROL_L,
+        KeyCode::CURSOR_UP,
+    </autogen>
+    <autogen>
+        --KeyToKey--
+        KeyCode::J, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::SHIFT_L | ModifierFlag::CONTROL_L,
+        KeyCode::CURSOR_DOWN,
+    </autogen>
+    <autogen>
+        --KeyToKey--
+        KeyCode::H, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::SHIFT_L | ModifierFlag::CONTROL_L,
+        KeyCode::CURSOR_LEFT,
+    </autogen>
+    <autogen>
+        --KeyToKey--
+        KeyCode::L, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::SHIFT_L | ModifierFlag::CONTROL_L,
+        KeyCode::CURSOR_RIGHT,
+    </autogen>
+
+
 
 </item>
 
