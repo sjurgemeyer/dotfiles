@@ -17,10 +17,11 @@ nnoremap <leader>s <C-w>s<C-w>j
 nnoremap <D-D> <C-w>s<C-w>j
 
 "Close all navigation windows
-map <F13> :call CloseNavigation()<CR>
+map <F12> :call CloseNavigation()<CR>
 function! CloseNavigation()
     :BuffergatorClose
     :NERDTreeClose
+    :TagbarClose
     :ccl
 endfunction
 
