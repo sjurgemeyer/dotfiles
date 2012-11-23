@@ -37,7 +37,7 @@ setopt NO_BEEP
 # Customize to your needs...
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/opt/local/bin:/opt/local/sbin:/usr/local/sbin:/usr/local/groovy/bin:/usr/local/mysql/bin:/usr/local/tomcat/bin:/usr/local/scripts:/usr/local/gradle/bin:$HOME/.rvm/bin
 export JAVA_OPTS="-XX:PermSize=128m -XX:MaxPermSize=384m -XX:NewSize=256m -Xmx1024m -server -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled"
-
+export JAVA_HOME=`/usr/libexec/java_home`
 #For the love of god make sure everything acts like vim
 export EDITOR=vim
 export SVN_EDITOR=vim
@@ -56,17 +56,16 @@ alias http='python -m SimpleHTTPServer'
 
 ###############################  Grails  ##############################
 source ~/.ted_grails_complete
-export GRAILS_HOME='/usr/local/grails'
-export GROOVY_HOME='/usr/local/groovy'
 
-alias gr='grails run-app'
-alias gd='grails-debug run-app'
-alias gtr='grails test run-app'
-alias gdta='grails-debug test run-app'
-alias gf='grails run-fitnesse'
-alias gt='grails -Duser.timezone=UTC test-app'
-alias gtu='grails -Duser.timezone=UTC test-app unit:'
-alias gti='grails -Duser.timezone=UTC test-app integration:'
+alias gr='grails-dynamic run-app'
+alias gd='grails-debug-dynamic run-app'
+alias gtr='grails-dynamic test run-app'
+alias gdta='grails-debug-dynamic test run-app'
+alias gf='grails-dynamic run-fitnesse'
+alias gt='grails-dynamic -Duser.timezone=UTC test-app'
+alias gtu='grails-dynamic -Duser.timezone=UTC test-app unit:'
+alias gti='grails-dynamic -Duser.timezone=UTC test-app integration:'
+alias gdy='grails-dynamic '
 
 ############################### Mysql ###############################
 alias mysqlstart='sudo /Library/StartupItems/MySQLCOM/MySQLCOM start'
@@ -135,3 +134,6 @@ p() {
 
 #SCM Breeze
 [ -s "/Users/sjurgemeyer/.scm_breeze/scm_breeze.sh" ] && source "/Users/sjurgemeyer/.scm_breeze/scm_breeze.sh"
+
+#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
+[[ -s "/Users/sjurgemeyer/.gvm/bin/gvm-init.sh" ]] && source "/Users/sjurgemeyer/.gvm/bin/gvm-init.sh"

@@ -11,8 +11,8 @@ done
 
 if [ -f application.properties ]; then
     export GRAILS_VERSION=`grep app.grails.version application.properties | sed -E 's/.*=(.*)/\1/'`
-    export GRAILS_HOME="$HOME/app/grails-$GRAILS_VERSION"
-    echo "application.properties found, using \$GRAILS_HOME of $GRAILS_HOME"
+    echo "application.properties found, grails $GRAILS_VERSION"
+    gvm use grails $GRAILS_VERSION
 else 
     echo "application.properties NOT found, leaving \$GRAILS_HOME as $GRAILS_HOME"
 fi
@@ -22,5 +22,4 @@ if [ ! -d $GRAILS_HOME ]; then
     exit 1
 fi
  
-echo $GRAILS_HOME/bin/$GRAILS_CMD $*
-$GRAILS_HOME/bin/$GRAILS_CMD $*
+$GRAILS_CMD $*
