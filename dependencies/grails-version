@@ -1,3 +1,4 @@
+#!/bin/bash
 GRAILS_CMD=$1
 shift
 GRAILS_TEMP_DIR="`find . -iname grails-app | grep -Ev 'target|.hg|rabbitmq'`"
@@ -22,4 +23,4 @@ if [ ! -d $GRAILS_HOME ]; then
     exit 1
 fi
  
-$GRAILS_CMD $*
+$GRAILS_HOME/bin/$GRAILS_CMD $*

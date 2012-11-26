@@ -55,6 +55,7 @@ layout browserTest ${browser} ${ext-full}
 layout browserTest ${term} ${lap-full}
 
 layout debug ${browser} ${ext-full}
+layout debug ${term} ${lap-full}
 layout debug ${idea} ${lap-full}
 
 bind up:ctrl;alt      ${full}
@@ -71,6 +72,7 @@ bind down:ctrl;alt;cmd  throw down  resize
 # Window Hints
 bind esc:cmd hint
 
+#Make sure that the right windows are focused by default
 bind 1:${hyper} sequence layout coding | focus ${hipchat} | focus ${vim}
 bind 2:${hyper} sequence layout testRunningChrome | focus ${term} | focus ${browser}
 bind 3:${hyper} sequence layout browserTest | focus ${term} | focus ${browser}
@@ -88,3 +90,5 @@ bind t:${hyper} focus ${term}
 bind f:${hyper} focus ${file}
 bind r:${hyper} focus ${hipchat}
 bind a:${hyper} focus 'Adium'
+bind s:${hyper} focus 'Spotify'
+

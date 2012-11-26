@@ -30,10 +30,10 @@ rm -Rf ~/.oh-my-zsh/themes/shaun.zsh-theme
 sudo ln -s ~/projects/dotfiles/.oh-my-zsh/themes/shaun.zsh-theme ~/.oh-my-zsh/themes/shaun.zsh-theme
 rm /Users/sjurgemeyer/Library/Application\ Support/KeyRemap4MacBook/private.xml
 sudo ln -s ~/projects/dotfiles/dependencies/private.xml ~/Library/Application\ Support/KeyRemap4MacBook/private.xml
-rm -Rf /usr/local/bin/grails
-sudo ln -s ~/projects/dotfiles/dependencies/grails /usr/local/bin/grails
-rm -Rf /usr/local/bin/grails-debug
-sudo ln -s ~/projects/dotfiles/dependencies/grails-debug /usr/local/bin/grails-debug
+rm -Rf /usr/local/bin/grails-dynamic
+sudo ln -s ~/projects/dotfiles/dependencies/grails /usr/local/bin/grails-dynamic
+rm -Rf /usr/local/bin/grails-debug-dynamic
+sudo ln -s ~/projects/dotfiles/dependencies/grails-debug /usr/local/bin/grails-debug-dynamic
 rm -Rf /usr/local/bin/grails-compile-file
 sudo ln -s ~/projects/dotfiles/dependencies/grails-compile-file /usr/local/bin/grails-compile-file
 rm -Rf /usr/local/bin/grails-version
