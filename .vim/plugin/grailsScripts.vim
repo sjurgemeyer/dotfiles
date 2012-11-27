@@ -35,8 +35,7 @@ function! TestResults()
 endfunction
 
 function! GrailsSearch(pattern)
-    :execute "vimgrep /" . a:pattern . "/j **/*.groovy **/*.gsp **/*.properties"
-    :copen
+    :execute "Ack --type=groovy " . a:pattern
 endfunction
 command! -nargs=* GGrep :call GrailsSearch(<q-args>)
 map <Leader>vv :call GrailsSearch(expand("<cword>"))<CR>

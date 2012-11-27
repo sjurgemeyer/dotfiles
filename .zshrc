@@ -57,15 +57,14 @@ alias http='python -m SimpleHTTPServer'
 ###############################  Grails  ##############################
 source ~/.ted_grails_complete
 
-alias gr='grails-dynamic run-app'
-alias gd='grails-debug-dynamic run-app'
-alias gtr='grails-dynamic test run-app'
-alias gdta='grails-debug-dynamic test run-app'
-alias gf='grails-dynamic run-fitnesse'
-alias gt='grails-dynamic -Duser.timezone=UTC test-app'
-alias gtu='grails-dynamic -Duser.timezone=UTC test-app unit:'
-alias gti='grails-dynamic -Duser.timezone=UTC test-app integration:'
-alias gdy='grails-dynamic '
+alias gr='grails run-app'
+alias gd='grails-debug run-app'
+alias gtr='grails test run-app'
+alias gdta='grails-debug -Duser.timezone=UTC test run-app'
+alias gf='grails run-fitnesse'
+alias gt='grails -Duser.timezone=UTC test-app'
+alias gtu='grails -Duser.timezone=UTC test-app unit:'
+alias gti='grails -Duser.timezone=UTC test-app integration:'
 
 ############################### Mysql ###############################
 alias mysqlstart='sudo /Library/StartupItems/MySQLCOM/MySQLCOM start'
@@ -135,5 +134,6 @@ p() {
 #SCM Breeze
 [ -s "/Users/sjurgemeyer/.scm_breeze/scm_breeze.sh" ] && source "/Users/sjurgemeyer/.scm_breeze/scm_breeze.sh"
 
+export GVM_AUTODETECT=1
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "/Users/sjurgemeyer/.gvm/bin/gvm-init.sh" ]] && source "/Users/sjurgemeyer/.gvm/bin/gvm-init.sh"

@@ -54,9 +54,9 @@ layout testRunningChrome ${term} ${lap-left}
 layout browserTest ${browser} ${ext-full}
 layout browserTest ${term} ${lap-full}
 
-layout debug ${browser} ${ext-full}
+layout debug ${browser} ${ext-left}
+layout debug ${idea} ${ext-right}
 layout debug ${term} ${lap-full}
-layout debug ${idea} ${lap-full}
 
 bind up:ctrl;alt      ${full}
 bind down:ctrl;alt    ${small} 

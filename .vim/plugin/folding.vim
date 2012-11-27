@@ -22,5 +22,6 @@ nnoremap <Space> za
 nnoremap <S-Space> zA
 set foldtext=CustomFoldText() 
 set foldlevel=1 
+set foldlevelstart=20 "Make sure folders are open by default
 set foldmethod=syntax 
 set foldenable

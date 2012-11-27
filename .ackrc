@@ -1,0 +1,4 @@
+--smart-case
+--sort-files
+--type-add=groovy=.gsp,.properties
+--ignore-dir=target
