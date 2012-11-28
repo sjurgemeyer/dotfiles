@@ -37,8 +37,20 @@ endfunction
 function! GrailsSearch(pattern)
     :execute "Ack --type=groovy " . a:pattern
 endfunction
+
+function! GrailsSearchNoTests(pattern)
+    :execute "Ack --type=groovy -G '.*Tests\.groovy|.*Spec\.groovy' --invert-file-match " . a:pattern
+endfunction
+
+function! GrailsSearchOnlyTests(pattern)
+    :execute "Ack --type=groovy -G '.*Tests\.groovy|.*Spec\.groovy' " . a:pattern
+endfunction
+
+
 command! -nargs=* GGrep :call GrailsSearch(<q-args>)
 map <Leader>vv :call GrailsSearch(expand("<cword>"))<CR>
+map <Leader>vc :call GrailsSearchNoTests(expand("<cword>"))<CR>
+map <Leader>vt :call GrailsSearchOnlyTests(expand("<cword>"))<CR>
 
 function! Groovy_eval_vsplit() range
   let temp_source = s:copy_groovy_buffer_to_temp(a:firstline, a:lastline)
