@@ -1,20 +1,32 @@
-def text = ''
-new File('target/test-reports/html/alltests-errors.html').eachLine {
-    if (includeLine(it)) {
-        text += it.replaceAll('nowrap','')
+
+processFile('alltests-errors.html')
+processFile('alltests-fails.html')
+def processFile(fileName) {
+    def text = getXmlFromHtml(fileName)
+    def xml = new XmlSlurper().parseText(text)
+    def errorBlocks = xml.body.table.tr.grep{ it.@class == 'Error' || it.@class == 'Failure'}
+    if (errorBlocks) {
+        printRed  '*'*15 + ' Test Failures' + '*'*15 
+        errorBlocks.each { errorBlock ->
+            def className = errorBlock.td[0].a.text()
+            def testName = errorBlock.td[1].a[1].text()
+            def testOutput = errorBlock.td[3].text()
+            
+            printBlue className + ' - ' + testName
+            printOutput(testOutput)
+            printRed '*'*40
+        }
     }
 }
-def xml = new XmlSlurper().parseText(text)
-printRed  '*'*15 + ' Test Failures' + '*'*15 
-def errorBlocks = xml.body.table.tr.grep{ it.@class == 'Error' }
-errorBlocks.each { errorBlock ->
-    def className = errorBlock.td[0].a.text()
-    def testName = errorBlock.td[1].a[1].text()
-    def testOutput = errorBlock.td[3].text()
-    
-    printBlue className + ' - ' + testName
-    printOutput(testOutput)
-    printRed '*'*40
+
+def getXmlFromHtml(fileName) {
+    def text = ''
+    new File("target/test-reports/html/$fileName").eachLine {
+        if (includeLine(it)) {
+            text += it.replaceAll('nowrap','')
+        }
+    }
+    text
 }
 
 def printOutput(text) {
