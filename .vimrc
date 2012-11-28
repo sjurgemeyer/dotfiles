@@ -44,6 +44,7 @@ set encoding=utf-8
 set scrolloff=20
 set autoindent
 set autoread 
+set history=1000
 set shiftround
 set showmode
 set showcmd
@@ -79,6 +80,10 @@ colorscheme shaun
 
 let mapleader = ","
 let g:mapleader = ","
+
+" ` goes to the line and column by default, where ' only goes to the row.  Switch ' to be the more useful one
+nnoremap ' `
+nnoremap ` '
 
 so ~/.vim/config/nerdtree.vim
 so ~/.vim/config/ctrlp.vim

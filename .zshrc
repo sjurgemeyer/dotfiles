@@ -65,6 +65,7 @@ alias gf='grails run-fitnesse'
 alias gt='grails -Duser.timezone=UTC test-app'
 alias gtu='grails -Duser.timezone=UTC test-app unit:'
 alias gti='grails -Duser.timezone=UTC test-app integration:'
+alias results='open target/test-reports/html/index.html'
 
 ############################### Mysql ###############################
 alias mysqlstart='sudo /Library/StartupItems/MySQLCOM/MySQLCOM start'
@@ -78,6 +79,7 @@ alias redisstop='sudo launchctl stop io.redis.redis-server'
 alias rabbit='sudo /usr/local/Cellar/rabbitmq/2.8.7/sbin/rabbitmq-server'
 
 ################################ Git ###############################
+#Using scm_breeze shortcuts
 
 ################################ Mercurial ###############################
 alias hs="hg status -S"

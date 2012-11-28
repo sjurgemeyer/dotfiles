@@ -49,8 +49,8 @@ endfunction
 
 command! -nargs=* GGrep :call GrailsSearch(<q-args>)
 map <Leader>vv :call GrailsSearch(expand("<cword>"))<CR>
-map <Leader>vc :call GrailsSearchNoTests(expand("<cword>"))<CR>
-map <Leader>vt :call GrailsSearchOnlyTests(expand("<cword>"))<CR>
+"map <Leader>vc :call GrailsSearchNoTests(expand("<cword>"))<CR>
+"map <Leader>vt :call GrailsSearchOnlyTests(expand("<cword>"))<CR>
 
 function! Groovy_eval_vsplit() range
   let temp_source = s:copy_groovy_buffer_to_temp(a:firstline, a:lastline)
@@ -125,7 +125,7 @@ function! RunGrailsTest(testName)
             let flag = "unit:unit"
         endif
     endif
-    :call RunInTerminal (g:grails_interactive . "test-app " . flag . " " . a:testName) 
+    :call RunInTerminal (g:grails_interactive . "test-app " . flag . " " . a:testName . "; groovy ~/.vim/plugin/parseJunit.groovy") 
     ":call RunInVim ("grails -Dprintln.test.logs=true test-app " . flag . " " . a:testName) 
 endfunction
 
@@ -176,6 +176,7 @@ endfunction
 
 "Open file under cursor
 map <D-y> :call OpenFileUnderCursor(expand("<cword>"))<CR>
+map <D-u> :call SplitOpenFileUnderCursor(expand("<cword>"))<CR>
 map <Leader>h :call FindSubClasses(expand("<cword>"))<CR>
 
 function! FindSubClasses(filename) 
@@ -186,6 +187,12 @@ function! OpenFileUnderCursor(filename)
    let ext = fnamemodify(expand("%:p"), ":t:e")
    let fname = toupper(strpart(a:filename, 0, 1)) . strpart(a:filename, 1, strlen(a:filename))
    execute ":find " . fname . "." . ext 
+endfunction
+
+function! SplitOpenFileUnderCursor(filename)
+   let ext = fnamemodify(expand("%:p"), ":t:e")
+   let fname = toupper(strpart(a:filename, 0, 1)) . strpart(a:filename, 1, strlen(a:filename))
+   execute ":rightb vert sfind " . fname . "." . ext 
 endfunction
 
 
