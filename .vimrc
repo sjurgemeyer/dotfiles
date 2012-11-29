@@ -56,7 +56,6 @@ set ttyfast
 set ruler
 set backspace=indent,eol,start
 set laststatus=2
-set macmeta "use Mac option key as a meta key
 " set relativenumber
 set undofile
 "set winwidth=119
@@ -71,9 +70,9 @@ set incsearch
 set hls
 set clipboard=unnamed
 "Directories for swp files
-set backupdir=~/.vim/backup
-set directory=~/.vim/backup
-set undodir=~/.vim/undo
+set backupdir=~/.vimbackup
+set directory=~/.vimbackup
+set undodir=~/.vimundo
 
 colorscheme shaun
 
@@ -86,7 +85,6 @@ nnoremap ` '
 
 so ~/.vim/config/nerdtree.vim
 so ~/.vim/config/ctrlp.vim
-so ~/.vim/config/easygrep.vim
 so ~/.vim/config/splice.vim
 so ~/.vim/config/powerline.vim
 so ~/.vim/config/neosnippet.vim
