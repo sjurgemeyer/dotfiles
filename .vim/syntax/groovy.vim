@@ -456,4 +456,4 @@ let b:spell_options="contained"
 "
 
 syn region foldBraces start=/{/ end=/}/ transparent fold
-syn region foldJavadoc start=,/\*\*, end=,\*/, transparent fold keepend
+"syn region foldJavadoc start=,/\*\*, end=,\*/, transparent fold keepend
