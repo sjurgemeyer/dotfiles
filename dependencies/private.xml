@@ -25,6 +25,25 @@
     <autogen>--KeyToKey-- KeyCode::SPACE, ModifierFlag::SHIFT_R, KeyCode::KEY_0, ModifierFlag::SHIFT_L, KeyCode::SPACE</autogen>
 </item>
 <item>
+    <name>Ctrl to Braces</name>
+    <appendix>Ctrls, when pressed alone, type braces.  When used with other keys they're normal ctrls.</appendix>
+
+    <identifier>private.ctrls_to_parens</identifier>
+
+    <!-- This is the basic mapping. -->
+    <autogen>--KeyOverlaidModifier-- KeyCode::CONTROL_R, ModifierFlag::CONTROL_R | ModifierFlag::NONE, KeyCode::CONTROL_R, KeyCode::BRACKET_RIGHT, ModifierFlag::SHIFT_L</autogen>
+    <autogen>--KeyOverlaidModifier-- KeyCode::CONTROL_L, ModifierFlag::CONTROL_L | ModifierFlag::NONE, KeyCode::CONTROL_L, KeyCode::BRACKET_LEFT, ModifierFlag::SHIFT_R</autogen>
+
+    <!--
+        Remap the "rolls" of () and )( because it's too easy to hit one
+        before finishing the other, and there's no other reason to be
+        pressing both shift keys at once anyway
+    -->
+    <autogen>--KeyToKey-- KeyCode::CONTROL_L, ModifierFlag::CONTROL_R, KeyCode::KEY_0, ModifierFlag::CONTROL_L, KeyCode::BRACKET_LEFT, ModifierFlag::SHIFT_L</autogen>
+    <autogen>--KeyToKey-- KeyCode::CONTROL_R, ModifierFlag::CONTROL_L, KeyCode::KEY_9, ModifierFlag::CONTROL_L, KeyCode::BRACKET_RIGHT, ModifierFlag::SHIFT_L</autogen>
+</item>
+
+<item>
     <name>Esc to Hyper</name>
    <appendix>Let Esc act like Esc when pressed by itself, otherwise map it to CTRL-SHIFT-CMD-ALT</appendix>
 
