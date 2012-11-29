@@ -1,4 +1,5 @@
 function! InsertImport()
+    :let original_pos = getpos('.')
     let classToFind = expand("<cword>")
     let paths = globpath('.', '**/' . classToFind . '.groovy')
     let multiplePaths = split(paths, '\n')
@@ -25,9 +26,21 @@ function! InsertImport()
             let trimmedPath = ConvertPathToPackage(f)
             let importPackage = RemoveFileFromPackage(trimmedPath)
             if importPackage != currentpackage
-                :call add(pathList, trimmedPath)
+                :let starredImport = search(importPackage . "\\.\\*", 'nw')
+                if starredImport > 0
+                    echom importPackage . '.* exists'
+                    return
+                else
+                    :let existingImport = search(trimmedPath, 'nw')
+                    if existingImport > 0
+                        echom 'import already exists'
+                        return
+                    else
+                        :call add(pathList, trimmedPath)
+                    endif
+                endif
             else 
-                echoerr "File is in the same package"
+                echom "File is in the same package"
                 return
             endif
         endfor
@@ -45,10 +58,11 @@ function! InsertImport()
         :call RemoveUnneededImports()
         :call OrganizeImports() 
         if len(pathList) > 1
-            echoerr "Warning: Multiple imports created!"
+            echom "Warning: Multiple imports created!"
         endif
     endif
 
+    call setpos('.', original_pos)
 endfunction
 
 function! GetCurrentPackage()
@@ -86,7 +100,7 @@ function! OrganizeImports()
     :let end = search("^import", 'b')
     :let lines = sort(getline(2, end))
     :execute "normal 2G"
-    :execute "normal d" . (end-2) . "j"
+    :execute 'normal "_d' . (end-2) . "j"
     :let currentprefix = ''
     :let currentline = ''
     for line in lines
@@ -106,8 +120,7 @@ function! OrganizeImports()
             endif
         endif
     endfor
-    :execute "normal " . pos[1] . "G"
-
+    call setpos('.', pos)
 endfunction
 
 command! OrganizeImports :call OrganizeImports()
@@ -127,7 +140,7 @@ function! RemoveUnneededImports()
     :let updatedLines = []
 
     :execute "normal 2G"
-    :execute "normal d" . (end-2) . "j"
+    :execute 'normal "_d' . (end-2) . "j"
     for line in lines
 
         if len(line) > 0
