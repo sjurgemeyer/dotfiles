@@ -6,6 +6,7 @@ String filePath() {
 }
 
 def processFile(fileName) {
+    if (!new File("${filePath()}$fileName").exists()) return
     def errorDetailMap = createErrorDetailMap(fileName)
     def text = getXmlFromHtml(fileName)
     def xml = new XmlSlurper().parseText(text)

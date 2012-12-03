@@ -96,11 +96,19 @@ map <D-i> :InsertImport <CR>
 
 function! OrganizeImports()
     :let pos = getpos('.')
-    :let start = line('.')
+
+    :let start = search("^import")
     :let end = search("^import", 'b')
-    :let lines = sort(getline(2, end))
-    :execute "normal 2G"
-    :execute 'normal "_d' . (end-2) . "j"
+    :let lines = getline(start, end)
+    :let updatedLines = []
+
+    :execute "normal " . start . "G"
+    if end == start
+        :execute 'normal "_dd'
+    else
+        :execute 'normal "_d' . (end-start) . "j"
+    endif
+     
     :let currentprefix = ''
     :let currentline = ''
     for line in lines
@@ -135,23 +143,28 @@ function! CountOccurances(searchstring)
 endfunction
 
 function! RemoveUnneededImports()
+    :let start = search("^import")
     :let end = search("^import", 'b')
-    :let lines = getline(2, end)
+    :let lines = getline(start, end)
     :let updatedLines = []
 
-    :execute "normal 2G"
-    :execute 'normal "_d' . (end-2) . "j"
+    :execute "normal " . start . "G"
+    if end == start
+        :execute 'normal "_dd'
+    else
+        :execute 'normal "_d' . (end-start) . "j"
+    endif
+        
     for line in lines
-
         if len(line) > 0
             let classname = split(line, '\.')[-1]
             " echoerr classname . " " . CountOccurances(classname)
             if CountOccurances(classname) > 0
-                :call add(updatedLines, line)
+                :call add(updatedLines, substitute(line, '^\(\s\*\)','',''))
             endif
         endif
     endfor
-    :execute "normal 2G"
+    :execute "normal " . start . "G0"
     for line in updatedLines 
         :execute "normal I" . line . "\<CR>" 
     endfor
