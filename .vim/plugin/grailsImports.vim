@@ -25,23 +25,25 @@ function! InsertImport()
         for f in filePathList
             let trimmedPath = ConvertPathToPackage(f)
             let importPackage = RemoveFileFromPackage(trimmedPath)
-            if importPackage != currentpackage
-                :let starredImport = search(importPackage . "\\.\\*", 'nw')
-                if starredImport > 0
-                    echom importPackage . '.* exists'
-                    return
-                else
-                    :let existingImport = search(trimmedPath, 'nw')
-                    if existingImport > 0
-                        echom 'import already exists'
+            if importPackage != '' 
+                if  importPackage != currentpackage
+                    :let starredImport = search(importPackage . "\\.\\*", 'nw')
+                    if starredImport > 0
+                        echom importPackage . '.* exists'
                         return
                     else
-                        :call add(pathList, trimmedPath)
+                        :let existingImport = search(trimmedPath, 'nw')
+                        if existingImport > 0
+                            echom 'import already exists'
+                            return
+                        else
+                            :call add(pathList, trimmedPath)
+                        endif
                     endif
+                else 
+                    echom "File is in the same package"
+                    return
                 endif
-            else 
-                echom "File is in the same package"
-                return
             endif
         endfor
     endif
