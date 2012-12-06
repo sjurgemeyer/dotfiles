@@ -40,7 +40,7 @@ set softtabstop=4
 set expandtab
 set path+=**
 set encoding=utf-8
-set scrolloff=20
+set scrolloff=1
 set autoindent
 set autoread 
 set history=1000
@@ -135,7 +135,11 @@ command! Green :colorscheme shaun-green
 command! Red :colorscheme shaun-red
 command! Blue :colorscheme shaun-blue
 command! Black :colorscheme shaun
+command! White :colorscheme delek
 command! Ses :mks! ~/session.vim
+
+command! Big :set guifont=Source\ Code\ Pro\ Semibold:h40
+command! Small :set guifont=Source\ Code\ Pro\ Semibold:h13
 
 "Cleanup quickfix
 au Filetype qf setl nolist 
