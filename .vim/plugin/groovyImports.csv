@@ -3005,4 +3005,6 @@ org.junit.Ignore
 org.junit.rules.ExpectedException
 grails.test.GrailsUnitTestCase
 grails.test.mixin.support.GrailsUnitTestMixin
+grails.test.mixin.TestFor
+grails.test.mixin.Mock
 org.hibernate.SessionFactory

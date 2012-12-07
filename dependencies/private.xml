@@ -101,5 +101,29 @@
 
 
 </item>
+<item>
+   <name>PGUP PGDOWN to volume</name>
+   <appendix>CMD PGUP and PGDOWN control volume</appendix>
+
+    <identifier>private.music.page.keys</identifier>
+    <autogen>
+        --KeyToKey--
+        KeyCode::PAGEUP, ModifierFlag::COMMAND_L ,
+        KeyCode::VK_CONSUMERKEY_VOLUME_UP,
+    </autogen>
+    <autogen>
+        --KeyToKey--
+        KeyCode::PAGEDOWN, ModifierFlag::COMMAND_L ,
+        KeyCode::VK_CONSUMERKEY_VOLUME_DOWN,
+    </autogen>
+    <autogen>
+        --KeyToKey--
+        KeyCode::END, ModifierFlag::COMMAND_L ,
+        KeyCode::VK_CONSUMERKEY_MUSIC_PLAY,
+    </autogen>
+    
+
+</item>
+
 
 </root>
