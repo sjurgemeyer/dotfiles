@@ -4,7 +4,7 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
-Bundle 'vcscommand.vim'
+" Bundle 'vcscommand.vim'
 Bundle 'Lokaltog/vim-powerline.git'
 Bundle 'kien/ctrlp.vim.git'
 Bundle 'scrooloose/nerdtree.git'
@@ -13,6 +13,7 @@ Bundle 'sjl/clam.vim.git'
 Bundle 'sjl/gundo.vim.git'
 Bundle 'sjl/splice.vim'
 Bundle 'tpope/vim-abolish.git'
+Bundle 'tpope/vim-fugitive.git'
 Bundle 'vim-scripts/VimClojure.git'
 Bundle 'jeetsukumaran/vim-buffergator.git'
 Bundle 'majutsushi/tagbar.git'
@@ -22,7 +23,7 @@ Bundle 'Shougo/neocomplcache.git'
 Bundle 'Shougo/neosnippet.git'
 Bundle 'Align'
 Bundle 'ZoomWin'
-Bundle 'hgrev'
+" Bundle 'hgrev'
 Bundle 'scrooloose/nerdcommenter.git'
 Bundle 'slimv.vim'
 
@@ -144,4 +145,7 @@ command! Small :set guifont=Source\ Code\ Pro\ Semibold:h13
 au Filetype qf setl nolist 
 au Filetype qf setl nocursorline 
 au Filetype qf setl nowrap
+
+"shortcut for rerunning macro
+map <A-;> @@n
 
