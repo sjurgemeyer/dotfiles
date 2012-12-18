@@ -5,7 +5,7 @@ call vundle#rc()
 
 Bundle 'gmarik/vundle'
 " Bundle 'vcscommand.vim'
-Bundle 'Lokaltog/vim-powerline.git'
+"Bundle 'Lokaltog/powerline.git'
 Bundle 'kien/ctrlp.vim.git'
 Bundle 'scrooloose/nerdtree.git'
 Bundle 'scrooloose/syntastic.git'
@@ -14,6 +14,7 @@ Bundle 'sjl/gundo.vim.git'
 Bundle 'sjl/splice.vim'
 Bundle 'tpope/vim-abolish.git'
 Bundle 'tpope/vim-fugitive.git'
+Bundle 'tpope/vim-unimpaired.git'
 Bundle 'vim-scripts/VimClojure.git'
 Bundle 'jeetsukumaran/vim-buffergator.git'
 Bundle 'majutsushi/tagbar.git'
@@ -86,7 +87,6 @@ nnoremap ` '
 so ~/.vim/config/nerdtree.vim
 so ~/.vim/config/ctrlp.vim
 so ~/.vim/config/splice.vim
-so ~/.vim/config/powerline.vim
 so ~/.vim/config/neosnippet.vim
 so ~/.vim/config/neocomplcache.vim
 so ~/.vim/config/vimclojure.vim
@@ -95,6 +95,7 @@ so ~/.vim/config/tagbar.vim
 so ~/.vim/config/nerdcommenter.vim
 so ~/.vim/config/buffergator.vim
 so ~/.vim/config/gundo.vim
+so ~/.vim/config/fugitive.vim
 
 "quick switch to last edited file
 map <C-tab> <C-^>
