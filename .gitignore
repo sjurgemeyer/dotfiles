@@ -2,3 +2,4 @@
 .vim/undo/*
 z-zsh/*
 dependencies/hg-prompt/*
+.vim/bundle/*
