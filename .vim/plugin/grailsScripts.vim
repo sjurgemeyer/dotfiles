@@ -125,7 +125,8 @@ function! RunGrailsTest(testName)
             let flag = "unit:unit"
         endif
     endif
-    :call RunInTerminal (g:grails_interactive . "test-app " . flag . " " . a:testName . "; groovy ~/.vim/plugin/parseJunit.groovy") 
+    :call RunInTerminal (g:grails_interactive . "test-app " . flag . " " . a:testName )
+    " . ; groovy ~/.vim/plugin/parseJunit.groovy) 
     ":call RunInVim ("grails -Dprintln.test.logs=true test-app " . flag . " " . a:testName) 
 endfunction
 

@@ -3009,3 +3009,5 @@ grails.test.mixin.TestFor
 grails.test.mixin.Mock
 org.hibernate.SessionFactory
 spock.lang.Specification
+spock.lang.Unroll
+
