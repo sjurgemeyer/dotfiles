@@ -150,3 +150,6 @@ au Filetype qf setl nowrap
 "shortcut for rerunning macro
 map <A-;> @@n
 
+"Set 'very magic' search by default.  Use /V to use basic searching
+:nnoremap / /\v
+:cnoremap s/ s/\v

@@ -1,0 +1,2 @@
+To use the .vimrc you'll need to install the vundle plugin (https://github.com/gmarik/vundle).  
+My bundle dir is excluded from this repo
