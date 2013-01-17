@@ -14,6 +14,7 @@ Bundle 'sjl/gundo.vim.git'
 Bundle 'sjl/splice.vim'
 Bundle 'tpope/vim-abolish.git'
 Bundle 'tpope/vim-fugitive.git'
+Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired.git'
 Bundle 'vim-scripts/VimClojure.git'
 Bundle 'jeetsukumaran/vim-buffergator.git'
@@ -150,6 +151,7 @@ au Filetype qf setl nowrap
 "shortcut for rerunning macro
 map <A-;> @@n
 
-"Set 'very magic' search by default.  Use /V to use basic searching
+"Set 'very magic' search by default.
 :nnoremap / /\v
+:cnoremap %s/ %s/\v
 :cnoremap s/ s/\v

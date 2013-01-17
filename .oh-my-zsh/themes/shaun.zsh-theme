@@ -1,6 +1,9 @@
-PROMPT='%{$fg[blue]%}✘%{$fg[white]%} %t %{$fg[blue]%}✘%{$fg[green]%}%p %{$fg[white]%}%c %{$fg[blue]%}$(git_prompt_info)$(hg_prompt_info)%{$fg[blue]%} ✘ % %{$reset_color%}'
+export arrow='➜'
+# export beer='🍺 '
+PROMPT='%{$fg_bold[blue]%}$arrow%{$fg[white]%} %t %{$fg[blue]%}✘%{$fg[green]%}%p %{$fg[white]%}%c %{$fg[blue]%}$(git_prompt_info)$(hg_prompt_info)%{$fg[blue]%} ✘ % %{$reset_color%}'
 #PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
 #RPROMPT='%{$bg[$(vim_prompt)]%}%{$fg[white]%}$VIMODE%{$reset_color%}'
+
 # Ξ ⏣ ♫ ☢
 ZSH_THEME_GIT_PROMPT_PREFIX="git:(%{$fg[white]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
