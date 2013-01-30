@@ -23,7 +23,7 @@ Bundle 'mileszs/ack.vim'
 Bundle 'AndrewRadev/linediff.vim'
 Bundle 'Shougo/neocomplcache.git'
 Bundle 'Shougo/neosnippet.git'
-Bundle 'Align'
+Bundle 'vim-scripts/Align.git'
 Bundle 'ZoomWin'
 " Bundle 'hgrev'
 Bundle 'scrooloose/nerdcommenter.git'
@@ -152,6 +152,6 @@ au Filetype qf setl nowrap
 map <A-;> @@n
 
 "Set 'very magic' search by default.
-:nnoremap / /\v
-:cnoremap %s/ %s/\v
-:cnoremap s/ s/\v
+" :nnoremap / /\v
+" :cnoremap %s/ %s/\v
+" :cnoremap s/ s/\v

@@ -50,6 +50,7 @@ bindkey -M main '\C-r' history-incremental-search-backward
 PROJECT_DIR=$HOME/projects
 
 source ~/.otherFunctions
+source ~/projects/bloom/dev_scripts/bash/git-branch-cleanup.sh
 
 #Start web server
 alias http='python -m SimpleHTTPServer'
