@@ -161,7 +161,7 @@ function! RemoveUnneededImports()
         if len(line) > 0
             let classname = split(line, '\.')[-1]
             " echoerr classname . " " . CountOccurances(classname)
-            if className == "*" || CountOccurances(classname) > 0
+            if classname == "*" || CountOccurances(classname) > 0
                 :call add(updatedLines, substitute(line, '^\(\s\*\)','',''))
             endif
         endif

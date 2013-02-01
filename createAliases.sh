@@ -22,6 +22,8 @@ rm -Rf ~/.vim
 sudo ln -s ~/projects/dotfiles/.vim ~/.vim
 rm -Rf ~/.vimrc
 sudo ln -s ~/projects/dotfiles/.vimrc ~/.vimrc
+rm -Rf ~/.vimrc-core
+sudo ln -s ~/projects/dotfiles/.vimrc-core ~/.vimrc-core
 rm -Rf ~/.git.scmbrc
 sudo ln -s ~/projects/dotfiles/.git.scmbrc ~/.git.scmbrc
 rm -Rf ~/.zshrc
