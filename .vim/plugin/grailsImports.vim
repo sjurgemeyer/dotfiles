@@ -147,7 +147,7 @@ endfunction
 function! RemoveUnneededImports()
     :let start = search("^import")
     :let end = search("^import", 'b')
-    :let lines = getline(start, end)
+    :let lines = sort(getline(start, end))
     :let updatedLines = []
 
     :execute "normal " . start . "G"
