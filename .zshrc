@@ -144,6 +144,10 @@ alias t=todo
 alias tls='t ls'
 alias ta='t add'
 alias td='t do'
+alias tvp='t view project'
+alias tvd='t view date'
+alias tvc='t view context'
+alias ts='t schedule'
 complete -F _todo t
 
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!

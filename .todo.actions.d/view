@@ -58,7 +58,7 @@ function project_view() {
         # Use core _list function, does numbering and colouring for us
         PROJECT_LIST=$(_list "$TODO_FILE" "+$project\b" "$term" | sed 's/\(^+\|\ *+\)[a-zA-Z0-9\{._\-\}]*\ */ /g')
         if [[ -n "${PROJECT_LIST}" ]]; then
-            echo "---  $project  ---"
+            echo_header "$project"
             echo "${PROJECT_LIST}"
             echo ""
         fi
@@ -67,7 +67,7 @@ function project_view() {
     # Show todo items not associated to a project
     PROJECT_LIST=$(_list "$TODO_FILE" "$term" | grep -v "+\w")
     if  [[ -n "${PROJECT_LIST}" ]]; then
-        echo "---  Items without project  ---"
+        echo_header "Items without project"
         echo "${PROJECT_LIST}"
     fi
 }
@@ -85,7 +85,7 @@ function context_view() {
         # Use core _list function, does numbering and colouring for us
         CONTEXT_LIST=$(_list "$TODO_FILE" "@$context\b" "$term" | sed 's/(^@|\ *@)[^[:cntrl:] ]\ */ /g')
         if [[ -n "${CONTEXT_LIST}" ]]; then
-            echo "---  $context  ---"
+            echo_header "$context"
             echo "${CONTEXT_LIST}"
             echo ""
         fi
@@ -94,7 +94,7 @@ function context_view() {
     # Show todo items not associated to a context
     CONTEXT_LIST=$(_list "$TODO_FILE" "$term" | grep -v "@[^ ]*\ *")
     if [[ -n "${CONTEXT_LIST}" ]]; then
-        echo "---  Items without context  ---"
+        echo_header "Items without context" 
         echo "${CONTEXT_LIST}"
     fi
 }
@@ -127,7 +127,7 @@ function date_view() {
         #  Use core _list function, does numbering and colouring for us
         DATE_LIST=$(_list "$TODO_FILE" "t:$date" "$term" | sed 's/\(^t:\|\ *t:\)[0-9-]*\ */ /g')
         if [ -n "${DATE_LIST}" ]; then
-            echo  "---  $date  ---"
+            echo_header  "$date"
             echo  "${DATE_LIST}"
             echo  ""
         fi
@@ -138,7 +138,7 @@ function date_view() {
     if [[ "$option" =~ $re ]]; then
         DATE_LIST=$(_list "$TODO_FILE" "$term" | grep -v "t:[0-9-]*")
         if [ -n "${DATE_LIST}" ]; then
-            echo "---  Items without date  ---"
+            echo_header "Items without date" 
             echo "${DATE_LIST}"
         fi
     fi
@@ -189,6 +189,10 @@ function date_check() {
     esac
 
     return 0
+}
+
+function echo_header() {
+    echo "--- "$1" ---"
 }
 
 # Validate the input options
