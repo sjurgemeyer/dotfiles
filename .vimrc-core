@@ -28,6 +28,7 @@ Bundle 'ZoomWin'
 " Bundle 'hgrev'
 Bundle 'scrooloose/nerdcommenter.git'
 Bundle 'slimv.vim'
+Bundle 'freitass/todo.txt-vim'
 
 syntax on
 filetype plugin indent on
@@ -42,7 +43,7 @@ set softtabstop=4
 set expandtab
 set path+=**
 set encoding=utf-8
-set scrolloff=1
+set scrolloff=5
 set autoindent
 set autoread 
 set history=1000
@@ -154,3 +155,7 @@ map <A-;> @@n
 " :nnoremap / /\v
 " :cnoremap %s/ %s/\v
 " :cnoremap s/ s/\v
+"
+"change underscore variables to camel case
+:nnoremap + /\$\w\+_<CR>
+:nnoremap _ f_x~

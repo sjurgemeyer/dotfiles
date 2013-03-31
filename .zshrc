@@ -137,5 +137,14 @@ p() {
 #SCM Breeze
 [ -s "/Users/sjurgemeyer/.scm_breeze/scm_breeze.sh" ] && source "/Users/sjurgemeyer/.scm_breeze/scm_breeze.sh"
 
+#TODO.txt
+source $HOME/projects/dotfiles/dependencies/todo.txt_cli-2.9/todo_completion
+
+alias t=todo
+alias tls='t ls'
+alias ta='t add'
+alias td='t do'
+complete -F _todo t
+
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "/Users/sjurgemeyer/.gvm/bin/gvm-init.sh" ]] && source "/Users/sjurgemeyer/.gvm/bin/gvm-init.sh"

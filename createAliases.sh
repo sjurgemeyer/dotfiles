@@ -44,4 +44,11 @@ sudo ln -s ~/projects/dotfiles/dependencies/private.xml ~/Library/Application\ S
 #sudo ln -s ~/projects/dotfiles/dependencies/grails-version /usr/local/bin/grails-version
 rm -Rf /usr/local/bin/ffind
 sudo ln -s ~/projects/dotfiles/dependencies/friendly-find/ffind /usr/local/bin/ffind
+rm -Rf /usr/local/bin/todo
+sudo ln -s ~/projects/dotfiles/dependencies/todo.txt_cli-2.9/todo.sh /usr/local/bin/todo
+rm -Rf ~/.todo.cfg
+sudo ln -s ~/projects/dotfiles/.todo.cfg ~/.todo.cfg
+rm -Rf ~/.todo.actions.d
+sudo ln -s ~/projects/dotfiles/.todo.actions.d ~/.todo.actions.d
+
 
