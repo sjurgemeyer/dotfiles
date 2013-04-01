@@ -56,6 +56,15 @@ function replace {
 	add $item "$threshold"
 }
 
+function translateDate {
+    isDateAdjustment=`echo "$param" | sed -e 's/\(\+\).*/y/g'`
+    if [ "$param" = "tomorrow" ]; then
+        param=`date -v +1d "+%Y-%m-%d"`
+    elif [ "$isDateAdjustment" = 'y' ]; then
+        param=`date -v $param "+%Y-%m-%d"`
+    fi
+}
+
 [ "$action" = "usage" ] && usage
 
 if [ -z $item ]; then
@@ -66,5 +75,8 @@ elif [[ "$param" == mv* ]]; then # XXX: obsolete
 	threshold=${param#mv }
 	replace $item "$threshold"
 else
-	add $item "$param"
+    translateDate
+	add $item $param
 fi
+
+
