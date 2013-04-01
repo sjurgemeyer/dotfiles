@@ -52,6 +52,28 @@ PROJECT_DIR=$HOME/projects
 source ~/.otherFunctions
 source ~/projects/bloom/dev_scripts/bash/git-branch-cleanup.sh
 
+#open all changed files in vim
+alias git-changed='mvim -p `git diff --name-only --relative`'
+
+# diff each file in vimdiff using the specified commit
+function git-diffall() {
+    git diff $1 --name-only --relative | git difftool $1
+}
+function git-difflistdev() {
+    git diff upstream/develop...$1 --name-only
+}
+function git-diffalldev() {
+    git diff upstream/develop...$1 --name-only --relative | git difftool upstream/develop...$1
+}
+
+function git-diffpr() {
+    git diff upstream/develop...upstream/pr/$1 --name-only --relative | git difftool upstream/develop...upstream/pr/$1
+}
+
+#Add pull request branches to upstream fetch
+function git-pullify() {
+    git config --add remote.upstream.fetch '+refs/pull/*/head:refs/remotes/upstream/pr/*'
+}
 #Start web server
 alias http='python -m SimpleHTTPServer'
 

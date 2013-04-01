@@ -6,7 +6,7 @@
 [difftool]
     prompt = false
 [difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	cmd = mvimdiff \"$LOCAL\" \"$REMOTE\"
 	path = 
 [difftool "mvim"]
     cmd = mvim -df \"$LOCAL\" \"$REMOTE\"
