@@ -51,7 +51,7 @@ function project_view() {
     echo ""
 
     # Find all projects and sort
-    PROJECTS=$(grep -o '[^  ]*+[^  ]\+' "$TODO_FILE" | grep '^+' | sort -u | sed 's/^+//g')
+    PROJECTS=$(grep -o '[^  ]*+[^  ]\+' "$TODO_FILE" | grep '^+' | sort -fu | sed 's/^+//g')
 
     # For each project show header and the list of todo items
     for project in $PROJECTS; do
@@ -78,7 +78,7 @@ function context_view() {
     echo ""
 
     # Find all contexts and sort
-    CONTEXTS=$(grep -o '[^  ]*@[^  ]\+' "$TODO_FILE" | grep '^@' | sort -u | sed 's/@//g')
+    CONTEXTS=$(grep -o '[^  ]*@[^  ]\+' "$TODO_FILE" | grep '^@' | sort -fu | sed 's/@//g')
 
     # For each context show header and the list of todo items
     for context in $CONTEXTS ; do
