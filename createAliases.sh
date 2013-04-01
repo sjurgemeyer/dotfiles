@@ -50,5 +50,6 @@ rm -Rf ~/.todo.cfg
 sudo ln -s ~/projects/dotfiles/.todo.cfg ~/.todo.cfg
 rm -Rf ~/.todo.actions.d
 sudo ln -s ~/projects/dotfiles/.todo.actions.d ~/.todo.actions.d
-
+rm -Rf ~/.todo.txt.color
+sudo ln -s ~/projects/dotfiles/.todo.txt.color ~/.todo.txt.color
 
