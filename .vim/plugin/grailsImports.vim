@@ -102,7 +102,6 @@ function! OrganizeImports()
     :let start = search("^import")
     :let end = search("^import", 'b')
     :let lines = getline(start, end)
-    :let updatedLines = []
 
     :execute "normal " . start . "G"
     if end == start
@@ -113,6 +112,7 @@ function! OrganizeImports()
      
     :let currentprefix = ''
     :let currentline = ''
+
     for line in lines
         let pathList = split(line, '\.')
         
@@ -158,7 +158,8 @@ function! RemoveUnneededImports()
     endif
         
     for line in lines
-        if len(line) > 0
+        let trimmedLine = substitute(line, '^\s*\(.\{-}\)\s*$', '\1', '')  
+        if len(trimmedLine) > 0
             let classname = split(line, '\.')[-1]
             " echoerr classname . " " . CountOccurances(classname)
             if classname == "*" || CountOccurances(classname) > 0

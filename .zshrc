@@ -50,7 +50,7 @@ bindkey -M main '\C-r' history-incremental-search-backward
 PROJECT_DIR=$HOME/projects
 
 source ~/.otherFunctions
-source ~/projects/bloom/dev_scripts/bash/git-branch-cleanup.sh
+# source ~/projects/bloom/dev_scripts/bash/git-branch-cleanup.sh
 
 #open all changed files in vim
 alias git-changed='mvim -p `git diff --name-only --relative`'
@@ -170,7 +170,7 @@ alias tvp='t view project'
 alias tvd='t view date'
 alias tvc='t view context'
 alias ts='t schedule'
-complete -F _todo t
+# complete -F _todo t
 
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "/Users/sjurgemeyer/.gvm/bin/gvm-init.sh" ]] && source "/Users/sjurgemeyer/.gvm/bin/gvm-init.sh"
