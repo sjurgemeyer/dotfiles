@@ -1,4 +1,5 @@
 --smart-case
 --sort-files
---type-add=groovy=.gsp,.properties,.java
---ignore-dir=target
+--type-set=groovy:ext:groovy,gsp,properties,java
+--type-set=test:match:/(Test|Spec)\.(groovy|java)$/
+--ignore-dir=target,build

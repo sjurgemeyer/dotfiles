@@ -35,7 +35,7 @@ function! TestResults()
 endfunction
 
 function! GrailsSearch(pattern)
-    :execute "Ack --type=groovy " . a:pattern
+    :execute "Ack --groovy " . a:pattern
 endfunction
 
 function! GrailsSearchNoTests(pattern)
