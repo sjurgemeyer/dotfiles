@@ -78,7 +78,14 @@ function git-pullify() {
 alias http='python -m SimpleHTTPServer'
 
 ###############################  Grails  ##############################
-source ~/.ted_grails_complete
+function testResults() {
+    if [ -e "./application.properties" ]
+    then
+        open target/test-reports/html/index.html
+    else
+        open build/reports/tests/index.html
+    fi
+}
 
 alias gr='grails run-app'
 alias gd='grails-debug run-app'
@@ -88,7 +95,7 @@ alias gf='grails run-fitnesse'
 alias gt='grails -Duser.timezone=UTC test-app'
 alias gtu='grails -Duser.timezone=UTC test-app unit:'
 alias gti='grails -Duser.timezone=UTC test-app integration:'
-alias results='open target/test-reports/html/index.html'
+alias results=testResults
 
 ############################### Mysql ###############################
 alias mysqlstart='sudo /Library/StartupItems/MySQLCOM/MySQLCOM start'

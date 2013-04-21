@@ -97,6 +97,8 @@ au BufNewFile,BufRead *.groovy imap <silent> <S-F8> <Esc><S-F8>a
 map <S-F9> <Esc>:w<CR>:call RunSingleGrailsTest()<CR>
 map <F9> <Esc>:w<CR>:call RunGrailsTestFile()<CR>
 map <D-F9> :call RunLastCommandInTerminal()<CR>
+map <F9> <Esc>:w<CR>:call RunGrailsTestFile()<CR>
+map <F10> <Esc>:w<CR>:call RunGradleTestFile()<CR>
 
 command! TestResults :call TestResults()
 
@@ -108,6 +110,11 @@ endfunction
 function! RunGrailsTestFile()
     let testName = expand("%:t:r")
     :call RunGrailsTest(testName)
+endfunction
+
+function! RunGradleTestFile()
+    let testName = expand("%:t:r")
+    :call RunInTerminal ("gradle -Dtest.single=" . testName . " test") 
 endfunction
 
 function! RunGrailsTest(testName)
