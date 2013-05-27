@@ -21,6 +21,7 @@ Bundle 'jeetsukumaran/vim-buffergator.git'
 Bundle 'majutsushi/tagbar.git'
 Bundle 'mileszs/ack.vim'
 Bundle 'AndrewRadev/linediff.vim'
+Bundle 'sjurgemeyer/vim-grails-import'
 Bundle 'Shougo/neocomplcache.git'
 Bundle 'Shougo/neosnippet.git'
 Bundle 'vim-scripts/Align.git'
@@ -150,7 +151,9 @@ au Filetype qf setl nowrap
 
 "shortcut for rerunning macro
 map <A-;> @@n
-
+"Highlight text over 120 characters
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%121v.\+/
 "Set 'very magic' search by default.
 " :nnoremap / /\v
 " :cnoremap %s/ %s/\v
