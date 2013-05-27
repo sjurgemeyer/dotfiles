@@ -43,6 +43,10 @@ export EDITOR=vim
 export SVN_EDITOR=vim
 alias v='mvim'
 
+#Java
+alias jdk6='export JAVA_HOME=$(/usr/libexec/java_home -v 1.6)'
+alias jdk7='export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)'
+
 #VI Mode
 bindkey -v
 bindkey -M main '\C-r' history-incremental-search-backward
@@ -158,6 +162,11 @@ export VIMCLOJURE_SERVER_JAR="$HOME/projects/dotfiles/dependencies/lib/nailgun/s
 p() {
     ps -el | grep "$@"
 }
+
+function printClassesInJar() {
+    jar tf $1 | grep .class | grep -v '\$' | grep -v 'package-info' | sed s,/,.,g | sed s/.class//g
+}
+
 
 #RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
