@@ -2,4 +2,7 @@
 --sort-files
 --type-set=groovy:ext:groovy,gsp,properties,java
 --type-set=test:match:/(Test|Spec)\.(groovy|java)$/
---ignore-dir=target,build
+--type-set=gsp:ext:gsp
+--ignore-dir=target
+--ignore-dir=build
+
