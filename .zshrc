@@ -35,12 +35,15 @@ source $ZSH/oh-my-zsh.sh
 setopt NO_BEEP
 
 # Customize to your needs...
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/opt/local/bin:/opt/local/sbin:/usr/local/sbin:/usr/local/groovy/bin:/usr/local/mysql/bin:/usr/local/tomcat/bin:/usr/local/scripts:/usr/local/gradle/bin:$HOME/.rvm/bin
-export JAVA_OPTS="-Xms2G -Xmx2G -XX:MaxPermSize=512m -XX:PermSize=512m -XX:NewSize=256m -server -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled"
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/share/npm/bin/:/opt/local/bin:/opt/local/sbin:/usr/local/sbin:/usr/local/groovy/bin:/usr/local/mysql/bin:/usr/local/tomcat/bin:/usr/local/scripts:/usr/local/gradle/bin:$HOME/.rvm/bin
+export JAVA_OPTS="-Xmx2G -Xms2G -XX:MaxPermSize=512m" 
+# -Xms2G -Xmx2G -XX:MaxPermSize=512m -XX:PermSize=512m -XX:NewSize=256m -server -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled"
 export JAVA_HOME=`/usr/libexec/java_home`
 #For the love of god make sure everything acts like vim
 export EDITOR=vim
 export SVN_EDITOR=vim
+#Use this method to open MacVim so existing window can be used when opening a new file
+# alias v='open -a MacVim.app'
 alias v='mvim'
 
 #Java
@@ -54,30 +57,7 @@ bindkey -M main '\C-r' history-incremental-search-backward
 PROJECT_DIR=$HOME/projects
 
 source ~/.otherFunctions
-# source ~/projects/bloom/dev_scripts/bash/git-branch-cleanup.sh
 
-#open all changed files in vim
-alias git-changed='mvim -p `git diff --name-only --relative`'
-
-# diff each file in vimdiff using the specified commit
-function git-diffall() {
-    git diff $1 --name-only --relative | git difftool $1
-}
-function git-difflistdev() {
-    git diff upstream/develop...$1 --name-only
-}
-function git-diffalldev() {
-    git diff upstream/develop...$1 --name-only --relative | git difftool upstream/develop...$1
-}
-
-function git-diffpr() {
-    git diff upstream/develop...upstream/pr/$1 --name-only --relative | git difftool upstream/develop...upstream/pr/$1
-}
-
-#Add pull request branches to upstream fetch
-function git-pullify() {
-    git config --add remote.upstream.fetch '+refs/pull/*/head:refs/remotes/upstream/pr/*'
-}
 #Start web server
 alias http='python -m SimpleHTTPServer'
 
@@ -115,13 +95,37 @@ alias rabbit='sudo /usr/local/Cellar/rabbitmq/2.8.7/sbin/rabbitmq-server'
 ################################ Git ###############################
 #Using scm_breeze shortcuts
 
+# source ~/projects/bloom/dev_scripts/bash/git-branch-cleanup.sh
+#open all changed files in vim
+alias git-changed='mvim -p `git diff --name-only --relative`'
+
+# diff each file in vimdiff using the specified commit
+function git-diffall() {
+    git diff $1 --name-only --relative | git difftool $1
+}
+function git-difflistdev() {
+    git diff upstream/develop...$1 --name-only
+}
+function git-diffalldev() {
+    git diff upstream/develop...$1 --name-only --relative | git difftool upstream/develop...$1
+}
+
+function git-diffpr() {
+    git diff upstream/develop...upstream/pr/$1 --name-only --relative | git difftool upstream/develop...upstream/pr/$1
+}
+
+#Add pull request branches to upstream fetch
+function git-pullify() {
+    git config --add remote.upstream.fetch '+refs/pull/*/head:refs/remotes/upstream/pr/*'
+}
+
 ################################ Mercurial ###############################
 alias hs="hg status -S"
 alias hb="hg branch"
 alias hgdr=hgdiffrevs
 
-alias ic="hg incoming -v | lf"
-alias og="hg outgoing -v | lf"
+# alias ic="hg incoming -v | lf"
+# alias og="hg outgoing -v | lf"
 
 alias hgl="hg sglog -l"
 alias hglv="hg sglog -v -l"
@@ -129,8 +133,8 @@ alias hglv="hg sglog -v -l"
 alias hgi='hg identify -nibt'
 alias hga='hg annotate -un'
 
-alias icdiff="hg diff --reverse http://hg/direct \$(ic)"
-alias ogdiff="hg diff --reverse http://hg/direct \$(og)"
+# alias icdiff="hg diff --reverse http://hg/direct \$(ic)"
+# alias ogdiff="hg diff --reverse http://hg/direct \$(og)"
 
 hgdiffrevs() {
 	diff <(hg slog --rev $1:0 --follow) <(hg slog --rev $2:0 --follow)
