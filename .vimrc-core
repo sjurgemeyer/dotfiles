@@ -98,6 +98,7 @@ so ~/.vim/config/tagbar.vim
 so ~/.vim/config/nerdcommenter.vim
 so ~/.vim/config/buffergator.vim
 so ~/.vim/config/gundo.vim
+let g:grails_import_list_file='/Users/sjurgemeyer/.vim/config/grailsImportList.txt'
 
 "quick switch to last edited file
 map <C-tab> <C-^>
