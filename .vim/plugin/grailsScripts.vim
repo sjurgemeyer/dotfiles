@@ -125,14 +125,17 @@ function! RunGrailsTest(testName)
         else
             let flag = "unit:spock"
         endif
-    else if path =~ "Test"
-        if path =~ "integration"
-            let flag = "integration:integration"
-        else
-            let flag = "unit:unit"
-        endif
     else 
-        echoerr "The current file is not a test"
+        if path =~ "Test"
+            if path =~ "integration"
+                let flag = "integration:integration"
+            else
+                let flag = "unit:unit"
+            endif
+        else 
+            echoerr "The current file is not a test"
+            return
+        endif
     endif
     :call RunInTerminal (g:grails_interactive . "test-app " . flag . " " . a:testName) 
     ":call RunInVim ("grails -Dprintln.test.logs=true test-app " . flag . " " . a:testName) 
