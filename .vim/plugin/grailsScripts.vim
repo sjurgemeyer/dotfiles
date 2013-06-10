@@ -125,12 +125,14 @@ function! RunGrailsTest(testName)
         else
             let flag = "unit:spock"
         endif
-    else 
+    else if path =~ "Test"
         if path =~ "integration"
             let flag = "integration:integration"
         else
             let flag = "unit:unit"
         endif
+    else 
+        echoerr "The current file is not a test"
     endif
     :call RunInTerminal (g:grails_interactive . "test-app " . flag . " " . a:testName) 
     ":call RunInVim ("grails -Dprintln.test.logs=true test-app " . flag . " " . a:testName) 
@@ -149,10 +151,12 @@ endfunction
 
 "Function to run command in external terminal"
 function! RunInTerminal(command)
+
   if exists("a:command")
     let g:last_run_in_terminal = a:command
+    :execute "Dispatch " . a:command
 "    silent execute ":up"
-    silent execute g:run_script . " '" . a:command . "' " . g:vim_terminal . " &"
+    "silent execute g:run_script . " '" . a:command . "' " . g:vim_terminal . " &"
 "    silent execute ":redraw!"
   else
     echo "Couldn't figure out how to run " . a:file 
