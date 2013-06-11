@@ -115,9 +115,11 @@ endfunction
 function! RunGradleTestFile()
     let testName = expand("%:t:r")
     silent execute 'cd ' . FindGradleRoot()
-    :call RunInTerminal ("gradle -Dtest.single=" . testName . " test") 
+    :compiler gradle
+    :call RunInTerminal ("gradle -Dtest.single=" . testName . " test | ~/filter.groovy") 
     silent execute 'cd -'
 endfunction
+
 function! FindGrailsRoot() 
     let fileLocation = findfile("application.properties", expand("%:p:h") . ';/')
     return fnamemodify(fileLocation, ":p:h")
@@ -149,9 +151,9 @@ function! RunGrailsTest(testName)
         endif
     endif
     silent execute 'cd ' . FindGrailsRoot()
-    :call RunInTerminal (g:grails_interactive . "test-app " . flag . " " . a:testName) 
+    :compiler grails
+    :call RunInTerminal (g:grails_interactive . "test-app " . flag . " " . a:testName . ' | ~/filter.groovy') 
     silent execute 'cd -'
-    ":call RunInVim ("grails -Dprintln.test.logs=true test-app " . flag . " " . a:testName) 
 endfunction
 
 command! Interactive :call Interactive()
