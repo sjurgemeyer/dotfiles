@@ -11,8 +11,6 @@ endif
 
 CompilerSet makeprg=gradle
 "CompilerSet errorformat=%m
-CompilerSet errorformat=%A%m\ FAILED,%Z%.%#\ at\ %f:%l,%-G%.%#
 
-
-"com.bloomhealthco.payment.PaymentsByClaimMonthSpec > isEmpty[4] FAILED
-    "org.spockframework.runtime.SpockComparisonFailure at PaymentsByClaimMonthSpec.groovy:38
+CompilerSet errorformat=%A%f:\ %l:\ %m,%-G%.%#
+"/Users/sjurgemeyer/projects/bloom/lib_paymentSchedule/src/main/groovy/com/bloomhealthco/payment/Payment.groovy: 12: unexpected token: aymentType @ line 12, column 5.

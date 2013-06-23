@@ -31,6 +31,7 @@ Bundle 'ZoomWin'
 Bundle 'scrooloose/nerdcommenter.git'
 Bundle 'slimv.vim'
 Bundle 'freitass/todo.txt-vim'
+"Bundle 'DrawIt'
 
 syntax on
 filetype plugin indent on

@@ -102,6 +102,14 @@ map <F10> <Esc>:w<CR>:call RunGradleTestFile()<CR>
 
 command! TestResults :call TestResults()
 
+function! CompileGrails()
+    let fileName = expand("%:t:r")
+    silent execute 'cd ' . FindGrailsRoot()
+    :compiler grails
+    :call RunInTerminal ("grails compile") 
+    silent execute 'cd -'
+endfunction
+
 function! RunSingleGrailsTest()
     let testName = expand("%:t:r.") . "." . expand("<cword>")
     :call RunGrailsTest(testName)
@@ -112,11 +120,19 @@ function! RunGrailsTestFile()
     :call RunGrailsTest(testName)
 endfunction
 
+function! CompileGradle()
+    let fileName = expand("%:t:r")
+    silent execute 'cd ' . FindGradleRoot()
+    :compiler gradle
+    :call RunInTerminal ("gradle assemble") 
+    silent execute 'cd -'
+endfunction
+
 function! RunGradleTestFile()
     let testName = expand("%:t:r")
     silent execute 'cd ' . FindGradleRoot()
     :compiler gradle
-    :call RunInTerminal ("gradle -Dtest.single=" . testName . " test | ~/filter.groovy") 
+    :call RunInTerminal ("gradle -Dtest.single=" . testName . " test | ~/.vim/tools/filter.groovy") 
     silent execute 'cd -'
 endfunction
 
@@ -151,8 +167,8 @@ function! RunGrailsTest(testName)
         endif
     endif
     silent execute 'cd ' . FindGrailsRoot()
-    :compiler grails
-    :call RunInTerminal (g:grails_interactive . "test-app " . flag . " " . a:testName . ' | ~/filter.groovy') 
+    :compiler grailsTest
+    :call RunInTerminal (g:grails_interactive . "test-app " . flag . " " . a:testName . ' | ~/.vim/tools/filter.groovy') 
     silent execute 'cd -'
 endfunction
 
@@ -169,15 +185,9 @@ endfunction
 
 "Function to run command in external terminal"
 function! RunInTerminal(command)
-
   if exists("a:command")
     let g:last_run_in_terminal = a:command
     :execute "Dispatch " . a:command
-"    silent execute ":up"
-    "silent execute g:run_script . " '" . a:command . "' " . g:vim_terminal . " &"
-"    silent execute ":redraw!"
-  else
-    echo "Couldn't figure out how to run " . a:file 
   end
 endfunction
 
