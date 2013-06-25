@@ -73,13 +73,14 @@ function testResults() {
 
 alias gr='grails run-app'
 alias gd='grails-debug run-app'
-alias gtr='grails test run-app'
+alias gtr='grails --refresh-dependencies test run-app'
 alias gdta='grails-debug -Duser.timezone=UTC test run-app'
 alias gf='grails run-fitnesse'
-alias gt='grails -Duser.timezone=UTC test-app'
+alias gt='grails --refresh-dependencies -Duser.timezone=UTC test-app'
 alias gtu='grails -Duser.timezone=UTC test-app unit:'
 alias gti='grails -Duser.timezone=UTC test-app integration:'
 alias results=testResults
+alias codenarc="open build/reports/codenarc/main.html"
 
 ############################### Mysql ###############################
 alias mysqlstart='sudo /Library/StartupItems/MySQLCOM/MySQLCOM start'

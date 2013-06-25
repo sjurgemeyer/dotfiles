@@ -31,3 +31,6 @@
 	l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
     pop = stash pop
     pr = pull --rebase
+    b = checkout -b
+    pud = pull upstream develop
+    amend = commit --amend
