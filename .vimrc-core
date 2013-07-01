@@ -156,3 +156,6 @@ map <A-;> @@n
 
 "Remove spaces at the end of lines
 command! RemoveEndSpaces :silent %s/ \+$//g
+
+"JSON
+command! FormatJSON :%!python -m json.tool
