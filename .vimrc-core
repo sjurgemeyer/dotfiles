@@ -62,6 +62,7 @@ set ttyfast
 set ruler
 set backspace=indent,eol,start
 set laststatus=2
+set colorcolumn=121
 " set relativenumber
 set undofile
 "set winwidth=119
@@ -154,9 +155,6 @@ au Filetype qf setl nowrap
 
 "shortcut for rerunning macro
 map <A-;> @@n
-"Highlight text over 120 characters
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%121v.\+/
 "Set 'very magic' search by default.
 " :nnoremap / /\v
 " :cnoremap %s/ %s/\v
@@ -165,3 +163,6 @@ match OverLength /\%121v.\+/
 "change underscore variables to camel case
 :nnoremap + /\$\w\+_<CR>
 :nnoremap _ f_x~
+
+"Remove spaces at the end of lines
+command! RemoveEndSpaces :silent %s/ \+$//g
