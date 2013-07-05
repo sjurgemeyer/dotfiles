@@ -1,0 +1,145 @@
+alias V="mvim -c 'cd $CURRENT_PROJECT_DIR'"
+
+function git-dev() {
+    checkoutUpdateFromUpstreamAll develop
+}
+
+function git-master() {
+    checkoutUpdateFromUpstreamAll master
+}
+
+function git-reset-origin() {
+    resetFromOrigin $1
+}
+
+function git-dev-diff() {
+    git fetch upstream
+    git diff upstream/develop..$1
+}
+
+function git-dev-log() {
+    git fetch upstream
+    git log upstream/develop..$1
+}
+
+function git-reset-upstream() {
+    resetFromUpstream $1
+}
+
+function checkoutAll() {
+    logStartFunction
+    for project in $CURRENT_PROJECT_ALL_ROOTS; do
+        echom "Updating $project to $1"
+        cd $CURRENT_PROJECT_DIR/$project
+        git checkout $1
+    done
+    logEndFunction
+}
+
+function resetFromUpstream() {
+    logStartFunction
+    git fetch upstream $1
+    git branch -D $1
+    git checkout -b $1 upstream/$1
+    logEndFunction
+}
+
+function resetFromUpstreamAll() {
+    # logStartFunction
+    for project in $CURRENT_PROJECT_ALL_ROOTS; do
+        echom "Resetting $project $1"
+        cd $CURRENT_PROJECT_DIR/$project
+        resetFromUpstream $1
+    done
+    # logEndFunction
+}
+
+function resetFromOrigin() {
+    logStartFunction
+    git fetch origin $1
+    git branch -D $1
+    git checkout -b $1 origin/$1
+    logEndFunction
+}
+
+
+function resetFromOriginAll() {
+    logStartFunction
+    checkoutAll devleop
+    for project in $CURRENT_PROJECT_ALL_ROOTS; do
+        echom "Updating $project to $1"
+        cd $CURRENT_PROJECT_DIR/$project
+        git branch -D $1
+        git fetch --all
+        git checkout -b $1 origin/$1
+    done
+    logEndFunction
+}
+
+function checkoutUpdateFromUpstreamAll() {
+    logStartFunction
+    for project in $CURRENT_PROJECT_ALL_ROOTS; do
+        echom "Updating $project to $1"
+        cd $CURRENT_PROJECT_DIR/$project
+        git checkout $1
+        echom "Pulling $project from upstream"
+        git fetch upstream
+        git pull upstream $1
+    done
+    logEndFunction
+}
+
+
+function statusAll() {
+    gitAll status
+}
+
+function diffAll() {
+    gitAll diff 
+}
+function fetchAll() {
+    gitAll fetch --all
+}
+
+function gitAll {
+     logStartFunction
+     for project in $CURRENT_PROJECT_ALL_ROOTS; do
+        echom "Calling $1 for $project"
+        cd $CURRENT_PROJECT_DIR/$project
+        git $1
+        if [ $? -ne 0 ]
+        then
+            if [[ -n "$2" ]]
+            then
+                echoe "Error calling $1 for $project"
+                break
+            fi
+        fi
+    done
+    logEndFunction
+}
+
+
+function echoe() {
+    echo
+    echo "$fg[red]***** "$1" ***** $reset_color"
+}
+
+function echom() {
+    echo
+    echo "$fg[blue]***** "$1" ***** $reset_color"
+}
+
+function logStartFunction() {
+    TEMP_CURRENT_DIR=`pwd`
+    T="$(($(date +%s)))"
+}
+
+function logEndFunction() {
+    cd $TEMP_CURRENT_DIR
+    TEMP_CURRENT_DIR=
+    T="$(($(date +%s)-T))"
+    T=`printf "%02d:%02d:%02d\n" "$((T/3600%24))" "$((T/60%60))" "$((T%60))"`
+    echom "Total Time: ${T}"
+}
+

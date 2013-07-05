@@ -2,14 +2,12 @@ set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
-
+python import sys; sys.path.append("/Library/Python/2.7/site-packages")
 Bundle 'gmarik/vundle'
-" Bundle 'vcscommand.vim'
 "Bundle 'Lokaltog/powerline.git'
 Bundle 'kien/ctrlp.vim.git'
 Bundle 'scrooloose/nerdtree.git'
 Bundle 'scrooloose/syntastic.git'
-Bundle 'sjl/clam.vim.git'
 Bundle 'sjl/gundo.vim.git'
 Bundle 'sjl/splice.vim'
 Bundle 'tpope/vim-abolish.git'
@@ -21,13 +19,11 @@ Bundle 'vim-scripts/VimClojure.git'
 Bundle 'jeetsukumaran/vim-buffergator.git'
 Bundle 'majutsushi/tagbar.git'
 Bundle 'mileszs/ack.vim'
-Bundle 'AndrewRadev/linediff.vim'
 Bundle 'sjurgemeyer/vim-grails-import'
 Bundle 'Shougo/neocomplcache.git'
 Bundle 'Shougo/neosnippet.git'
 Bundle 'vim-scripts/Align.git'
 Bundle 'ZoomWin'
-" Bundle 'hgrev'
 Bundle 'scrooloose/nerdcommenter.git'
 Bundle 'slimv.vim'
 Bundle 'freitass/todo.txt-vim'
@@ -105,14 +101,6 @@ let g:grails_import_list_file='/Users/sjurgemeyer/.vim/config/grailsImportList.t
 
 "quick switch to last edited file
 map <C-tab> <C-^>
-"Skip over one
-map <A-tab> <Esc>,bjj<CR>
-
-"YankRing
-"map <Leader>a :YRShow<CR>
-"map <Leader>\ :s/^\(.*\)$/\/\/\1/<CR><Esc>:nohlsearch<CR>
-"map <Leader>- :s/^\/\/\(.*\)$/\1/<CR><Esc>:nohlsearch<CR>
-"let g:yankring_replace_n_pkey = '<C-x>'
 
 "Manipulate a comma seperated list"
 vmap <D-[> :s/,\s*/,\r/g<CR>
