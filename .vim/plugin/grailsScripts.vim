@@ -167,7 +167,7 @@ function! RunGrailsTest(testName)
         endif
     endif
     silent execute 'cd ' . FindGrailsRoot()
-    :compiler grailsTest
+    :compiler grails
     :call RunInTerminal (g:grails_interactive . "test-app " . flag . " " . a:testName . ' | ~/.vim/tools/filter.groovy') 
     silent execute 'cd -'
 endfunction
