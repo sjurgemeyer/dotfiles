@@ -1,5 +1,5 @@
-let g:vim_terminal="/dev/ttys000"
-let g:run_script = "!osascript ~/.vim/tools/run_command.applescript" 
+"let g:vim_terminal="/dev/ttys000"
+"let g:run_script = "!osascript ~/.vim/tools/run_command.applescript" 
 
 " Pulled from http://naleid.com/blog/2011/04/25/replace-grails-console-with-the-editor-of-your-choice/
 function! s:copy_groovy_buffer_to_temp(first, last)
@@ -29,6 +29,7 @@ function! s:select_new_temp_buffer()
  
   return temp_file
 endfunction
+"End text copied from naleid.com
 
 function! TestResults()
     silent execute ":!open target/test-reports/html/index.html" 
@@ -74,7 +75,6 @@ au BufNewFile,BufRead *.groovy imap <silent> <S-F7> <Esc><S-F7>a
 let g:grails_user = $DEFAULT_GRAILS_USER
 let g:grails_password = $DEFAULT_GRAILS_PASSWORD
 let g:grails_base_url = $DEFAULT_GRAILS_BASE_URL
-let g:grails_interactive = "grails -Duser.timezone=UTC "
  
 function! Grails_eval_vsplit() range
   let temp_source = s:copy_groovy_buffer_to_temp(a:firstline, a:lastline)
@@ -168,20 +168,9 @@ function! RunGrailsTest(testName)
     endif
     silent execute 'cd ' . FindGrailsRoot()
     :compiler grails
-    :call RunInTerminal (g:grails_interactive . "test-app " . flag . " " . a:testName . ' | ~/.vim/tools/filter.groovy') 
+    :call RunInTerminal ("grails -Duser.timezone=UTC test-app " . flag . " " . a:testName . ' | ~/.vim/tools/filter.groovy') 
     silent execute 'cd -'
 endfunction
-
-command! Interactive :call Interactive()
-function! Interactive()
-    let g:grails_interactive = ""
-endfunction
-
-command! NoInteractive :call NoInteractive()
-function! NoInteractive()
-    let g:grails_interactive = "grails -Duser.timezone=UTC "
-endfunction
-
 
 "Function to run command in external terminal"
 function! RunInTerminal(command)
@@ -193,7 +182,7 @@ endfunction
 
 function! RunLastCommandInTerminal()
     if exists("g:last_run_in_terminal")
-        silent execute g:run_script . " '" . g:last_run_in_terminal. "' " . g:vim_terminal . " &"
+        RunInTerminal(g:last_run_in_terminal)
     else
         echo "No last command to execute!"
     endif
