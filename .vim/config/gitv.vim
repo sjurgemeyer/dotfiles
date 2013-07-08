@@ -1,1 +1,1 @@
-nmap <C-v> :Gitv!
+nmap <C-v> :Gitv!<CR>
