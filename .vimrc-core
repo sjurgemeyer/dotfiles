@@ -2,31 +2,30 @@ set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
-python import sys; sys.path.append("/Library/Python/2.7/site-packages")
+Bundle 'Shougo/neocomplcache.git'
+Bundle 'Shougo/neosnippet.git'
+Bundle 'ZoomWin'
+Bundle 'bling/vim-airline'
+Bundle 'freitass/todo.txt-vim'
 Bundle 'gmarik/vundle'
-"Bundle 'Lokaltog/powerline.git'
+Bundle 'jeetsukumaran/vim-buffergator.git'
 Bundle 'kien/ctrlp.vim.git'
+Bundle 'majutsushi/tagbar.git'
+Bundle 'mileszs/ack.vim'
+Bundle 'scrooloose/nerdcommenter.git'
 Bundle 'scrooloose/nerdtree.git'
 Bundle 'scrooloose/syntastic.git'
 Bundle 'sjl/gundo.vim.git'
 Bundle 'sjl/splice.vim'
+Bundle 'sjurgemeyer/vim-grails-import'
+Bundle 'slimv.vim'
 Bundle 'tpope/vim-abolish.git'
+Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired.git'
-Bundle 'tpope/vim-dispatch'
-Bundle 'vim-scripts/VimClojure.git'
-Bundle 'jeetsukumaran/vim-buffergator.git'
-Bundle 'majutsushi/tagbar.git'
-Bundle 'mileszs/ack.vim'
-Bundle 'sjurgemeyer/vim-grails-import'
-Bundle 'Shougo/neocomplcache.git'
-Bundle 'Shougo/neosnippet.git'
 Bundle 'vim-scripts/Align.git'
-Bundle 'ZoomWin'
-Bundle 'scrooloose/nerdcommenter.git'
-Bundle 'slimv.vim'
-Bundle 'freitass/todo.txt-vim'
+Bundle 'vim-scripts/VimClojure.git'
 "Bundle 'DrawIt'
 
 syntax on
@@ -63,7 +62,7 @@ set colorcolumn=121
 set undofile
 "set winwidth=119
 set wildignore+=*.class,.git,.hg,.svn,test-integration/**,test-unit/**,**/target/**
-set guifont=Source\ Code\ Pro\ Semibold:h13
+set guifont=Source\ Code\ Pro\ Semibold\ for\ Powerline:h13
 set diffopt=filler,vertical
 
 set tags=.tags
@@ -86,17 +85,18 @@ let g:mapleader = ","
 nnoremap ' `
 nnoremap ` '
 
-so ~/.vim/config/nerdtree.vim
+so ~/.vim/config/airline.vim
+so ~/.vim/config/buffergator.vim
 so ~/.vim/config/ctrlp.vim
-so ~/.vim/config/splice.vim
-so ~/.vim/config/neosnippet.vim
+so ~/.vim/config/gundo.vim
 so ~/.vim/config/neocomplcache.vim
-so ~/.vim/config/vimclojure.vim
+so ~/.vim/config/neosnippet.vim
+so ~/.vim/config/nerdcommenter.vim
+so ~/.vim/config/nerdtree.vim
+so ~/.vim/config/splice.vim
 so ~/.vim/config/syntastic.vim
 so ~/.vim/config/tagbar.vim
-so ~/.vim/config/nerdcommenter.vim
-so ~/.vim/config/buffergator.vim
-so ~/.vim/config/gundo.vim
+so ~/.vim/config/vimclojure.vim
 let g:grails_import_list_file='/Users/sjurgemeyer/.vim/config/grailsImportList.txt'
 
 "quick switch to last edited file
