@@ -8,6 +8,7 @@ let g:ctrlp_mruf_exclude = '/tmp/.*\|/temp/.*\|.*/target/.*\|.*/build/.*|*.orig'
     \ }
 let g:ctrlp_max_files = 30000
 let g:ctrlp_max_depth = 40
+let g:ctrlp_lazy_update = 1
 
-"Open CTRLP with the current word pre-populated in the search
-nmap <Leader>p <C-p><C-\>w 
+nmap <Leader>p <C-p><C-\>w "Open CTRLP with current word prepopulated
+

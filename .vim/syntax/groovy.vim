@@ -73,7 +73,7 @@ endif
 syn keyword groovyExternal        native package
 syn match groovyExternal          "\<import\(\s\+static\>\)\?"
 syn keyword groovyError           goto const
-syn match groovyError             "\s\+$"
+"syn match groovyError             "\s\+$"
 syn keyword groovyConditional     if else switch
 syn keyword groovyRepeat          while for do
 syn keyword groovyBoolean         true false
