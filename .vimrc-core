@@ -2,6 +2,7 @@ set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
+
 Bundle 'Shougo/neocomplcache.git'
 Bundle 'Shougo/neosnippet.git'
 Bundle 'ZoomWin'
@@ -11,6 +12,7 @@ Bundle 'gmarik/vundle'
 Bundle 'jeetsukumaran/vim-buffergator.git'
 Bundle 'kien/ctrlp.vim.git'
 Bundle 'majutsushi/tagbar.git'
+Bundle 'mhinz/vim-startify'
 Bundle 'mileszs/ack.vim'
 Bundle 'scrooloose/nerdcommenter.git'
 Bundle 'scrooloose/nerdtree.git'
