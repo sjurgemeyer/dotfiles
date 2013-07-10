@@ -16,6 +16,7 @@ let colors_name = "wombat"
 if version >= 700
   hi CursorLine guibg=#242424
   hi CursorColumn guibg=#2d2d2d
+  hi ColorColumn guibg=#2d2d2d
   hi MatchParen guifg=#f6f3e8 guibg=#457bcf gui=bold
   hi Pmenu 		guifg=#f6f3e8 guibg=#444444
   hi PmenuSel 	guifg=#000000 guibg=#0f4a68 

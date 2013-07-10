@@ -34,3 +34,4 @@
     b = checkout -b
     pud = pull upstream develop
     amend = commit --amend
+    aa = commit -a --amend
