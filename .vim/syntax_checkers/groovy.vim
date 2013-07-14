@@ -1,6 +1,6 @@
 function! SyntaxCheckers_groovy_GetLocList()
     let makeprg = 'grails-compile-file '.shellescape(expand('%'))
-    let errorformat = '%f:\ %l:\ %m'
+"    let errorformat = '%f:\ %l:\ %m'
     return SyntasticMake({ 'makeprg': makeprg, 'errorformat': errorformat })
 endfunction
 

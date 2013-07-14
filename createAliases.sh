@@ -3,7 +3,7 @@ sudo ln -s ~/projects/dotfiles/.ackrc ~/.ackrc #For Ack 2.0
 sudo rm -Rf /usr/local/bin/ffind
 sudo ln -s ~/projects/dotfiles/dependencies/friendly-find/ffind /usr/local/bin/ffind
 rm /Users/sjurgemeyer/Library/Application\ Support/KeyRemap4MacBook/private.xml
-sudo ln -s ~/projects/dotfiles/dependencies/private.xml ~/Library/Application\ Support/KeyRemap4MacBook/private.xml
+sudo ln -s ~/projects/dotfiles/config/private.xml ~/Library/Application\ Support/KeyRemap4MacBook/private.xml
 rm -Rf ~/.slate
 sudo ln -s ~/projects/dotfiles/.slate ~/.slate
 
@@ -46,6 +46,9 @@ rm -Rf ~/.vimrc-core
 sudo ln -s ~/projects/dotfiles/.vimrc-core ~/.vimrc-core
 rm -Rf ~/.ctags
 sudo ln -s ~/projects/dotfiles/.ctags ~/.ctags
+# Used for syntastic
+sudo rm -Rf /usr/local/bin/grails-compile-file
+sudo ln -s ~/projects/dotfiles/config/grails-compile-file /usr/local/bin/grails-compile-file
 
 #ZSH
 rm -Rf ~/.zshrc

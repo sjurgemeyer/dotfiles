@@ -155,6 +155,8 @@ alias tvp='t view project'
 alias tvd='t view date'
 alias tvc='t view context'
 alias ts='t schedule'
+alias te='v /Users/sjurgemeyer/Dropbox/todo/todo.txt'
+
 # complete -F _todo t
 
 export VIMCLOJURE_SERVER_JAR="$HOME/projects/dotfiles/dependencies/lib/nailgun/server-2.3.6.jar"
