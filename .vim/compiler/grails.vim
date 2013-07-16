@@ -10,7 +10,7 @@ endif
 CompilerSet makeprg=grails
 "CompilerSet errorformat=%m
 "CompilerSet errorformat=%A%f:\ %l:\ %m,%-G%.%#
-CompilerSet errorformat=%A%.%#Failure:%m,%Z%.%#at\ %.%#(%f:%l),%-G%.%#
+CompilerSet errorformat=%A%.%#Failure:%m,%Z%.%#at\ %.%#(%f:%l),%+G%.%#
 
 "|| | Failure:  isValidForAgeAndType ageFrom:0 ageTo:0 age:30 type:null(com.bloomhealthco.domain.AgeBandSpec)
 "|| |  Condition not satisfied:
