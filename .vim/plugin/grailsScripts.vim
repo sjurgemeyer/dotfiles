@@ -176,13 +176,16 @@ endfunction
 function! RunInTerminal(command)
   if exists("a:command")
     let g:last_run_in_terminal = a:command
+    let g:last_command_dir = getcwd()
     :execute "Dispatch " . a:command
   end
 endfunction
 
 function! RunLastCommandInTerminal()
     if exists("g:last_run_in_terminal")
-        RunInTerminal(g:last_run_in_terminal)
+        silent execute 'cd ' . g:last_command_dir
+        :call RunInTerminal(g:last_run_in_terminal)
+        silent execute 'cd -'
     else
         echo "No last command to execute!"
     endif
