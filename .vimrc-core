@@ -16,18 +16,18 @@ Bundle 'mhinz/vim-startify'
 Bundle 'mileszs/ack.vim'
 Bundle 'scrooloose/nerdcommenter.git'
 Bundle 'scrooloose/nerdtree.git'
-Bundle 'scrooloose/syntastic.git'
+"Bundle 'scrooloose/syntastic.git'
 Bundle 'sjl/gundo.vim.git'
 Bundle 'sjl/splice.vim'
 Bundle 'sjurgemeyer/vim-grails-import'
-Bundle 'slimv.vim'
+"Bundle 'slimv.vim'
 Bundle 'tpope/vim-abolish.git'
 Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired.git'
 Bundle 'vim-scripts/Align.git'
-Bundle 'vim-scripts/VimClojure.git'
+"Bundle 'vim-scripts/VimClojure.git'
 "Bundle 'DrawIt'
 
 syntax on
@@ -96,6 +96,7 @@ so ~/.vim/config/neosnippet.vim
 so ~/.vim/config/nerdcommenter.vim
 so ~/.vim/config/nerdtree.vim
 so ~/.vim/config/splice.vim
+so ~/.vim/config/startify.vim
 so ~/.vim/config/syntastic.vim
 so ~/.vim/config/tagbar.vim
 so ~/.vim/config/vimclojure.vim
@@ -159,3 +160,5 @@ command! RemoveEndSpaces :silent %s/ \+$//g
 
 "JSON
 command! FormatJSON :%!python -m json.tool
+
+:nnoremap <A-c> /\v<[A-Z][a-zA-Z]+><CR>
