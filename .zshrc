@@ -159,6 +159,20 @@ alias te='v /Users/sjurgemeyer/Dropbox/todo/todo.txt'
 
 # complete -F _todo t
 
+# A bash function to display a growl notification using iTerm's magic
+# escape sequence. This version will work under screen.
+
+growl() {
+      local msg="\\e]9;\n\n${*}\\007"
+      case $TERM in
+        screen*)
+          echo -ne '\eP'${msg}'\e\\' ;;
+        *)
+          echo -ne ${msg} ;;
+      esac
+      return
+}
+
 export VIMCLOJURE_SERVER_JAR="$HOME/projects/dotfiles/dependencies/lib/nailgun/server-2.3.6.jar"
 
 #RVM
