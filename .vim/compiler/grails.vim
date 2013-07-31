@@ -10,7 +10,13 @@ endif
 CompilerSet makeprg=grails
 "CompilerSet errorformat=%m
 "CompilerSet errorformat=%A%f:\ %l:\ %m,%-G%.%#
-CompilerSet errorformat=%A%.%#Failure:%m,%Z%.%#at\ %.%#(%f:%l),%+G%.%#
+"
+"This one does the best job finding the messages, but only highlights a single
+"file link
+"CompilerSet errorformat=%A%.%#Failure:%m,%Z%.%#at\ %.%#(%f:%l),%+G%.%#
+
+" This one highlights all files pretty well, but doesn't pick out errors
+CompilerSet errorformat=%A%.%#at\ %.%#(%f:%l),%+G%.%#
 
 "|| | Failure:  isValidForAgeAndType ageFrom:0 ageTo:0 age:30 type:null(com.bloomhealthco.domain.AgeBandSpec)
 "|| |  Condition not satisfied:

@@ -10,5 +10,6 @@ let g:ctrlp_max_files = 30000
 let g:ctrlp_max_depth = 40
 let g:ctrlp_lazy_update = 1
 
-nmap <Leader>p <C-p><C-\>w "Open CTRLP with current word prepopulated
+"Open CTRLP with current word prepopulated
+nmap <Leader>p <C-p><C-\>w
 

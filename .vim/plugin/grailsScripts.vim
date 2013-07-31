@@ -211,7 +211,7 @@ map <D-u> :call SplitOpenFileUnderCursor(expand("<cword>"))<CR>
 map <Leader>h :call FindSubClasses(expand("<cword>"))<CR>
 
 function! FindSubClasses(filename) 
-    execute ":Grep \\(implements\\|extends\\) " . a:filename
+    execute ":GGrep \"(implements|extends) " . a:filename . "\""
 endfunction
 
 function! OpenFileUnderCursor(filename)

@@ -63,7 +63,7 @@ set colorcolumn=121
 " set relativenumber
 set undofile
 "set winwidth=119
-set wildignore+=*.class,.git,.hg,.svn,test-integration/**,test-unit/**,**/target/**
+set wildignore+=*.class,.git,.hg,.svn,test-integration/**,test-unit/**,**/target/**,**/build/**
 set guifont=Source\ Code\ Pro\ Semibold\ for\ Powerline:h13
 set diffopt=filler,vertical
 
