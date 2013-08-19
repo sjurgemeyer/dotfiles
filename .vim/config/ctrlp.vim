@@ -6,7 +6,7 @@ let g:ctrlp_mruf_exclude = '/tmp/.*\|/temp/.*\|.*/target/.*\|.*/build/.*|*.orig'
     \ 'dir':  '\v(build|target)$',
     \ 'file': '\v\.(orig|)$',
     \ }
-let g:ctrlp_max_files = 30000
+let g:ctrlp_max_files = 40000
 let g:ctrlp_max_depth = 40
 let g:ctrlp_lazy_update = 1
 

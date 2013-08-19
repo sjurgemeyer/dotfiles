@@ -16,7 +16,7 @@ Bundle 'mhinz/vim-startify'
 Bundle 'mileszs/ack.vim'
 Bundle 'scrooloose/nerdcommenter.git'
 Bundle 'scrooloose/nerdtree.git'
-"Bundle 'scrooloose/syntastic.git'
+Bundle 'scrooloose/syntastic.git'
 Bundle 'sjl/gundo.vim.git'
 Bundle 'sjl/splice.vim'
 Bundle 'sjurgemeyer/vim-grails-import'
@@ -162,3 +162,5 @@ command! RemoveEndSpaces :silent %s/ \+$//g
 command! FormatJSON :%!python -m json.tool
 
 :nnoremap <A-c> /\v<[A-Z][a-zA-Z]+><CR>
+
+"so ~/.vim/syntax_checkers/groovy.vim
