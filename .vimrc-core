@@ -2,7 +2,13 @@ set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
+set rtp+=~/.vim/bundle/vundleconfig/
+call vundleconfig#init()
 
+let mapleader = ","
+let g:mapleader = ","
+
+Bundle 'sjurgemeyer/vundleconfig.git'
 Bundle 'Shougo/neocomplcache.git'
 Bundle 'Shougo/neosnippet.git'
 Bundle 'ZoomWin'
@@ -80,26 +86,11 @@ set undodir=~/.vimundo
 
 colorscheme shaun
 
-let mapleader = ","
-let g:mapleader = ","
 
 " ` goes to the line and column by default, where ' only goes to the row.  Switch ' to be the more useful one
 nnoremap ' `
 nnoremap ` '
 
-so ~/.vim/config/airline.vim
-so ~/.vim/config/buffergator.vim
-so ~/.vim/config/ctrlp.vim
-so ~/.vim/config/gundo.vim
-so ~/.vim/config/neocomplcache.vim
-so ~/.vim/config/neosnippet.vim
-so ~/.vim/config/nerdcommenter.vim
-so ~/.vim/config/nerdtree.vim
-so ~/.vim/config/splice.vim
-so ~/.vim/config/startify.vim
-so ~/.vim/config/syntastic.vim
-so ~/.vim/config/tagbar.vim
-so ~/.vim/config/vimclojure.vim
 let g:grails_import_list_file='/Users/sjurgemeyer/.vim/config/grailsImportList.txt'
 
 "quick switch to last edited file
