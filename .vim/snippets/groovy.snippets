@@ -46,6 +46,19 @@ snippet cl
 	class ${2:`Filename()`} {
 		${3}
 	}
+
+snippet sp
+	package `GetCurrentPackageFromPath()`
+
+    import spock.lang.Specification
+
+	class ${2:`Filename()`} extends Specification {
+
+        void setup() {}
+
+        def '${3}' {
+        }
+	}
 snippet in
 	interface ${1:`Filename()`} ${2:extends Parent}${3}
 snippet v
