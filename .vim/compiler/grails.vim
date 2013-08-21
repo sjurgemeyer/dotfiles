@@ -16,7 +16,9 @@ CompilerSet makeprg=grails
 "CompilerSet errorformat=%A%.%#Failure:%m,%Z%.%#at\ %.%#(%f:%l),%+G%.%#
 
 " This one highlights all files pretty well, but doesn't pick out errors
-CompilerSet errorformat=%A%.%#at\ %.%#(%f:%l),%+G%.%#
+"CompilerSet errorformat=%A%.%#at\ %.%#(%f:%l),%+G%.%#
+" This works with the updated filter.groovy
+CompilerSet errorformat=%A''%f:%l''%m,%+G%.%#
 
 "|| | Failure:  isValidForAgeAndType ageFrom:0 ageTo:0 age:30 type:null(com.bloomhealthco.domain.AgeBandSpec)
 "|| |  Condition not satisfied:

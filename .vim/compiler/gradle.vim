@@ -12,5 +12,7 @@ endif
 CompilerSet makeprg=gradle
 "CompilerSet errorformat=%m
 
-CompilerSet errorformat=%A%f:\ %l:\ %m,%-G%.%#
+"CompilerSet errorformat=%A%f:\ %l:\ %m,%-G%.%#
+" This works with the updated filter.groovy
+CompilerSet errorformat=%A''%f:%l''%m,%+G%.%#
 "/Users/sjurgemeyer/projects/bloom/lib_paymentSchedule/src/main/groovy/com/bloomhealthco/payment/Payment.groovy: 12: unexpected token: aymentType @ line 12, column 5.

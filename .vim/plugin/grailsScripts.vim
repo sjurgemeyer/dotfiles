@@ -142,7 +142,13 @@ function! FindGrailsRoot()
 endfunction
 
 function! FindGradleRoot() 
-    let fileLocation = findfile("build.gradle", expand("%:p:h") . ';/')
+    " We have gradle files named different things so the best I could do was
+    " search for a build dir and use the parent.  VIM's finddir doesn't allow
+    " for wildcards.
+    let fileLocation1 = finddir("build", expand("%:p:h") . ';/')
+    let splitPath = split(fileLocation1, '/')
+    let fileLocation = join(splitPath[0:-2], '/')
+    echoerr fileLocation
     return fnamemodify(fileLocation, ":p:h")
 endfunction
 
