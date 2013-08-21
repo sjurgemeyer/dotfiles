@@ -148,7 +148,6 @@ function! FindGradleRoot()
     let fileLocation1 = finddir("build", expand("%:p:h") . ';/')
     let splitPath = split(fileLocation1, '/')
     let fileLocation = join(splitPath[0:-2], '/')
-    echoerr fileLocation
     return fnamemodify(fileLocation, ":p:h")
 endfunction
 
