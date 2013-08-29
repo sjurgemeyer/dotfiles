@@ -56,3 +56,10 @@ sudo ln -s ~/projects/dotfiles/.zshrc ~/.zshrc
 rm -Rf ~/.oh-my-zsh/themes/shaun.zsh-theme
 sudo ln -s ~/projects/dotfiles/.oh-my-zsh/themes/shaun.zsh-theme ~/.oh-my-zsh/themes/shaun.zsh-theme
 
+#Vagrant
+rm -Rf ~/.vagrant.d/Vagrantfile
+sudo ln -s ~/projects/dotfiles/.vagrant.d/VagrantFile ~/.vagrant.d/VagrantFile
+rm -Rf ~/.vagrant.d/cookbooks
+sudo ln -s ~/projects/dotfiles/.vagrant.d/cookbooks ~/.vagrant.d/cookbooks
+rm -Rf ~/.vagrant.d/bash
+sudo ln -s ~/projects/dotfiles/.vagrant.d/bash ~/.vagrant.d/bash

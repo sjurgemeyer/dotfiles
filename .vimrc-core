@@ -36,6 +36,11 @@ Bundle 'vim-scripts/Align.git'
 "Bundle 'vim-scripts/VimClojure.git'
 "Bundle 'DrawIt'
 
+Bundle 'tpope/vim-fugitive.git'
+Bundle 'gregsexton/gitv.git'
+so ~/.vim/config/fugitive.vim
+so ~/.vim/config/gitv.vim
+
 syntax on
 filetype plugin indent on
 " set shell=/bin/bash\ -li
