@@ -122,6 +122,9 @@ hgdiffrevs() {
 
 ###################### Generic Shell stuff ###########################
 
+# Move up directories more easily
+alias bd='. bd -s'
+
 alias dot='cd $PROJECT_DIR/dotfiles'
 
 alias mkdir='mkdir -p' #create intermediate directories

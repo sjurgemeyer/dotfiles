@@ -55,6 +55,8 @@ rm -Rf ~/.zshrc
 sudo ln -s ~/projects/dotfiles/.zshrc ~/.zshrc
 rm -Rf ~/.oh-my-zsh/themes/shaun.zsh-theme
 sudo ln -s ~/projects/dotfiles/.oh-my-zsh/themes/shaun.zsh-theme ~/.oh-my-zsh/themes/shaun.zsh-theme
+sudo rm -Rf /usr/local/bin/bd
+sudo ln -s ~/projects/dotfiles/dependencies/bd /usr/local/bin/bd
 
 #Vagrant
 rm -Rf ~/.vagrant.d/Vagrantfile
