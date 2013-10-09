@@ -2,6 +2,9 @@ colorscheme shaun
 
 set guioptions-=r
 set guioptions-=R
+set guioptions-=L
+set guioptions-=l
+:nnoremap <D-CR> :set invfu<CR>
 
 if has("mac")
   set macmeta "use Mac option key as a meta key
