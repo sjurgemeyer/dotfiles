@@ -1,0 +1,5 @@
+location:Minneapolis,US
+units:imperial
+background:\033[40m
+text:\033[036;1m
+delimiter:=

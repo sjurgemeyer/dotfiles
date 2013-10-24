@@ -6,6 +6,8 @@ rm /Users/sjurgemeyer/Library/Application\ Support/KeyRemap4MacBook/private.xml
 sudo ln -s ~/projects/dotfiles/config/private.xml ~/Library/Application\ Support/KeyRemap4MacBook/private.xml
 rm -Rf ~/.slate
 sudo ln -s ~/projects/dotfiles/.slate ~/.slate
+rm -Rf ~/.ansiweatherrc
+sudo ln -s ~/projects/dotfiles/.ansiweatherrc ~/.ansiweatherrc
 
 #Git
 rm -Rf ~/.gitconfig
@@ -57,6 +59,10 @@ rm -Rf ~/.oh-my-zsh/themes/shaun.zsh-theme
 sudo ln -s ~/projects/dotfiles/.oh-my-zsh/themes/shaun.zsh-theme ~/.oh-my-zsh/themes/shaun.zsh-theme
 sudo rm -Rf /usr/local/bin/bd
 sudo ln -s ~/projects/dotfiles/dependencies/bd /usr/local/bin/bd
+sudo rm -Rf /usr/local/bin/jq
+sudo ln -s ~/projects/dotfiles/dependencies/jq /usr/local/bin/jq
+sudo rm -Rf /usr/local/bin/weather
+sudo ln -s ~/projects/dotfiles/dependencies/ansiweather/ansiweather /usr/local/bin/weather
 
 #Vagrant
 rm -Rf ~/.vagrant.d/Vagrantfile

@@ -263,6 +263,7 @@ groovy.time.Duration
 groovy.time.TimeCategory
 groovy.time.TimeDatumDependentDuration
 groovy.time.TimeDuration
+groovy.transform.CompileStatic
 groovy.transform.IndexedProperty
 groovy.transform.InheritConstructors
 groovy.transform.Synchronized
