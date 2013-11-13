@@ -51,6 +51,8 @@ sudo ln -s ~/projects/dotfiles/.ctags ~/.ctags
 # Used for syntastic
 sudo rm -Rf /usr/local/bin/grails-compile-file
 sudo ln -s ~/projects/dotfiles/config/grails-compile-file /usr/local/bin/grails-compile-file
+rm -Rf ~/.jshintrc
+sudo ln -s ~/projects/dotfiles/.jshintrc ~/.jshintrc
 
 #ZSH
 rm -Rf ~/.zshrc

@@ -1,0 +1,8 @@
+snippet ang
+    (function() {
+        'use strict';
+        var module = angular.module('${1:myModule}', []);
+        module.${2:componentType}('${3:myComponent}', function() {
+            ${4}
+        });
+    });
