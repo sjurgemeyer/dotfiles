@@ -159,4 +159,3 @@ command! FormatJSON :%!python -m json.tool
 
 :nnoremap <A-c> /\v<[A-Z][a-zA-Z]+><CR>
 
-"so ~/.vim/syntax_checkers/groovy.vim

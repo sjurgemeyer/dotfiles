@@ -53,6 +53,8 @@ sudo rm -Rf /usr/local/bin/grails-compile-file
 sudo ln -s ~/projects/dotfiles/config/grails-compile-file /usr/local/bin/grails-compile-file
 rm -Rf ~/.jshintrc
 sudo ln -s ~/projects/dotfiles/.jshintrc ~/.jshintrc
+rm -Rf /usr/local/bin/codenarc
+sudo ln -s ~/.vim/tools/codenarc /usr/local/bin/codenarc
 
 #ZSH
 rm -Rf ~/.zshrc
