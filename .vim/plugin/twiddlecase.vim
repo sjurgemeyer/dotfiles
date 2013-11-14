@@ -12,6 +12,6 @@ function! TwiddleCase(str)
 endfunction
 
 vnoremap ~ ygv"=TwiddleCase(@")<CR>Pgv
-nnoremap <leader>~=TwiddleCase(<cword>)<CR>
+nnoremap <leader>~ ygv"=TwiddleCase(<cword>)<CR>
 
 
