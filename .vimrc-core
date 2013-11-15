@@ -33,8 +33,15 @@ Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired.git'
 Bundle 'vim-scripts/Align.git'
+"Javascript stuff
+Bundle 'jelera/vim-javascript-syntax'
+Bundle 'othree/javascript-libraries-syntax.vim'
+Bundle 'JavaScript-Indent'
+
 "Bundle 'vim-scripts/VimClojure.git'
 "Bundle 'DrawIt'
+Bundle 'mattn/calendar-vim'
+Bundle 'jmcantrell/vim-journal'
 
 Bundle 'tpope/vim-fugitive.git'
 Bundle 'gregsexton/gitv.git'
