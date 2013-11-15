@@ -12,4 +12,4 @@ let g:ctrlp_lazy_update = 1
 
 "Open CTRLP with current word prepopulated
 nmap <Leader>p <C-p><C-\>w
-
+nmap <Leader>m :CtrlPMRUFiles<CR>
