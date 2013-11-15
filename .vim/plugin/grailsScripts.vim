@@ -1,6 +1,3 @@
-"let g:vim_terminal="/dev/ttys000"
-"let g:run_script = "!osascript ~/.vim/tools/run_command.applescript" 
-
 " Pulled from http://naleid.com/blog/2011/04/25/replace-grails-console-with-the-editor-of-your-choice/
 function! s:copy_groovy_buffer_to_temp(first, last)
   " groovy/java scripts can't start with a # and tempname's normally do
@@ -49,9 +46,6 @@ endfunction
 
 
 command! -nargs=* GGrep :call GrailsSearch(<q-args>)
-map <Leader>vv :call GrailsSearch(expand("<cword>"))<CR>
-"map <Leader>vc :call GrailsSearchNoTests(expand("<cword>"))<CR>
-"map <Leader>vt :call GrailsSearchOnlyTests(expand("<cword>"))<CR>
 
 function! Groovy_eval_vsplit() range
   let temp_source = s:copy_groovy_buffer_to_temp(a:firstline, a:lastline)
@@ -62,13 +56,6 @@ function! Groovy_eval_vsplit() range
  
   wincmd p " change back to the source buffer
 endfunction
- 
-au BufNewFile,BufRead *.groovy vmap <silent> <F7> :call Groovy_eval_vsplit()<CR>
-au BufNewFile,BufRead *.groovy nmap <silent> <F7> mzggVG<F7>`z
-au BufNewFile,BufRead *.groovy imap <silent> <F7> <Esc><F7>a
-au BufNewFile,BufRead *.groovy map <silent> <S-F7> :wincmd P<CR>:q<CR>
-au BufNewFile,BufRead *.groovy imap <silent> <S-F7> <Esc><S-F7>a
- 
  
 " set these up as environment variables on your system, or override
 " per session by using ':let g:grails_user = foo'
@@ -86,19 +73,9 @@ function! Grails_eval_vsplit() range
   wincmd p " change back to the source buffer
 endfunction
  
-au BufNewFile,BufRead *.groovy vmap <F8> :call Grails_eval_vsplit()<CR>
-au BufNewFile,BufRead *.groovy nmap <silent> <F8> mzggVG<F8>`z
-au BufNewFile,BufRead *.groovy imap <silent> <F8> <Esc><F8>a
-au BufNewFile,BufRead *.groovy map <silent> <S-F8> :wincmd P<CR>:q<CR>
-au BufNewFile,BufRead *.groovy imap <silent> <S-F8> <Esc><S-F8>a
 
 
 "Grails testing
-map <S-F9> <Esc>:w<CR>:call RunSingleGrailsTest()<CR>
-map <F9> <Esc>:w<CR>:call RunGrailsTestFile()<CR>
-map <D-F9> :call RunLastCommandInTerminal()<CR>
-map <F9> <Esc>:w<CR>:call RunGrailsTestFile()<CR>
-map <F10> <Esc>:w<CR>:call RunGradleTestFile()<CR>
 
 command! TestResults :call TestResults()
 
@@ -197,7 +174,6 @@ function! RunLastCommandInTerminal()
 endfunction
 
 "Switch between test class and actual class
-map <Leader>x :call OpenTest()<CR>
 function! OpenTest() 
    let ext = fnamemodify(expand("%:p"), ":t:e")
    let file = expand("%:t:r")
@@ -210,10 +186,42 @@ function! OpenTest()
    endif
 endfunction
 
+function! CreateGroovyMappings() 
+    map <Leader>h :call FindSubClasses(expand("<cword>"))<CR>
+    map <Leader>x :call OpenTest()<CR>
+    map <Leader>vv :call GrailsSearch(expand("<cword>"))<CR>
+    "map <Leader>vc :call GrailsSearchNoTests(expand("<cword>"))<CR>
+    "map <Leader>vt :call GrailsSearchOnlyTests(expand("<cword>"))<CR>
+    
+    "Testing
+    map <S-F9> <Esc>:w<CR>:call RunSingleGrailsTest()<CR>
+    map <F9> <Esc>:w<CR>:call RunGrailsTestFile()<CR>
+    map <D-F9> :call RunLastCommandInTerminal()<CR>
+    map <F9> <Esc>:w<CR>:call RunGrailsTestFile()<CR>
+    map <F10> <Esc>:w<CR>:call RunGradleTestFile()<CR>
+
+    "running arbitrary groovy
+    vmap <silent> <F7> :call Groovy_eval_vsplit()<CR>
+    nmap <silent> <F7> mzggVG<F7>`z
+    imap <silent> <F7> <Esc><F7>a
+    map <silent> <S-F7> :wincmd P<CR>:q<CR>
+    imap <silent> <S-F7> <Esc><S-F7>a
+
+
+    "running through the grails console.  Haven't used this in awhile, not
+    "sure how well it works at this point
+    vmap <F8> :call Grails_eval_vsplit()<CR>
+    nmap <silent> <F8> mzggVG<F8>`z
+    imap <silent> <F8> <Esc><F8>a
+    map <silent> <S-F8> :wincmd P<CR>:q<CR>
+    imap <silent> <S-F8> <Esc><S-F8>a
+endfunction
+
+au BufNewFile,BufRead *.groovy :call CreateGroovyMappings()
+
 "Open file under cursor
 map <D-y> :call OpenFileUnderCursor(expand("<cword>"))<CR>
 map <D-u> :call SplitOpenFileUnderCursor(expand("<cword>"))<CR>
-map <Leader>h :call FindSubClasses(expand("<cword>"))<CR>
 
 function! FindSubClasses(filename) 
     execute ":GGrep \"(implements|extends) " . a:filename . "\""
@@ -230,6 +238,3 @@ function! SplitOpenFileUnderCursor(filename)
    let fname = toupper(strpart(a:filename, 0, 1)) . strpart(a:filename, 1, strlen(a:filename))
    execute ":rightb vert sfind " . fname . "." . ext 
 endfunction
-
-
-

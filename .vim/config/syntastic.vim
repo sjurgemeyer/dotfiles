@@ -10,3 +10,4 @@ let g:syntastic_groovy_checkers = ['codenarc']
 
 map <Leader>c :SyntasticCheck<CR>
 
+let g:syntastic_always_populate_loc_list=1
