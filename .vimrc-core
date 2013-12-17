@@ -44,6 +44,10 @@ Bundle 'JavaScript-Indent'
 Bundle 'mattn/calendar-vim'
 Bundle 'jmcantrell/vim-journal'
 
+"Dash
+Bundle 'rizzatti/funcoo.vim'
+Bundle 'rizzatti/dash.vim'
+
 Bundle 'tpope/vim-fugitive.git'
 Bundle 'gregsexton/gitv.git'
 so ~/.vim/config/fugitive.vim
