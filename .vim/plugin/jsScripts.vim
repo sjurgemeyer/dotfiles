@@ -14,3 +14,4 @@ function! FindGruntRoot()
 endfunction
 
 au BufNewFile,BufRead *.js :call CreateJavascriptMappings()
+

@@ -33,6 +33,7 @@ Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired.git'
 Bundle 'vim-scripts/Align.git'
+Bundle 'plasticboy/vim-markdown'
 "Javascript stuff
 Bundle 'jelera/vim-javascript-syntax'
 Bundle 'othree/javascript-libraries-syntax.vim'
@@ -53,12 +54,10 @@ filetype plugin indent on
 " set shell=/bin/bash\ -li
 
 " set modelines=0
-set number
 set nowrap
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-set expandtab
 set path+=**
 set encoding=utf-8
 set scrolloff=5
@@ -74,15 +73,13 @@ set wildmode=list:longest
 set visualbell
 set cursorline
 set ttyfast
+set title titlestring=  " Sets the title of the window to the filename
 set ruler
 set backspace=indent,eol,start
-set laststatus=2
-set colorcolumn=121
 " set relativenumber
 set undofile
 "set winwidth=119
 set wildignore+=*.class,.git,.hg,.svn,test-integration/**,test-unit/**,**/target/**,**/build/**
-set guifont=Source\ Code\ Pro\ Semibold\ for\ Powerline:h13
 set diffopt=filler,vertical
 
 set tags=tags;/
@@ -95,8 +92,6 @@ set clipboard=unnamed
 set backupdir=~/.vimbackup
 set directory=~/.vimbackup
 set undodir=~/.vimundo
-
-colorscheme shaun
 
 
 " ` goes to the line and column by default, where ' only goes to the row.  Switch ' to be the more useful one
@@ -166,3 +161,58 @@ command! FormatJSON :%!python -m json.tool
 
 :nnoremap <A-c> /\v<[A-Z][a-zA-Z]+><CR>
 
+:nmap <C-Down> ddp
+:nmap <C-Up> ddkP
+           
+"Set tab options
+function! TabWidth(width)
+    let &tabstop=a:width
+    let &shiftwidth=a:width
+    let &softtabstop=a:width
+endfunction
+
+"Make vim work as a word processor
+func! WordProcessorMode() 
+  colorscheme iawriter
+  setlocal formatoptions=1 
+  setlocal noexpandtab 
+  "map j gj 
+  "map k gk
+  setlocal spell spelllang=en_us 
+  set thesaurus+=/Users/sjurgemeyer/.vim/thesaurus/mthesaur.txt
+  set complete+=s
+  setlocal formatprg=par
+  setlocal wrap 
+  setlocal linebreak 
+  set colorcolumn=
+  set laststatus=0 " don't show status line
+  set gfn=Cousine:h14                " font to use
+  set nonumber
+  "set guifont=Source\ Code\ Pro\ Semibold\ for\ Powerline:h15
+endfu 
+command! WordProcessorMode :call WordProcessorMode()
+
+"Undo wordprocessormode
+func! CodeMode() 
+  colorscheme shaun
+  setlocal expandtab 
+  "map j gj 
+  "map k gk
+  setlocal spell spelllang=
+  set colorcolumn=121
+  set laststatus=2 " don't show status line
+  set guifont=Source\ Code\ Pro\ Semibold\ for\ Powerline:h13
+  set number
+endfu 
+command! CodeMode :call CodeMode()
+
+
+"dragVisuals shortcuts
+vmap <expr> <LEFT> DVB_Drag('left')
+vmap <expr> <RIGHT> DVB_Drag('right')
+vmap <expr> <UP> DVB_Drag('up')
+vmap <expr> <DOWN> DVB_Drag('down')
+vmap <expr> D DVB_Duplicate()
+
+"Code mode by default
+:CodeMode

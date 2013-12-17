@@ -56,9 +56,14 @@ snippet sp
 
         void setup() {}
 
-        def '${3}' {
+        def '${3}'() {
         }
 	}
+snippet swt
+    setup:
+    ${1}
+    when:
+    then:
 snippet in
 	interface ${1:`Filename()`} ${2:extends Parent}${3}
 snippet v
@@ -85,13 +90,6 @@ snippet ts
 	}
 snippet pl
 	println "${1:it} $$1"
-snippet spec
-	package com.opi
-	import spock.lang.Specification
-
-	class ${1:`Filename("", "untitled")`} extends Specification {
-		${2}
-	}
 snippet mf 
 	def ${1:myService}Mock = mockFor($1)
 	$1Mock.demand.${2} { ${3} ->

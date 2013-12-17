@@ -1,5 +1,9 @@
 "switch windows
 map <D-l> <Esc><C-w><C-w>
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 "Resize windows
 map <C-S-Left> 8<C-w>>
@@ -11,9 +15,8 @@ map <C-S-Right> 8<C-w><
 map <D-CR> <C-w>o
 
 " open vertical window and switch to it
-nnoremap <leader>v <C-w>v<C-w>l
 nnoremap <D-d> <C-w>v<C-w>l
-nnoremap <leader>s <C-w>s<C-w>j
+" open horizontal window and switch to it
 nnoremap <D-D> <C-w>s<C-w>j
 
 "Close all navigation windows
