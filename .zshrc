@@ -14,6 +14,7 @@ export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local
 export EDITOR=vim
 export SVN_EDITOR=vim
 alias v='mvim'
+
 #VI Mode
 bindkey -v
 bindkey -M main '\C-r' history-incremental-search-backward
@@ -25,9 +26,6 @@ export JAVA_OPTS="-Xmx2G -Xms2G -XX:MaxPermSize=512m"
 # -Xms2G -Xmx2G -XX:MaxPermSize=512m -XX:PermSize=512m -XX:NewSize=256m -server -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled"
 export JAVA_HOME=`/usr/libexec/java_home`
 
-function printClassesInJar() {
-    jar tf $1 | grep .class | grep -v '\$' | grep -v 'package-info' | sed s,/,.,g | sed s/.class//g
-}
 
 #Project setup
 PROJECT_DIR=$HOME/projects
@@ -37,7 +35,8 @@ source ~/.gitFunctions
 #Start web server
 alias http='python -m SimpleHTTPServer'
 
-###############################  Grails  ##############################
+###############################  Groovy/Grails  ##############################
+alias gd='gradle'
 function testResults() {
     if [ -e "./application.properties" ]
     then
@@ -48,15 +47,13 @@ function testResults() {
 }
 
 alias gr='grails run-app'
-alias gd='grails-debug run-app'
 alias gtr='grails --refresh-dependencies test run-app'
-alias gdta='grails-debug -Duser.timezone=UTC test run-app'
-alias gf='grails run-fitnesse'
-alias gt='grails --refresh-dependencies -Duser.timezone=UTC test-app'
-alias gtu='grails -Duser.timezone=UTC test-app unit:'
-alias gti='grails -Duser.timezone=UTC test-app integration:'
 alias results=testResults
 alias cn="open build/reports/codenarc/main.html"
+
+function printClassesInJar() {
+    jar tf $1 | grep .class | grep -v '\$' | grep -v 'package-info' | sed s,/,.,g | sed s/.class//g
+}
 
 ############################### Mysql ###############################
 alias mysqlstart='sudo /Library/StartupItems/MySQLCOM/MySQLCOM start'

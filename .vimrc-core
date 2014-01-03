@@ -199,10 +199,9 @@ command! WordProcessorMode :call WordProcessorMode()
 "Undo wordprocessormode
 func! CodeMode() 
   colorscheme shaun
-  setlocal expandtab 
+  set expandtab 
   "map j gj 
   "map k gk
-  setlocal spell spelllang=
   set colorcolumn=121
   set laststatus=2 " don't show status line
   set guifont=Source\ Code\ Pro\ Semibold\ for\ Powerline:h13
