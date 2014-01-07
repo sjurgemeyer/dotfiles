@@ -47,7 +47,7 @@ function usage() {
 
 function project_view() {
     # Show projects in alphabetical order and todo items in priority order
-    echo "=====  Projects  ====="
+    print_title "Projects"
     echo ""
 
     # Find all projects and sort
@@ -72,9 +72,13 @@ function project_view() {
     fi
 }
 
+function print_title() {
+    echo -e "\033[34m===== $1 =====\033[0m"
+}
+
 function context_view() {
     # Show contexts in alphabetical order and todo items in priority order
-    echo "=====  Contexts  ====="
+    print_title "Contexts"
     echo ""
 
     # Find all contexts and sort
@@ -101,7 +105,7 @@ function context_view() {
 
 function date_view() {
     #  Show dates in alphabetical order and todo items in priority order
-    echo "=====  Dates  ====="
+    print_title "Dates" 
     echo ""
 
     #  Find all dates and sort
@@ -192,7 +196,7 @@ function date_check() {
 }
 
 function echo_header() {
-    echo "--- "$1" ---"
+    echo -e "\033[34m--- "$1" ---\033[0m"
 }
 
 # Validate the input options

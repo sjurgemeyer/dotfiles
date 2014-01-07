@@ -29,7 +29,7 @@ sudo ln -s ~/projects/dotfiles/.hgrc ~/.hgrc
 
 #TODO.txt
 sudo rm -Rf /usr/local/bin/todo
-sudo ln -s ~/projects/dotfiles/dependencies/todo.txt_cli-2.9/todo.sh /usr/local/bin/todo
+sudo ln -s ~/projects/dotfiles/dependencies/todo.txt_cli-2.10/todo.sh /usr/local/bin/todo
 rm -Rf ~/.todo.cfg
 sudo ln -s ~/projects/dotfiles/.todo.cfg ~/.todo.cfg
 rm -Rf ~/.todo.actions.d
