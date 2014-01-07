@@ -39,7 +39,7 @@ augroup END
 function! AS_M_HandleSwapfile (filename)
 
     " Is file already open in another Vim session in some other Terminal window???
-    let active_window = AS_M_DetectActiveWindow(a:filename)
+    let active_window = '' "AS_M_DetectActiveWindow(a:filename)
 
     " If so, go there instead and terminate this attempt to open the file...
     if (strlen(active_window) > 0)

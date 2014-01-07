@@ -1,3 +1,5 @@
+"Script for extracting visually selected text into a varable declaration 
+"(for Groovy)
 function! ExtractVariable(foo)
    let [lnum1, col1] = getpos("'<")[1:2]
    normal! gv"hd
