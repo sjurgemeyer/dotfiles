@@ -145,7 +145,7 @@ p() {
 }
 
 #TODO.txt
-source $HOME/projects/dotfiles/dependencies/todo.txt_cli-2.9/todo_completion
+source $HOME/projects/dotfiles/dependencies/todo.txt_cli-2.10/todo_completion
 
 alias t=todo
 alias tls='t ls'
@@ -156,6 +156,12 @@ alias tvd='t view date'
 alias tvc='t view context'
 alias ts='t schedule'
 alias te='v /Users/sjurgemeyer/Dropbox/todo/todo.txt'
+
+function numberOfCurrentTasks() {
+    today=`date "+%Y-%m-%d"`
+    z=`tls $today | wc -l | sed -e 's/^ *//g' -e 's/ *$//g'`
+    echo `expr $z - 2`
+}
 
 # complete -F _todo t
 
