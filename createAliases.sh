@@ -36,6 +36,8 @@ rm -Rf ~/.todo.actions.d
 sudo ln -s ~/projects/dotfiles/.todo.actions.d ~/.todo.actions.d
 rm -Rf ~/.todo.txt.color
 sudo ln -s ~/projects/dotfiles/.todo.txt.color ~/.todo.txt.color
+rm -Rf ~/.todofilter.py
+sudo ln -s ~/projects/dotfiles/config/todofilter.py ~/.todofilter.py 
 
 #Vim
 rm -Rf ~/.gvimrc
