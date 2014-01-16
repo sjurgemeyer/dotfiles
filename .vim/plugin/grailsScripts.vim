@@ -1,32 +1,4 @@
-" Pulled from http://naleid.com/blog/2011/04/25/replace-grails-console-with-the-editor-of-your-choice/
-function! s:copy_groovy_buffer_to_temp(first, last)
-  " groovy/java scripts can't start with a # and tempname's normally do
-  let src = substitute(tempname(), "[^\/]*$", "vim_&.groovy", "") 
  
-  " put current buffer's content in a temp file
-  silent exe ": " . a:first . "," . a:last . "w " . src
- 
-  return src
-endfunction
- 
-function! s:select_new_temp_buffer()
-  let temp_file = tempname()
- 
-  " open the preview window to the temp file
-  silent exe ":pedit! " . temp_file
- 
-  " select the temp buffer as active 
-  wincmd P
- 
-  " set options for temp buffer
-  setlocal buftype=nofile
-  setlocal noswapfile
-  setlocal syntax=none
-  setlocal bufhidden=delete
- 
-  return temp_file
-endfunction
-"End text copied from naleid.com
 
 function! TestResults()
     silent execute ":!open target/test-reports/html/index.html" 
@@ -48,13 +20,7 @@ endfunction
 command! -nargs=* GGrep :call GrailsSearch(<q-args>)
 
 function! Groovy_eval_vsplit() range
-  let temp_source = s:copy_groovy_buffer_to_temp(a:firstline, a:lastline)
-  let temp_file = s:select_new_temp_buffer()
- 
-  " replace current buffer with groovy's output
-  silent execute ":%! groovy " . temp_source . " 2>&1 "
- 
-  wincmd p " change back to the source buffer
+    :call Eval_vsplit('groovy', a:firstline, a:lastline)
 endfunction
  
 " set these up as environment variables on your system, or override
@@ -64,16 +30,8 @@ let g:grails_password = $DEFAULT_GRAILS_PASSWORD
 let g:grails_base_url = $DEFAULT_GRAILS_BASE_URL
  
 function! Grails_eval_vsplit() range
-  let temp_source = s:copy_groovy_buffer_to_temp(a:firstline, a:lastline)
-  let temp_file = s:select_new_temp_buffer()
- 
-  " replace current buffer with grails' output
-  silent execute ":%! postCode.groovy -u " . g:grails_user . " -p " . g:grails_password . " -b " . g:grails_base_url . " " . temp_source . " 2>&1 "
- 
-  wincmd p " change back to the source buffer
+  Eval_vsplit(postCode.groovy -u " . g:grails_user . " -p " . g:grails_password . " -b " . g:grails_base_url)
 endfunction
- 
-
 
 "Grails testing
 
