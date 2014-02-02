@@ -77,3 +77,7 @@ rm -Rf ~/.vagrant.d/cookbooks
 sudo ln -s ~/projects/dotfiles/.vagrant.d/cookbooks ~/.vagrant.d/cookbooks
 rm -Rf ~/.vagrant.d/bash
 sudo ln -s ~/projects/dotfiles/.vagrant.d/bash ~/.vagrant.d/bash
+
+#NPM
+rm -Rf ~/.npmrc
+sudo ln -s ~/projects/dotfiles/.npmrc ~/.npmrc
