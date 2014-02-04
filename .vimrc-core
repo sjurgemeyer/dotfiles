@@ -50,6 +50,11 @@ Bundle 'rizzatti/dash.vim'
 
 Bundle 'tpope/vim-fugitive.git'
 Bundle 'gregsexton/gitv.git'
+
+"github PR review
+Bundle 'junkblocker/patchreview-vim'
+Bundle 'codegram/vim-codereview'
+
 so ~/.vim/config/fugitive.vim
 so ~/.vim/config/gitv.vim
 
@@ -58,6 +63,7 @@ filetype plugin indent on
 " set shell=/bin/bash\ -li
 
 " set modelines=0
+set nostartofline
 set nowrap
 set tabstop=4
 set shiftwidth=4
