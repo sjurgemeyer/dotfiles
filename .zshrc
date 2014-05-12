@@ -72,6 +72,7 @@ alias rabbit='sudo /usr/local/Cellar/rabbitmq/2.8.7/sbin/rabbitmq-server'
 # source ~/projects/bloom/dev_scripts/bash/git-branch-cleanup.sh
 # open all changed files in vim
 alias git-changed='mvim -p `git diff --name-only --relative`'
+alias bc='git difftool --tool=bc3 -d HEAD~1'
 
 # diff each file in vimdiff using the specified commit
 function git-diffall() {

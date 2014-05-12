@@ -1,5 +1,6 @@
 " Java
 java.math.RoundingMode
+javax.inject.Inject
 
 " Groovy
 groovy.beans.BindableASTTransformation
@@ -2531,6 +2532,10 @@ org.codehaus.groovy.vmplugin.v6.Java6
 org.codehaus.groovy.vmplugin.v6.PluginDefaultGroovyMethods
 org.codehaus.groovy.vmplugin.v6.PluginStaticGroovyMethods
 
+groovy.transform.ToString
+groovy.transform.EqualsAndHashCode
+groovy.util.logging.Slf4j
+
 "Grails
 grails.persistence.Entity
 grails.persistence.Event
@@ -3136,6 +3141,11 @@ org.junit.runners.model.TestClass
 
 " Hibernate
 org.hibernate.SessionFactory
+org.hibernate.Criteria
+org.hibernate.Query
+org.hibernate.SessionFactory
+org.hibernate.criterion.Order
+org.hibernate.criterion.Restrictions
 
 "Spock
 org.spockframework.builder.AddSlotFactory
@@ -3596,3 +3606,22 @@ com.fasterxml.jackson.annotation.JsonView
 com.fasterxml.jackson.annotation.ObjectIdGenerator
 com.fasterxml.jackson.annotation.ObjectIdGenerators
 com.fasterxml.jackson.annotation.PropertyAccessor
+
+"Spring
+org.springframework.stereotype.Service
+org.springframework.beans.factory.annotation.Autowired
+org.springframework.stereotype.Component
+org.springframework.context.annotation.Bean
+org.springframework.beans.factory.annotation.Value
+org.springframework.context.annotation.Import
+
+"Spring Batch
+org.springframework.batch.item.ItemWriter
+org.springframework.batch.item.ItemReader
+org.springframework.batch.item.ItemProcessor
+org.springframework.batch.core.StepExecutionListener
+org.springframework.batch.core.scope.StepScope
+org.springframework.batch.core.Step
+org.springframework.batch.core.Job
+org.springframework.batch.core.configuration.annotation.JobBuilderFactory
+org.springframework.batch.core.configuration.annotation.EnableBatchProcessing
