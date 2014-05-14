@@ -46,8 +46,6 @@ rm -Rf ~/.vim
 sudo ln -s ~/projects/dotfiles/.vim ~/.vim
 rm -Rf ~/.vimrc
 sudo ln -s ~/projects/dotfiles/.vimrc ~/.vimrc
-rm -Rf ~/.vimrc-core
-sudo ln -s ~/projects/dotfiles/.vimrc-core ~/.vimrc-core
 rm -Rf ~/.ctags
 sudo ln -s ~/projects/dotfiles/.ctags ~/.ctags
 # Used for syntastic

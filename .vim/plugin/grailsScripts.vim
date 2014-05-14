@@ -6,6 +6,7 @@ endfunction
 
 function! GrailsSearch(pattern)
     :execute "Ack --groovy " . a:pattern
+    :ccl
 endfunction
 
 function! GrailsSearchNoTests(pattern)
