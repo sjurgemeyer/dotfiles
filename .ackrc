@@ -5,4 +5,6 @@
 --type-set=gsp:ext:gsp
 --ignore-dir=target
 --ignore-dir=build
+--ignore-dir=bower_components
+--ignore-dir=dist
 

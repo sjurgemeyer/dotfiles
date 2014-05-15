@@ -3,7 +3,7 @@ let g:ctrlp_working_path_mode = 0
 "let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'rtscript']
 let g:ctrlp_mruf_exclude = '/tmp/.*\|/temp/.*\|.*/target/.*\|.*/build/.*|*.orig'
   let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v(build|target)$',
+    \ 'dir':  '\v(build|target|\.git|\.hg|\.svn|\.sass-cache|node_modules|dist|\.gradle)$',
     \ 'file': '\v\.(orig|)$',
     \ }
 let g:ctrlp_max_files = 50000
