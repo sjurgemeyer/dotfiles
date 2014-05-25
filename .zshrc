@@ -157,6 +157,18 @@ alias tvd='t view date'
 alias tvc='t view context'
 alias ts='t schedule'
 alias te='v /Users/sjurgemeyer/Dropbox/todo/todo.txt'
+alias todohelp='echo \
+"TODO.txt shortcuts
+------------------
+tls: List all tasks
+ta:  Add a task
+td:  Complete a task
+tvp: View tasks by project
+tvd: View tasks by date
+tvc: View tasks by context
+ts:  View tasks with specific dates
+te:  Edit todo.txt
+"'
 
 function numberOfCurrentTasks() {
     today=`date "+%Y-%m-%d"`

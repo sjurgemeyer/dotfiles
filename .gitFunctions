@@ -1,6 +1,16 @@
 #!/bin/bash
 alias V="mvim -c 'cd $CURRENT_PROJECT_DIR'"
 
+alias githelp='echo \
+"Custom Git functions
+--------------------
+git-reset-origin branchName - remove the specified branch and checkout from origin
+git-reset-upstream branchName - remove the specified branch and checkout from upstream
+git-dev-diff - Diff the current branch against upstream develop
+git-dev-diff - Show the changes from upstream/develop to the current branch
+cleanupBranches - For all branches local and origin, give a Y/n option to delete (will checkout master)
+"'
+
 function git-dev() {
     checkoutUpdateFromUpstreamAll develop
 }
