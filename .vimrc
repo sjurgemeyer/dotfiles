@@ -42,6 +42,7 @@ Bundle 'plasticboy/vim-markdown'
 Bundle 'jelera/vim-javascript-syntax'
 Bundle 'othree/javascript-libraries-syntax.vim'
 Bundle 'JavaScript-Indent'
+Bundle 'csv.vim'
 
 "Bundle 'slimv.vim'
 "Bundle 'vim-scripts/VimClojure.git'
