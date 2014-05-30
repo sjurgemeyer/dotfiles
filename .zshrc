@@ -11,6 +11,7 @@ setopt NO_BEEP
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/share/npm/bin/:/opt/local/bin:/opt/local/sbin:/usr/local/sbin:/usr/local/groovy/bin:/usr/local/mysql/bin:/usr/local/tomcat/bin:/usr/local/scripts:/usr/local/gradle/bin:$HOME/.rvm/bin:/usr/local/Cellar/ruby/2.0.0-p247/bin:$HOME/.node/bin:$PATH
 
 #VI/VIM defaults
+export VIMRUNTIME=/Applications/MacVim.app/Contents/Resources/vim/runtime/
 export EDITOR=vim
 export SVN_EDITOR=vim
 alias v='mvim'
