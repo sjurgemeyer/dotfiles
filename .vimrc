@@ -43,6 +43,7 @@ Bundle 'jelera/vim-javascript-syntax'
 Bundle 'othree/javascript-libraries-syntax.vim'
 Bundle 'JavaScript-Indent'
 Bundle 'csv.vim'
+Bundle 'kana/vim-fakeclip'
 
 "Bundle 'slimv.vim'
 "Bundle 'vim-scripts/VimClojure.git'

@@ -15,6 +15,7 @@ export VIMRUNTIME=/Applications/MacVim.app/Contents/Resources/vim/runtime/
 export EDITOR=vim
 export SVN_EDITOR=vim
 alias v='mvim'
+alias n='nvim'
 
 #VI Mode
 bindkey -v
@@ -32,6 +33,8 @@ export JAVA_HOME=`/usr/libexec/java_home`
 PROJECT_DIR=$HOME/projects
 source ~/.otherFunctions
 source ~/.gitFunctions
+alias V="mvim -c 'cd $CURRENT_PROJECT_DIR'"
+alias N="nvim -c 'cd $CURRENT_PROJECT_DIR'"
 
 #Start web server
 alias http='python -m SimpleHTTPServer'
