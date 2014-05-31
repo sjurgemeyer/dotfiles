@@ -1,5 +1,8 @@
 .vim/backup/*
 .vim/undo/*
+.vim/colors/ororo.vim
 z-zsh/*
 dependencies/hg-prompt/*
 .vim/bundle/*
+.todo.actions.d/recur
+

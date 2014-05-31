@@ -48,6 +48,9 @@ rm -Rf ~/.vimrc
 sudo ln -s ~/projects/dotfiles/.vimrc ~/.vimrc
 rm -Rf ~/.ctags
 sudo ln -s ~/projects/dotfiles/.ctags ~/.ctags
+rm -Rf ~/.vim/colors/ororo.vim
+sudo ln -s ~/projects/dotfiles/dependencies/vim-ororo/ororo.vim ~/.vim/colors/ororo.vim 
+
 # Used for syntastic
 sudo rm -Rf /usr/local/bin/grails-compile-file
 sudo ln -s ~/projects/dotfiles/config/grails-compile-file /usr/local/bin/grails-compile-file

@@ -1,4 +1,4 @@
-colorscheme shaun
+colorscheme ororo
 
 set guioptions-=r
 set guioptions-=R

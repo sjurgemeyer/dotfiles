@@ -142,10 +142,6 @@ endfunction
 command! RemoveSwapFile :call RemoveSwapFile()
 
 "Shortcuts to change background color
-command! Green :colorscheme shaun-green
-command! Red :colorscheme shaun-red
-command! Blue :colorscheme shaun-blue
-command! Black :colorscheme shaun
 command! White :colorscheme delek
 command! Ses :mks! ~/session.vim
 
@@ -209,7 +205,7 @@ command! WordProcessorMode :call WordProcessorMode()
 
 "Undo wordprocessormode
 func! CodeMode() 
-  colorscheme shaun
+  colorscheme ororo
   set expandtab 
   "map j gj 
   "map k gk
