@@ -62,9 +62,6 @@ Bundle 'gregsexton/gitv.git'
 Bundle 'junkblocker/patchreview-vim'
 Bundle 'codegram/vim-codereview'
 
-so ~/.vim/config/fugitive.vim
-so ~/.vim/config/gitv.vim
-
 syntax on
 filetype plugin indent on
 " set shell=/bin/bash\ -li
@@ -77,6 +74,7 @@ set shiftwidth=4
 set softtabstop=4
 set path+=**
 set encoding=utf-8
+set termencoding=utf-8
 set scrolloff=5
 set autoindent
 set autoread 
@@ -205,7 +203,7 @@ func! WordProcessorMode()
   set laststatus=0 " don't show status line
   set gfn=Cousine:h14                " font to use
   set nonumber
-  "set guifont=Source\ Code\ Pro\ Semibold\ for\ Powerline:h15
+  set guifont=Source\ Code\ Pro\ Semibold\ for\ Powerline:h15
 endfu 
 command! WordProcessorMode :call WordProcessorMode()
 
@@ -236,6 +234,6 @@ vmap <expr> D DVB_Duplicate()
 autocmd VimEnter * silent !konsoleprofile UseCustomCursorColor=1
 
 if $TERM_PROGRAM =~ "iTerm"
-    let &t_SI = "\<Esc>]50;CustomCursorColor=red;CursorShape=1\x7" " Vertical bar in insert mode
-    let &t_EI = "\<Esc>]50;CustomCursorColor=red;CursorShape=0\x7" " Block in normal mode"
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode"
 endif
