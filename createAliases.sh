@@ -79,3 +79,9 @@ sudo ln -s ~/projects/dotfiles/.vagrant.d/bash ~/.vagrant.d/bash
 #NPM
 rm -Rf ~/.npmrc
 sudo ln -s ~/projects/dotfiles/.npmrc ~/.npmrc
+
+#NEOVIM
+rm -Rf ~/.nvim
+sudo ln -s ~/projects/dotfiles/.vim ~/.nvim
+rm -Rf ~/.nvimrc
+sudo ln -s ~/projects/dotfiles/.vimrc ~/.nvimrc
