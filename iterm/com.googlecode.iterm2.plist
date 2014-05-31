@@ -1673,13 +1673,13 @@
 	<key>MaxVertically</key>
 	<false/>
 	<key>NSColorPanelMode</key>
-	<string>7</string>
-	<key>NSColorPickerPageableNameListDefaults</key>
-	<string>1Crayons</string>
-	<key>NSFileViewer</key>
-	<string>com.cocoatech.PathFinder</string>
+	<string>6</string>
+	<key>NSFontPanelAttributes</key>
+	<string>1, 0</string>
+	<key>NSFontPanelPreviewHeight</key>
+	<real>0.0</real>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/projects/dotfiles/iterm</string>
+	<string>~/Downloads</string>
 	<key>NSQuotedKeystrokeBinding</key>
 	<string></string>
 	<key>NSRepeatCountBinding</key>
@@ -1697,33 +1697,24 @@
 		BAtzdHJlYW10eXBlZIHoA4QBQISEhAhOU1N0cmluZwGEhAhOU09iamVjdACF
 		hAErATGG
 		</data>
-		<string>302</string>
+		<string>319</string>
 	</array>
 	<key>NSTableView Hidden Columns KeyBingingTable</key>
 	<array/>
 	<key>NSTableView Sort Ordering KeyBingingTable</key>
 	<array/>
-	<key>NSToolbar Configuration Terminal Toolbar</key>
-	<dict>
-		<key>TB Display Mode</key>
-		<integer>1</integer>
-		<key>TB Icon Size Mode</key>
-		<integer>1</integer>
-		<key>TB Is Shown</key>
-		<integer>0</integer>
-		<key>TB Size Mode</key>
-		<integer>1</integer>
-	</dict>
 	<key>NSWindow Frame NSColorPanel</key>
-	<string>426 367 214 309 0 0 1920 1080 </string>
+	<string>433 410 201 301 0 0 1920 1178 </string>
+	<key>NSWindow Frame NSFontPanel</key>
+	<string>843 481 445 270 0 0 1920 1178 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>110 204 924 485 0 0 1440 878 </string>
-	<key>NSWindow Frame UKCrashReporter</key>
-	<string>155 594 592 584 0 0 1920 1178 </string>
+	<string>269 105 924 485 0 0 1920 1178 </string>
+	<key>NSWindow Frame com.apple.typography_panel_SourceCodePro-Bold</key>
+	<string>560 741 260 116 0 0 1920 1178 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>4 16 1434 862 0 0 1440 878 </string>
+	<string>0 2 1914 1166 0 0 1920 1178 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>4 47 1865 1131 0 0 1920 1178 </string>
+	<string>398 167 2130 1196 0 0 2560 1418 </string>
 	<key>NeverWarnAboutShortLivedSessions_86928FF9-F4EB-4ABC-8342-904B112E6D31</key>
 	<true/>
 	<key>New Bookmarks</key>
@@ -2275,11 +2266,11 @@
 			<key>Name</key>
 			<string>Default</string>
 			<key>Non Ascii Font</key>
-			<string>SourceCodePro-SemiboldForPowerline 14</string>
+			<string>SauceCodePowerline-Semibold 14</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>SourceCodePro-SemiboldForPowerline 14</string>
+			<string>SauceCodePowerline-Semibold 14</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -3000,11 +2991,11 @@
 			<key>Name</key>
 			<string>Shaun</string>
 			<key>Non Ascii Font</key>
-			<string>SourceCodePro-SemiboldForPowerline 14</string>
+			<string>SauceCodePowerline-Semibold 14</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>SourceCodePro-SemiboldForPowerline 14</string>
+			<string>SauceCodePowerline-Semibold 14</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -3241,7 +3232,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2014-05-31T05:11:46Z</date>
+	<date>2014-05-31T05:25:28Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>ShowBookmarkName</key>
@@ -3264,8 +3255,6 @@
 	<integer>10</integer>
 	<key>TripleClickSelectsFullWrappedLines</key>
 	<false/>
-	<key>UKCrashReporterLastCrashReportDate</key>
-	<real>1328585088</real>
 	<key>URLHandlersByGuid</key>
 	<dict/>
 	<key>UseBorder</key>
