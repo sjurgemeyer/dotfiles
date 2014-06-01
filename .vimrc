@@ -60,13 +60,15 @@ Bundle 'junkblocker/patchreview-vim'
 Bundle 'codegram/vim-codereview'
 
 "Other
+Bundle 'vim-scripts/SyntaxRange'
 Bundle 'scrooloose/syntastic.git'
 Bundle 'sjurgemeyer/vim-grails-import'
 Bundle 'tpope/vim-abolish.git'
 Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
-Bundle 'vim-sripts/Align.git'
+Bundle 'tpope/vim-sleuth'
+Bundle 'vim-scripts/Align.git'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'scrooloose/nerdcommenter.git'
 Bundle 'csv.vim'
@@ -243,7 +245,17 @@ vmap <expr> D DVB_Duplicate()
 
 autocmd VimEnter * silent !konsoleprofile UseCustomCursorColor=1
 
+"Cursor in terminal mode
 if $TERM_PROGRAM =~ "iTerm"
     let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
     let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode"
+endif
+
+if ! has('gui_running')
+  set ttimeoutlen=10
+  augroup FastEscape
+    autocmd!
+    au InsertEnter * set timeoutlen=0
+    au InsertLeave * set timeoutlen=1000
+  augroup END
 endif
