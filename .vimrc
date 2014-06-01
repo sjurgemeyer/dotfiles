@@ -8,46 +8,41 @@ call vundleconfig#init()
 let mapleader = ","
 let g:mapleader = ","
 
+"Plugins management
 Bundle 'sjurgemeyer/vundleconfig.git'
+Bundle 'gmarik/vundle'
+
+"Code completion
 Bundle 'Shougo/neocomplcache.git'
 Bundle 'Shougo/neosnippet.git'
-"Bundle 'Shougo/unite.vim.git'
-"Bundle 'Shougo/neomru.vim.git'
-"Bundle 'Shougo/vimproc.vim.git'
-Bundle 'ZoomWin'
-Bundle 'bling/vim-airline'
-Bundle 'freitass/todo.txt-vim'
-Bundle 'gmarik/vundle'
+
+"Buffer management
 Bundle 'jeetsukumaran/vim-buffergator.git'
 Bundle 'BufOnly.vim'
+Bundle 'ZoomWin'
+
+"Navigation
 Bundle 'kien/ctrlp.vim.git'
 Bundle 'majutsushi/tagbar.git'
-"Bundle 'mhinz/vim-startify'
 Bundle 'mileszs/ack.vim'
-Bundle 'scrooloose/nerdcommenter.git'
 Bundle 'scrooloose/nerdtree.git'
-Bundle 'scrooloose/syntastic.git'
+Bundle 'jayflo/vim-skip'
 Bundle 'sjl/gundo.vim.git'
-Bundle 'sjl/splice.vim'
-Bundle 'sjurgemeyer/vim-grails-import'
-Bundle 'sjurgemeyer/vim-todo.txt-plugin'
-Bundle 'tpope/vim-abolish.git'
-Bundle 'tpope/vim-dispatch'
-Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired.git'
-Bundle 'vim-scripts/Align.git'
-Bundle 'plasticboy/vim-markdown'
+
+"TODO.txt
+Bundle 'freitass/todo.txt-vim'
+Bundle 'sjurgemeyer/vim-todo.txt-plugin'
+
 "Javascript stuff
 Bundle 'jelera/vim-javascript-syntax'
 Bundle 'othree/javascript-libraries-syntax.vim'
 Bundle 'JavaScript-Indent'
-Bundle 'csv.vim'
+
+"terminal clipboard
 Bundle 'kana/vim-fakeclip'
 
-"Bundle 'slimv.vim'
-"Bundle 'vim-scripts/VimClojure.git'
-"Bundle 'DrawIt'
+"Writing stuff
 Bundle 'mattn/calendar-vim'
 Bundle 'jmcantrell/vim-journal'
 
@@ -55,12 +50,27 @@ Bundle 'jmcantrell/vim-journal'
 Bundle 'rizzatti/funcoo.vim'
 Bundle 'rizzatti/dash.vim'
 
+"Git
+Bundle 'sjl/splice.vim'
 Bundle 'tpope/vim-fugitive.git'
 Bundle 'gregsexton/gitv.git'
 
 "github PR review
 Bundle 'junkblocker/patchreview-vim'
 Bundle 'codegram/vim-codereview'
+
+"Other
+Bundle 'scrooloose/syntastic.git'
+Bundle 'sjurgemeyer/vim-grails-import'
+Bundle 'tpope/vim-abolish.git'
+Bundle 'tpope/vim-dispatch'
+Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-surround'
+Bundle 'vim-sripts/Align.git'
+Bundle 'plasticboy/vim-markdown'
+Bundle 'scrooloose/nerdcommenter.git'
+Bundle 'csv.vim'
+Bundle 'bling/vim-airline'
 
 syntax on
 filetype plugin indent on
@@ -172,6 +182,10 @@ command! FormatJSON :%!python -m json.tool
 
 :nnoremap <A-c> /\v<[A-Z][a-zA-Z]+><CR>
 
+" select previously pasted text
+nnoremap gp `[v`] 
+
+"Move lines up and down
 :nmap <C-Down> ddp
 :nmap <C-Up> ddkP
            
