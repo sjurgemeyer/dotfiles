@@ -24,20 +24,14 @@ Bundle 'ZoomWin'
 "Navigation
 Bundle 'kien/ctrlp.vim.git'
 Bundle 'majutsushi/tagbar.git'
-Bundle 'mileszs/ack.vim'
 Bundle 'scrooloose/nerdtree.git'
 Bundle 'jayflo/vim-skip'
 Bundle 'sjl/gundo.vim.git'
 Bundle 'tpope/vim-unimpaired.git'
 
-"TODO.txt
-Bundle 'freitass/todo.txt-vim'
-Bundle 'sjurgemeyer/vim-todo.txt-plugin'
-
-"Javascript stuff
-Bundle 'jelera/vim-javascript-syntax'
-Bundle 'othree/javascript-libraries-syntax.vim'
-Bundle 'JavaScript-Indent'
+"Searching
+Bundle 'mileszs/ack.vim'
+Bundle 'tpope/vim-abolish.git'
 
 "terminal clipboard
 Bundle 'kana/vim-fakeclip'
@@ -50,6 +44,30 @@ Bundle 'jmcantrell/vim-journal'
 Bundle 'rizzatti/funcoo.vim'
 Bundle 'rizzatti/dash.vim'
 
+"Editing
+Bundle 'scrooloose/syntastic.git'
+Bundle 'tpope/vim-surround'
+Bundle 'scrooloose/nerdcommenter.git'
+Bundle 'sjurgemeyer/vim-grails-import'
+
+"Formatting
+Bundle 'vim-scripts/Align.git'
+Bundle 'tpope/vim-sleuth'
+Bundle 'vim-scripts/SyntaxRange'
+
+"Filetype
+Bundle 'tpope/vim-markdown'
+Bundle 'csv.vim'
+
+"Javascript stuff
+Bundle 'jelera/vim-javascript-syntax'
+Bundle 'othree/javascript-libraries-syntax.vim'
+Bundle 'JavaScript-Indent'
+
+"TODO.txt
+Bundle 'freitass/todo.txt-vim'
+Bundle 'sjurgemeyer/vim-todo.txt-plugin'
+
 "Git
 Bundle 'sjl/splice.vim'
 Bundle 'tpope/vim-fugitive.git'
@@ -59,26 +77,16 @@ Bundle 'gregsexton/gitv.git'
 Bundle 'junkblocker/patchreview-vim'
 Bundle 'codegram/vim-codereview'
 
-"Other
-Bundle 'vim-scripts/SyntaxRange'
-Bundle 'scrooloose/syntastic.git'
-Bundle 'sjurgemeyer/vim-grails-import'
-Bundle 'tpope/vim-abolish.git'
-Bundle 'tpope/vim-dispatch'
+"Utils
 Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-sleuth'
-Bundle 'vim-scripts/Align.git'
-Bundle 'tpope/vim-markdown'
-Bundle 'scrooloose/nerdcommenter.git'
-Bundle 'csv.vim'
+Bundle 'tpope/vim-dispatch'
+
+"Pretty
 Bundle 'bling/vim-airline'
 
 syntax on
 filetype plugin indent on
-" set shell=/bin/bash\ -li
 
-" set modelines=0
 set nostartofline
 set nowrap
 set tabstop=4
@@ -103,7 +111,6 @@ set ttyfast
 set title titlestring=  " Sets the title of the window to the filename
 set ruler
 set backspace=indent,eol,start
-" set relativenumber
 set undofile
 "set winwidth=119
 set wildignore+=*.class,.git,.hg,.svn,test-integration/**,test-unit/**,**/target/**,**/build/**
@@ -115,6 +122,7 @@ set smartcase
 set incsearch 
 set hls
 set clipboard=unnamed
+
 "Directories for swp files
 set backupdir=~/.vimbackup
 set directory=~/.vimbackup
@@ -126,9 +134,6 @@ nnoremap ' `
 nnoremap ` '
 
 let g:grails_import_list_file='/Users/sjurgemeyer/.vim/config/grailsImportList.txt'
-
-"quick switch to last edited file
-map <C-tab> <C-^>
 
 "Manipulate a comma seperated list"
 vmap <D-[> :s/,\s*/,\r/g<CR>
@@ -153,25 +158,14 @@ function! RemoveSwapFile()
 endfunction
 command! RemoveSwapFile :call RemoveSwapFile()
 
-"Shortcuts to change background color
-command! White :colorscheme delek
-command! Ses :mks! ~/session.vim
-
-command! Big :set guifont=Source\ Code\ Pro\ Semibold:h40
-command! Small :set guifont=Source\ Code\ Pro\ Semibold:h13
+command! Big :set guifont=Source\ Code\ Pro\ Semibold\ for\ Powerline:h40
+command! Small :set guifont=Source\ Code\ Pro\ Semibold\ for\ Powerline:h13
 
 "Cleanup quickfix
 au Filetype qf setl nolist 
 au Filetype qf setl nocursorline 
 au Filetype qf setl nowrap
 
-"shortcut for rerunning macro
-map <A-;> @@n
-"Set 'very magic' search by default.
-" :nnoremap / /\v
-" :cnoremap %s/ %s/\v
-" :cnoremap s/ s/\v
-"
 "change underscore variables to camel case
 :nnoremap + /\$\w\+_<CR>
 :nnoremap _ f_x~
@@ -242,8 +236,6 @@ vmap <expr> D DVB_Duplicate()
 
 "Code mode by default
 :CodeMode
-
-autocmd VimEnter * silent !konsoleprofile UseCustomCursorColor=1
 
 "Cursor in terminal mode
 if $TERM_PROGRAM =~ "iTerm"

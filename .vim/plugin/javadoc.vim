@@ -3,6 +3,6 @@ function! LookupJavadoc()
     :execute "!open https://www.google.com/search?q=" . word . "+javadoc"
 endfunction 
 command! LookupJavadoc :call LookupJavadoc()
-map <A-j> <Esc>:LookupJavadoc<CR>
+map <D-j> <Esc>:LookupJavadoc<CR>
 
 
