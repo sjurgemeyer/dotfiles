@@ -160,7 +160,7 @@ alias tvp='t view project'
 alias tvd='t view date'
 alias tvc='t view context'
 alias ts='t schedule'
-alias te='v /Users/sjurgemeyer/Dropbox/todo/todo.txt'
+alias te='n /Users/sjurgemeyer/Dropbox/todo/todo.txt'
 alias trec 'v /Users/sjurgemeyer/Dropbox/todo/recur.txt'
 alias todohelp='echo \
 "TODO.txt shortcuts
