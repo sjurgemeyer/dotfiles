@@ -77,6 +77,18 @@ function! FindGrailsRoot()
     return fnamemodify(fileLocation, ":p:h")
 endfunction
 
+function! FindTestDir() 
+    let file = expand("%:p:h")
+    let testDir = substitute(file, "/main/", "/test/", "")
+    while 1 == 1
+        if (isdirectory(testDir))
+            return testDir
+        endif
+        let testDir = substitute(testDir, "/[^/]*$", "", "")
+    endwhile
+
+endfunction
+
 function! FindGradleRoot() 
     " We have gradle files named different things so the best I could do was
     " search for a build dir and use the parent.  VIM's finddir doesn't allow
@@ -137,11 +149,29 @@ function! OpenTest()
    let ext = fnamemodify(expand("%:p"), ":t:e")
    let file = expand("%:t:r")
    let is_test = strridx(file, "Tests")
+   if is_test < 0
+      let is_test = strridx(file, "Spec")
+   endif 
    if is_test > 0
        let file = strpart(file, 0, is_test) 
        execute ":find " . file . "." . ext
-   else
-       execute ":find " . file . "Tests." . ext
+    else
+        try
+            execute ":find " . file . "Spec." . ext
+        catch
+            "Try for old grails style tests
+            try
+                execute ":find " . file . "Tests." . ext
+            catch
+                "Open the test dir (or closest existing dir) if no test exists
+                let x = g:NERDTreePath.New(FindTestDir())
+                if !nerdtree#isTreeOpen()
+                    call g:NERDTreeCreator.TogglePrimary("")
+                endif
+                call nerdtree#putCursorInTreeWin()
+                call b:NERDTreeRoot.reveal(x)
+            endtry
+       endtry
    endif
 endfunction
 
@@ -149,8 +179,8 @@ function! CreateGroovyMappings()
     map <Leader>h :call FindSubClasses(expand("<cword>"))<CR>
     map <Leader>x :call OpenTest()<CR>
     map <Leader>vv :call GrailsSearch(expand("<cword>"))<CR>
-    "map <Leader>vc :call GrailsSearchNoTests(expand("<cword>"))<CR>
-    "map <Leader>vt :call GrailsSearchOnlyTests(expand("<cword>"))<CR>
+    map <Leader>vc :call GrailsSearchNoTests(expand("<cword>"))<CR>
+    map <Leader>vt :call GrailsSearchOnlyTests(expand("<cword>"))<CR>
     
     "Testing
     map <S-F9> <Esc>:w<CR>:call RunSingleGrailsTest()<CR>
