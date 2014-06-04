@@ -155,7 +155,7 @@ function! CreateGroovyMappings()
     "Testing
     map <S-F9> <Esc>:w<CR>:call RunSingleGrailsTest()<CR>
     map <F9> <Esc>:w<CR>:call RunGrailsTestFile()<CR>
-    map <D-F9> :call RunLastCommandInTerminal()<CR>
+    map <F11> :call RunLastCommandInTerminal()<CR>
     map <F9> <Esc>:w<CR>:call RunGrailsTestFile()<CR>
     map <F10> <Esc>:w<CR>:call RunGradleTestFile()<CR>
 
@@ -179,8 +179,8 @@ endfunction
 au BufNewFile,BufRead *.groovy :call CreateGroovyMappings()
 
 "Open file under cursor
-map <D-y> :call OpenFileUnderCursor(expand("<cword>"))<CR>
-map <D-u> :call SplitOpenFileUnderCursor(expand("<cword>"))<CR>
+map <Leader>y :call OpenFileUnderCursor(expand("<cword>"))<CR>
+map <Leader>u :call SplitOpenFileUnderCursor(expand("<cword>"))<CR>
 
 function! FindSubClasses(filename) 
     execute ":GGrep \"(implements|extends) " . a:filename . "\""
