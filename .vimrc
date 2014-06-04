@@ -68,6 +68,8 @@ Bundle 'JavaScript-Indent'
 Bundle 'freitass/todo.txt-vim'
 Bundle 'sjurgemeyer/vim-todo.txt-plugin'
 
+Bundle 'vim-scripts/dbext.vim'
+
 "Git
 Bundle 'sjl/splice.vim'
 Bundle 'tpope/vim-fugitive.git'
@@ -85,6 +87,7 @@ Bundle 'tpope/vim-dispatch'
 Bundle 'bling/vim-airline'
 
 syntax on
+source ~/.vimrc-private
 filetype plugin indent on
 
 set nostartofline
