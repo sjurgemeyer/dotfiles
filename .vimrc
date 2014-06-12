@@ -74,6 +74,7 @@ Bundle 'vim-scripts/dbext.vim'
 Bundle 'sjl/splice.vim'
 Bundle 'tpope/vim-fugitive.git'
 Bundle 'gregsexton/gitv.git'
+Bundle 'idanarye/vim-merginal'
 
 "github PR review
 Bundle 'junkblocker/patchreview-vim'
