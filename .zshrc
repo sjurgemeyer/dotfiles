@@ -37,7 +37,7 @@ alias V="mvim -c 'cd $CURRENT_PROJECT_DIR'"
 alias N="nvim -c 'cd $CURRENT_PROJECT_DIR'"
 
 #Start web server
-alias http='python -m SimpleHTTPServer'
+alias serve='python -m SimpleHTTPServer'
 
 ###############################  Groovy/Grails  ##############################
 alias gd='gradle'
