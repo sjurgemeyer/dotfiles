@@ -4,9 +4,12 @@ export deadpool='⌽'
 export xchar='✘'
 export delta='𝚫'
 export cool='こ'
+export thing='₪'
 export break='⎠'
 export fancyarrow='ᕗ '
+export swords='⚔'
 #➤'
+# Ξ ⏣ ♫ ☢ 
 
 
 #PROMPT='%{$fg_bold[blue]%}$arrow%{$fg[white]%} %t %{$fg[blue]%}✘%{$fg[green]%}%p %{$fg[white]%}%c %{$fg[blue]%}$(git_prompt_info)$(hg_prompt_info)%{$fg[blue]%} $(tasks)✘ % %{$reset_color%}'
@@ -14,7 +17,6 @@ PROMPT='%{$fg[red]%}$deadpool%{$fg_bold[cyan]%} %t %{$reset_color%}%{$fg[blue]%}
 #PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
 
 
-# Ξ ⏣ ♫ ☢ 
 ZSH_THEME_GIT_PROMPT_PREFIX="$break %{$fg_bold[cyan]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$reset_color%}%{$fg[blue]%}%{$fg[red]%} $delta%{$reset_color%}"
