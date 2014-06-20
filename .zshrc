@@ -135,8 +135,12 @@ mkcd () { mkdir -p "$@" && cd "$@"; }
 alias lla='ll -a' # ll is created by scm breeze
 
 #Easier ZSH history
-source $HOME/projects/dotfiles/dependencies/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $HOME/projects/dotfiles/dependencies/zsh-history-substring-search/zsh-history-substring-search.zsh
+# 
+source $HOME/projects/dotfiles/dependencies/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+source $HOME/projects/dotfiles/dependencies/zsh-history-substring-search/zsh-history-substring-search.plugin.zsh
+zmodload zsh/terminfo
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
 
 ## Friendly find alias
 alias ff=ffind

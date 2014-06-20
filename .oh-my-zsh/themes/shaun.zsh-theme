@@ -1,14 +1,24 @@
 export arrow='➜'
 # export beer='🍺 '
+export deadpool='⌽'
+export xchar='✘'
+export delta='𝚫'
+export cool='こ'
+export break='⎠'
+export fancyarrow='ᕗ '
+#➤'
+
+
 #PROMPT='%{$fg_bold[blue]%}$arrow%{$fg[white]%} %t %{$fg[blue]%}✘%{$fg[green]%}%p %{$fg[white]%}%c %{$fg[blue]%}$(git_prompt_info)$(hg_prompt_info)%{$fg[blue]%} $(tasks)✘ % %{$reset_color%}'
-PROMPT='%{$fg[blue]%}$arrow%{$fg_bold[cyan]%} %t %{$reset_color%}%{$fg[blue]%}✘%{$fg[green]%}%p%{$fg_bold[cyan]%} %c %{$reset_color%}%{$fg[blue]%}$(git_prompt_info)%{$fg[blue]%} ✘ % %{$reset_color%}'
+PROMPT='%{$fg[red]%}$deadpool%{$fg_bold[cyan]%} %t %{$reset_color%}%{$fg[blue]%}$break%{$fg[green]%}%p%{$fg_bold[cyan]%} %c %{$reset_color%}%{$fg[blue]%}$(git_prompt_info)%{$fg[blue]%} $fancyarrow % %{$reset_color%}'
 #PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
 
-# Ξ ⏣ ♫ ☢
-ZSH_THEME_GIT_PROMPT_PREFIX="(%{$fg_bold[cyan]%}"
+
+# Ξ ⏣ ♫ ☢ 
+ZSH_THEME_GIT_PROMPT_PREFIX="$break %{$fg_bold[cyan]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$reset_color%}%{$fg[blue]%})%{$fg[red]%}!%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$reset_color%}%{$fg[blue]%})"
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$reset_color%}%{$fg[blue]%}%{$fg[red]%} $delta%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$reset_color%}%{$fg[blue]%}"
 
 function hg_prompt_info {
     hg prompt --angle-brackets "\
