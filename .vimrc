@@ -52,7 +52,7 @@ Bundle 'sjurgemeyer/vim-grails-import'
 
 "Formatting
 Bundle 'vim-scripts/Align.git'
-Bundle 'tpope/vim-sleuth'
+"Bundle 'tpope/vim-sleuth'
 Bundle 'vim-scripts/SyntaxRange'
 
 "Filetype
