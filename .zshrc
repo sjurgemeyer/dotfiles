@@ -134,13 +134,6 @@ alias mkdir='mkdir -p' #create intermediate directories
 mkcd () { mkdir -p "$@" && cd "$@"; }
 alias lla='ll -a' # ll is created by scm breeze
 
-#Easier ZSH history
-# 
-source $HOME/projects/dotfiles/dependencies/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
-source $HOME/projects/dotfiles/dependencies/zsh-history-substring-search/zsh-history-substring-search.plugin.zsh
-zmodload zsh/terminfo
-bindkey "$terminfo[kcuu1]" history-substring-search-up
-bindkey "$terminfo[kcud1]" history-substring-search-down
 
 ## Friendly find alias
 alias ff=ffind
@@ -204,6 +197,16 @@ growl() {
 
 export VIMCLOJURE_SERVER_JAR="$HOME/projects/dotfiles/dependencies/lib/nailgun/server-2.3.6.jar"
 
+#Easier ZSH history
+# 
+source $HOME/projects/dotfiles/dependencies/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/projects/dotfiles/dependencies/zsh-history-substring-search/zsh-history-substring-search.zsh
+zmodload zsh/terminfo
+# bind UP and DOWN arrow keys
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
 #RVM
 #[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
 #[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.

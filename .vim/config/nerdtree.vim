@@ -9,3 +9,4 @@ let NERDTreeDirArrows = 1
 let NERDTreeQuitOnOpen = 1
 let NERDTreeShowHidden = 1
 let NERDTreeIgnore=['\.iml$']
+let NERDTreeWinSize = 45

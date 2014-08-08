@@ -40,10 +40,11 @@ command! TestResults :call TestResults()
 
 function! CompileGrails()
     let fileName = expand("%:t:r")
+    let g:working_dir = getcwd()
     silent execute 'cd ' . FindGrailsRoot()
     :compiler grails
     :call RunInTerminal ("grails compile") 
-    silent execute 'cd -'
+    silent execute 'cd ' . g:working_dir
 endfunction
 
 function! RunSingleGrailsTest()
@@ -58,18 +59,20 @@ endfunction
 
 function! CompileGradle()
     let fileName = expand("%:t:r")
+    let g:working_dir = getcwd()
     silent execute 'cd ' . FindGradleRoot()
     :compiler gradle
     :call RunInTerminal ("gradle assemble") 
-    silent execute 'cd -'
+    silent execute 'cd ' . g:working_dir
 endfunction
 
 function! RunGradleTestFile()
     let testName = expand("%:t:r")
+    let g:working_dir = getcwd()
     silent execute 'cd ' . FindGradleRoot()
     :compiler gradle
     :call RunInTerminal ("gradle -x codenarcMain -Dtest.single=" . testName . " test | ~/.vim/tools/filter.groovy") 
-    silent execute 'cd -'
+    silent execute 'cd ' . g:working_dir
 endfunction
 
 function! FindGrailsRoot() 
@@ -119,10 +122,11 @@ function! RunGrailsTest(testName)
             return
         endif
     endif
+    let g:working_dir = getcwd()
     silent execute 'cd ' . FindGrailsRoot()
     :compiler grails
     :call RunInTerminal ("grails -Duser.timezone=UTC test-app " . flag . " " . a:testName . ' | ~/.vim/tools/filter.groovy') 
-    silent execute 'cd -'
+    silent execute 'cd ' . g:working_dir
 endfunction
 
 "Function to run command in external terminal"
@@ -136,9 +140,10 @@ endfunction
 
 function! RunLastCommandInTerminal()
     if exists("g:last_run_in_terminal")
+        let g:working_dir = getcwd()
         silent execute 'cd ' . g:last_command_dir
         :call RunInTerminal(g:last_run_in_terminal)
-        silent execute 'cd -'
+        silent execute 'cd ' . g:working_dir
     else
         echo "No last command to execute!"
     endif
