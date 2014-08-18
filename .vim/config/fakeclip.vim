@@ -1,4 +1,4 @@
 map Y "+y
 
-nmap <Leader>, "+p
+nmap <Leader><Leader> "+p
 

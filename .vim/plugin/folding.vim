@@ -18,8 +18,8 @@
 "    let expansionString = " ... }" . repeat(" ", w - strwidth(foldSizeStr.line.foldLevelStr.foldPercentage))
 "    return line . expansionString . foldSizeStr . foldPercentage . foldLevelStr
 "endf
-nnoremap <Space> za
-nnoremap <S-Space> zA
+"nnoremap <Space> za
+"nnoremap <S-Space> zA
 "set foldenable
 "set foldtext=CustomFoldText() 
 "set foldlevel=1 

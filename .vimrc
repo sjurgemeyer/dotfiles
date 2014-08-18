@@ -5,8 +5,8 @@ call vundle#rc()
 set rtp+=~/.vim/bundle/vundleconfig/
 call vundleconfig#init()
 
-let mapleader = ","
-let g:mapleader = ","
+let mapleader = "\<Space>"
+let g:mapleader = "\<Space>"
 
 "Plugins management
 Bundle 'sjurgemeyer/vundleconfig.git'
@@ -32,6 +32,7 @@ Bundle 'tpope/vim-unimpaired.git'
 "Searching
 Bundle 'mileszs/ack.vim'
 Bundle 'tpope/vim-abolish.git'
+Bundle 'terryma/vim-expand-region'
 
 "terminal clipboard
 Bundle 'kana/vim-fakeclip'
@@ -146,6 +147,9 @@ vmap <D-]> :s/,\n/, /g<CR>
 "clear current highlighting
 map <C-c> :nohlsearch<CR>
 
+"Jump to line number with just 12<CR> instead of 12G<CR>
+"nnoremap <CR> G
+
 "Next/Previous difference in vimdiff
 map <D-k> [c
 map <D-j> ]c
@@ -154,6 +158,12 @@ map <D-j> ]c
 map <S-CR> <Esc>o<Esc>
 "Paste newline
 map <D-p> <S-CR>p
+
+" Jump to the end of copied text
+vnoremap <silent> y y`]
+" Jump to the end of pasted text
+vnoremap <silent> p p`]
+nnoremap <silent> p p`]
 
 function! RemoveSwapFile()
     let backupdir = &backupdir
