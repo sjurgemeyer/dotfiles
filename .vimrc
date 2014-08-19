@@ -147,6 +147,11 @@ vmap <D-]> :s/,\n/, /g<CR>
 "clear current highlighting
 map <C-c> :nohlsearch<CR>
 
+"Map c to move to end of search term
+vnoremap <silent> g //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>
+    \:<C-u>call histdel('search',-1)<Bar>let @/=histget('search',-1)<CR>gv
+omap g :normal vg<CR>
+
 "Jump to line number with just 12<CR> instead of 12G<CR>
 "nnoremap <CR> G
 
