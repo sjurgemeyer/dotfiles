@@ -1,3 +1,18 @@
 [submodule "dependencies/zsh-syntax-highlighting"]
 	path = dependencies/zsh-syntax-highlighting
 	url = git@github.com:zsh-users/zsh-syntax-highlighting.git
+[submodule "dependencies/zsh-history-substring-search"]
+	path = dependencies/zsh-history-substring-search
+	url = git@github.com:zsh-users/zsh-history-substring-search.git
+[submodule "dependencies/ansiweather"]
+	path = dependencies/ansiweather
+	url = git@github.com:fcambus/ansiweather.git
+[submodule "dependencies/friendly-find"]
+	path = dependencies/friendly-find
+	url = git@github.com:sjl/friendly-find.git
+[submodule "dependencies/vim-ororo"]
+	path = dependencies/vim-ororo
+	url = git@github.com:sjurgemeyer/vim-ororo.git
+[submodule "dependencies/scm_breeze"]
+	path = dependencies/scm_breeze
+	url = https://github.com/ndbroadbent/scm_breeze
