@@ -37,6 +37,7 @@
     aa = commit -a --amend
     d = branch -D
     co = checkout
+    tc = commit -a -m \"Temp commit\"
 [hub]
 	protocol = https
 [push]

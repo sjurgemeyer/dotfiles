@@ -18,10 +18,10 @@ PROMPT='%{$fg[red]%}$deadpool%{$fg_bold[cyan]%} %t %{$reset_color%}%{$fg[blue]%}
 #PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
 
 
-ZSH_THEME_GIT_PROMPT_PREFIX="$hexagon %{$fg_bold[cyan]%}"
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[yellow]%}$hexagon "
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$reset_color%}%{$fg[blue]%}%{$fg[red]%} $delta%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$reset_color%}%{$fg[blue]%}"
+ZSH_THEME_GIT_PROMPT_DIRTY=" $hexagon %{$reset_color%}%{$fg[blue]%}%{$fg[red]%} $delta%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_CLEAN=" $hexagon %{$reset_color%}%{$fg[blue]%}"
 
 function hg_prompt_info {
     hg prompt --angle-brackets "\

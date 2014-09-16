@@ -71,7 +71,7 @@ function! RunGradleTestFile()
     let g:working_dir = getcwd()
     silent execute 'cd ' . FindGradleRoot()
     :compiler gradle
-    :call RunInTerminal ("gradle -x codenarcMain -Dtest.single=" . testName . " test | ~/.vim/tools/filter.groovy") 
+    :call RunInTerminal ("gradle -Dtest.single=" . testName . " test | ~/.vim/tools/filter.groovy") 
     silent execute 'cd ' . g:working_dir
 endfunction
 
