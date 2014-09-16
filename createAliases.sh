@@ -2,8 +2,8 @@ rm -Rf ~/.ackrc
 sudo ln -s ~/projects/dotfiles/.ackrc ~/.ackrc #For Ack 2.0
 sudo rm -Rf /usr/local/bin/ffind
 sudo ln -s ~/projects/dotfiles/dependencies/friendly-find/ffind /usr/local/bin/ffind
-rm /Users/sjurgemeyer/Library/Application\ Support/KeyRemap4MacBook/private.xml
-sudo ln -s ~/projects/dotfiles/config/private.xml ~/Library/Application\ Support/KeyRemap4MacBook/private.xml
+rm /Users/sjurgemeyer/Library/Application\ Support/Karabiner/private.xml
+sudo ln -s ~/projects/dotfiles/config/private.xml ~/Library/Application\ Support/Karabiner/private.xml
 rm -Rf ~/.slate
 sudo ln -s ~/projects/dotfiles/.slate ~/.slate
 rm -Rf ~/.ansiweatherrc
