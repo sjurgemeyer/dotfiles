@@ -28,6 +28,7 @@ Bundle 'scrooloose/nerdtree.git'
 Bundle 'jayflo/vim-skip'
 Bundle 'sjl/gundo.vim.git'
 Bundle 'tpope/vim-unimpaired.git'
+Bundle 'vim-scripts/renamer.vim'
 
 "Searching
 Bundle 'mileszs/ack.vim'

@@ -20,7 +20,8 @@ alias n='nvim'
 #VI Mode
 bindkey -v
 bindkey -M main '\C-r' history-incremental-search-backward
-
+source $HOME/projects/dotfiles/dependencies/opp.zsh/opp.zsh
+source $HOME/projects/dotfiles/dependencies/opp.zsh/opp/*.zsh
 #Java/JVM stuff
 alias jdk6='export JAVA_HOME=$(/usr/libexec/java_home -v 1.6)'
 alias jdk7='export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)'

@@ -16,3 +16,6 @@
 [submodule "dependencies/scm_breeze"]
 	path = dependencies/scm_breeze
 	url = https://github.com/ndbroadbent/scm_breeze
+[submodule "dependencies/opp.zsh"]
+	path = dependencies/opp.zsh
+	url = git@github.com:hchbaw/opp.zsh.git
