@@ -29,6 +29,7 @@ Bundle 'jayflo/vim-skip'
 Bundle 'sjl/gundo.vim.git'
 Bundle 'tpope/vim-unimpaired.git'
 Bundle 'vim-scripts/renamer.vim'
+Bundle 'rargo/vim-line-jump'
 
 "Searching
 Bundle 'mileszs/ack.vim'
