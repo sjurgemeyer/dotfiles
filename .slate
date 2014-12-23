@@ -41,6 +41,7 @@ alias mail 'Sparrow'
 alias file 'Path Finder'
 alias idea 'IntelliJ IDEA'
 alias hipchat 'HipChat'
+alias slack 'Slack'
 
 # Layouts
 layout coding ${hipchat} ${lap-full}
@@ -88,7 +89,8 @@ bind w:${hyper} focus 'Twitter'
 bind i:${hyper} focus ${idea}
 bind t:${hyper} focus ${term}
 bind f:${hyper} focus ${file}
-bind r:${hyper} focus ${hipchat}
+bind p:${hyper} focus ${hipchat}
 bind a:${hyper} focus 'Adium'
-bind s:${hyper} focus 'Spotify'
+bind r:${hyper} focus 'Rdio'
+bind s:${hyper} focus ${slack}
 

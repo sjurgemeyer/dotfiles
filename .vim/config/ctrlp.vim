@@ -9,6 +9,7 @@ let g:ctrlp_mruf_exclude = '/tmp/.*\|/temp/.*\|.*/target/.*\|.*/build/.*|*.orig'
 let g:ctrlp_max_files = 50000
 let g:ctrlp_max_depth = 100
 let g:ctrlp_lazy_update = 1
+let ctrlp_follow_symlinks = 1
 
 "Open CTRLP with current word prepopulated
 nmap <Leader>p <C-p><C-\>w

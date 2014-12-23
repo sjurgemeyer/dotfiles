@@ -89,6 +89,8 @@ sudo ln -s ~/projects/dotfiles/.vim ~/.nvim
 rm -Rf ~/.nvimrc
 sudo ln -s ~/projects/dotfiles/.vimrc ~/.nvimrc
 
-#Iterm
-rm -Rf ~/Library/Preferences/com.googlecode.iterm2.plist
-sudo cp ~/projects/dotfiles/iterm/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist 
+#SCM_BREEZE
+rm -Rf ~/.scm_breeze
+cp -r ~/projects/dotfiles/dependencies/scm_breeze ~/.scm_breeze
+~/.scm_breeze/install.sh
+

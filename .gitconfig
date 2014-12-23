@@ -15,7 +15,7 @@
     cmd = mvim -df $BASE $LOCAL $MERGED $REMOTE -c \"wincmd J\"
     mvim
 [mergetool "splice"]
-    cmd = "mvim -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
+    cmd = "vim -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
     trustExitCode = true
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
@@ -32,7 +32,8 @@
     pop = stash pop
     pr = pull --rebase
     b = checkout -b
-    pud = pull upstream develop
+    pum = pull upstream master
+	prum = pull --rebase upstream master
     amend = commit --amend
     aa = commit -a --amend
     d = branch -D

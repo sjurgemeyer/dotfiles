@@ -32,6 +32,7 @@ Bundle 'vim-scripts/renamer.vim'
 Bundle 'rargo/vim-line-jump'
 
 "Searching
+Bundle 'haya14busa/incsearch.vim'
 Bundle 'mileszs/ack.vim'
 Bundle 'tpope/vim-abolish.git'
 Bundle 'terryma/vim-expand-region'
@@ -104,7 +105,7 @@ set encoding=utf-8
 set termencoding=utf-8
 set scrolloff=5
 set autoindent
-set autoread 
+set autoread
 set history=1000
 set shiftround
 set showmode
@@ -126,7 +127,7 @@ set diffopt=filler,vertical
 set tags=tags;/
 set ic
 set smartcase
-set incsearch 
+set incsearch
 set hls
 set clipboard=unnamed
 
@@ -183,8 +184,8 @@ command! Big :set guifont=Source\ Code\ Pro\ Semibold\ for\ Powerline:h40
 command! Small :set guifont=Source\ Code\ Pro\ Semibold\ for\ Powerline:h13
 
 "Cleanup quickfix
-au Filetype qf setl nolist 
-au Filetype qf setl nocursorline 
+au Filetype qf setl nolist
+au Filetype qf setl nocursorline
 au Filetype qf setl nowrap
 
 "change underscore variables to camel case
@@ -200,12 +201,12 @@ command! FormatJSON :%!python -m json.tool
 :nnoremap <A-c> /\v<[A-Z][a-zA-Z]+><CR>
 
 " select previously pasted text
-nnoremap gp `[v`] 
+nnoremap gp `[v`]
 
 "Move lines up and down
 :nmap <C-Down> ddp
 :nmap <C-Up> ddkP
-           
+
 "Set tab options
 function! TabWidth(width)
     let &tabstop=a:width
@@ -213,38 +214,47 @@ function! TabWidth(width)
     let &softtabstop=a:width
 endfunction
 
+nmap <Leader>2 :call TabWidth(2)<CR>:set expandtab<CR>
+nmap <Leader>4 :call TabWidth(4)<CR>:set expandtab<CR>
+nmap <Leader><Tab> :call TabWidth(4)<CR>:set noexpandtab<CR>
+
+autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
+autocmd FileType groovy setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
+autocmd FileType java setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
+
 "Make vim work as a word processor
-func! WordProcessorMode() 
+func! WordProcessorMode()
   colorscheme iawriter
-  setlocal formatoptions=1 
-  setlocal noexpandtab 
-  "map j gj 
+  setlocal formatoptions=1
+  setlocal noexpandtab
+  "map j gj
   "map k gk
-  setlocal spell spelllang=en_us 
+  setlocal spell spelllang=en_us
   set thesaurus+=/Users/sjurgemeyer/.vim/thesaurus/mthesaur.txt
   set complete+=s
   setlocal formatprg=par
-  setlocal wrap 
-  setlocal linebreak 
+  setlocal wrap
+  setlocal linebreak
   set colorcolumn=
   set laststatus=0 " don't show status line
   set gfn=Cousine:h14                " font to use
   set nonumber
   set guifont=Source\ Code\ Pro\ Semibold\ for\ Powerline:h15
-endfu 
+endfu
 command! WordProcessorMode :call WordProcessorMode()
 
 "Undo wordprocessormode
-func! CodeMode() 
+func! CodeMode()
   colorscheme ororo
-  set expandtab 
-  "map j gj 
+  set noexpandtab
+  "map j gj
   "map k gk
   set colorcolumn=121
   set laststatus=2 " don't show status line
   set guifont=Source\ Code\ Pro\ Semibold\ for\ Powerline:h13
   set number
-endfu 
+endfu
 command! CodeMode :call CodeMode()
 
 
@@ -257,6 +267,12 @@ vmap <expr> D DVB_Duplicate()
 
 "Code mode by default
 :CodeMode
+
+"function! AirlineInit()
+  "call airline#parts#define_raw('time', '%{strftime("%c"}')
+  ""let g:airline_section_b = airline#sections#create_right(['ffenc', 'time'])
+"endfunction
+"autocmd VimEnter * call AirlineInit()
 
 "Cursor in terminal mode
 if $TERM_PROGRAM =~ "iTerm"
