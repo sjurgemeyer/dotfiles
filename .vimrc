@@ -63,6 +63,11 @@ Bundle 'vim-scripts/SyntaxRange'
 Bundle 'tpope/vim-markdown'
 Bundle 'csv.vim'
 
+"CSS
+Bundle 'https://github.com/gorodinskiy/vim-coloresque.git'
+"Bundle 'skammer/vim-css-color'
+Bundle 'groenewege/vim-less'
+
 "Javascript stuff
 Bundle 'jelera/vim-javascript-syntax'
 Bundle 'othree/javascript-libraries-syntax.vim'
