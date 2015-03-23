@@ -11,7 +11,8 @@ setopt NO_BEEP
 export GOROOT=$HOME/go
 export GOPATH=~/gopath
 
-export PATH=$HOME/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/share/npm/bin/:/opt/local/bin:/opt/local/sbin:/usr/local/sbin:/usr/local/groovy/bin:/usr/local/mysql/bin:/usr/local/tomcat/bin:/usr/local/scripts:/usr/local/gradle/bin:/usr/local/Cellar/ruby/2.0.0-p247/bin:$HOME/.node/bin:$PATH:$HOME/app/dsc-cassandra-2.1.0/bin
+export CASSANDRA_BIN=~/app/apache-cassandra-2.0.12/bin
+export PATH=$HOME/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/share/npm/bin/:/opt/local/bin:/opt/local/sbin:/usr/local/sbin:/usr/local/groovy/bin:/usr/local/mysql/bin:/usr/local/tomcat/bin:/usr/local/scripts:/usr/local/gradle/bin:/usr/local/Cellar/ruby/2.0.0-p247/bin:$HOME/.node/bin:$PATH:$HOME/app/dsc-cassandra-2.1.0/bin:/usr/local/Cellar/kafka/0.8.1.1/bin
 export PATH=$PATH:$GOROOT/bin
 export DISABLE_DYNAMO_TESTS=true
 export ST_ENV=local
@@ -32,7 +33,8 @@ source $HOME/projects/dotfiles/dependencies/opp.zsh/opp/*.zsh
 alias jdk6='export JAVA_HOME=$(/usr/libexec/java_home -v 1.6)'
 alias jdk7='export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)'
 alias jdk8='export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)'
-export JAVA_OPTS="-server -Xms2G -Xmx3G -XX:PermSize=256M -XX:MaxPermSize=1G -noverify" 
+export JAVA_OPTS="-server -Djava.awt.headless=true -Xms2G -Xmx3G -XX:PermSize=256M -XX:MaxPermSize=1G -noverify" 
+export GROOVY_CONSOLE_JAVA_OPTS="-server -Xms2G -Xmx3G -XX:PermSize=256M -XX:MaxPermSize=1G -noverify" 
 # -XX:NewSize=64m -Dfile.encoding=UTF-8 -noverify"
 export GRAILS_OPTS="-Xms2G -Xmx3G -XX:PermSize=256m -XX:MaxPermSize=1G -Dfile.encoding=UTF-8"
 # -Xms2G -Xmx2G -XX:MaxPermSize=512m -XX:PermSize=512m -XX:NewSize=256m -server -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled"
@@ -84,7 +86,7 @@ alias redisstart='sudo launchctl start io.redis.redis-server'
 alias redisstop='sudo launchctl stop io.redis.redis-server'
 
 ################################ Rabbit ###############################
-alias rabbit='sudo /usr/local/Cellar/rabbitmq/2.8.7/sbin/rabbitmq-server'
+alias rabbit='sudo /usr/local/Cellar/rabbitmq/3.3.5/sbin/rabbitmq-server -detached'
 
 ################################ Git ###############################
 #Using scm_breeze shortcuts
@@ -193,6 +195,14 @@ function numberOfCurrentTasks() {
     today=`date "+%Y-%m-%d"`
     z=`tls $today | wc -l | sed -e 's/^ *//g' -e 's/ *$//g'`
     echo `expr $z - 2`
+}
+
+vman() {
+	nvim -c "SuperMan $*"
+
+	if [ "$?" != "0" ]; then
+		echo "No manual entry for $*"
+	fi
 }
 
 # complete -F _todo t

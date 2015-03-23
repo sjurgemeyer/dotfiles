@@ -30,7 +30,6 @@ Bundle 'sjl/gundo.vim.git'
 Bundle 'tpope/vim-unimpaired.git'
 Bundle 'vim-scripts/renamer.vim'
 Bundle 'rargo/vim-line-jump'
-
 "Searching
 Bundle 'haya14busa/incsearch.vim'
 Bundle 'mileszs/ack.vim'
@@ -71,13 +70,22 @@ Bundle 'groenewege/vim-less'
 "Javascript stuff
 Bundle 'jelera/vim-javascript-syntax'
 Bundle 'othree/javascript-libraries-syntax.vim'
-Bundle 'JavaScript-Indent'
+"Bundle 'JavaScript-Indent'
+
+"Scala
+Bundle 'derekwyatt/vim-scala'
+
+"Golang
+"Bundle 'fatih/vim-go'
 
 "TODO.txt
 Bundle 'freitass/todo.txt-vim'
 Bundle 'sjurgemeyer/vim-todo.txt-plugin'
 
 Bundle 'vim-scripts/dbext.vim'
+
+"Command line
+"Bundle 'Z1MM32M4N/vim-superman'
 
 "Git
 Bundle 'sjl/splice.vim'
@@ -95,6 +103,9 @@ Bundle 'tpope/vim-dispatch'
 
 "Pretty
 Bundle 'bling/vim-airline'
+
+" REST / HTTP
+Bundle 'aquach/vim-http-client'
 
 syntax on
 source ~/.vimrc-private
@@ -225,8 +236,8 @@ nmap <Leader><Tab> :call TabWidth(4)<CR>:set noexpandtab<CR>
 
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
-autocmd FileType groovy setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
-autocmd FileType java setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
+autocmd FileType groovy setlocal shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab
+autocmd FileType java setlocal shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab
 
 "Make vim work as a word processor
 func! WordProcessorMode()

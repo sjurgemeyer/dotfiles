@@ -8,8 +8,8 @@
 [difftool "sourcetree"]
 	cmd = mvimdiff \"$LOCAL\" \"$REMOTE\"
 	path = 
-[difftool "mvim"]
-    cmd = mvim -df \"$LOCAL\" \"$REMOTE\"
+[difftool "vim"]
+    cmd = vim -df \"$LOCAL\" \"$REMOTE\"
     mvim
 [mergetool "mvim"]
     cmd = mvim -df $BASE $LOCAL $MERGED $REMOTE -c \"wincmd J\"
@@ -25,7 +25,7 @@
 [merge]
 	tool = splice
 [diff]
-    tool = mvim
+    tool = vim
 [alias]
     # Log display from screencast, with train tracks.
 	l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
