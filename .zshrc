@@ -8,8 +8,8 @@ plugins=(git osx gradle lein redis-cli vi-mode)
 source $ZSH/oh-my-zsh.sh
 setopt NO_BEEP
 
-export GOROOT=$HOME/go
-export GOPATH=~/gopath
+export GOROOT=/usr/local/go
+#export GOPATH=~/gopath
 
 export CASSANDRA_BIN=~/app/apache-cassandra-2.0.12/bin
 export PATH=$HOME/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/share/npm/bin/:/opt/local/bin:/opt/local/sbin:/usr/local/sbin:/usr/local/groovy/bin:/usr/local/mysql/bin:/usr/local/tomcat/bin:/usr/local/scripts:/usr/local/gradle/bin:/usr/local/Cellar/ruby/2.0.0-p247/bin:$HOME/.node/bin:$PATH:$HOME/app/dsc-cassandra-2.1.0/bin:/usr/local/Cellar/kafka/0.8.1.1/bin
@@ -29,6 +29,7 @@ bindkey -v
 bindkey -M main '\C-r' history-incremental-search-backward
 source $HOME/projects/dotfiles/dependencies/opp.zsh/opp.zsh
 source $HOME/projects/dotfiles/dependencies/opp.zsh/opp/*.zsh
+
 #Java/JVM stuff
 alias jdk6='export JAVA_HOME=$(/usr/libexec/java_home -v 1.6)'
 alias jdk7='export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)'
@@ -239,3 +240,7 @@ bindkey -M vicmd 'j' history-substring-search-down
 
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "/Users/sjurgemeyer/.gvm/bin/gvm-init.sh" ]] && source "/Users/sjurgemeyer/.gvm/bin/gvm-init.sh"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export NVM_DIR="/Users/sjurgemeyer/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm

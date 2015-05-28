@@ -33,6 +33,7 @@ Bundle 'rargo/vim-line-jump'
 "Searching
 Bundle 'haya14busa/incsearch.vim'
 Bundle 'mileszs/ack.vim'
+"Bundle 'gabesoft/vim-ags'
 Bundle 'tpope/vim-abolish.git'
 Bundle 'terryma/vim-expand-region'
 
@@ -57,6 +58,7 @@ Bundle 'sjurgemeyer/vim-grails-import'
 Bundle 'vim-scripts/Align.git'
 "Bundle 'tpope/vim-sleuth'
 Bundle 'vim-scripts/SyntaxRange'
+Bundle 'editorconfig/editorconfig-vim'
 
 "Filetype
 Bundle 'tpope/vim-markdown'
@@ -272,6 +274,14 @@ func! CodeMode()
   set number
 endfu
 command! CodeMode :call CodeMode()
+
+"Neovim terminal
+tnoremap <C-q> <C-\><C-n>
+
+function! Term()
+	:e term://zsh
+endfunction
+command! Term :call Term()
 
 
 "dragVisuals shortcuts
