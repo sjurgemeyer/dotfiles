@@ -61,8 +61,8 @@ layout debug ${term} ${lap-full}
 
 bind up:ctrl;alt      ${full}
 bind down:ctrl;alt    ${small} 
-bind left:ctrl;alt    ${lefthalf} 
-bind right:ctrl;alt   ${righthalf} 
+bind left:ctrl;cmd    ${lefthalf} 
+bind right:ctrl;cmd   ${righthalf} 
 
 #Throw bindings
 bind right:ctrl;alt;cmd throw right resize

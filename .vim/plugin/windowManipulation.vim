@@ -25,6 +25,7 @@ function! CloseNavigation()
     :BuffergatorClose
     :NERDTreeClose
     :TagbarClose
+	:UndotreeHide
     :ccl
 endfunction
 

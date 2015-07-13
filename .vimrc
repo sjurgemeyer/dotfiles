@@ -26,23 +26,19 @@ Bundle 'kien/ctrlp.vim.git'
 Bundle 'majutsushi/tagbar.git'
 Bundle 'scrooloose/nerdtree.git'
 Bundle 'jayflo/vim-skip'
-Bundle 'sjl/gundo.vim.git'
+Bundle 'mbbill/undotree'
 Bundle 'tpope/vim-unimpaired.git'
 Bundle 'vim-scripts/renamer.vim'
-Bundle 'rargo/vim-line-jump'
+
 "Searching
 Bundle 'haya14busa/incsearch.vim'
-Bundle 'mileszs/ack.vim'
-"Bundle 'gabesoft/vim-ags'
+Bundle 'wincent/ferret'
+
 Bundle 'tpope/vim-abolish.git'
 Bundle 'terryma/vim-expand-region'
 
 "terminal clipboard
 Bundle 'kana/vim-fakeclip'
-
-"Writing stuff
-Bundle 'mattn/calendar-vim'
-Bundle 'jmcantrell/vim-journal'
 
 "Dash
 Bundle 'rizzatti/funcoo.vim'
@@ -56,7 +52,8 @@ Bundle 'sjurgemeyer/vim-grails-import'
 
 "Formatting
 Bundle 'vim-scripts/Align.git'
-"Bundle 'tpope/vim-sleuth'
+
+" Required for other plugins?
 Bundle 'vim-scripts/SyntaxRange'
 Bundle 'editorconfig/editorconfig-vim'
 
@@ -66,13 +63,11 @@ Bundle 'csv.vim'
 
 "CSS
 Bundle 'https://github.com/gorodinskiy/vim-coloresque.git'
-"Bundle 'skammer/vim-css-color'
 Bundle 'groenewege/vim-less'
 
 "Javascript stuff
 Bundle 'jelera/vim-javascript-syntax'
 Bundle 'othree/javascript-libraries-syntax.vim'
-"Bundle 'JavaScript-Indent'
 
 "Scala
 Bundle 'derekwyatt/vim-scala'
@@ -84,10 +79,8 @@ Bundle 'derekwyatt/vim-scala'
 Bundle 'freitass/todo.txt-vim'
 Bundle 'sjurgemeyer/vim-todo.txt-plugin'
 
-Bundle 'vim-scripts/dbext.vim'
-
-"Command line
-"Bundle 'Z1MM32M4N/vim-superman'
+"DB
+"Bundle 'vim-scripts/dbext.vim'
 
 "Git
 Bundle 'sjl/splice.vim'
@@ -97,7 +90,6 @@ Bundle 'idanarye/vim-merginal'
 
 "github PR review
 Bundle 'junkblocker/patchreview-vim'
-Bundle 'codegram/vim-codereview'
 
 "Utils
 Bundle 'tpope/vim-repeat'
@@ -276,13 +268,28 @@ endfu
 command! CodeMode :call CodeMode()
 
 "Neovim terminal
-tnoremap <C-q> <C-\><C-n>
+if has('nvim')
+	tnoremap <C-q> <C-\><C-n>
 
-function! Term()
-	:e term://zsh
+	function! Term()
+		:e term://zsh
+	endfunction
+	command! Term :call Term()
+else 
+	" Requires Ruby support
+	Bundle 'codegram/vim-codereview'
+endif
+
+" vp doesn't replace paste buffer
+function! RestoreRegister()
+  let @" = s:restore_reg
+  return ''
 endfunction
-command! Term :call Term()
-
+function! s:Repl()
+  let s:restore_reg = @"
+  return "p@=RestoreRegister()\<cr>"
+endfunction
+vmap <silent> <expr> p <sid>Repl()
 
 "dragVisuals shortcuts
 vmap <expr> <LEFT> DVB_Drag('left')
@@ -293,12 +300,6 @@ vmap <expr> D DVB_Duplicate()
 
 "Code mode by default
 :CodeMode
-
-"function! AirlineInit()
-  "call airline#parts#define_raw('time', '%{strftime("%c"}')
-  ""let g:airline_section_b = airline#sections#create_right(['ffenc', 'time'])
-"endfunction
-"autocmd VimEnter * call AirlineInit()
 
 "Cursor in terminal mode
 if $TERM_PROGRAM =~ "iTerm"

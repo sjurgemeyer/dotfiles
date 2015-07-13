@@ -11,6 +11,19 @@ let g:ctrlp_max_depth = 100
 let g:ctrlp_lazy_update = 1
 let ctrlp_follow_symlinks = 1
 
+" Use ag for searching
+let g:ctrlp_use_caching = 0
+if executable('ag')
+    set grepprg=ag\ --nogroup\ --nocolor
+
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+else
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+  let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
+    \ }
+endif
+
 "Open CTRLP with current word prepopulated
 nmap <Leader>p <C-p><C-\>w
 nmap <Leader>m :CtrlPMRUFiles<CR>

@@ -180,7 +180,7 @@ function! OpenTest()
 endfunction
 
 function! CreateGroovyMappings() 
-    map <Leader>h :call FindSubClasses(expand("<cword>"))<CR>
+    "map <Leader>h :call FindSubClasses(expand("<cword>"))<CR>
     map <Leader>x :call OpenTest()<CR>
     map <Leader>vv :call GrailsSearch(expand("<cword>"))<CR>
     map <Leader>vc :call GrailsSearchNoTests(expand("<cword>"))<CR>

@@ -154,6 +154,12 @@ function logEndFunction() {
     echom "Total Time: ${T}"
 }
 
+function cleanBranches() {
+  git branch --merged | grep -v "master|release|\*" | grep -v "\*" | xargs -n 1 git branch -d
+  echo "=============="
+  git branch -vv
+}
+
 function cleanupBranches() {
     git remote prune origin
     git remote prune upstream
