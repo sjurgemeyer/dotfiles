@@ -244,3 +244,5 @@ bindkey -M vicmd 'j' history-substring-search-down
 
 export NVM_DIR="/Users/sjurgemeyer/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+source /Users/sjurgemeyer/.iterm2_shell_integration.zsh

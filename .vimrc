@@ -146,6 +146,11 @@ set backupdir=~/.vimbackup
 set directory=~/.vimbackup
 set undodir=~/.vimundo
 
+"Remapping ; and :
+"nnoremap ; :
+"nnoremap : ;
+"vnoremap ; :
+"vnoremap : ;
 
 " ` goes to the line and column by default, where ' only goes to the row.  Switch ' to be the more useful one
 nnoremap ' `

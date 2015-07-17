@@ -27,6 +27,33 @@ function! CloseNavigation()
     :TagbarClose
 	:UndotreeHide
     :ccl
+	:call WipeMatchingBuffers('.*gitv-.*')
 endfunction
 
+function! GetBufferList()
+    return range(1,bufnr('$'))
+endfunction
 
+function! GetMatchingBuffers(pattern)
+    return filter(GetBufferList(), 'bufname(v:val) =~ a:pattern')
+endfunction
+
+function! WipeMatchingBuffers(pattern)
+    let l:matchList = GetMatchingBuffers(a:pattern)
+
+    let l:count = len(l:matchList)
+    if l:count < 1
+        "echo 'No buffers found matching pattern ' . a:pattern
+        return
+    endif
+
+    if l:count == 1
+        let l:suffix = ''
+    else
+        let l:suffix = 's'
+    endif
+
+    exec 'bd ' . join(l:matchList, ' ')
+
+    "echo 'Wiped ' . l:count . ' buffer' . l:suffix . '.'
+endfunction
