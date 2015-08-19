@@ -168,7 +168,7 @@ p() {
 #TODO.txt
 source $HOME/projects/dotfiles/dependencies/todo.txt_cli-2.10/todo_completion
 
-alias t=todo
+alias t='workon topydo; topydo'
 alias tls='t ls'
 alias ta='t add'
 alias td='t do'
@@ -237,6 +237,9 @@ bindkey -M vicmd 'j' history-substring-search-down
 #RVM
 #[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
 #[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
+
+# make 'workon' available
+source virtualenvwrapper.sh
 
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "/Users/sjurgemeyer/.gvm/bin/gvm-init.sh" ]] && source "/Users/sjurgemeyer/.gvm/bin/gvm-init.sh"

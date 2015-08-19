@@ -1,1 +1,1 @@
-nmap <F4> :UndotreeToggle<CR>
+nmap <F6> :UndotreeToggle<CR>

@@ -1,5 +1,4 @@
 map <F2> <Esc>:NERDTreeToggle<CR>
-map <F4> <Esc>:TlistToggle<CR>
 map <F4> <Esc>:NERDTreeFind<CR>
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1

@@ -38,6 +38,8 @@ rm -Rf ~/.todo.txt.color
 sudo ln -s ~/projects/dotfiles/.todo.txt.color ~/.todo.txt.color
 rm -Rf ~/.todofilter.py
 sudo ln -s ~/projects/dotfiles/config/todofilter.py ~/.todofilter.py 
+rm -Rf ~/.topydo
+sudo ln -s ~/projects/dotfiles/.topydo ~/.topydo
 
 #Vim
 rm -Rf ~/.gvimrc
