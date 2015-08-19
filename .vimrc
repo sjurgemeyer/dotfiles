@@ -102,7 +102,9 @@ Bundle 'bling/vim-airline'
 Bundle 'aquach/vim-http-client'
 
 syntax on
-source ~/.vimrc-private
+if filereadable("~/.vimrc-private")
+	source ~/.vimrc-private
+endif
 filetype plugin indent on
 
 set nostartofline
@@ -156,7 +158,9 @@ set undodir=~/.vimundo
 nnoremap ' `
 nnoremap ` '
 
-let g:grails_import_list_file='/Users/sjurgemeyer/.vim/config/grailsImportList.txt'
+if filereadable("/Users/sjurgemeyer/.vim/config/grailsImportList.txt")
+	let g:grails_import_list_file='/Users/sjurgemeyer/.vim/config/grailsImportList.txt'
+endif
 
 "Manipulate a comma seperated list"
 vmap <D-[> :s/,\s*/,\r/g<CR>

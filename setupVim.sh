@@ -1,5 +1,7 @@
 #bash -c "$(curl -fsSkL raw.github.com/sjurgemeyer/dotfiles/master/setupVim.sh)"
 mkdir ~/projects
+mkdir ~/.vimundo
+mkdir ~/.vimbackup
 cd ~/projects
 git clone https://github.com/sjurgemeyer/dotfiles
 cd dotfiles
