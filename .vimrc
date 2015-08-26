@@ -18,17 +18,17 @@ Bundle 'Shougo/neosnippet.git'
 
 "Buffer management
 Bundle 'jeetsukumaran/vim-buffergator.git'
-Bundle 'BufOnly.vim'
-Bundle 'ZoomWin'
+"Bundle 'BufOnly.vim'
+"Bundle 'ZoomWin'
 
 "Navigation
 Bundle 'kien/ctrlp.vim.git'
 Bundle 'majutsushi/tagbar.git'
 Bundle 'scrooloose/nerdtree.git'
-Bundle 'jayflo/vim-skip'
+"Bundle 'jayflo/vim-skip'
 Bundle 'mbbill/undotree'
 Bundle 'tpope/vim-unimpaired.git'
-Bundle 'vim-scripts/renamer.vim'
+"Bundle 'vim-scripts/renamer.vim'
 
 "Searching
 Bundle 'haya14busa/incsearch.vim'
@@ -89,11 +89,12 @@ Bundle 'gregsexton/gitv.git'
 Bundle 'idanarye/vim-merginal'
 
 "github PR review
-Bundle 'junkblocker/patchreview-vim'
+"Bundle 'junkblocker/patchreview-vim'
 
 "Utils
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-dispatch'
+Bundle 'tpope/vim-eunuch'
 
 "Pretty
 Bundle 'bling/vim-airline'
