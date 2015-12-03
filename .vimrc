@@ -72,6 +72,9 @@ Bundle 'othree/javascript-libraries-syntax.vim'
 "Scala
 Bundle 'derekwyatt/vim-scala'
 
+" Terraform
+Bundle 'markcornick/vim-terraform'
+
 "Golang
 "Bundle 'fatih/vim-go'
 
@@ -312,10 +315,10 @@ vmap <expr> D DVB_Duplicate()
 :CodeMode
 
 "Cursor in terminal mode
-if $TERM_PROGRAM =~ "iTerm"
+"if $TERM_PROGRAM =~ "iTerm"
     let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
     let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode"
-endif
+"endif
 
 if ! has('gui_running')
   set ttimeoutlen=10

@@ -164,7 +164,7 @@ function cleanupBranches() {
     git remote prune origin
     git remote prune upstream
     git checkout master
-    git branch --merged | grep -v "\*" | xargs -n 1 git branch -d
+	git branch --merged | grep -v "master|release|\*" | grep -v "\*" | xargs -n 1 git branch -d
     for i in `git -c color.status=false branch -a | sed 's/.* //' | egrep -v ".*HEAD.*|.*upstream/.*"`; do
         echo -e "\nDelete branch $i? (Y)es/(n)o/(c)ancel"
         read foo
@@ -176,7 +176,7 @@ function cleanupBranches() {
                 git push origin :$BRANCHNAME
             else
                 # Delete local branch
-                git branch --delete $i
+                git branch -D $i
             fi
         else
             if [ "$confirm" = "c" ]; then
@@ -188,4 +188,9 @@ function cleanupBranches() {
     echo -e "\n"
     echo "Cleanup complete"
     git branch -a
+}
+
+function gitb() {
+	git checkout master
+	git checkout -b $1
 }
