@@ -39,6 +39,9 @@
     d = branch -D
     co = checkout
 	com = checkout master
+	cm = commit -m 
+	cf = commit --fixup
+	cauto = commit --automerge
     tc = commit -a -m \"Temp commit\"
 [hub]
 	protocol = https
