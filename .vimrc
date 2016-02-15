@@ -76,7 +76,7 @@ Bundle 'derekwyatt/vim-scala'
 Bundle 'markcornick/vim-terraform'
 
 "Golang
-"Bundle 'fatih/vim-go'
+Bundle 'fatih/vim-go'
 
 "TODO.txt
 Bundle 'freitass/todo.txt-vim'
@@ -173,7 +173,7 @@ vmap <D-]> :s/,\n/, /g<CR>
 "clear current highlighting
 map <C-c> :nohlsearch<CR>
 
-"Map c to move to end of search term
+"Map g to move to end of search term
 vnoremap <silent> g //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>
     \:<C-u>call histdel('search',-1)<Bar>let @/=histget('search',-1)<CR>gv
 omap g :normal vg<CR>

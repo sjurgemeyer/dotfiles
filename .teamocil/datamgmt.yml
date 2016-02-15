@@ -1,0 +1,20 @@
+windows:
+  - name: datamgmt
+    root: ~/projects/smartthings
+    layout: tiled
+    panes:
+      - commands:
+        - tabcolor red
+        - cda
+        - vu
+        - cdd 
+        - grails run-app
+      - commands: 
+        - cd active/device-connectivity
+        - ./gradlew run -Pconfig.vagrant
+      - commands:
+        - cd reference/ide-connectivity
+        - ./gradlew run
+      - commands:
+        - cd reference/client-connectivity
+        - ./gradlew run -Pconfig.vagrant

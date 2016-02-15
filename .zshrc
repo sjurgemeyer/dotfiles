@@ -222,6 +222,7 @@ growl() {
       return
 }
 alias resettab='echo -e "\033]6;1;bg;*;default\a"'
+
 function tabcolor() {
 	resettab
 	echo -e "\033]6;1;bg;$1;brightness;255\a" 

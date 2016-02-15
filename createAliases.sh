@@ -87,3 +87,6 @@ rm -Rf ~/.scm_breeze
 cp -r ~/projects/dotfiles/dependencies/scm_breeze ~/.scm_breeze
 ~/.scm_breeze/install.sh
 
+#iTermocil
+rm -Rf ~/.teamocil
+sudo ln -s ~/projects/dotfiles/.teamocil ~/.teamocil
