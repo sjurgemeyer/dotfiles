@@ -8,13 +8,17 @@ windows:
         - cda
         - vu
         - cdd 
+        - tabtitle 'Data Management'
         - grails run-app
       - commands: 
         - cd active/device-connectivity
+        - tabtitle 'Device Connectivity'
         - ./gradlew run -Pconfig.vagrant
       - commands:
         - cd reference/ide-connectivity
+        - tabtitle 'IDE Connectivity'
         - ./gradlew run
       - commands:
         - cd reference/client-connectivity
+        - tabtitle 'Client Connectivity'
         - ./gradlew run -Pconfig.vagrant

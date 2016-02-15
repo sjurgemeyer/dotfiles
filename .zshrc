@@ -142,7 +142,7 @@ hgdiffrevs() {
 }
 
 ###################### Generic Shell stuff ###########################
-
+export DISABLE_AUTO_TITLE="true" 
 # Move up directories more easily
 alias bd='. bd -s'
 
@@ -222,12 +222,16 @@ growl() {
       return
 }
 alias resettab='echo -e "\033]6;1;bg;*;default\a"'
-
 function tabcolor() {
 	resettab
 	echo -e "\033]6;1;bg;$1;brightness;255\a" 
 }
 
+function tabtitle() {
+	echo -ne "\e]1;$1\a"
+}
+
+export CHEATCOLORS=true
 export VIMCLOJURE_SERVER_JAR="$HOME/projects/dotfiles/dependencies/lib/nailgun/server-2.3.6.jar"
 
 #Easier ZSH history
@@ -247,11 +251,12 @@ bindkey -M vicmd 'j' history-substring-search-down
 # make 'workon' available
 source virtualenvwrapper.sh
 
-#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
-[[ -s "/Users/sjurgemeyer/.gvm/bin/gvm-init.sh" ]] && source "/Users/sjurgemeyer/.gvm/bin/gvm-init.sh"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export NVM_DIR="/Users/sjurgemeyer/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 source /Users/sjurgemeyer/.iterm2_shell_integration.zsh
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+[[ -s "/Users/sjurgemeyer/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/sjurgemeyer/.sdkman/bin/sdkman-init.sh"
