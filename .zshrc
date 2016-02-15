@@ -22,7 +22,7 @@ export ST_ENV=local
 export EDITOR=vim
 export SVN_EDITOR=vim
 alias v='mvim'
-alias n='tabcolor green;nvim'
+alias n='tabcolor green;nvim;resettab'
 
 #VI Mode
 bindkey -v
@@ -48,7 +48,7 @@ PROJECT_DIR=$HOME/projects
 source ~/.otherFunctions
 source ~/.gitFunctions
 alias V="mvim -c 'cd $CURRENT_PROJECT_DIR'"
-alias N="tabcolor green;nvim -c 'cd $CURRENT_PROJECT_DIR'"
+alias N="tabcolor green;nvim -c 'cd $CURRENT_PROJECT_DIR';resettab"
 
 #Start web server
 alias serve='python -m SimpleHTTPServer'
