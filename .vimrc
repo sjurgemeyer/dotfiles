@@ -45,17 +45,18 @@ Bundle 'rizzatti/funcoo.vim'
 Bundle 'rizzatti/dash.vim'
 
 "Editing
-Bundle 'scrooloose/syntastic.git'
+"Bundle 'scrooloose/syntastic.git'
+Bundle 'benekastah/neomake'
 Bundle 'tpope/vim-surround'
 Bundle 'scrooloose/nerdcommenter.git'
 Bundle 'sjurgemeyer/vim-grails-import'
 
 "Formatting
 Bundle 'vim-scripts/Align.git'
+Bundle 'editorconfig/editorconfig-vim'
 
 " Required for other plugins?
 Bundle 'vim-scripts/SyntaxRange'
-Bundle 'editorconfig/editorconfig-vim'
 
 "Filetype
 Bundle 'tpope/vim-markdown'
@@ -91,12 +92,9 @@ Bundle 'tpope/vim-fugitive.git'
 Bundle 'gregsexton/gitv.git'
 Bundle 'idanarye/vim-merginal'
 
-"github PR review
-"Bundle 'junkblocker/patchreview-vim'
-
 "Utils
 Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-dispatch'
+"Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-eunuch'
 
 "Pretty
@@ -328,3 +326,5 @@ if ! has('gui_running')
     au InsertLeave * set timeoutlen=1000
   augroup END
 endif
+
+

@@ -214,6 +214,8 @@ au BufNewFile,BufRead *.groovy :call CreateGroovyMappings()
 
 "Open file under cursor
 map <Leader>y :call OpenFileUnderCursor(expand("<cword>"))<CR>
+map <Leader>j :call OpenFileUnderCursorWithExtension(expand("<cword>"), 'java')<CR>
+map <Leader>g :call OpenFileUnderCursorWithExtension(expand("<cword>"), 'groovy')<CR>
 map <Leader>u :call SplitOpenFileUnderCursor(expand("<cword>"))<CR>
 
 function! FindSubClasses(filename) 
@@ -224,6 +226,11 @@ function! OpenFileUnderCursor(filename)
    let ext = fnamemodify(expand("%:p"), ":t:e")
    let fname = toupper(strpart(a:filename, 0, 1)) . strpart(a:filename, 1, strlen(a:filename))
    execute ":find " . fname . "." . ext 
+endfunction
+
+function! OpenFileUnderCursorWithExtension(filename, ext)
+   let fname = toupper(strpart(a:filename, 0, 1)) . strpart(a:filename, 1, strlen(a:filename))
+   execute ":find " . fname . "." . a:ext 
 endfunction
 
 function! SplitOpenFileUnderCursor(filename)
