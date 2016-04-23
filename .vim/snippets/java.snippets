@@ -1,0 +1,58 @@
+snippet main
+	public static void main (String [] args) {
+		${1:/* code */}
+	}
+snippet de
+	default:
+		${1}
+snippet ca
+	catch(${1:Exception} ${2:e}) {
+        ${3}
+    }
+snippet th
+	throw new ${1:Exception}();${2}
+snippet if
+	if (${1}) ${2}
+snippet el
+	else 
+snippet elif
+	else if (${1}) ${2}
+snippet wh
+	while (${1}) {
+        ${2}
+    }
+snippet for
+	for (${1}; ${2}; ${3}) {
+        ${4}
+    }
+snippet fore
+	for (${1} : ${2}) {
+        ${3}
+    }
+snippet sw
+	switch (${1}) ${2}
+snippet cs
+	case ${1}:
+		${2}
+	${3}
+snippet tb
+	def ${1:object} = ${2:$1}.build(${3})
+snippet cl
+	package `GetCurrentPackageFromPath()`;
+	class ${2:`Filename()`} {
+		${3}
+	}
+
+snippet in
+	interface ${1:`Filename()`} ${2:extends Parent}${3};
+snippet co
+	public static final ${1:String} ${2:var} = ${3};
+snippet cos
+	public static final String ${1:var} = "${2}";${3}
+snippet ts
+	public String toString() {
+		${1}
+	}
+snippet new
+	${1:Class} ${2} = new $1();
+

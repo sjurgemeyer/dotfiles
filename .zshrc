@@ -4,14 +4,14 @@ ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="shaun"
 
 #ohymyzsh plugins
-plugins=(git osx gradle lein redis-cli vi-mode)
+# plugins=(gradle lein redis-cli)
 source $ZSH/oh-my-zsh.sh
 setopt NO_BEEP
 
 export GOROOT=/usr/local/go
 
 export CASSANDRA_BIN=~/app/apache-cassandra-2.0.12/bin
-export PATH=$HOME/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/share/npm/bin/:/opt/local/bin:/opt/local/sbin:/usr/local/sbin:/usr/local/groovy/bin:/usr/local/mysql/bin:/usr/local/tomcat/bin:/usr/local/scripts:/usr/local/gradle/bin:/usr/local/Cellar/ruby/2.0.0-p247/bin:$HOME/.node/bin:$PATH:$HOME/app/dsc-cassandra-2.1.0/bin:/usr/local/Cellar/kafka/0.8.1.1/bin
+export PATH=$HOME/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/share/npm/bin/:/opt/local/bin:/opt/local/sbin:/usr/local/sbin:/usr/local/groovy/bin:/usr/local/mysql/bin:/usr/local/tomcat/bin:/usr/local/scripts:/usr/local/gradle/bin:/usr/local/Cellar/ruby/2.0.0-p247/bin:$HOME/.node/bin:$PATH:$HOME/app/dsc-cassandra-2.1.0/bin:/usr/local/Cellar/kafka/0.8.1.1/bin:$HOME/app/dasht-2.0.0/bin
 export PATH=$PATH:$GOROOT/bin
 export DISABLE_DYNAMO_TESTS=true
 export ST_ENV=local

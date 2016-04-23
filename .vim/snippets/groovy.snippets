@@ -1,13 +1,14 @@
 snippet main
-	public static void main (String [] args)
-	{
+	public static void main (String [] args) {
 		${1:/* code */}
 	}
 snippet de
 	default:
 		${1}
 snippet ca
-	catch(${1:Exception} ${2:e}) ${3}
+	catch(${1:Exception} ${2:e}) {
+        ${3}
+    }
 snippet th
 	throw new ${1:Exception}()${2}
 snippet if
@@ -17,28 +18,23 @@ snippet el
 snippet elif
 	else if (${1}) ${2}
 snippet wh
-	while (${1}) ${2}
+	while (${1}) {
+        ${2}
+    }
 snippet for
-	for (${1}; ${2}; ${3}) ${4}
+	for (${1}; ${2}; ${3}) {
+        ${4}
+    }
 snippet fore
-	for (${1} : ${2}) ${3}
+	for (${1} : ${2}) {
+        ${3}
+    }
 snippet sw
 	switch (${1}) ${2}
 snippet cs
 	case ${1}:
 		${2}
 	${3}
-snippet tc
-	public class ${1:`Filename()`} extends ${2:TestCase}
-snippet t
-	void test${1:Method}() {
-		${2}
-	}
-snippet su 
-	void setUp() {
-		super.setUp()
-		${1}
-	}
 snippet tb
 	def ${1:object} = ${2:$1}.build(${3})
 snippet cl
@@ -74,10 +70,6 @@ snippet cos
 	public static final String ${1:var} = "${2}";${3}
 snippet as
 	assert ${1:test} : "${2:Failure message}";${3}
-snippet ib
-	import com.bloomhealthco.
-snippet ibd
-	import com.bloomhealthco.domain.*
 snippet ij
 	import org.joda.time.LocalDate
 snippet ea

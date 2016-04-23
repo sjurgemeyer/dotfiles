@@ -15,10 +15,11 @@ Bundle 'gmarik/vundle'
 "Code completion
 Bundle 'Shougo/neocomplcache.git'
 Bundle 'Shougo/neosnippet.git'
+Bundle 'Shougo/neosnippet-snippets.git'
 
 "Buffer management
 Bundle 'jeetsukumaran/vim-buffergator.git'
-"Bundle 'BufOnly.vim'
+Bundle 'BufOnly.vim'
 "Bundle 'ZoomWin'
 
 "Navigation
@@ -48,6 +49,7 @@ Bundle 'rizzatti/dash.vim'
 "Bundle 'scrooloose/syntastic.git'
 Bundle 'benekastah/neomake'
 Bundle 'tpope/vim-surround'
+Bundle 'wellle/targets.vim'
 Bundle 'scrooloose/nerdcommenter.git'
 Bundle 'sjurgemeyer/vim-grails-import'
 
@@ -91,6 +93,7 @@ Bundle 'sjl/splice.vim'
 Bundle 'tpope/vim-fugitive.git'
 Bundle 'gregsexton/gitv.git'
 Bundle 'idanarye/vim-merginal'
+Bundle 'airblade/vim-gitgutter'
 
 "Utils
 Bundle 'tpope/vim-repeat'
@@ -213,6 +216,9 @@ au Filetype qf setl nowrap
 :nnoremap + /\$\w\+_<CR>
 :nnoremap _ f_x~
 
+"change camelcase to underscore
+":s#\(\<\u\l\+\|\l\+\)\(\u\)#\l\1_\l\2#g
+"
 "Remove spaces at the end of lines
 command! RemoveEndSpaces :silent %s/ \+$//g
 
