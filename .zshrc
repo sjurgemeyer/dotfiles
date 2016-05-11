@@ -59,7 +59,6 @@ alias N="tabcolor green;nvim -c 'cd $CURRENT_PROJECT_DIR';resettab"
 alias serve='python -m SimpleHTTPServer'
 
 ###############################  Groovy/Grails  ##############################
-alias gd='gradle'
 function testResults() {
     if [ -e "./application.properties" ]
     then
@@ -69,8 +68,6 @@ function testResults() {
     fi
 }
 
-alias gr='grails run-app'
-alias gtr='grails --refresh-dependencies test run-app'
 alias results=testResults
 alias cn="open build/reports/codenarc/main.html"
 
@@ -97,7 +94,6 @@ alias rabbit='sudo /usr/local/Cellar/rabbitmq/3.3.5/sbin/rabbitmq-server -detach
 ################################ Git ###############################
 #Using scm_breeze shortcuts
 
-# source ~/projects/bloom/dev_scripts/bash/git-branch-cleanup.sh
 # open all changed files in vim
 alias git-changed='mvim -p `git diff --name-only --relative`'
 alias bc='git difftool --tool=bc3 -d HEAD~1'
@@ -130,17 +126,11 @@ alias hs="hg status -S"
 alias hb="hg branch"
 alias hgdr=hgdiffrevs
 
-# alias ic="hg incoming -v | lf"
-# alias og="hg outgoing -v | lf"
-
 alias hgl="hg sglog -l"
 alias hglv="hg sglog -v -l"
 
 alias hgi='hg identify -nibt'
 alias hga='hg annotate -un'
-
-# alias icdiff="hg diff --reverse http://hg/direct \$(ic)"
-# alias ogdiff="hg diff --reverse http://hg/direct \$(og)"
 
 hgdiffrevs() {
 	diff <(hg slog --rev $1:0 --follow) <(hg slog --rev $2:0 --follow)
@@ -226,6 +216,8 @@ growl() {
       esac
       return
 }
+
+# iTerm tabs
 alias resettab='echo -e "\033]6;1;bg;*;default\a"'
 function tabcolor() {
 	resettab
@@ -236,8 +228,8 @@ function tabtitle() {
 	echo -ne "\e]1;$1\a"
 }
 
-export CHEATCOLORS=true
-export VIMCLOJURE_SERVER_JAR="$HOME/projects/dotfiles/dependencies/lib/nailgun/server-2.3.6.jar"
+#export CHEATCOLORS=true
+#export VIMCLOJURE_SERVER_JAR="$HOME/projects/dotfiles/dependencies/lib/nailgun/server-2.3.6.jar"
 
 #Easier ZSH history
 # 

@@ -56,3 +56,12 @@ snippet ts
 snippet new
 	${1:Class} ${2} = new $1();
 
+snippet settergetter
+    public void set${1:Name}(${2:String} `!p snip.rv = mixedCase(t[1])`) {
+        this.`!p snip.rv = mixedCase(t[1])` = `!p snip.rv = mixedCase(t[1])`;
+    }
+
+    public $2 get$1() {
+        return `!p snip.rv = mixedCase(t[1])`;
+    }
+

@@ -73,7 +73,7 @@ Bundle 'jelera/vim-javascript-syntax'
 Bundle 'othree/javascript-libraries-syntax.vim'
 
 "Scala
-Bundle 'derekwyatt/vim-scala'
+"Bundle 'derekwyatt/vim-scala'
 
 " Terraform
 Bundle 'markcornick/vim-terraform'
