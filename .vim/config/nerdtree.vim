@@ -6,3 +6,6 @@ let NERDTreeQuitOnOpen = 1
 let NERDTreeShowHidden = 1
 let NERDTreeIgnore=['\.iml$']
 let NERDTreeWinSize = 45
+
+" Close vim when nerdtree is the only open window
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif

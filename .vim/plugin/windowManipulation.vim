@@ -28,6 +28,7 @@ function! CloseNavigation()
 	:UndotreeHide
     :ccl
 	:call WipeMatchingBuffers('.*gitv-.*')
+	:call WipeMatchingBuffers('.*__HTTP_Client_Response__.*')
 endfunction
 
 function! GetBufferList()

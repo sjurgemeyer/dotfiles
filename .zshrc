@@ -17,11 +17,16 @@ export DISABLE_DYNAMO_TESTS=true
 export ST_ENV=local
 
 #VI/VIM defaults
-#export VIMRUNTIME=/Applications/MacVim.app/Contents/Resources/vim/runtime/
 export EDITOR=vim
 export SVN_EDITOR=vim
-alias v='mvim'
-alias n='tabcolor green;nvim;resettab'
+
+#launch neovim with customized tab color
+function n() {
+	tabcolor green
+	nvim $@
+	resettab
+	tabtitle "sh"
+}
 
 #VI Mode
 bindkey -v
@@ -39,11 +44,10 @@ export GO15VENDOREXPERIMENT=1
 alias jdk6='export JAVA_HOME=$(/usr/libexec/java_home -v 1.6)'
 alias jdk7='export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)'
 alias jdk8='export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)'
+
 export JAVA_OPTS="-server -Djava.awt.headless=true -Xms2G -Xmx3G -XX:PermSize=256M -XX:MaxPermSize=1G -noverify" 
 export GROOVY_CONSOLE_JAVA_OPTS="-server -Xms2G -Xmx3G -XX:PermSize=256M -XX:MaxPermSize=1G -noverify" 
-# -XX:NewSize=64m -Dfile.encoding=UTF-8 -noverify"
 export GRAILS_OPTS="-Xms2G -Xmx3G -XX:PermSize=256m -XX:MaxPermSize=1G -Dfile.encoding=UTF-8"
-# -Xms2G -Xmx2G -XX:MaxPermSize=512m -XX:PermSize=512m -XX:NewSize=256m -server -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled"
 export JAVA_HOME=`/usr/libexec/java_home`
 jdk7
 
@@ -52,8 +56,7 @@ jdk7
 PROJECT_DIR=$HOME/projects
 source ~/.otherFunctions
 source ~/.gitFunctions
-alias V="mvim -c 'cd $CURRENT_PROJECT_DIR'"
-alias N="tabcolor green;nvim -c 'cd $CURRENT_PROJECT_DIR';resettab"
+alias N="tabcolor green;n -c 'cd $CURRENT_PROJECT_DIR';resettab"
 
 #Start web server
 alias serve='python -m SimpleHTTPServer'
@@ -79,6 +82,7 @@ function grailsTestOrder() {
 }
 
 alias testorder=grailsTestOrder
+
 ############################### Mysql ###############################
 alias mysqlstart='mysql.server.start'
 alias mysqlstop='mysql.server.stop'
@@ -160,39 +164,6 @@ p() {
     ps -el | grep "$@"
 }
 
-#TODO.txt
-source $HOME/projects/dotfiles/dependencies/todo.txt_cli-2.10/todo_completion
-
-alias t='workon topydo; topydo'
-alias tls='t ls'
-alias ta='t add'
-alias td='t do'
-alias tvp='t view project'
-alias tvd='t view date'
-alias tvc='t view context'
-alias ts='t schedule'
-alias te='n /Users/sjurgemeyer/Dropbox/todo/todo.txt'
-alias trec 'v /Users/sjurgemeyer/Dropbox/todo/recur.txt'
-alias todohelp='echo \
-"TODO.txt shortcuts
-------------------
-tls: List all tasks
-ta:  Add a task
-td:  Complete a task
-tvp: View tasks by project
-tvd: View tasks by date
-tvc: View tasks by context
-ts:  View tasks with specific dates
-te:  Edit todo.txt
-trec:  Edit recur.txt
-"'
-
-function numberOfCurrentTasks() {
-    today=`date "+%Y-%m-%d"`
-    z=`tls $today | wc -l | sed -e 's/^ *//g' -e 's/ *$//g'`
-    echo `expr $z - 2`
-}
-
 vman() {
 	nvim -c "SuperMan $*"
 
@@ -200,8 +171,6 @@ vman() {
 		echo "No manual entry for $*"
 	fi
 }
-
-# complete -F _todo t
 
 # A bash function to display a growl notification using iTerm's magic
 # escape sequence. This version will work under screen.
@@ -218,29 +187,30 @@ growl() {
 }
 
 # iTerm tabs
-alias resettab='echo -e "\033]6;1;bg;*;default\a"'
+function  resettab() {
+	echo -ne "\033]6;1;bg;*;default\a"
+}
+
 function tabcolor() {
 	resettab
-	echo -e "\033]6;1;bg;$1;brightness;255\a" 
+	echo -ne "\033]6;1;bg;$1;brightness;255\a" 
 }
 
 function tabtitle() {
 	echo -ne "\e]1;$1\a"
 }
 
-#export CHEATCOLORS=true
-#export VIMCLOJURE_SERVER_JAR="$HOME/projects/dotfiles/dependencies/lib/nailgun/server-2.3.6.jar"
-
 #Easier ZSH history
-# 
 source $HOME/projects/dotfiles/dependencies/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $HOME/projects/dotfiles/dependencies/zsh-history-substring-search/zsh-history-substring-search.zsh
 zmodload zsh/terminfo
+
 # bind UP and DOWN arrow keys
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
+
 #RVM
 #[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
 #[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
@@ -250,10 +220,12 @@ source virtualenvwrapper.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# NVM
 export NVM_DIR="/Users/sjurgemeyer/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
+# ITerm shell integration
 source /Users/sjurgemeyer/.iterm2_shell_integration.zsh
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+# SDKMan
 [[ -s "/Users/sjurgemeyer/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/sjurgemeyer/.sdkman/bin/sdkman-init.sh"

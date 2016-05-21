@@ -26,10 +26,9 @@ Bundle 'BufOnly.vim'
 Bundle 'kien/ctrlp.vim.git'
 Bundle 'majutsushi/tagbar.git'
 Bundle 'scrooloose/nerdtree.git'
-"Bundle 'jayflo/vim-skip'
+Bundle 'Xuyuanp/nerdtree-git-plugin'
 Bundle 'mbbill/undotree'
 Bundle 'tpope/vim-unimpaired.git'
-"Bundle 'vim-scripts/renamer.vim'
 
 "Searching
 Bundle 'haya14busa/incsearch.vim'
@@ -80,13 +79,6 @@ Bundle 'markcornick/vim-terraform'
 
 "Golang
 Bundle 'fatih/vim-go'
-
-"TODO.txt
-Bundle 'freitass/todo.txt-vim'
-Bundle 'sjurgemeyer/vim-todo.txt-plugin'
-
-"DB
-"Bundle 'vim-scripts/dbext.vim'
 
 "Git
 Bundle 'sjl/splice.vim'
@@ -146,18 +138,12 @@ set ic
 set smartcase
 set incsearch
 set hls
-set clipboard=unnamed
+set clipboard=unnamed "Setting the default clipboard to the system clipboard
 
 "Directories for swp files
 set backupdir=~/.vimbackup
 set directory=~/.vimbackup
 set undodir=~/.vimundo
-
-"Remapping ; and :
-"nnoremap ; :
-"nnoremap : ;
-"vnoremap ; :
-"vnoremap : ;
 
 " ` goes to the line and column by default, where ' only goes to the row.  Switch ' to be the more useful one
 nnoremap ' `
@@ -179,17 +165,8 @@ vnoremap <silent> g //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>
     \:<C-u>call histdel('search',-1)<Bar>let @/=histget('search',-1)<CR>gv
 omap g :normal vg<CR>
 
-"Jump to line number with just 12<CR> instead of 12G<CR>
-"nnoremap <CR> G
-
-"Next/Previous difference in vimdiff
-map <D-k> [c
-map <D-j> ]c
-
 "Insert line
 map <S-CR> <Esc>o<Esc>
-"Paste newline
-map <D-p> <S-CR>p
 
 " Jump to the end of copied text
 vnoremap <silent> y y`]
@@ -292,6 +269,9 @@ if has('nvim')
 		:e term://zsh
 	endfunction
 	command! Term :call Term()
+	let g:loaded_python3_provider = 0
+	let g:loaded_python_provider = 1
+	let g:python_host_prog = 'python'
 else 
 	" Requires Ruby support
 	Bundle 'codegram/vim-codereview'
