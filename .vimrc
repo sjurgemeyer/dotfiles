@@ -7,7 +7,6 @@ call vundleconfig#init()
 
 let mapleader = "\<Space>"
 let g:mapleader = "\<Space>"
-
 "Plugins management
 Bundle 'sjurgemeyer/vundleconfig.git'
 Bundle 'gmarik/vundle'
@@ -23,7 +22,7 @@ Bundle 'BufOnly.vim'
 "Bundle 'ZoomWin'
 
 "Navigation
-Bundle 'kien/ctrlp.vim.git'
+Bundle 'ctrlpvim/ctrlp.vim'
 Bundle 'majutsushi/tagbar.git'
 Bundle 'scrooloose/nerdtree.git'
 Bundle 'Xuyuanp/nerdtree-git-plugin'
@@ -55,6 +54,7 @@ Bundle 'sjurgemeyer/vim-grails-import'
 "Formatting
 Bundle 'vim-scripts/Align.git'
 Bundle 'editorconfig/editorconfig-vim'
+Bundle 'ntpeters/vim-better-whitespace'
 
 " Required for other plugins?
 Bundle 'vim-scripts/SyntaxRange'
@@ -70,6 +70,9 @@ Bundle 'groenewege/vim-less'
 "Javascript stuff
 Bundle 'jelera/vim-javascript-syntax'
 Bundle 'othree/javascript-libraries-syntax.vim'
+
+"Kotlin
+Bundle 'udalov/kotlin-vim'
 
 "Scala
 "Bundle 'derekwyatt/vim-scala'
@@ -263,18 +266,20 @@ command! CodeMode :call CodeMode()
 
 "Neovim terminal
 if has('nvim')
+	"let g:loaded_python_provider = 0
+	let g:python_host_skip_check = 1
+	let g:python_host_prog = 'python'
+
+	"let g:loaded_python3_provider = 0
+	let g:python3_host_skip_check = 1
+	let g:python3_host_prog = 'python3'
+
 	tnoremap <C-q> <C-\><C-n>
 
 	function! Term()
 		:e term://zsh
 	endfunction
 	command! Term :call Term()
-	let g:loaded_python3_provider = 0
-	let g:loaded_python_provider = 1
-	let g:python_host_prog = 'python'
-else 
-	" Requires Ruby support
-	Bundle 'codegram/vim-codereview'
 endif
 
 " vp doesn't replace paste buffer
