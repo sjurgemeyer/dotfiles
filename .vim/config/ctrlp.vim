@@ -9,7 +9,8 @@ let g:ctrlp_custom_ignore = {
 let g:ctrlp_max_files = 50000
 let g:ctrlp_max_depth = 100
 let g:ctrlp_lazy_update = 1
-let ctrlp_follow_symlinks = 1
+let g:ctrlp_follow_symlinks = 1
+let g:ctrlp_match_current_file = 1
 
 " Use ag for searching
 let g:ctrlp_use_caching = 1
