@@ -49,7 +49,7 @@ Bundle 'benekastah/neomake'
 Bundle 'tpope/vim-surround'
 Bundle 'wellle/targets.vim'
 Bundle 'scrooloose/nerdcommenter.git'
-Bundle 'sjurgemeyer/vim-grails-import'
+Bundle 'sjurgemeyer/vimport'
 
 "Formatting
 Bundle 'vim-scripts/Align.git'
@@ -152,9 +152,12 @@ set undodir=~/.vimundo
 nnoremap ' `
 nnoremap ` '
 
-if filereadable("/Users/sjurgemeyer/.vim/config/grailsImportList.txt")
-	let g:grails_import_list_file='/Users/sjurgemeyer/.vim/config/grailsImportList.txt'
-endif
+autocmd BufWritePre *.groovy RemoveUnneededImports
+autocmd BufWritePre *.groovy OrganizeImports
+autocmd BufWritePre *.java RemoveUnneededImports
+autocmd BufWritePre *.java OrganizeImports
+
+autocmd BufWritePre * StripWhitespace
 
 "Manipulate a comma seperated list"
 vmap <D-[> :s/,\s*/,\r/g<CR>
@@ -317,5 +320,4 @@ if ! has('gui_running')
     au InsertLeave * set timeoutlen=1000
   augroup END
 endif
-
 

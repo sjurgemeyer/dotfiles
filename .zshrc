@@ -45,11 +45,11 @@ alias jdk6='export JAVA_HOME=$(/usr/libexec/java_home -v 1.6)'
 alias jdk7='export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)'
 alias jdk8='export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)'
 
-export JAVA_OPTS="-server -Djava.awt.headless=true -Xms2G -Xmx3G -XX:PermSize=256M -XX:MaxPermSize=1G -noverify" 
-export GROOVY_CONSOLE_JAVA_OPTS="-server -Xms2G -Xmx3G -XX:PermSize=256M -XX:MaxPermSize=1G -noverify" 
+export JAVA_OPTS="-server -Djava.awt.headless=true -Xms2G -Xmx3G -XX:PermSize=256M -XX:MaxPermSize=1G -noverify"
+export GROOVY_CONSOLE_JAVA_OPTS="-server -Xms2G -Xmx3G -XX:PermSize=256M -XX:MaxPermSize=1G -noverify"
 export GRAILS_OPTS="-Xms2G -Xmx3G -XX:PermSize=256m -XX:MaxPermSize=1G -Dfile.encoding=UTF-8"
 export JAVA_HOME=`/usr/libexec/java_home`
-jdk7
+jdk8
 
 
 #Project setup
@@ -141,7 +141,7 @@ hgdiffrevs() {
 }
 
 ###################### Generic Shell stuff ###########################
-export DISABLE_AUTO_TITLE="true" 
+export DISABLE_AUTO_TITLE="true"
 # Move up directories more easily
 alias bd='. bd -s'
 
@@ -193,7 +193,7 @@ function  resettab() {
 
 function tabcolor() {
 	resettab
-	echo -ne "\033]6;1;bg;$1;brightness;255\a" 
+	echo -ne "\033]6;1;bg;$1;brightness;255\a"
 }
 
 function tabtitle() {
