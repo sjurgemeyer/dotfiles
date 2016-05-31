@@ -163,9 +163,6 @@ autocmd BufWritePre * StripWhitespace
 vmap <D-[> :s/,\s*/,\r/g<CR>
 vmap <D-]> :s/,\n/, /g<CR>
 
-"clear current highlighting
-map <C-c> :nohlsearch<CR>
-
 "Map g to move to end of search term
 vnoremap <silent> g //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>
     \:<C-u>call histdel('search',-1)<Bar>let @/=histget('search',-1)<CR>gv

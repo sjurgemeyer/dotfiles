@@ -1,11 +1,21 @@
 rm -Rf ~/.ackrc
 sudo ln -s ~/projects/dotfiles/.ackrc ~/.ackrc #For Ack 2.0
+
+rm -Rf ~/.agignore
+sudo ln -s ~/projects/dotfiles/.agignore ~/.agignore
+
 sudo rm -Rf /usr/local/bin/ffind
 sudo ln -s ~/projects/dotfiles/dependencies/friendly-find/ffind /usr/local/bin/ffind
+
+# Remapping keys
 rm /Users/sjurgemeyer/Library/Application\ Support/Karabiner/private.xml
 sudo ln -s ~/projects/dotfiles/config/private.xml ~/Library/Application\ Support/Karabiner/private.xml
+
+# Slate for window management
 rm -Rf ~/.slate
 sudo ln -s ~/projects/dotfiles/.slate ~/.slate
+
+# Weather app thing that I don't really use
 rm -Rf ~/.ansiweatherrc
 sudo ln -s ~/projects/dotfiles/.ansiweatherrc ~/.ansiweatherrc
 
@@ -37,7 +47,7 @@ sudo ln -s ~/projects/dotfiles/.todo.actions.d ~/.todo.actions.d
 rm -Rf ~/.todo.txt.color
 sudo ln -s ~/projects/dotfiles/.todo.txt.color ~/.todo.txt.color
 rm -Rf ~/.todofilter.py
-sudo ln -s ~/projects/dotfiles/config/todofilter.py ~/.todofilter.py 
+sudo ln -s ~/projects/dotfiles/config/todofilter.py ~/.todofilter.py
 rm -Rf ~/.topydo
 sudo ln -s ~/projects/dotfiles/.topydo ~/.topydo
 

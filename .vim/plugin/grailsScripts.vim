@@ -1,7 +1,7 @@
- 
+
 
 function! TestResults()
-    silent execute ":!open target/test-reports/html/index.html" 
+    silent execute ":!open target/test-reports/html/index.html"
 endfunction
 
 function! GrailsSearch(pattern)
@@ -22,13 +22,13 @@ command! -nargs=* GGrep :call GrailsSearch(<q-args>)
 function! Groovy_eval_vsplit() range
     :call Eval_vsplit('groovy', a:firstline, a:lastline)
 endfunction
- 
+
 " set these up as environment variables on your system, or override
 " per session by using ':let g:grails_user = foo'
 let g:grails_user = $DEFAULT_GRAILS_USER
 let g:grails_password = $DEFAULT_GRAILS_PASSWORD
 let g:grails_base_url = $DEFAULT_GRAILS_BASE_URL
- 
+
 function! Grails_eval_vsplit() range
   Eval_vsplit(postCode.groovy -u " . g:grails_user . " -p " . g:grails_password . " -b " . g:grails_base_url)
 endfunction
@@ -42,7 +42,7 @@ function! CompileGrails()
     let g:working_dir = getcwd()
     silent execute 'cd ' . FindGrailsRoot()
     :compiler grails
-    :call RunInTerminal ("grails compile") 
+    :call RunInTerminal ("grails compile")
     silent execute 'cd ' . g:working_dir
 endfunction
 
@@ -61,7 +61,7 @@ function! CompileGradle()
     let g:working_dir = getcwd()
     silent execute 'cd ' . FindGradleRoot()
     :compiler gradle
-    :call RunInTerminal ("gradle assemble") 
+    :call RunInTerminal ("gradle assemble")
     silent execute 'cd ' . g:working_dir
 endfunction
 
@@ -70,16 +70,16 @@ function! RunGradleTestFile()
     let g:working_dir = getcwd()
     silent execute 'cd ' . FindGradleRoot()
     :compiler gradle
-    :call RunInTerminal ("gradle -Dtest.single=" . testName . " test | ~/.vim/tools/filter.groovy") 
+    :call RunInTerminal ("gradle -Dtest.single=" . testName . " test | ~/.vim/tools/filter.groovy")
     silent execute 'cd ' . g:working_dir
 endfunction
 
-function! FindGrailsRoot() 
+function! FindGrailsRoot()
     let fileLocation = findfile("application.properties", expand("%:p:h") . ';/')
     return fnamemodify(fileLocation, ":p:h")
 endfunction
 
-function! FindTestDir() 
+function! FindTestDir()
     let file = expand("%:p:h")
     let testDir = substitute(file, "/main/", "/test/", "")
     while 1 == 1
@@ -91,7 +91,7 @@ function! FindTestDir()
 
 endfunction
 
-function! FindGradleRoot() 
+function! FindGradleRoot()
     " We have gradle files named different things so the best I could do was
     " search for a build dir and use the parent.  VIM's finddir doesn't allow
     " for wildcards.
@@ -109,14 +109,14 @@ function! RunGrailsTest(testName)
         else
             let flag = "unit:spock"
         endif
-    else 
+    else
         if path =~ "Test"
             if path =~ "integration"
                 let flag = "integration:integration"
             else
                 let flag = "unit:unit"
             endif
-        else 
+        else
             echoerr "The current file is not a test"
             return
         endif
@@ -124,7 +124,7 @@ function! RunGrailsTest(testName)
     let g:working_dir = getcwd()
     silent execute 'cd ' . FindGrailsRoot()
     :compiler grails
-    :call RunInTerminal ("grails -Duser.timezone=UTC test-app " . flag . " " . a:testName . ' | ~/.vim/tools/filter.groovy') 
+    :call RunInTerminal ("grails -Duser.timezone=UTC test-app " . flag . " " . a:testName . ' | ~/.vim/tools/filter.groovy')
     silent execute 'cd ' . g:working_dir
 endfunction
 
@@ -149,15 +149,15 @@ function! RunLastCommandInTerminal()
 endfunction
 
 "Switch between test class and actual class
-function! OpenTest() 
+function! OpenTest()
    let ext = fnamemodify(expand("%:p"), ":t:e")
    let file = expand("%:t:r")
    let is_test = strridx(file, "Tests")
    if is_test < 0
       let is_test = strridx(file, "Spec")
-   endif 
+   endif
    if is_test > 0
-       let file = strpart(file, 0, is_test) 
+       let file = strpart(file, 0, is_test)
        execute ":find " . file . "." . ext
     else
         try
@@ -179,13 +179,13 @@ function! OpenTest()
    endif
 endfunction
 
-function! CreateGroovyMappings() 
+function! CreateGroovyMappings()
     "map <Leader>h :call FindSubClasses(expand("<cword>"))<CR>
     map <Leader>x :call OpenTest()<CR>
     map <Leader>vv :call GrailsSearch(expand("<cword>"))<CR>
     map <Leader>vc :call GrailsSearchNoTests(expand("<cword>"))<CR>
     map <Leader>vt :call GrailsSearchOnlyTests(expand("<cword>"))<CR>
-    
+
     "Testing
     map <S-F9> <Esc>:w<CR>:call RunSingleGrailsTest()<CR>
     map <F9> <Esc>:w<CR>:call RunGrailsTestFile()<CR>
@@ -218,23 +218,50 @@ map <Leader>j :call OpenFileUnderCursorWithExtension(expand("<cword>"), 'java')<
 map <Leader>g :call OpenFileUnderCursorWithExtension(expand("<cword>"), 'groovy')<CR>
 map <Leader>u :call SplitOpenFileUnderCursor(expand("<cword>"))<CR>
 
-function! FindSubClasses(filename) 
+function! FindSubClasses(filename)
     execute ":GGrep \"(implements|extends) " . a:filename . "\""
 endfunction
 
 function! OpenFileUnderCursor(filename)
    let ext = fnamemodify(expand("%:p"), ":t:e")
    let fname = toupper(strpart(a:filename, 0, 1)) . strpart(a:filename, 1, strlen(a:filename))
-   execute ":find " . fname . "." . ext 
+   execute ":find " . fname . "." . ext
 endfunction
 
 function! OpenFileUnderCursorWithExtension(filename, ext)
    let fname = toupper(strpart(a:filename, 0, 1)) . strpart(a:filename, 1, strlen(a:filename))
-   execute ":find " . fname . "." . a:ext 
+   execute ":find " . fname . "." . a:ext
 endfunction
 
 function! SplitOpenFileUnderCursor(filename)
    let ext = fnamemodify(expand("%:p"), ":t:e")
    let fname = toupper(strpart(a:filename, 0, 1)) . strpart(a:filename, 1, strlen(a:filename))
-   execute ":rightb vert sfind " . fname . "." . ext 
+   execute ":rightb vert sfind " . fname . "." . ext
+endfunction
+
+
+
+if !exists('g:package_seperators')
+    let g:package_seperators = ['domain', 'services', 'groovy', 'java', 'taglib', 'controllers', 'integration', 'unit']
+endif
+
+function! GetCurrentPackageFromPath()
+    return ConvertPathToPackage(expand("%:r"))
+endfunction
+
+function! ConvertPathToPackage(filePath)
+    let splitPath = split(a:filePath, '/')
+
+    let idx = len(splitPath)
+    for sep in g:package_seperators
+        let tempIdx = index(splitPath, sep)
+        if tempIdx > 0
+            if tempIdx < idx
+                let idx = tempIdx + 1
+            endif
+        endif
+    endfor
+    let trimmedPath = splitPath[idx :-1]
+
+    return join(split(join(trimmedPath, '.'),'\.')[0:-2], '.')
 endfunction

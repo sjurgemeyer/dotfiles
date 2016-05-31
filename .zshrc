@@ -52,6 +52,8 @@ export JAVA_HOME=`/usr/libexec/java_home`
 jdk8
 
 
+# Searching
+alias ag='ag --path-to-agignore ~/.agignore'
 #Project setup
 PROJECT_DIR=$HOME/projects
 source ~/.otherFunctions
