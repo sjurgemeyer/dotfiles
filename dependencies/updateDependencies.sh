@@ -6,5 +6,3 @@ cd ~/projects/dotfiles/dependencies/friendly-find
 git pull
 cd ~/projects/dotfiles/dependencies/vim-ororo
 git pull
-cd ~/projects/dotfiles/dependencies/ansiweather
-git pull

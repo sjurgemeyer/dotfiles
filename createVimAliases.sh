@@ -7,4 +7,10 @@ ln -s ~/projects/dotfiles/.vimrc ~/.vimrc
 rm -Rf ~/.ctags
 ln -s ~/projects/dotfiles/.ctags ~/.ctags
 rm -Rf ~/.vim/colors/ororo.vim
-ln -s ~/projects/dotfiles/dependencies/vim-ororo/ororo.vim ~/.vim/colors/ororo.vim 
+ln -s ~/projects/dotfiles/dependencies/vim-ororo/ororo.vim ~/.vim/colors/ororo.vim
+
+#NEOVIM
+rm -Rf ~/.nvim
+sudo ln -s ~/projects/dotfiles/.vim ~/.nvim
+rm -Rf ~/.nvimrc
+sudo ln -s ~/projects/dotfiles/.vimrc ~/.nvimrc

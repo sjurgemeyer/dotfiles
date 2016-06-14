@@ -15,10 +15,6 @@ sudo ln -s ~/projects/dotfiles/config/private.xml ~/Library/Application\ Support
 rm -Rf ~/.slate
 sudo ln -s ~/projects/dotfiles/.slate ~/.slate
 
-# Weather app thing that I don't really use
-rm -Rf ~/.ansiweatherrc
-sudo ln -s ~/projects/dotfiles/.ansiweatherrc ~/.ansiweatherrc
-
 #Git
 rm -Rf ~/.gitconfig
 sudo ln -s ~/projects/dotfiles/.gitconfig ~/.gitconfig
@@ -36,20 +32,6 @@ rm -Rf ~/.hgignore_global
 sudo ln -s ~/projects/dotfiles/.hgignore_global ~/.hgignore_global
 rm -Rf ~/.hgrc
 sudo ln -s ~/projects/dotfiles/.hgrc ~/.hgrc
-
-#TODO.txt
-sudo rm -Rf /usr/local/bin/todo
-sudo ln -s ~/projects/dotfiles/dependencies/todo.txt_cli-2.10/todo.sh /usr/local/bin/todo
-rm -Rf ~/.todo.cfg
-sudo ln -s ~/projects/dotfiles/.todo.cfg ~/.todo.cfg
-rm -Rf ~/.todo.actions.d
-sudo ln -s ~/projects/dotfiles/.todo.actions.d ~/.todo.actions.d
-rm -Rf ~/.todo.txt.color
-sudo ln -s ~/projects/dotfiles/.todo.txt.color ~/.todo.txt.color
-rm -Rf ~/.todofilter.py
-sudo ln -s ~/projects/dotfiles/config/todofilter.py ~/.todofilter.py
-rm -Rf ~/.topydo
-sudo ln -s ~/projects/dotfiles/.topydo ~/.topydo
 
 #Vim
 ~/projects/dotfiles/createVimAliases.sh
@@ -71,8 +53,6 @@ sudo rm -Rf /usr/local/bin/bd
 sudo ln -s ~/projects/dotfiles/dependencies/bd /usr/local/bin/bd
 sudo rm -Rf /usr/local/bin/jq
 sudo ln -s ~/projects/dotfiles/dependencies/jq /usr/local/bin/jq
-sudo rm -Rf /usr/local/bin/weather
-sudo ln -s ~/projects/dotfiles/dependencies/ansiweather/ansiweather /usr/local/bin/weather
 
 #Vagrant
 rm -Rf ~/.vagrant.d/Vagrantfile
@@ -85,12 +65,6 @@ sudo ln -s ~/projects/dotfiles/.vagrant.d/bash ~/.vagrant.d/bash
 #NPM
 rm -Rf ~/.npmrc
 sudo ln -s ~/projects/dotfiles/.npmrc ~/.npmrc
-
-#NEOVIM
-rm -Rf ~/.nvim
-sudo ln -s ~/projects/dotfiles/.vim ~/.nvim
-rm -Rf ~/.nvimrc
-sudo ln -s ~/projects/dotfiles/.vimrc ~/.nvimrc
 
 #SCM_BREEZE
 rm -Rf ~/.scm_breeze

@@ -4,9 +4,6 @@
 [submodule "dependencies/zsh-history-substring-search"]
 	path = dependencies/zsh-history-substring-search
 	url = https://github.com/zsh-users/zsh-history-substring-search.git
-[submodule "dependencies/ansiweather"]
-	path = dependencies/ansiweather
-	url = https://github.com/fcambus/ansiweather.git
 [submodule "dependencies/friendly-find"]
 	path = dependencies/friendly-find
 	url = https://github.com/sjl/friendly-find.git
