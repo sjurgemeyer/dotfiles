@@ -32,6 +32,7 @@ Bundle 'tpope/vim-unimpaired.git'
 "Searching
 Bundle 'haya14busa/incsearch.vim'
 Bundle 'wincent/ferret'
+Bundle 'vim-scripts/keepcase.vim'
 
 Bundle 'tpope/vim-abolish.git'
 Bundle 'terryma/vim-expand-region'
@@ -50,6 +51,7 @@ Bundle 'tpope/vim-surround'
 Bundle 'wellle/targets.vim'
 Bundle 'scrooloose/nerdcommenter.git'
 Bundle 'sjurgemeyer/vimport'
+Bundle 'sjurgemeyer/vim-open'
 
 "Formatting
 Bundle 'vim-scripts/Align.git'
@@ -75,7 +77,7 @@ Bundle 'othree/javascript-libraries-syntax.vim'
 Bundle 'udalov/kotlin-vim'
 
 "Scala
-"Bundle 'derekwyatt/vim-scala'
+Bundle 'derekwyatt/vim-scala'
 
 " Terraform
 Bundle 'markcornick/vim-terraform'
@@ -100,6 +102,9 @@ Bundle 'bling/vim-airline'
 
 " REST / HTTP
 Bundle 'aquach/vim-http-client'
+
+"Random
+Bundle 'nixon/vim-vmath'
 
 syntax on
 if filereadable("~/.vimrc-private")

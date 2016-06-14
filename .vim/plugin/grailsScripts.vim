@@ -1,5 +1,3 @@
-
-
 function! TestResults()
     silent execute ":!open target/test-reports/html/index.html"
 endfunction
@@ -16,21 +14,10 @@ function! GrailsSearchOnlyTests(pattern)
     :execute "Ack --type=groovy -G '.*Tests\.groovy|.*Spec\.groovy' " . a:pattern
 endfunction
 
-
 command! -nargs=* GGrep :call GrailsSearch(<q-args>)
 
 function! Groovy_eval_vsplit() range
     :call Eval_vsplit('groovy', a:firstline, a:lastline)
-endfunction
-
-" set these up as environment variables on your system, or override
-" per session by using ':let g:grails_user = foo'
-let g:grails_user = $DEFAULT_GRAILS_USER
-let g:grails_password = $DEFAULT_GRAILS_PASSWORD
-let g:grails_base_url = $DEFAULT_GRAILS_BASE_URL
-
-function! Grails_eval_vsplit() range
-  Eval_vsplit(postCode.groovy -u " . g:grails_user . " -p " . g:grails_password . " -b " . g:grails_base_url)
 endfunction
 
 "Grails testing
@@ -44,16 +31,6 @@ function! CompileGrails()
     :compiler grails
     :call RunInTerminal ("grails compile")
     silent execute 'cd ' . g:working_dir
-endfunction
-
-function! RunSingleGrailsTest()
-    let testName = expand("%:t:r.") . "." . expand("<cword>")
-    :call RunGrailsTest(testName)
-endfunction
-
-function! RunGrailsTestFile()
-    let testName = expand("%:t:r")
-    :call RunGrailsTest(testName)
 endfunction
 
 function! CompileGradle()
@@ -101,40 +78,13 @@ function! FindGradleRoot()
     return fnamemodify(fileLocation, ":p:h")
 endfunction
 
-function! RunGrailsTest(testName)
-    let path = expand("%:r")
-    if path =~ "Spec"
-        if path =~ "integration"
-            let flag = "integration:spock"
-        else
-            let flag = "unit:spock"
-        endif
-    else
-        if path =~ "Test"
-            if path =~ "integration"
-                let flag = "integration:integration"
-            else
-                let flag = "unit:unit"
-            endif
-        else
-            echoerr "The current file is not a test"
-            return
-        endif
-    endif
-    let g:working_dir = getcwd()
-    silent execute 'cd ' . FindGrailsRoot()
-    :compiler grails
-    :call RunInTerminal ("grails -Duser.timezone=UTC test-app " . flag . " " . a:testName . ' | ~/.vim/tools/filter.groovy')
-    silent execute 'cd ' . g:working_dir
-endfunction
-
 "Function to run command in external terminal"
 function! RunInTerminal(command)
-  if exists("a:command")
-    let g:last_run_in_terminal = a:command
-    let g:last_command_dir = getcwd()
-    :execute "Dispatch " . a:command
-  end
+    if exists("a:command")
+        let g:last_run_in_terminal = a:command
+        let g:last_command_dir = getcwd()
+        :execute "Dispatch " . a:command
+    end
 endfunction
 
 function! RunLastCommandInTerminal()
@@ -150,15 +100,15 @@ endfunction
 
 "Switch between test class and actual class
 function! OpenTest()
-   let ext = fnamemodify(expand("%:p"), ":t:e")
-   let file = expand("%:t:r")
-   let is_test = strridx(file, "Tests")
-   if is_test < 0
-      let is_test = strridx(file, "Spec")
-   endif
-   if is_test > 0
-       let file = strpart(file, 0, is_test)
-       execute ":find " . file . "." . ext
+    let ext = fnamemodify(expand("%:p"), ":t:e")
+    let file = expand("%:t:r")
+    let is_test = strridx(file, "Tests")
+    if is_test < 0
+        let is_test = strridx(file, "Spec")
+    endif
+    if is_test > 0
+        let file = strpart(file, 0, is_test)
+        execute ":find " . file . "." . ext
     else
         try
             execute ":find " . file . "Spec." . ext
@@ -175,8 +125,8 @@ function! OpenTest()
                 call nerdtree#putCursorInTreeWin()
                 call b:NERDTreeRoot.reveal(x)
             endtry
-       endtry
-   endif
+        endtry
+    endif
 endfunction
 
 function! CreateGroovyMappings()
@@ -201,45 +151,14 @@ function! CreateGroovyMappings()
     imap <silent> <S-F7> <Esc><S-F7>a
 
 
-    "running through the grails console.  Haven't used this in awhile, not
-    "sure how well it works at this point
-    vmap <F8> :call Grails_eval_vsplit()<CR>
-    nmap <silent> <F8> mzggVG<F8>`z
-    imap <silent> <F8> <Esc><F8>a
-    map <silent> <S-F8> :wincmd P<CR>:q<CR>
-    imap <silent> <S-F8> <Esc><S-F8>a
 endfunction
 
 au BufNewFile,BufRead *.groovy :call CreateGroovyMappings()
 
-"Open file under cursor
-map <Leader>y :call OpenFileUnderCursor(expand("<cword>"))<CR>
-map <Leader>j :call OpenFileUnderCursorWithExtension(expand("<cword>"), 'java')<CR>
-map <Leader>g :call OpenFileUnderCursorWithExtension(expand("<cword>"), 'groovy')<CR>
-map <Leader>u :call SplitOpenFileUnderCursor(expand("<cword>"))<CR>
 
 function! FindSubClasses(filename)
     execute ":GGrep \"(implements|extends) " . a:filename . "\""
 endfunction
-
-function! OpenFileUnderCursor(filename)
-   let ext = fnamemodify(expand("%:p"), ":t:e")
-   let fname = toupper(strpart(a:filename, 0, 1)) . strpart(a:filename, 1, strlen(a:filename))
-   execute ":find " . fname . "." . ext
-endfunction
-
-function! OpenFileUnderCursorWithExtension(filename, ext)
-   let fname = toupper(strpart(a:filename, 0, 1)) . strpart(a:filename, 1, strlen(a:filename))
-   execute ":find " . fname . "." . a:ext
-endfunction
-
-function! SplitOpenFileUnderCursor(filename)
-   let ext = fnamemodify(expand("%:p"), ":t:e")
-   let fname = toupper(strpart(a:filename, 0, 1)) . strpart(a:filename, 1, strlen(a:filename))
-   execute ":rightb vert sfind " . fname . "." . ext
-endfunction
-
-
 
 if !exists('g:package_seperators')
     let g:package_seperators = ['domain', 'services', 'groovy', 'java', 'taglib', 'controllers', 'integration', 'unit']

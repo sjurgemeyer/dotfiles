@@ -1,4 +1,4 @@
-"SOURCE NEEDED: This might have been pulled from the vim tips wiki or something similar.
+"http://vim.wikia.com/wiki/Switching_case_of_characters
 "Toggle case (UPPER, lower, Mixed) for visual selection
 function! TwiddleCase(str)
   if a:str ==# toupper(a:str)
@@ -13,5 +13,3 @@ endfunction
 
 vnoremap ~ ygv"=TwiddleCase(@")<CR>Pgv
 nnoremap <leader>~ ygv"=TwiddleCase(<cword>)<CR>
-
-
