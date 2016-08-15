@@ -49,3 +49,5 @@
 	default = current
 #[remote "upstream"]
 #	receivepack = /bin/false
+[credential]
+	helper = osxkeychain

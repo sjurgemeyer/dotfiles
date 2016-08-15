@@ -8,107 +8,114 @@ call vundleconfig#init()
 let mapleader = "\<Space>"
 let g:mapleader = "\<Space>"
 "Plugins management
-Bundle 'sjurgemeyer/vundleconfig.git'
-Bundle 'gmarik/vundle'
+Plugin 'sjurgemeyer/vundleconfig.git'
+Plugin 'VundleVim/Vundle.vim'
 
 "Code completion
-Bundle 'Shougo/neocomplcache.git'
-Bundle 'Shougo/neosnippet.git'
-Bundle 'Shougo/neosnippet-snippets.git'
+if has('nvim')
+	Plugin 'Shougo/deoplete.nvim'
+endif
+Plugin 'sirver/ultisnips'
+Plugin 'honza/vim-snippets'
 
 "Buffer management
-Bundle 'jeetsukumaran/vim-buffergator.git'
-Bundle 'BufOnly.vim'
-"Bundle 'ZoomWin'
+Plugin 'jeetsukumaran/vim-buffergator.git'
+Plugin 'BufOnly.vim'
+Plugin 'ZoomWin'
 
 "Navigation
-Bundle 'ctrlpvim/ctrlp.vim'
-Bundle 'majutsushi/tagbar.git'
-Bundle 'scrooloose/nerdtree.git'
-Bundle 'Xuyuanp/nerdtree-git-plugin'
-Bundle 'mbbill/undotree'
-Bundle 'tpope/vim-unimpaired.git'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'majutsushi/tagbar.git'
+Plugin 'scrooloose/nerdtree.git'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'mbbill/undotree'
+Plugin 'tpope/vim-unimpaired.git'
 
 "Searching
-Bundle 'haya14busa/incsearch.vim'
-Bundle 'wincent/ferret'
-Bundle 'vim-scripts/keepcase.vim'
+Plugin 'haya14busa/incsearch.vim'
+Plugin 'wincent/ferret'
+Plugin 'vim-scripts/keepcase.vim'
 
-Bundle 'tpope/vim-abolish.git'
-Bundle 'terryma/vim-expand-region'
+Plugin 'tpope/vim-abolish.git'
+Plugin 'terryma/vim-expand-region'
 
 "terminal clipboard
-Bundle 'kana/vim-fakeclip'
+Plugin 'kana/vim-fakeclip'
 
 "Dash
-Bundle 'rizzatti/funcoo.vim'
-Bundle 'rizzatti/dash.vim'
+Plugin 'rizzatti/funcoo.vim'
+Plugin 'rizzatti/dash.vim'
 
 "Editing
-"Bundle 'scrooloose/syntastic.git'
-Bundle 'benekastah/neomake'
-Bundle 'tpope/vim-surround'
-Bundle 'wellle/targets.vim'
-Bundle 'scrooloose/nerdcommenter.git'
-Bundle 'sjurgemeyer/vimport'
-Bundle 'sjurgemeyer/vim-open'
+Plugin 'scrooloose/syntastic.git'
+Plugin 'benekastah/neomake'
+Plugin 'tpope/vim-surround'
+Plugin 'wellle/targets.vim'
+Plugin 'scrooloose/nerdcommenter.git'
+Plugin 'sjurgemeyer/vimport'
+Plugin 'sjurgemeyer/vim-open'
 
 "Formatting
-Bundle 'vim-scripts/Align.git'
-Bundle 'editorconfig/editorconfig-vim'
-Bundle 'ntpeters/vim-better-whitespace'
+Plugin 'vim-scripts/Align.git'
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'ntpeters/vim-better-whitespace'
 
 " Required for other plugins?
-Bundle 'vim-scripts/SyntaxRange'
+Plugin 'vim-scripts/SyntaxRange'
 
 "Filetype
-Bundle 'tpope/vim-markdown'
-Bundle 'csv.vim'
+Plugin 'tpope/vim-markdown'
+Plugin 'csv.vim'
 
 "CSS
-Bundle 'https://github.com/gorodinskiy/vim-coloresque.git'
-Bundle 'groenewege/vim-less'
+Plugin 'https://github.com/gorodinskiy/vim-coloresque.git'
+Plugin 'groenewege/vim-less'
 
 "Javascript stuff
-Bundle 'jelera/vim-javascript-syntax'
-Bundle 'othree/javascript-libraries-syntax.vim'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'othree/javascript-libraries-syntax.vim'
 
 "Kotlin
-Bundle 'udalov/kotlin-vim'
+Plugin 'udalov/kotlin-vim'
 
 "Scala
-Bundle 'derekwyatt/vim-scala'
+Plugin 'derekwyatt/vim-scala'
+
+"Gradle
+Plugin 'vim-gradle'
 
 " Terraform
-Bundle 'markcornick/vim-terraform'
+Plugin 'markcornick/vim-terraform'
 
 "Golang
-Bundle 'fatih/vim-go'
+Plugin 'fatih/vim-go'
 
 "Git
-Bundle 'sjl/splice.vim'
-Bundle 'tpope/vim-fugitive.git'
-Bundle 'gregsexton/gitv.git'
-Bundle 'idanarye/vim-merginal'
-Bundle 'airblade/vim-gitgutter'
+Plugin 'sjl/splice.vim'
+Plugin 'tpope/vim-fugitive.git'
+Plugin 'gregsexton/gitv.git'
+Plugin 'idanarye/vim-merginal'
+Plugin 'airblade/vim-gitgutter'
 
 "Utils
-Bundle 'tpope/vim-repeat'
-"Bundle 'tpope/vim-dispatch'
-Bundle 'tpope/vim-eunuch'
+Plugin 'tpope/vim-repeat'
+"Plugin 'tpope/vim-dispatch'
+Plugin 'tpope/vim-eunuch'
 
 "Pretty
-Bundle 'bling/vim-airline'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 " REST / HTTP
-Bundle 'aquach/vim-http-client'
+Plugin 'aquach/vim-http-client'
 
 "Random
-Bundle 'nixon/vim-vmath'
+Plugin 'nixon/vim-vmath'
 
 syntax on
 if filereadable("~/.vimrc-private")
-	source ~/.vimrc-private
+    source ~/.vimrc-private
 endif
 filetype plugin indent on
 
@@ -235,6 +242,10 @@ autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2 expand
 autocmd FileType groovy setlocal shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab
 autocmd FileType java setlocal shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab
 
+
+
+
+
 "Make vim work as a word processor
 func! WordProcessorMode()
   colorscheme iawriter
@@ -256,6 +267,18 @@ func! WordProcessorMode()
 endfu
 command! WordProcessorMode :call WordProcessorMode()
 
+func! Light()
+	colorscheme morning
+	let g:airline_theme='cool'
+endfu
+command Light :call Light()
+
+func! Dark()
+	colorscheme ororo
+	let g:airline_theme='dark'
+endfu
+command Dark :call Dark()
+
 "Undo wordprocessormode
 func! CodeMode()
   colorscheme ororo
@@ -271,20 +294,21 @@ command! CodeMode :call CodeMode()
 
 "Neovim terminal
 if has('nvim')
-	"let g:loaded_python_provider = 0
-	let g:python_host_skip_check = 1
-	let g:python_host_prog = 'python'
+    "let g:loaded_python_provider = 0
+    let g:python_host_skip_check = 1
+    let g:python_host_prog = 'python'
 
-	"let g:loaded_python3_provider = 0
-	let g:python3_host_skip_check = 1
-	let g:python3_host_prog = 'python3'
+    "let g:loaded_python3_provider = 0
+    let g:python3_host_skip_check = 1
+    let g:python3_host_prog = 'python3'
 
-	tnoremap <C-q> <C-\><C-n>
+  set termguicolors
+    tnoremap <C-q> <C-\><C-n>
 
-	function! Term()
-		:e term://zsh
-	endfunction
-	command! Term :call Term()
+    function! Term()
+        :e term://zsh
+    endfunction
+    command! Term :call Term()
 endif
 
 " vp doesn't replace paste buffer
@@ -323,3 +347,6 @@ if ! has('gui_running')
   augroup END
 endif
 
+" TEMP
+let g:syntastic_java_checkers=['javac']
+let g:syntastic_java_javac_config_file_enabled = 1

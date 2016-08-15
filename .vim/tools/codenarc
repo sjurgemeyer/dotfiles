@@ -1,1 +1,0 @@
-java -classpath $1 org.codenarc.CodeNarc -rulesetfiles=$2 -includes=**/$3 -report=console

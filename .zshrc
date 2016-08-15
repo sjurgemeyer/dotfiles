@@ -23,7 +23,7 @@ export SVN_EDITOR=vim
 #launch neovim with customized tab color
 function n() {
 	tabcolor green
-	nvim $@
+	nvim -c 'cd .' $@
 	resettab
 	tabtitle "sh"
 }

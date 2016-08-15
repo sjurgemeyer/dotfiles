@@ -1,0 +1,150 @@
+snippet main
+public static void main (String [] args) {
+	${1:/* code */}
+}
+endsnippet
+
+snippet de
+default:
+	${1}
+endsnippet
+
+snippet ca
+catch(${1:Exception} ${2:e}) {
+	${3}
+}
+endsnippet
+
+snippet th
+throw new ${1:Exception}()${2}
+endsnippet
+
+snippet if
+if (${1}) ${2}
+endsnippet
+
+snippet el
+else
+endsnippet
+
+snippet elif
+else if (${1}) ${2}
+endsnippet
+
+snippet wh
+while (${1}) {
+	${2}
+}
+endsnippet
+
+snippet for
+for (${1}; ${2}; ${3}) {
+	${4}
+}
+endsnippet
+
+snippet fore
+for (${1} : ${2}) {
+	${3}
+}
+endsnippet
+
+snippet sw
+switch (${1}) ${2}
+endsnippet
+
+snippet cs
+case ${1}:
+	${2}
+${3}
+endsnippet
+
+snippet tb
+def ${1:object} = ${2:$1}.build(${3})
+endsnippet
+
+snippet cl
+package `!v GetCurrentPackageFromPath()`
+class ${2:`!v vim_snippets#Filename()`} {
+	${3}
+}
+endsnippet
+
+snippet sp
+package `!v GetCurrentPackageFromPath()`
+
+import spock.lang.Specification
+
+class ${2:`!v vim_snippets#Filename()`} extends Specification {
+
+	void setup() {}
+
+	def '${3}'() {
+	}
+}
+endsnippet
+
+snippet swt
+setup:
+${1}
+when:
+then:
+endsnippet
+
+snippet in
+interface ${1:`!v vim_snippets#Filename()`} ${2:extends Parent}${3}
+endsnippet
+
+snippet v
+${1:String} ${2:var}${3: = null}${4};${5}
+endsnippet
+
+snippet co
+public static final ${1:String} ${2:var} = ${3};${4}
+endsnippet
+
+snippet cos
+public static final String ${1:var} = "${2}";${3}
+endsnippet
+
+snippet as
+assert ${1:test} : "${2:Failure message}";${3}
+endsnippet
+
+snippet ij
+import org.joda.time.LocalDate
+endsnippet
+
+snippet ea
+each { ${1:it} ->
+	$1${2}
+}
+endsnippet
+
+snippet ts
+public String toString() {
+	${1}
+}
+endsnippet
+
+snippet pl
+println "${1:it} $$1"
+endsnippet
+
+snippet mf
+def ${1:myService}Mock = mockFor($1)
+$1Mock.demand.${2} { ${3} ->
+	${4}
+}
+${5:def} $1 = $1Mock.createMock()
+$1Mock.verify()
+endsnippet
+
+snippet ai
+assert ${1:member}.is(_$1)
+endsnippet
+
+snippet new
+${1:Class} ${2} = new $1()
+endsnippet
+
