@@ -54,6 +54,7 @@ Plugin 'wellle/targets.vim'
 Plugin 'scrooloose/nerdcommenter.git'
 Plugin 'sjurgemeyer/vimport'
 Plugin 'sjurgemeyer/vim-open'
+Plugin 'sjurgemeyer/vim-gradle'
 
 "Formatting
 Plugin 'vim-scripts/Align.git'
@@ -80,9 +81,6 @@ Plugin 'udalov/kotlin-vim'
 
 "Scala
 Plugin 'derekwyatt/vim-scala'
-
-"Gradle
-Plugin 'vim-gradle'
 
 " Terraform
 Plugin 'markcornick/vim-terraform'
@@ -346,7 +344,3 @@ if ! has('gui_running')
     au InsertLeave * set timeoutlen=1000
   augroup END
 endif
-
-" TEMP
-let g:syntastic_java_checkers=['javac']
-let g:syntastic_java_javac_config_file_enabled = 1

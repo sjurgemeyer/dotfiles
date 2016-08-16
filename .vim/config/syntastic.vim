@@ -1,12 +1,13 @@
 "Syntastic
 let g:syntastic_check_on_open = 1
 let g:syntastic_mode_map = { 'mode': 'passive',
-                               \ 'passive_filetypes': ['groovy'] }
+                               \ 'passive_filetypes': ['groovy','java'] }
                                "\ 'active_filetypes': ['javascript', 'html', 'css'],
 
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-", "invalid value \"{{"]
 
 let g:syntastic_groovy_checkers = ['gradlebuild', 'codenarc']
+let g:syntastic_java_checkers = ['gradlebuild']
 
 map <Leader>c :SyntasticCheck<CR>
 
