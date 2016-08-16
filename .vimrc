@@ -97,7 +97,7 @@ Plugin 'airblade/vim-gitgutter'
 
 "Utils
 Plugin 'tpope/vim-repeat'
-"Plugin 'tpope/vim-dispatch'
+Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-eunuch'
 
 "Pretty
