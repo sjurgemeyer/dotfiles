@@ -1,0 +1,1 @@
+vmap ,w :Align \|<CR>

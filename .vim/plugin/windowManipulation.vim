@@ -15,22 +15,16 @@ map <C-S-Up> 4<C-w>+
 map <C-S-Down> 4<C-w>-
 map <C-S-Right> 8<C-w><
 
-" Full screen
-map <D-CR> <C-w>o
-
-" open vertical window and switch to it
-nnoremap <D-d> <C-w>v<C-w>l
-" open horizontal window and switch to it
-nnoremap <D-D> <C-w>s<C-w>j
-
 "Close all navigation windows
 map <F12> :call CloseNavigation()<CR>
+
 function! CloseNavigation()
     :BuffergatorClose
     :NERDTreeClose
     :TagbarClose
 	:UndotreeHide
     :ccl
+	:lcl
 	:call WipeMatchingBuffers('.*gitv-.*')
 	:call WipeMatchingBuffers('.*__HTTP_Client_Response__.*')
 endfunction
@@ -48,7 +42,6 @@ function! WipeMatchingBuffers(pattern)
 
     let l:count = len(l:matchList)
     if l:count < 1
-        "echo 'No buffers found matching pattern ' . a:pattern
         return
     endif
 
@@ -60,5 +53,4 @@ function! WipeMatchingBuffers(pattern)
 
     exec 'bd ' . join(l:matchList, ' ')
 
-    "echo 'Wiped ' . l:count . ' buffer' . l:suffix . '.'
 endfunction

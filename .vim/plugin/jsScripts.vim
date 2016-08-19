@@ -15,7 +15,7 @@ function RunGruntTests()
     silent execute 'cd -'
 endfunction
 
-function! FindGruntRoot() 
+function! FindGruntRoot()
     let fileLocation = findfile("Gruntfile.js", expand("%:p:h") . ';/')
     return fnamemodify(fileLocation, ":p:h")
 endfunction

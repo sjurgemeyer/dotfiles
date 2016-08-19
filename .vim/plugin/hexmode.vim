@@ -1,4 +1,4 @@
-"SOURCE NEEDED: I pulled this from somewhere.  Not sure of the original source.  
+"SOURCE NEEDED: I pulled this from somewhere.  Not sure of the original source.
 "Hex mode
 " ex command for toggling hex mode - define mapping if desired
 command! -bar Hexmode call ToggleHex()
