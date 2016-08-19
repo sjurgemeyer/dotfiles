@@ -1,2 +1,2 @@
---options=/Users/sjurgemeyer/.vim/bundle/vim-gradle/ctags/groovy.ctags
---options=/Users/sjurgemeyer/.vim/bundle/vim-gradle/ctags/gradle.ctags
+--options=/Users/sjurgemeyer/.vim/ctags/groovy.ctags
+--options=/Users/sjurgemeyer/.vim/ctags/gradle.ctags
