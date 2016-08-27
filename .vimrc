@@ -19,7 +19,8 @@ Plugin 'sirver/ultisnips'
 Plugin 'honza/vim-snippets'
 
 "Buffer management
-Plugin 'jeetsukumaran/vim-buffergator.git'
+"Plugin 'jeetsukumaran/vim-buffergator.git'
+Plugin 'jlanzarotta/bufexplorer'
 Plugin 'BufOnly.vim'
 Plugin 'ZoomWin'
 
@@ -55,9 +56,10 @@ Plugin 'scrooloose/nerdcommenter.git'
 Plugin 'sjurgemeyer/vimport'
 Plugin 'sjurgemeyer/vim-open'
 Plugin 'sjurgemeyer/vim-gradle'
+Plugin 'sjurgemeyer/vim-tabspace'
 
 "Formatting
-Plugin 'vim-scripts/Align.git'
+"Plugin 'vim-scripts/Align.git'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'ntpeters/vim-better-whitespace'
 

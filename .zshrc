@@ -23,7 +23,7 @@ export SVN_EDITOR=vim
 #launch neovim with customized tab color
 function n() {
 	tabcolor green
-	nvim -c 'cd .' $@
+	nvim $@
 	resettab
 	tabtitle "sh"
 }
@@ -58,7 +58,7 @@ alias ag='ag --path-to-agignore ~/.agignore'
 PROJECT_DIR=$HOME/projects
 source ~/.otherFunctions
 source ~/.gitFunctions
-alias N="tabcolor green;n -c 'cd $CURRENT_PROJECT_DIR';resettab"
+alias N="tabcolor green;n -c 'call CreateTabspaces(g:initial_tabspaces_event, 1)';resettab"
 
 #Start web server
 alias serve='python -m SimpleHTTPServer'

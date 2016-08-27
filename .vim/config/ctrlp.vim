@@ -32,3 +32,7 @@ endif
 "Open CTRLP with current word prepopulated
 nmap <Leader>p <C-p><C-\>w
 nmap <Leader>m :CtrlPMRUFiles<CR>
+
+let g:ctrlp_extensions = ['tabspace']
+command! CtrlPTabspace call ctrlp#init(ctrlp#tabspace#id())
+nmap <Leader>b :CtrlPTabspace<CR>
