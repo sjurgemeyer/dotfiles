@@ -19,7 +19,7 @@ map <C-S-Right> 8<C-w><
 map <F12> :call CloseNavigation()<CR>
 
 function! CloseNavigation()
-    :BuffergatorClose
+    ":BuffergatorClose
     :NERDTreeClose
     :TagbarClose
 	:UndotreeHide

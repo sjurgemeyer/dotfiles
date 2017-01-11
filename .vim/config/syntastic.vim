@@ -9,7 +9,7 @@ let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-", "invali
 let g:syntastic_groovy_checkers = ['gradlebuild', 'codenarc']
 let g:syntastic_java_checkers = ['gradlebuild']
 
-map <Leader>c :SyntasticCheck<CR>
+"map <Leader>c :SyntasticCheck<CR>
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}

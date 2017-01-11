@@ -41,7 +41,7 @@ Plugin 'tpope/vim-abolish.git'
 Plugin 'terryma/vim-expand-region'
 
 "terminal clipboard
-Plugin 'kana/vim-fakeclip'
+"Plugin 'kana/vim-fakeclip'
 
 "Dash
 Plugin 'rizzatti/funcoo.vim'
@@ -57,6 +57,7 @@ Plugin 'sjurgemeyer/vimport'
 Plugin 'sjurgemeyer/vim-open'
 Plugin 'sjurgemeyer/vim-gradle'
 Plugin 'sjurgemeyer/vim-tabspace'
+Plugin 'sjurgemeyer/vim-uuid'
 
 "Formatting
 "Plugin 'vim-scripts/Align.git'
@@ -108,7 +109,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
 " REST / HTTP
-Plugin 'aquach/vim-http-client'
+Plugin 'sjurgemeyer/vim-http-client'
 
 "Random
 Plugin 'nixon/vim-vmath'
@@ -166,8 +167,8 @@ nnoremap ` '
 
 autocmd BufWritePre *.groovy RemoveUnneededImports
 autocmd BufWritePre *.groovy OrganizeImports
-autocmd BufWritePre *.java RemoveUnneededImports
-autocmd BufWritePre *.java OrganizeImports
+"autocmd BufWritePre *.java RemoveUnneededImports
+"autocmd BufWritePre *.java OrganizeImports
 
 autocmd BufWritePre * StripWhitespace
 

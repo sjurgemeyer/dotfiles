@@ -220,6 +220,20 @@ bindkey -M vicmd 'j' history-substring-search-down
 # make 'workon' available
 source virtualenvwrapper.sh
 
+# Karabiner Elements
+function defaultKeyboard {
+	rm -Rf ~/.config/karabiner/karabiner.json
+	ln -s ~/karabiner/karabiner-default.json ~/.config/karabiner/karabiner.json
+}
+function externalKeyboard {
+	rm -Rf ~/.config/karabiner/karabiner.json
+	ln -s ~/karabiner/karabiner-external.json ~/.config/karabiner/karabiner.json
+}
+
+# Android
+export ANDROID_HOME=/Users/$USER/Library/Android/sdk
+export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # NVM
@@ -231,3 +245,4 @@ source /Users/sjurgemeyer/.iterm2_shell_integration.zsh
 
 # SDKMan
 [[ -s "/Users/sjurgemeyer/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/sjurgemeyer/.sdkman/bin/sdkman-init.sh"
+

@@ -106,7 +106,7 @@ function statusAll() {
 }
 
 function diffAll() {
-    gitAll diff 
+    gitAll diff
 }
 function fetchAll() {
     gitAll fetch --all
@@ -183,7 +183,7 @@ function cleanupBranches() {
                 echo -e "\nCancelling delete branch script"
                 exit 0
             fi
-        fi 
+        fi
     done
     echo -e "\n"
     echo "Cleanup complete"
@@ -193,4 +193,10 @@ function cleanupBranches() {
 function gitb() {
 	git checkout master
 	git checkout -b $1
+}
+
+function lab() {
+  h=`git config --get remote.origin.url`
+  p=${h%.*}
+  open "$p/tree/`git rev-parse --abbrev-ref HEAD`"
 }
