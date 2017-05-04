@@ -1,4 +1,5 @@
 map /  <Plug>(incsearch-forward)
+map \  /<C-R>"
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 
@@ -11,4 +12,4 @@ map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
 
 let g:incsearch#consistent_n_direction = 1
-let g:incsearch#magic = '\v'
+"let g:incsearch#magic = '\v'

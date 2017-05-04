@@ -11,6 +11,13 @@ git-dev-diff - Show the changes from upstream/develop to the current branch
 cleanupBranches - For all branches local and origin, give a Y/n option to delete (will checkout master)
 "'
 
+function git-update() {
+	git checkout master
+	git pull upstream master
+	git checkout release
+	git pull upstream release
+}
+
 function git-dev() {
     checkoutUpdateFromUpstreamAll develop
 }

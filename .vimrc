@@ -1,5 +1,4 @@
 set nocompatible
-filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 set rtp+=~/.vim/bundle/vundleconfig/
@@ -13,7 +12,9 @@ Plugin 'VundleVim/Vundle.vim'
 
 "Code completion
 if has('nvim')
-	Plugin 'Shougo/deoplete.nvim'
+    Plugin 'Shougo/deoplete.nvim'
+else
+    Plugin 'Shougo/neocomplete.vim'
 endif
 Plugin 'sirver/ultisnips'
 Plugin 'honza/vim-snippets'
@@ -41,7 +42,7 @@ Plugin 'tpope/vim-abolish.git'
 Plugin 'terryma/vim-expand-region'
 
 "terminal clipboard
-"Plugin 'kana/vim-fakeclip'
+Plugin 'kana/vim-fakeclip'
 
 "Dash
 Plugin 'rizzatti/funcoo.vim'
@@ -60,9 +61,11 @@ Plugin 'sjurgemeyer/vim-tabspace'
 Plugin 'sjurgemeyer/vim-uuid'
 
 "Formatting
-"Plugin 'vim-scripts/Align.git'
+Plugin 'vim-scripts/Align.git'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'junegunn/vim-easy-align'
+Plugin 'ciaranm/detectindent'
 
 " Required for other plugins?
 Plugin 'vim-scripts/SyntaxRange'
@@ -70,6 +73,10 @@ Plugin 'vim-scripts/SyntaxRange'
 "Filetype
 Plugin 'tpope/vim-markdown'
 Plugin 'csv.vim'
+
+" plantuml
+Plugin 'sjurgemeyer/vim-plantuml'
+Plugin 'aklt/plantuml-syntax'
 
 "CSS
 Plugin 'https://github.com/gorodinskiy/vim-coloresque.git'
@@ -90,6 +97,9 @@ Plugin 'markcornick/vim-terraform'
 
 "Golang
 Plugin 'fatih/vim-go'
+
+"Rust
+Plugin 'rust-lang/rust.vim'
 
 "Git
 Plugin 'sjl/splice.vim'
@@ -269,14 +279,14 @@ endfu
 command! WordProcessorMode :call WordProcessorMode()
 
 func! Light()
-	colorscheme morning
-	let g:airline_theme='cool'
+    colorscheme morning
+    let g:airline_theme='cool'
 endfu
 command Light :call Light()
 
 func! Dark()
-	colorscheme ororo
-	let g:airline_theme='dark'
+    colorscheme ororo
+    let g:airline_theme='dark'
 endfu
 command Dark :call Dark()
 
