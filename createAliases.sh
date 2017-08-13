@@ -1,6 +1,7 @@
 mkdir ~/.vimbackup
 mkdir ~/.vimundo
 
+#Hammerspoon
 rm -Rf ~/.hammerspoon/init.lua
 sudo ln -s ~/projects/dotfiles/init.lua ~/.hammerspoon/init.lua
 
@@ -17,8 +18,9 @@ sudo rm -Rf /usr/local/bin/ffind
 sudo ln -s ~/projects/dotfiles/dependencies/friendly-find/ffind /usr/local/bin/ffind
 
 # Remapping keys
-rm /Users/sjurgemeyer/Library/Application\ Support/Karabiner/private.xml
-sudo ln -s ~/projects/dotfiles/config/private.xml ~/Library/Application\ Support/Karabiner/private.xml
+sudo rm -Rf ~/.config/karabiner/karabiner.json
+sudo ln -s ~/projects/dotfiles/karabiner.json ~/.config/karabiner/karabiner.json
+
 
 # Slate for window management
 rm -Rf ~/.slate
