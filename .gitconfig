@@ -7,7 +7,7 @@
     prompt = false
 [difftool "sourcetree"]
 	cmd = mvimdiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+	path =
 [difftool "vim"]
     cmd = vim -df \"$LOCAL\" \"$REMOTE\"
     mvim
@@ -31,6 +31,7 @@
 	l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
     pop = stash pop
     pr = pull --rebase
+    cp = cherry-pick
     b = checkout -b
     pum = pull upstream master
 	prum = pull --rebase upstream master
@@ -39,7 +40,7 @@
     d = branch -D
     co = checkout
 	com = checkout master
-	cm = commit -m 
+	cm = commit -m
 	cf = commit --fixup
 	cauto = commit --automerge
     tc = commit -a -m \"Temp commit\"

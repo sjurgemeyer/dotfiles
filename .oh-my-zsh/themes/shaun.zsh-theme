@@ -15,7 +15,7 @@ export koreanshaun='숀'
 
 
 #PROMPT='%{$fg_bold[blue]%}$arrow%{$fg[white]%} %t %{$fg[blue]%}✘%{$fg[green]%}%p %{$fg[white]%}%c %{$fg[blue]%}$(git_prompt_info)$(hg_prompt_info)%{$fg[blue]%} $(tasks)✘ % %{$reset_color%}'
-PROMPT='%{$fg[red]%}$koreanshaun%{$fg[green]%}%p%{$fg_bold[cyan]%} %c %{$reset_color%}%{$fg[blue]%}$(git_prompt_info)%{$fg[blue]%}$pointyarrow % %{$reset_color%}'
+PROMPT='%{$fg[red]%}$koreanshaun%{$fg[green]%}%p%{$fg_bold[cyan]%} %c %{$reset_color%}%{$fg[blue]%}$(git_prompt_info)%{$reset_color%}%{$fg[blue]%} $pointyarrow % %{$reset_color%}'
 #PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
 
 
@@ -53,9 +53,10 @@ bindkey -v
 #}
 
 # define right prompt, if it wasn't defined by a theme
-#if [[ "$RPS1" == "" && "$RPROMPT" == "" ]]; then
+if [[ "$RPS1" == "" && "$RPROMPT" == "" ]]; then
   ##RPS1='$(vi_mode_prompt_info)'
-#fi
+  RPS1='$(prompt_kubecontext)'
+fi
 #
 function tab_title() {
   local REPO=$(basename `git rev-parse --show-toplevel 2> /dev/null` 2> /dev/null) || return
@@ -68,3 +69,17 @@ function tab_title() {
 }
 
 ZSH_THEME_TERM_TAB_TITLE_IDLE='$(tab_title)'
+
+function prompt_kubecontext() {
+    kube_env=$(kubectl config current-context)
+
+    kube_prompt=''
+    if [[ $kube_env =~ ".*stag.*" ]]; then
+      kube_prompt="$kube_prompt%{$fg[yellow]%}"
+    elif [[ $kube_env =~ ".*prod.*" ]]; then
+      kube_prompt="$kube_prompt%{$fg[red]%}"
+    else
+      kube_prompt="$kube_prompt%{$fg[green]%}"
+    fi
+    echo $kube_prompt"[$kube_env]%{$reset_color%}"
+}

@@ -1,5 +1,6 @@
 set nocompatible
-set rtp+=~/.vim/bundle/vundle/
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#rc()
 set rtp+=~/.vim/bundle/vundleconfig/
 call vundleconfig#init()
@@ -12,9 +13,9 @@ Plugin 'VundleVim/Vundle.vim'
 
 "Code completion
 if has('nvim')
-    Plugin 'Shougo/deoplete.nvim'
+   "Plugin 'Shougo/deoplete.nvim'
 else
-    Plugin 'Shougo/neocomplete.vim'
+   Plugin 'Shougo/neocomplete.vim'
 endif
 Plugin 'sirver/ultisnips'
 Plugin 'honza/vim-snippets'
@@ -65,21 +66,20 @@ Plugin 'vim-scripts/Align.git'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'junegunn/vim-easy-align'
-Plugin 'ciaranm/detectindent'
+"Plugin 'ciaranm/detectindent'
 
 " Required for other plugins?
 Plugin 'vim-scripts/SyntaxRange'
 
-"Filetype
+""Filetype
 Plugin 'tpope/vim-markdown'
 Plugin 'csv.vim'
-
 " plantuml
 Plugin 'sjurgemeyer/vim-plantuml'
 Plugin 'aklt/plantuml-syntax'
 
 "CSS
-Plugin 'https://github.com/gorodinskiy/vim-coloresque.git'
+"Plugin 'https://github.com/gorodinskiy/vim-coloresque.git'
 Plugin 'groenewege/vim-less'
 
 "Javascript stuff
@@ -96,7 +96,7 @@ Plugin 'derekwyatt/vim-scala'
 Plugin 'markcornick/vim-terraform'
 
 "Golang
-Plugin 'fatih/vim-go'
+"Plugin 'fatih/vim-go'
 
 "Rust
 Plugin 'rust-lang/rust.vim'
@@ -175,7 +175,6 @@ set undodir=~/.vimundo
 nnoremap ' `
 nnoremap ` '
 
-autocmd BufWritePre *.groovy RemoveUnneededImports
 autocmd BufWritePre *.groovy OrganizeImports
 "autocmd BufWritePre *.java RemoveUnneededImports
 "autocmd BufWritePre *.java OrganizeImports
@@ -207,8 +206,8 @@ function! RemoveSwapFile()
 endfunction
 command! RemoveSwapFile :call RemoveSwapFile()
 
-command! Big :set guifont=Source\ Code\ Pro\ Semibold\ for\ Powerline:h40
-command! Small :set guifont=Source\ Code\ Pro\ Semibold\ for\ Powerline:h13
+command! Big :set guifont=Source\ Code\ Pro\ for\ Powerline\ Semibold:h40
+command! Small :set guifont=Source\ Code\ Pro\ for\ Powerline\ Semibold:h13
 
 "Cleanup quickfix
 au Filetype qf setl nolist
@@ -250,8 +249,8 @@ nmap <Leader><Tab> :call TabWidth(4)<CR>:set noexpandtab<CR>
 
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
-autocmd FileType groovy setlocal shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab
-autocmd FileType java setlocal shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab
+autocmd FileType groovy setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
+autocmd FileType java setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
 
 
 
@@ -274,7 +273,7 @@ func! WordProcessorMode()
   set laststatus=0 " don't show status line
   set gfn=Cousine:h14                " font to use
   set nonumber
-  set guifont=Source\ Code\ Pro\ Semibold\ for\ Powerline:h15
+  set guifont=Source\ Code\ Pro\ for\ Powerline\ Semibold:h15
 endfu
 command! WordProcessorMode :call WordProcessorMode()
 
@@ -293,12 +292,12 @@ command Dark :call Dark()
 "Undo wordprocessormode
 func! CodeMode()
   colorscheme ororo
-  set noexpandtab
+  set expandtab
   "map j gj
   "map k gk
   set colorcolumn=121
   set laststatus=2 " don't show status line
-  set guifont=Source\ Code\ Pro\ Semibold\ for\ Powerline:h13
+  set guifont=Source\ Code\ Pro\ for\ Powerline\ Semibold:h13
   set number
 endfu
 command! CodeMode :call CodeMode()

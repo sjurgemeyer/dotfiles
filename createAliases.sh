@@ -1,3 +1,6 @@
+mkdir ~/.vimbackup
+mkdir ~/.vimundo
+
 rm -Rf ~/.ackrc
 sudo ln -s ~/projects/dotfiles/.ackrc ~/.ackrc #For Ack 2.0
 

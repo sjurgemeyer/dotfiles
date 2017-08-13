@@ -4,14 +4,14 @@ ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="shaun"
 
 #ohymyzsh plugins
-# plugins=(gradle lein redis-cli)
+plugins=(lein redis-cli kubectl)
 source $ZSH/oh-my-zsh.sh
 setopt NO_BEEP
 
 export GOROOT=/usr/local/go
 
 export CASSANDRA_BIN=~/app/apache-cassandra-2.0.12/bin
-export PATH=$HOME/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/share/npm/bin:/opt/local/bin:/opt/local/sbin:/usr/local/sbin:/usr/local/groovy/bin:/usr/local/mysql/bin:/usr/local/tomcat/bin:/usr/local/scripts:/usr/local/gradle/bin:/usr/local/Cellar/ruby/2.0.0-p247/bin:$HOME/.node/bin:$PATH:$HOME/app/dsc-cassandra-2.1.0/bin:/usr/local/Cellar/kafka/0.8.1.1/bin:$HOME/app/dasht-2.0.0/bin
+export PATH=$HOME/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/share/npm/bin:/opt/local/bin:/opt/local/sbin:/usr/local/sbin:/usr/local/groovy/bin:/usr/local/mysql/bin:/usr/local/tomcat/bin:/usr/local/scripts:/usr/local/gradle/bin:/usr/local/Cellar/ruby/2.0.0-p247/bin:$HOME/.node/bin:$PATH:$HOME/app/dsc-cassandra-2.1.0/bin:/usr/local/Cellar/kafka/0.10.2.0/bin:$HOME/app/dasht-2.0.0/bin
 export PATH=$PATH:$GOROOT/bin
 export DISABLE_DYNAMO_TESTS=true
 export ST_ENV=local
@@ -35,6 +35,7 @@ function v() {
 	resettab
 	tabtitle "sh"
 }
+alias vi="v"
 
 #VI Mode
 bindkey -v
@@ -49,19 +50,19 @@ function gopath() {
 export GO15VENDOREXPERIMENT=1
 
 #Java/JVM stuff
-alias jdk6='export JAVA_HOME=$(/usr/libexec/java_home -v 1.6)'
-alias jdk7='export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)'
-alias jdk8='export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)'
+#alias jdk6='export JAVA_HOME=$(/usr/libexec/java_home -v 1.6)'
+#alias jdk7='export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)'
+#alias jdk8='export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)'
 
-export JAVA_OPTS="-server -Djava.awt.headless=true -Xms2G -Xmx3G -XX:PermSize=256M -XX:MaxPermSize=1G -noverify"
+export JAVA_OPTS="-server -Djava.awt.headless=true -Xms2G -Xmx3G "
 export GROOVY_CONSOLE_JAVA_OPTS="-server -Xms2G -Xmx3G -XX:PermSize=256M -XX:MaxPermSize=1G -noverify"
 export GRAILS_OPTS="-Xms2G -Xmx3G -XX:PermSize=256m -XX:MaxPermSize=1G -Dfile.encoding=UTF-8"
 export JAVA_HOME=`/usr/libexec/java_home`
-jdk8
+#jdk8
 
 
 # Searching
-alias ag='ag --path-to-agignore ~/.agignore'
+#alias ag='ag --path-to-agignore ~/.agignore'
 #Project setup
 PROJECT_DIR=$HOME/projects
 source ~/.otherFunctions
@@ -226,7 +227,7 @@ bindkey -M vicmd 'j' history-substring-search-down
 #[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
 
 # make 'workon' available
-source virtualenvwrapper.sh
+#source virtualenvwrapper.sh
 
 # Karabiner Elements
 function defaultKeyboard {
@@ -249,8 +250,11 @@ export NVM_DIR="/Users/sjurgemeyer/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # ITerm shell integration
-source /Users/sjurgemeyer/.iterm2_shell_integration.zsh
+#source /Users/sjurgemeyer/.iterm2_shell_integration.zsh
 
 # SDKMan
-[[ -s "/Users/sjurgemeyer/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/sjurgemeyer/.sdkman/bin/sdkman-init.sh"
+source "${HOME}/.sdkman/bin/sdkman-init.sh"
 
+[ -s "${HOME}/projects/dotfiles/dependencies/scm_breeze/scm_breeze.sh" ] && source "${HOME}/projects/dotfiles/dependencies/scm_breeze/scm_breeze.sh"
+
+[ -s "${HOME}/projects/secrets/scripts/k8s/k8sLoadAndSetContext.sh" ] && . "${HOME}/projects/secrets/scripts/k8s/k8sLoadAndSetContext.sh"
