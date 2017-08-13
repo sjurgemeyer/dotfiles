@@ -42,6 +42,8 @@ shift_handler = function(evt)
 				left_shift_active = false
 				if (send_left_paren) then
 					keyUpDown({"shift"}, '9')
+                    check_left_paren_handler:stop()
+                    send_left_paren = false
 				end
 			end
 		end
@@ -65,6 +67,8 @@ shift_handler = function(evt)
 				right_shift_active = false
 				if (send_right_paren) then
 					keyUpDown({"shift"}, '0')
+                    check_right_paren_handler:stop()
+                    send_right_paren = false
 				end
 			end
 		end

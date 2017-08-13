@@ -1,6 +1,9 @@
 mkdir ~/.vimbackup
 mkdir ~/.vimundo
 
+rm -Rf ~/.hammerspoon/init.lua
+sudo ln -s ~/projects/dotfiles/init.lua ~/.hammerspoon/init.lua
+
 rm -Rf ~/.hammerspoon/hammerspoon
 sudo ln -s ~/projects/dotfiles/hammerspoon ~/.hammerspoon/hammerspoon
 
