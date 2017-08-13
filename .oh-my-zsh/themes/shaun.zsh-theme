@@ -71,15 +71,17 @@ function tab_title() {
 ZSH_THEME_TERM_TAB_TITLE_IDLE='$(tab_title)'
 
 function prompt_kubecontext() {
-    kube_env=$(kubectl config current-context)
+    if type "kubectl">/dev/null 2>&1; then
+        kube_env=$(kubectl config current-context)
 
-    kube_prompt=''
-    if [[ $kube_env =~ ".*stag.*" ]]; then
-      kube_prompt="$kube_prompt%{$fg[yellow]%}"
-    elif [[ $kube_env =~ ".*prod.*" ]]; then
-      kube_prompt="$kube_prompt%{$fg[red]%}"
-    else
-      kube_prompt="$kube_prompt%{$fg[green]%}"
+        kube_prompt=''
+        if [[ $kube_env =~ ".*stag.*" ]]; then
+        kube_prompt="$kube_prompt%{$fg[yellow]%}"
+        elif [[ $kube_env =~ ".*prod.*" ]]; then
+        kube_prompt="$kube_prompt%{$fg[red]%}"
+        else
+        kube_prompt="$kube_prompt%{$fg[green]%}"
+        fi
+        echo $kube_prompt"[$kube_env]%{$reset_color%}"
     fi
-    echo $kube_prompt"[$kube_env]%{$reset_color%}"
 }

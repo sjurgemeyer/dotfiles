@@ -35,7 +35,6 @@ function v() {
 	resettab
 	tabtitle "sh"
 }
-alias vi="v"
 
 #VI Mode
 bindkey -v
@@ -133,8 +132,6 @@ function git-pullify() {
     git config --add remote.upstream.fetch '+refs/pull/*/head:refs/remotes/upstream/pr/*'
 }
 
-#SCM Breeze
-[ -s "/Users/sjurgemeyer/.scm_breeze/scm_breeze.sh" ] && source "/Users/sjurgemeyer/.scm_breeze/scm_breeze.sh"
 
 ################################ Mercurial ###############################
 alias hs="hg status -S"
@@ -255,6 +252,7 @@ export NVM_DIR="/Users/sjurgemeyer/.nvm"
 # SDKMan
 source "${HOME}/.sdkman/bin/sdkman-init.sh"
 
-[ -s "${HOME}/projects/dotfiles/dependencies/scm_breeze/scm_breeze.sh" ] && source "${HOME}/projects/dotfiles/dependencies/scm_breeze/scm_breeze.sh"
+#SCM Breeze
+[ -s "${HOME}/.scm_breeze/scm_breeze.sh" ] && source "${HOME}/.scm_breeze/scm_breeze.sh"
 
 [ -s "${HOME}/projects/secrets/scripts/k8s/k8sLoadAndSetContext.sh" ] && . "${HOME}/projects/secrets/scripts/k8s/k8sLoadAndSetContext.sh"

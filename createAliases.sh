@@ -1,6 +1,9 @@
 mkdir ~/.vimbackup
 mkdir ~/.vimundo
 
+rm -Rf ~/.hammerspoon/hammerspoon
+sudo ln -s ~/projects/dotfiles/hammerspoon ~/.hammerspoon/hammerspoon
+
 rm -Rf ~/.ackrc
 sudo ln -s ~/projects/dotfiles/.ackrc ~/.ackrc #For Ack 2.0
 
