@@ -7,6 +7,7 @@ return {
   { 'b', 'Google Chrome' },     -- "B" for "Browser"
   { 'c', 'Slack' },             -- "C for "Chat"
   { 'f', 'Finder' },            -- "F" for "Finder"
+  { 'h', 'Hipchat' },           -- "H" for "Hipchat"
   { 's', 'Slack' },             -- "S" for "Slack"
   { 't', 'iTerm' },             -- "T" for "Terminal"
 }

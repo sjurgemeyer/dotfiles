@@ -10,34 +10,34 @@
                 "parameters": {
                     "basic.to_if_alone_timeout_milliseconds": 1000
                 },
-				"rules": [
-					{
-						"manipulators": [
-							{
-								"description": "Change right_control to Hyper (i.e., command+control+option+shift)",
-								"from": {
-									"key_code": "right_control",
-									"modifiers": {
-										"optional": [
-											"any"
-										]
-									}
-								},
-								"to": [
-									{
-										"key_code": "left_shift",
-										"modifiers": [
-											"left_control",
-											"left_option",
-											"left_command"
-										]
-									}
-								],
-								"type": "basic"
-							}
-						]
-					}
-				]
+                "rules": [
+                    {
+                        "manipulators": [
+                            {
+                                "description": "Change right_control to Hyper (i.e., command+control+option+shift)",
+                                "from": {
+                                    "key_code": "right_control",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_shift",
+                                        "modifiers": [
+                                            "left_control",
+                                            "left_option",
+                                            "left_command"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    }
+                ]
             },
             "devices": [],
             "fn_function_keys": {
@@ -69,7 +69,34 @@
                 "parameters": {
                     "basic.to_if_alone_timeout_milliseconds": 1000
                 },
-                "rules": []
+                "rules": [
+                    {
+                        "manipulators": [
+                            {
+                                "description": "Change right_control to Hyper (i.e., command+control+option+shift)",
+                                "from": {
+                                    "key_code": "right_control",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_shift",
+                                        "modifiers": [
+                                            "left_control",
+                                            "left_option",
+                                            "left_command"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    }
+                ]
             },
             "devices": [],
             "fn_function_keys": {

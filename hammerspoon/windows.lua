@@ -138,9 +138,11 @@ function hs.window.upRight(win)
 end
 
 -- +--------------+
--- |  |        |  |
+-- |              |
+-- |  +--------+  |
 -- |  |  HERE  |  |
--- |  |        |  |
+-- |  +--------+  |
+-- |              |
 -- +---------------+
 function hs.window.centerWithFullHeight(win)
   local f = win:frame()
@@ -149,8 +151,8 @@ function hs.window.centerWithFullHeight(win)
 
   f.x = max.x + (max.w / 5)
   f.w = max.w * 3/5
-  f.y = max.y
-  f.h = max.h
+  f.y = max.y + (max.h / 5)
+  f.h = max.h * 3/5
   win:setFrame(f)
 end
 
