@@ -1,0 +1,13 @@
+
+hs.hotkey.bind({'shift', 'ctrl', 'alt', 'cmd'}, 'j', function()
+    keyUpDown({}, '[')
+end)
+hs.hotkey.bind({'shift', 'ctrl', 'alt', 'cmd'}, 'k', function()
+    keyUpDown({}, ']')
+end)
+hs.hotkey.bind({'shift', 'ctrl', 'alt', 'cmd'}, 'l', function()
+    keyUpDown({'shift'}, '[')
+end)
+hs.hotkey.bind({'shift', 'ctrl', 'alt', 'cmd'}, ';', function()
+    keyUpDown({'shift'}, ']')
+end)

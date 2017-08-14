@@ -34,6 +34,7 @@ end
 require('hammerspoon.caps')
 require('hammerspoon.shift')
 require('hammerspoon.hyper')
+require('hammerspoon.hyper-braces')
 --require('hammerspoon.panes')
 require('hammerspoon.windows')
 
