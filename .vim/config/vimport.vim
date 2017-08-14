@@ -15,3 +15,6 @@ let g:vimport_import_groups = [
         \ 'matcher' : 'import static .*'
     \ },
 \]
+
+nmap <C-m> :VimportImportAll
+nmap <C-n> :VimportReloadCaches
