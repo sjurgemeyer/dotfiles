@@ -226,7 +226,7 @@ end
 windowLayoutMode = hs.hotkey.modal.new({}, 'F16')
 
 local message = require('hammerspoon.status-message')
-windowLayoutMode.statusMessage = message.new('Window Layout Mode (control-s)')
+windowLayoutMode.statusMessage = message.new('Window Layout Mode')
 windowLayoutMode.entered = function()
   windowLayoutMode.statusMessage:show()
 end
@@ -303,9 +303,9 @@ windowLayoutMode:bindWithAutomaticExit({}, 'left', function()
 end)
 
 -- Use Control+s to toggle WindowLayout Mode
-hs.hotkey.bind({'shift','alt','cmd','ctrl'}, 'a', function()
+hs.hotkey.bind({'shift','alt','cmd','ctrl'}, 'w', function()
   windowLayoutMode:enter()
 end)
-windowLayoutMode:bind({'shift','alt','cmd','ctrl'}, 'a', function()
+windowLayoutMode:bind({'shift','alt','cmd','ctrl'}, 'w', function()
   windowLayoutMode:exit()
 end)

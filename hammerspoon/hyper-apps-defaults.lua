@@ -8,6 +8,7 @@ return {
   { 'c', 'Slack' },             -- "C for "Chat"
   { 'f', 'Finder' },            -- "F" for "Finder"
   { 'h', 'Hipchat' },           -- "H" for "Hipchat"
+  { 'm', 'Spotify' },           -- "H" for "Hipchat"
   { 's', 'Slack' },             -- "S" for "Slack"
   { 't', 'iTerm' },             -- "T" for "Terminal"
 }

@@ -31,11 +31,10 @@ enableHotkeyForWindowsMatchingFilter = function(windowFilter, hotkey)
   end)
 end
 
+require('hammerspoon.apps')
 require('hammerspoon.caps')
 require('hammerspoon.shift')
-require('hammerspoon.hyper')
 require('hammerspoon.hyper-braces')
---require('hammerspoon.panes')
 require('hammerspoon.windows')
 
 hs.notify.new({title='Hammerspoon', informativeText='Ready to rock 🤘'}):send()
