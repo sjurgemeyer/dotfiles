@@ -8,6 +8,8 @@ rm -Rf ~/.ctags
 ln -s ~/projects/dotfiles/.ctags ~/.ctags
 rm -Rf ~/.vim/colors/ororo.vim
 ln -s ~/projects/dotfiles/dependencies/vim-ororo/ororo.vim ~/.vim/colors/ororo.vim
+rm -Rf ~/.vim/colors/ororo-light.vim
+ln -s ~/projects/dotfiles/dependencies/vim-ororo/ororo_light.vim ~/.vim/colors/ororo_light.vim
 
 #NEOVIM
 rm -Rf ~/.nvim

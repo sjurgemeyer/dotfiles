@@ -1,0 +1,14 @@
+windows:
+- name: func
+  root: ~/projects/ole/warehouse-management
+  layout: main-vertical
+  panes:
+    - commands:
+      - tail -f ~/output.txt
+    - commands:
+      - echo "" > ~/output.txt
+      - ./scripts/run-all-services.sh > ~/output.txt 2>&1
+    - commands:
+      - cd ../authproxy/
+      - ./run-local.sh
+    - echo "runFunc"

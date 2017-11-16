@@ -16,5 +16,5 @@ let g:vimport_import_groups = [
     \ },
 \]
 
-nmap <C-m> :VimportImportAll<CR>
-nmap <C-n> :VimportReloadCaches<CR>
+"nmap <C-m> :VimportImportAll<CR>
+"nmap <C-n> :VimportReloadCaches<CR>

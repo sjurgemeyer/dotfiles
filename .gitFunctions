@@ -211,5 +211,5 @@ function lab() {
 function thub() {
   h=`git config --get remote.origin.url`
   p=${h%.*}
-  open "http://git.target.com/ShaunJurgemeyer/warehouse-management/tree/`git rev-parse --abbrev-ref HEAD`"
+  open "http://git.target.com/ShaunJurgemeyer/${PWD##*/}/tree/`git rev-parse --abbrev-ref HEAD`"
 }

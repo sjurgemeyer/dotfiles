@@ -20,15 +20,21 @@ throw new ${1:Exception}()${2}
 endsnippet
 
 snippet if
-if (${1}) ${2}
+if (${1}) {
+	${2}
+}
 endsnippet
 
 snippet el
-else
+} else {
+	${1}
+}
 endsnippet
 
 snippet elif
-else if (${1}) ${2}
+else if (${1}) {
+	${2}
+}
 endsnippet
 
 snippet wh
@@ -65,6 +71,10 @@ endsnippet
 
 snippet cl
 package `!v GetCurrentPackageFromPath()`
+
+import groovy.util.logging.Slf4j
+
+@Slf4j
 class ${2:`!v vim_snippets#Filename()`} {
 	${3}
 }
@@ -107,19 +117,15 @@ ${1:String} ${2:var}${3: = null}${4};${5}
 endsnippet
 
 snippet co
-public static final ${1:String} ${2:var} = ${3};${4}
+static final ${1:String} ${2:var} = ${3}
 endsnippet
 
 snippet cos
-public static final String ${1:var} = "${2}";${3}
+static final String ${1:var} = '${2}'
 endsnippet
 
 snippet as
 assert ${1:test} : "${2:Failure message}";${3}
-endsnippet
-
-snippet ij
-import org.joda.time.LocalDate
 endsnippet
 
 snippet ea
@@ -136,15 +142,6 @@ endsnippet
 
 snippet pl
 println "${1:it} $$1"
-endsnippet
-
-snippet mf
-def ${1:myService}Mock = mockFor($1)
-$1Mock.demand.${2} { ${3} ->
-	${4}
-}
-${5:def} $1 = $1Mock.createMock()
-$1Mock.verify()
 endsnippet
 
 snippet ai

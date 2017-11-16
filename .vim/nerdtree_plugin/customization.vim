@@ -46,6 +46,21 @@ call NERDTreeAddKeyMap({
 			\ 'quickhelpText': 'change dir and cd' })
 
 
+call NERDTreeAddKeyMap({
+			\ 'key': 'd',
+			\ 'scope': 'all',
+			\ 'callback': 'CollapseDirs',
+			\ 'quickhelpText': 'collapse or expand empty dirs' })
+
+function! CollapseDirs()
+    if g:NERDTreeCascadeSingleChildDir == '1'
+        let g:NERDTreeCascadeSingleChildDir=0
+    else
+        let g:NERDTreeCascadeSingleChildDir=1
+    endif
+    silent execute "normal R"
+endfunction
+
 function! ChangeDir()
 	silent execute 'normal C'
 	silent execute 'normal cd'

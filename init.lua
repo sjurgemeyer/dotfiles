@@ -33,8 +33,9 @@ end
 
 require('hammerspoon.apps')
 require('hammerspoon.caps')
-require('hammerspoon.shift')
+--require('hammerspoon.shift')
 require('hammerspoon.hyper-braces')
 require('hammerspoon.windows')
+require('hammerspoon.karabiner')
 
 hs.notify.new({title='Hammerspoon', informativeText='Ready to rock 🤘'}):send()

@@ -117,6 +117,7 @@ Plugin 'tpope/vim-eunuch'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'luochen1990/rainbow'
 
 " REST / HTTP
 Plugin 'sjurgemeyer/vim-http-client'
@@ -356,3 +357,9 @@ if ! has('gui_running')
     au InsertLeave * set timeoutlen=1000
   augroup END
 endif
+
+
+function! PasteTime()
+    let t = strftime("%FT%T%z")
+	execute 'normal i' . t
+endfunction

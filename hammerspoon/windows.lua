@@ -296,10 +296,12 @@ end)
 
 windowLayoutMode:bindWithAutomaticExit({}, 'right', function()
   hs.window.focusedWindow():moveOneScreenEast()
+  hs.window.focusedWindow():maximize()
 end)
 
 windowLayoutMode:bindWithAutomaticExit({}, 'left', function()
   hs.window.focusedWindow():moveOneScreenWest()
+  hs.window.focusedWindow():maximize()
 end)
 
 -- Use Control+s to toggle WindowLayout Mode

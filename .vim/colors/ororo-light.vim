@@ -1,0 +1,1 @@
+/Users/z002pfx/projects/dotfiles/dependencies/vim-ororo/ororo-light.vim
