@@ -1,6 +1,6 @@
 let g:vimport_lookup_gradle_classpath = 1
 let g:vimport_auto_organize = 1
-let g:vimport_gradle_cache_file = "~/.vimGradleCache"
+let g:vimport_gradle_cache_file = "$HOME/.vimGradleCache"
 let g:vimport_import_groups = [
     \ {
         \ 'name' : 'java',
@@ -16,5 +16,5 @@ let g:vimport_import_groups = [
     \ },
 \]
 
-"nmap <C-m> :VimportImportAll<CR>
+nmap <Leader-n> :VimportReloadAllCaches<CR>
 "nmap <C-n> :VimportReloadCaches<CR>

@@ -213,3 +213,21 @@ function thub() {
   p=${h%.*}
   open "http://git.target.com/ShaunJurgemeyer/${PWD##*/}/tree/`git rev-parse --abbrev-ref HEAD`"
 }
+
+
+function changesSinceAuthor() {
+    git fetch upstream
+    git log --no-merges --format="%s - %an" v$1...upstream/master
+}
+function changesSince() {
+    git fetch upstream
+    git log --no-merges --format="%s" v$1...upstream/master
+}
+
+function changesBetween() {
+    git fetch upstream
+    git log --no-merges --format="%s" v$1...v$2
+}
+function gitAuthors() {
+    git ls-tree --name-only -r HEAD | grep -E $1 | xargs -n1 git blame --line-porcelain | grep "^author "|sort|uniq -c|sort -nr
+}

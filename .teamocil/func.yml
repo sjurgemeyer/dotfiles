@@ -1,14 +1,27 @@
+# This can be used with itermocil https://github.com/TomAnthony/itermocil to launch all appropriate services.
 windows:
 - name: func
-  root: ~/projects/ole/warehouse-management
+  root: ~/projects/ole
   layout: main-vertical
   panes:
     - commands:
-      - tail -f ~/output.txt
+      - cd functional-tests
+      - echo "Once things have settled down run ./gradlew test --no-daemon"
     - commands:
-      - echo "" > ~/output.txt
-      - ./scripts/run-all-services.sh > ~/output.txt 2>&1
+      - cd warehouse-management
+      - ./scripts/run-all-services.sh
     - commands:
-      - cd ../authproxy/
+      - cd authproxy
       - ./run-local.sh
-    - echo "runFunc"
+    - commands:
+      - cd transfer-order
+      - ./gradlew --no-daemon transfer-order:run
+    - commands:
+      - cd tasks
+      - ./gradlew --no-daemon task-manager:run
+    - commands:
+      - cd order-pool
+      - ./gradlew --no-daemon order-pool-service:run
+    - commands:
+      - cd event
+      - "./gradlew --no-daemon build -x test -x cM -x cT $* && ./gradlew --parallel --max-workers 4 $* event:bootRun event-consumer:run event-inbox:run"

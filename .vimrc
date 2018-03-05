@@ -13,9 +13,12 @@ Plugin 'VundleVim/Vundle.vim'
 
 "Code completion
 if has('nvim')
-   "Plugin 'Shougo/deoplete.nvim'
+   Plugin 'Shougo/deoplete.nvim'
+   set inccommand=nosplit
+   tnoremap <Esc> <C-\><C-n>
 else
    Plugin 'Shougo/neocomplete.vim'
+   Plugin 'haya14busa/incsearch.vim'
 endif
 Plugin 'sirver/ultisnips'
 Plugin 'honza/vim-snippets'
@@ -35,7 +38,6 @@ Plugin 'mbbill/undotree'
 Plugin 'tpope/vim-unimpaired.git'
 
 "Searching
-Plugin 'haya14busa/incsearch.vim'
 Plugin 'wincent/ferret'
 Plugin 'vim-scripts/keepcase.vim'
 

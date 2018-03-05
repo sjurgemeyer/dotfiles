@@ -8,17 +8,13 @@ plugins=(lein redis-cli kubectl)
 source $ZSH/oh-my-zsh.sh
 setopt NO_BEEP
 
-export GOROOT=/usr/local/go
-
 export CASSANDRA_BIN=~/app/apache-cassandra-2.0.12/bin
 export PATH=$HOME/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/share/npm/bin:/opt/local/bin:/opt/local/sbin:/usr/local/sbin:/usr/local/groovy/bin:/usr/local/mysql/bin:/usr/local/tomcat/bin:/usr/local/scripts:/usr/local/gradle/bin:/usr/local/Cellar/ruby/2.0.0-p247/bin:$HOME/.node/bin:$PATH:$HOME/app/dsc-cassandra-2.1.0/bin:/usr/local/Cellar/kafka/0.10.2.0/bin:$HOME/app/dasht-2.0.0/bin
-export PATH=$PATH:$GOROOT/bin
-export DISABLE_DYNAMO_TESTS=true
-export ST_ENV=local
 
 #VI/VIM defaults
-export EDITOR=vim
+export EDITOR=nvim
 export SVN_EDITOR=vim
+export XDG_CONFIG_HOME=$HOME/.config/
 
 #launch neovim with customized tab color
 function n() {
@@ -42,22 +38,8 @@ bindkey -M main '\C-r' history-incremental-search-backward
 source $HOME/projects/dotfiles/dependencies/opp.zsh/opp.zsh
 source $HOME/projects/dotfiles/dependencies/opp.zsh/opp/*.zsh
 
-#Golang
-function gopath() {
-	export GOPATH=`pwd`
-}
-export GO15VENDOREXPERIMENT=1
-
-#Java/JVM stuff
-#alias jdk6='export JAVA_HOME=$(/usr/libexec/java_home -v 1.6)'
-#alias jdk7='export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)'
-#alias jdk8='export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)'
-
 export JAVA_OPTS="-server -Djava.awt.headless=true -Xms2G -Xmx3G "
-export GROOVY_CONSOLE_JAVA_OPTS="-server -Xms2G -Xmx3G -XX:PermSize=256M -XX:MaxPermSize=1G -noverify"
-export GRAILS_OPTS="-Xms2G -Xmx3G -XX:PermSize=256m -XX:MaxPermSize=1G -Dfile.encoding=UTF-8"
 export JAVA_HOME=`/usr/libexec/java_home`
-#jdk8
 
 
 # Searching
@@ -71,27 +53,33 @@ alias N="tabcolor green;n -c 'call CreateTabspaces(g:initial_tabspaces_event, 1)
 #Start web server
 alias serve='python -m SimpleHTTPServer'
 
-###############################  Groovy/Grails  ##############################
+###############################  Gradle ##############################
 function testResults() {
-    if [ -e "./application.properties" ]
-    then
-        open target/test-reports/html/index.html
-    else
-        open build/reports/tests/index.html
-    fi
+    openWithBaseDir /build/reports/tests/test/index.html $1
 }
 
 alias results=testResults
-alias cn="open build/reports/codenarc/main.html"
+
+function codenarcMain() {
+    openWithBaseDir /build/reports/codenarc/test.html $1
+}
+
+function codenarcTest() {
+    openWithBaseDir /build/reports/codenarc/main.html $1
+}
+
+function openWithBaseDir() {
+    FILEPATH=$1
+    BASEDIR=$2
+    if [ -z "$BASEDIR" ]; then
+        BASEDIR=.
+    fi
+    open $BASEDIR/$FILEPATH
+}
 
 function printClassesInJar() {
     jar tf $1 | grep .class | grep -v '\$' | grep -v 'package-info' | sed s,/,.,g | sed s/.class//g
 }
-function grailsTestOrder() {
-    grep testsuite $1 | grep -v testsuites | cut -d\  -f8-9 | sed -E 's/name="(.*)" package="(.*)"/\2.\1/' | grep .
-}
-
-alias testorder=grailsTestOrder
 
 ############################### Mysql ###############################
 alias mysqlstart='mysql.server.start'
@@ -132,21 +120,6 @@ function git-pullify() {
     git config --add remote.upstream.fetch '+refs/pull/*/head:refs/remotes/upstream/pr/*'
 }
 
-
-################################ Mercurial ###############################
-alias hs="hg status -S"
-alias hb="hg branch"
-alias hgdr=hgdiffrevs
-
-alias hgl="hg sglog -l"
-alias hglv="hg sglog -v -l"
-
-alias hgi='hg identify -nibt'
-alias hga='hg annotate -un'
-
-hgdiffrevs() {
-	diff <(hg slog --rev $1:0 --follow) <(hg slog --rev $2:0 --follow)
-}
 
 ###################### Generic Shell stuff ###########################
 export DISABLE_AUTO_TITLE="true"
@@ -219,27 +192,7 @@ bindkey '^[[B' history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
-#RVM
-#[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
-#[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
-
-# make 'workon' available
-#source virtualenvwrapper.sh
-
-# Karabiner Elements
-function defaultKeyboard {
-	rm -Rf ~/.config/karabiner/karabiner.json
-	ln -s ~/karabiner/karabiner-default.json ~/.config/karabiner/karabiner.json
-}
-function externalKeyboard {
-	rm -Rf ~/.config/karabiner/karabiner.json
-	ln -s ~/karabiner/karabiner-external.json ~/.config/karabiner/karabiner.json
-}
-
-# Android
-export ANDROID_HOME=/Users/$USER/Library/Android/sdk
-export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
-
+alias python=/usr/local/opt/python@2/bin/python2
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # NVM

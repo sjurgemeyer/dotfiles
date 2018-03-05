@@ -36,14 +36,6 @@ sudo ln -s ~/projects/dotfiles/.gitFunctions ~/.gitFunctions
 rm -Rf ~/.git.scmbrc
 sudo ln -s ~/projects/dotfiles/.git.scmbrc ~/.git.scmbrc
 
-#HG
-rm -Rf ~/.hgignore
-sudo ln -s ~/projects/dotfiles/.hgignore ~/.hgignore
-rm -Rf ~/.hgignore_global
-sudo ln -s ~/projects/dotfiles/.hgignore_global ~/.hgignore_global
-rm -Rf ~/.hgrc
-sudo ln -s ~/projects/dotfiles/.hgrc ~/.hgrc
-
 #Vim
 ~/projects/dotfiles/createVimAliases.sh
 
