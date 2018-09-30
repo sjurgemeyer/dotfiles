@@ -40,6 +40,8 @@ Plugin 'tpope/vim-unimpaired.git'
 "Searching
 Plugin 'wincent/ferret'
 Plugin 'vim-scripts/keepcase.vim'
+Plugin 'RRethy/vim-illuminate'
+Plugin 'prakashdanish/vim-githubinator'
 
 Plugin 'tpope/vim-abolish.git'
 Plugin 'terryma/vim-expand-region'
@@ -76,6 +78,7 @@ Plugin 'vim-scripts/SyntaxRange'
 ""Filetype
 Plugin 'tpope/vim-markdown'
 Plugin 'csv.vim'
+
 " plantuml
 Plugin 'sjurgemeyer/vim-plantuml'
 Plugin 'aklt/plantuml-syntax'
@@ -109,6 +112,8 @@ Plugin 'tpope/vim-fugitive.git'
 Plugin 'gregsexton/gitv.git'
 Plugin 'idanarye/vim-merginal'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'tyru/open-browser.vim'
+Plugin 'tyru/open-browser-github.vim'
 
 "Utils
 Plugin 'tpope/vim-repeat'
@@ -126,6 +131,9 @@ Plugin 'sjurgemeyer/vim-http-client'
 
 "Random
 Plugin 'nixon/vim-vmath'
+
+" Drawing
+"Plugin 'gyim/vim-boxdraw'
 
 syntax on
 if filereadable("~/.vimrc-private")

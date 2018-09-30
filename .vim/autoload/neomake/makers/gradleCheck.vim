@@ -45,3 +45,5 @@ function! GetFullFilePath(line) abort
     endif
     return a:line
 endfunction
+let g:neomake_java_gradleCheck_maker = neomake#makers#gradleCheck#gradleCheck()
+let g:neomake_groovy_gradleCheck_maker = neomake#makers#gradleCheck#gradleCheck()

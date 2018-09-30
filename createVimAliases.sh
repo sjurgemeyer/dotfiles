@@ -16,3 +16,7 @@ rm -Rf ~/.nvim
 sudo ln -s ~/projects/dotfiles/.vim ~/.nvim
 rm -Rf ~/.nvimrc
 sudo ln -s ~/projects/dotfiles/.vimrc ~/.nvimrc
+rm -Rf ~/.config/nvim
+mkdir ~/.config/
+sudo ln -s ~/projects/dotfiles/.vim ~/.config/nvim
+sudo ln -s ~/projects/dotfiles/.vimrc ~/.config/nvim/init.vim

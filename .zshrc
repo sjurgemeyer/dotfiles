@@ -8,8 +8,9 @@ plugins=(lein redis-cli kubectl)
 source $ZSH/oh-my-zsh.sh
 setopt NO_BEEP
 
-export CASSANDRA_BIN=~/app/apache-cassandra-2.0.12/bin
-export PATH=$HOME/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/share/npm/bin:/opt/local/bin:/opt/local/sbin:/usr/local/sbin:/usr/local/groovy/bin:/usr/local/mysql/bin:/usr/local/tomcat/bin:/usr/local/scripts:/usr/local/gradle/bin:/usr/local/Cellar/ruby/2.0.0-p247/bin:$HOME/.node/bin:$PATH:$HOME/app/dsc-cassandra-2.1.0/bin:/usr/local/Cellar/kafka/0.10.2.0/bin:$HOME/app/dasht-2.0.0/bin
+#export CASSANDRA_BIN=~/app/apache-cassandra-2.0.12/bin
+export CASSANDRA_BIN=~/app/apache-cassandra-3.0.16/bin
+export PATH=$HOME/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/share/npm/bin:/opt/local/bin:/opt/local/sbin:/usr/local/sbin:/usr/local/groovy/bin:/usr/local/mysql/bin:/usr/local/tomcat/bin:/usr/local/scripts:/usr/local/gradle/bin:/usr/local/Cellar/ruby/2.0.0-p247/bin:$HOME/.node/bin:$PATH:$CASSANDRA_BIN:/usr/local/Cellar/kafka/1.1.0/bin:$HOME/app/dasht-2.0.0/bin
 
 #VI/VIM defaults
 export EDITOR=nvim
@@ -32,11 +33,31 @@ function v() {
 	tabtitle "sh"
 }
 
+# use better versions of commands
+alias cat=bat
+alias ping='prettyping --nolegend'
+alias top=htop
+alias diff=diff-so-fancy
+eval "$(fasd --init auto)"
+alias v='f -e vim' # quick opening files with vim
+
+alias preview="fzf --preview 'bat --color \"always\" {}'"
+# add support for ctrl+o to open selected file in VS Code
+export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(code {})+abort'"
+
+export DOTFILES_DIR=$HOME/projects/dotfiles
 #VI Mode
 bindkey -v
 bindkey -M main '\C-r' history-incremental-search-backward
-source $HOME/projects/dotfiles/dependencies/opp.zsh/opp.zsh
-source $HOME/projects/dotfiles/dependencies/opp.zsh/opp/*.zsh
+source $DOTFILES_DIR/dependencies/opp.zsh/opp.zsh
+source $DOTFILES_DIR/dependencies/opp.zsh/opp/*.zsh
+
+source ~/.otherFunctions
+source $DOTFILES_DIR/cli/cassandra.sh
+source $DOTFILES_DIR/cli/git.sh
+source $DOTFILES_DIR/cli/kafka.sh
+source $DOTFILES_DIR/cli/kubernetes.sh
+source $DOTFILES_DIR/cli/objectStore.sh
 
 export JAVA_OPTS="-server -Djava.awt.headless=true -Xms2G -Xmx3G "
 export JAVA_HOME=`/usr/libexec/java_home`
@@ -46,8 +67,7 @@ export JAVA_HOME=`/usr/libexec/java_home`
 #alias ag='ag --path-to-agignore ~/.agignore'
 #Project setup
 PROJECT_DIR=$HOME/projects
-source ~/.otherFunctions
-source ~/.gitFunctions
+source ~/projects/dotfiles/docker.sh
 alias N="tabcolor green;n -c 'call CreateTabspaces(g:initial_tabspaces_event, 1)';resettab"
 
 #Start web server
@@ -211,3 +231,5 @@ source "${HOME}/.sdkman/bin/sdkman-init.sh"
 [ -s "${HOME}/projects/secrets/scripts/k8s/k8sLoadAndSetContext.sh" ] && . "${HOME}/projects/secrets/scripts/k8s/k8sLoadAndSetContext.sh"
 
 export USERNAME=z002pfx
+export ES_CERT_PATH=/Users/z002pfx/target/target_cacerts.cer
+[ -s "/Users/z002pfx/.scm_breeze/scm_breeze.sh" ] && source "/Users/z002pfx/.scm_breeze/scm_breeze.sh"
