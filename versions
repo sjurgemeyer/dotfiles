@@ -1,0 +1,14 @@
+latestVersion () {
+   if [ $# -lt 1 ]
+   then
+     echo -e "Usage: latestVersion <repo name>"
+     return
+   fi
+    git ls-remote git@git.target.com:ole/$1 | grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn} 'refs/tags/[0-9]' | sed -e 's/.*refs\/tags\/\([0-9][0-9]*\)/\1/g' | sort -n | tail -1
+ }
+
+allLatestVersions() {
+  for app in tasks transfer-order warehouse-management yard-management scheduler inventory order-pool shipping location event batch-consumer; do
+    echo $app; latestVersion $app
+  done
+}
