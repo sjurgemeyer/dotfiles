@@ -1,11 +1,11 @@
 
 declare -a environments=("dev" "stage" "prod")
-declare -a cmds=("deployment" "configmap", "ingress")
+declare -a cmds=("deployment" "configmap" "ingress")
 for env in "${environments[@]}"
 do
     for cmd in "${cmds[@]}"
     do
-        eval "function k_${cmd}_${env}() { kubecommand $cmd $env \$* }"
+        eval "function k_${cmd}_${env}() { kubecommand $cmd $env \$* | bat -l yaml }"
     done
 done
 
