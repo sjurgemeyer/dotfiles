@@ -17,7 +17,7 @@ if has('nvim')
    set inccommand=nosplit
    tnoremap <Esc> <C-\><C-n>
 else
-   Plugin 'Shougo/neocomplete.vim'
+   "Plugin 'Shougo/neocomplete.vim'
    Plugin 'haya14busa/incsearch.vim'
 endif
 Plugin 'sirver/ultisnips'

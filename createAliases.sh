@@ -1,7 +1,8 @@
-mkdir ~/.vimbackup
-mkdir ~/.vimundo
+mkdir -p ~/.vimbackup
+mkdir -p ~/.vimundo
 
 #Hammerspoon
+mkdir -p ~/.hammerspoon
 rm -Rf ~/.hammerspoon/init.lua
 sudo ln -s ~/projects/dotfiles/init.lua ~/.hammerspoon/init.lua
 
@@ -56,14 +57,6 @@ sudo rm -Rf /usr/local/bin/bd
 sudo ln -s ~/projects/dotfiles/dependencies/bd /usr/local/bin/bd
 sudo rm -Rf /usr/local/bin/jq
 sudo ln -s ~/projects/dotfiles/dependencies/jq /usr/local/bin/jq
-
-#Vagrant
-rm -Rf ~/.vagrant.d/Vagrantfile
-sudo ln -s ~/projects/dotfiles/.vagrant.d/VagrantFile ~/.vagrant.d/VagrantFile
-rm -Rf ~/.vagrant.d/cookbooks
-sudo ln -s ~/projects/dotfiles/.vagrant.d/cookbooks ~/.vagrant.d/cookbooks
-rm -Rf ~/.vagrant.d/bash
-sudo ln -s ~/projects/dotfiles/.vagrant.d/bash ~/.vagrant.d/bash
 
 #NPM
 rm -Rf ~/.npmrc

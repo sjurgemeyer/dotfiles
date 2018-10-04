@@ -8,7 +8,7 @@ rm -Rf ~/.ctags
 ln -s ~/projects/dotfiles/.ctags ~/.ctags
 rm -Rf ~/.vim/colors/ororo.vim
 ln -s ~/projects/dotfiles/dependencies/vim-ororo/ororo.vim ~/.vim/colors/ororo.vim
-rm -Rf ~/.vim/colors/ororo-light.vim
+rm -Rf ~/.vim/colors/ororo_light.vim
 ln -s ~/projects/dotfiles/dependencies/vim-ororo/ororo_light.vim ~/.vim/colors/ororo_light.vim
 
 #NEOVIM
@@ -17,6 +17,7 @@ sudo ln -s ~/projects/dotfiles/.vim ~/.nvim
 rm -Rf ~/.nvimrc
 sudo ln -s ~/projects/dotfiles/.vimrc ~/.nvimrc
 rm -Rf ~/.config/nvim
-mkdir ~/.config/
+mkdir -p ~/.config/
 sudo ln -s ~/projects/dotfiles/.vim ~/.config/nvim
+rm -Rf ~/.config/nvim/init.vim
 sudo ln -s ~/projects/dotfiles/.vimrc ~/.config/nvim/init.vim
