@@ -230,6 +230,8 @@ source "${HOME}/.sdkman/bin/sdkman-init.sh"
 
 [ -s "${HOME}/projects/secrets/scripts/k8s/k8sLoadAndSetContext.sh" ] && . "${HOME}/projects/secrets/scripts/k8s/k8sLoadAndSetContext.sh"
 
+alias t=tasky.py
+alias ta="t -a --title"
 export USERNAME=z002pfx
-export ES_CERT_PATH=/Users/z002pfx/target/target_cacerts.cer
+export ES_CERT_PATH=/Users/z002pfx/target_cacerts.cer
 [ -s "/Users/z002pfx/.scm_breeze/scm_breeze.sh" ] && source "/Users/z002pfx/.scm_breeze/scm_breeze.sh"
