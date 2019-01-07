@@ -32,7 +32,7 @@ function cql_container() {
 }
 
 function cql_container_by_barcode() {
-    cql_script_$1 ole_aggregate_tables_$1 "select * from container_by_barcode where location_id = '3844' barcode=$2"
+    cql_script_$1 ole_aggregate_tables_$1 "select * from container_by_barcode where location_id = '3844' and barcode='$2'"
 }
 
 function cql_file_prod() {

@@ -1744,9 +1744,9 @@
 	<key>NSTableView Supports v2 KeyBingingTable</key>
 	<true/>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>410 377 620 392 0 0 1440 877 </string>
+	<string>410 363 620 392 0 0 1440 877 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>268 243 1018 447 0 0 1440 877 </string>
+	<string>268 300 770 429 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>0 0 1440 877 0 0 1440 877 </string>
 	<key>NeverWarnAboutShortLivedSessions_86928FF9-F4EB-4ABC-8342-904B112E6D31</key>
@@ -4780,6 +4780,8 @@
 	<true/>
 	<key>NoSyncInstallationId</key>
 	<string>CB43BD46-F5CC-44D8-98ED-A7C9474E0F4F</string>
+	<key>NoSyncPermissionToShowTip</key>
+	<false/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
 	<real>560289376.70273805</real>
 	<key>OnlyWhenMoreTabs</key>
@@ -4850,7 +4852,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-10-03T20:25:18Z</date>
+	<date>2019-01-06T17:10:34Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -4858,7 +4860,7 @@
 	<key>ShowBookmarkName</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>
-	<true/>
+	<false/>
 	<key>ShowNewOutputIndicator</key>
 	<true/>
 	<key>ShowPaneTitles</key>
@@ -11103,7 +11105,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.2.2</string>
+	<string>3.2.6beta2</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>

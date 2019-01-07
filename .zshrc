@@ -10,7 +10,7 @@ setopt NO_BEEP
 
 #export CASSANDRA_BIN=~/app/apache-cassandra-2.0.12/bin
 export CASSANDRA_BIN=~/app/apache-cassandra-3.0.16/bin
-export PATH=$HOME/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/share/npm/bin:/opt/local/bin:/opt/local/sbin:/usr/local/sbin:/usr/local/groovy/bin:/usr/local/mysql/bin:/usr/local/tomcat/bin:/usr/local/scripts:/usr/local/gradle/bin:/usr/local/Cellar/ruby/2.0.0-p247/bin:$HOME/.node/bin:$PATH:$CASSANDRA_BIN:/usr/local/Cellar/kafka/1.1.0/bin:$HOME/app/dasht-2.0.0/bin
+export PATH=$HOME/app/kafka_2.11-1.1.0/bin:$HOME/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/share/npm/bin:/opt/local/bin:/opt/local/sbin:/usr/local/sbin:/usr/local/groovy/bin:/usr/local/mysql/bin:/usr/local/tomcat/bin:/usr/local/scripts:/usr/local/gradle/bin:/usr/local/Cellar/ruby/2.0.0-p247/bin:$HOME/.node/bin:$PATH:$CASSANDRA_BIN:$HOME/app/dasht-2.0.0/bin
 
 #VI/VIM defaults
 export EDITOR=nvim

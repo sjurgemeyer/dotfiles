@@ -219,6 +219,7 @@ function changesSinceAuthor() {
     git fetch upstream
     git log --no-merges --format="%s - %an" v$1...upstream/master
 }
+
 function changesSince() {
     git fetch upstream
     git log --no-merges --format="%s" v$1...upstream/master
@@ -228,6 +229,19 @@ function changesBetween() {
     git fetch upstream
     git log --no-merges --format="%s" v$1...v$2
 }
+
 function gitAuthors() {
     git ls-tree --name-only -r HEAD | grep -E $1 | xargs -n1 git blame --line-porcelain | grep "^author "|sort|uniq -c|sort -nr
+}
+
+function gitResetMaster() {
+    git reset --hard
+    git checkout master
+    git pull upstream master
+}
+
+function gitStashResetMaster() {
+    git stash -u
+    gitResetMaster
+    git pop
 }

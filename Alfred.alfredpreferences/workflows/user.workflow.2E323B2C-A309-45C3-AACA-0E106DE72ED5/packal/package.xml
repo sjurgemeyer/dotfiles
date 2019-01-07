@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<workflow>
+  <name>Simple Screenshots</name>
+  <version>1.0</version>
+  <bundle>com.valrus.screenshot.simple</bundle>
+  <updated>1495931799</updated>
+  <file>simple_screenshots.alfredworkflow</file>
+</workflow>

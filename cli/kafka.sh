@@ -50,7 +50,7 @@ function consume() {
     cat ${prop_file}
 
     echo "Consuming from topic: ${topic} on server: ${kafka_server}"
-    kafka-console-consumer \
+    kafka-console-consumer.sh \
         --bootstrap-server ${kafka_server} \
         --timeout-ms 3000 \
         --topic ${topic} \
