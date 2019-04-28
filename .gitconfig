@@ -2,7 +2,7 @@
 	name = Shaun Jurgemeyer
 	email = sjurgemeyer@gmail.com
 [core]
-	excludesfile = /Users/sjurgemeyer/.gitignore_global
+	excludesfile = ~/.gitignore_global
 	pager = diff-so-fancy | less --tabs=4 -RFX
 [difftool]
     prompt = false
@@ -16,7 +16,7 @@
     cmd = mvim -df $BASE $LOCAL $MERGED $REMOTE -c \"wincmd J\"
     mvim
 [mergetool "splice"]
-    cmd = "vim -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
+    cmd = "vim --cmd 'let g:nofugitive=1' -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
     trustExitCode = true
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"

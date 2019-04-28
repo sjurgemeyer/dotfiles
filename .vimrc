@@ -22,22 +22,22 @@ else
 endif
 Plugin 'sirver/ultisnips'
 Plugin 'honza/vim-snippets'
+Plugin 'gravle'
 
 "Buffer management
-"Plugin 'jeetsukumaran/vim-buffergator.git'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'BufOnly.vim'
-Plugin 'ZoomWin'
+Plugin 'szw/vim-maximizer'
 
 "Navigation
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'majutsushi/tagbar.git'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'mbbill/undotree'
 Plugin 'tpope/vim-unimpaired.git'
 
 "Searching
+set rtp+=/usr/local/opt/fzf
+Plugin 'junegunn/fzf.vim'
 Plugin 'wincent/ferret'
 Plugin 'vim-scripts/keepcase.vim'
 Plugin 'RRethy/vim-illuminate'
@@ -70,6 +70,7 @@ Plugin 'vim-scripts/Align.git'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'junegunn/vim-easy-align'
+Plugin 'navicore/vissort.vim'
 "Plugin 'ciaranm/detectindent'
 
 " Required for other plugins?
@@ -108,7 +109,9 @@ Plugin 'rust-lang/rust.vim'
 
 "Git
 Plugin 'sjl/splice.vim'
-Plugin 'tpope/vim-fugitive.git'
+if !exists('g:nofugitive')
+    Plugin 'tpope/vim-fugitive.git'
+endif
 Plugin 'gregsexton/gitv.git'
 Plugin 'idanarye/vim-merginal'
 Plugin 'airblade/vim-gitgutter'
@@ -134,6 +137,11 @@ Plugin 'nixon/vim-vmath'
 
 " Drawing
 "Plugin 'gyim/vim-boxdraw'
+
+" NeoVim terminal
+if has('nvim')
+    Plugin 'kassio/neoterm'
+endif
 
 syntax on
 if filereadable("~/.vimrc-private")
@@ -170,7 +178,7 @@ set undofile
 set wildignore+=*.class,.git,.hg,.svn,test-integration/**,test-unit/**,**/target/**,**/build/**
 set diffopt=filler,vertical
 
-set tags=tags;/
+set tags=.tags;/
 set ic
 set smartcase
 set incsearch
@@ -371,5 +379,28 @@ endif
 
 function! PasteTime()
     let t = strftime("%FT%T%z")
-	execute 'normal i' . t
+    execute 'normal i' . t
+endfunction
+
+
+" Need to move these functions elsewhere
+function! SmallTerm()
+    :bel Topen
+endfunction
+command! SmallTerm :call SmallTerm()
+
+let g:neoterm_size = 10
+let g:neoterm_open_in_all_tabs = 1
+"let g:neoterm_autojump = 1
+let g:neoterm_fixedsize = 1
+
+
+function! RunTest()
+    let file = expand('%:t:r')
+    let root = GradleRootDir()
+    let project = GradleSubprojectName()
+    let package = GetCurrentPackage()
+    call SmallTerm()
+    execute ':T cd ' . root
+    execute ':T ./gradlew -p ' . project . ' test --tests ' . package . '.' . file
 endfunction

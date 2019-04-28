@@ -1,3 +1,4 @@
+#!/bin/bash
 alias V="mvim -c 'cd $CURRENT_PROJECT_DIR'"
 
 alias githelp='echo \
@@ -218,6 +219,7 @@ function changesSinceAuthor() {
     git fetch upstream
     git log --no-merges --format="%s - %an" v$1...upstream/master
 }
+
 function changesSince() {
     git fetch upstream
     git log --no-merges --format="%s" v$1...upstream/master
@@ -227,6 +229,7 @@ function changesBetween() {
     git fetch upstream
     git log --no-merges --format="%s" v$1...v$2
 }
+
 function gitAuthors() {
     git ls-tree --name-only -r HEAD | grep -E $1 | xargs -n1 git blame --line-porcelain | grep "^author "|sort|uniq -c|sort -nr
 }
@@ -247,4 +250,29 @@ function cloneRepo() {
         git remote add origin $base:ShaunJurgemeyer/$project.git
         cd -
     fi
+}
+function gitResetMaster() {
+    git reset --hard
+    git checkout master
+    git pull upstream master
+}
+
+function gitStashResetMaster() {
+    git stash -u
+    gitResetMaster
+    git pop
+}
+
+function gitUpstreamMaster() {
+    if [[ `git status --porcelain` ]]; then
+        echo "Changes exist to current branch, exiting"
+    else
+        git checkout master
+        git fetch upstream
+        git pull upstream master
+    fi
+}
+
+function branches() {
+    git for-each-ref --sort=-committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
 }

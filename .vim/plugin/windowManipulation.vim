@@ -16,17 +16,19 @@ map <C-S-Down> 4<C-w>-
 map <C-S-Right> 8<C-w><
 
 "Close all navigation windows
-map <F12> :call CloseNavigation()<CR>
+map <BS> :call CloseNavigation()<CR>
 
 function! CloseNavigation()
     ":BuffergatorClose
     :NERDTreeClose
-    :TagbarClose
 	:UndotreeHide
     :ccl
 	:lcl
 	:call WipeMatchingBuffers('.*gitv-.*')
 	:call WipeMatchingBuffers('.*__HTTP_Client_Response__.*')
+    :call WipeMatchingBuffers('.*nvim/runtime/doc.*')
+    :call WipeMatchingBuffers('.*bin/fzf.*')
+    :call WipeMatchingBuffers('.*term://.*')
 endfunction
 
 function! GetBufferList()
@@ -45,12 +47,6 @@ function! WipeMatchingBuffers(pattern)
         return
     endif
 
-    if l:count == 1
-        let l:suffix = ''
-    else
-        let l:suffix = 's'
-    endif
-
-    exec 'bd ' . join(l:matchList, ' ')
+    exec 'bd! ' . join(l:matchList, ' ')
 
 endfunction

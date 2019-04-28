@@ -10,30 +10,16 @@ setopt NO_BEEP
 
 #export CASSANDRA_BIN=~/app/apache-cassandra-2.0.12/bin
 export CASSANDRA_BIN=~/app/apache-cassandra-3.0.16/bin
-export PATH=$HOME/app/kafka_2.11-1.1.0/bin:$HOME/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/share/npm/bin:/opt/local/bin:/opt/local/sbin:/usr/local/sbin:/usr/local/groovy/bin:/usr/local/mysql/bin:/usr/local/tomcat/bin:/usr/local/scripts:/usr/local/gradle/bin:/usr/local/Cellar/ruby/2.0.0-p247/bin:$HOME/.node/bin:$PATH:$CASSANDRA_BIN:$HOME/app/dasht-2.0.0/bin
+export PATH=$HOME/app/kafka_2.11-1.1.0/bin:$HOME/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/share/npm/bin:/opt/local/bin:/opt/local/sbin:/usr/local/sbin:/usr/local/groovy/bin:/usr/local/mysql/bin:/usr/local/tomcat/bin:/usr/local/scripts:/usr/local/gradle/bin:/usr/local/Cellar/ruby/2.0.0-p247/bin:$HOME/.node/bin:$PATH:$CASSANDRA_BIN:$HOME/app/dasht-2.0.0/bin:/usr/local/Cellar/ctags/5.8_1/bin/
 
 #VI/VIM defaults
 export EDITOR=nvim
 export SVN_EDITOR=vim
 export XDG_CONFIG_HOME=$HOME/.config/
 
-#launch neovim with customized tab color
-function n() {
-	tabcolor green
-	nvim $@
-	resettab
-	tabtitle "sh"
-}
-
-#launch vim with customized tab color
-function v() {
-	tabcolor green
-	vim $@
-	resettab
-	tabtitle "sh"
-}
-
 # use better versions of commands
+alias n=nvim
+alias v=vim
 alias cat=bat
 alias ping='prettyping --nolegend'
 alias top=htop
@@ -43,7 +29,9 @@ alias v='f -e vim' # quick opening files with vim
 
 alias preview="fzf --preview 'bat --color \"always\" {}'"
 # add support for ctrl+o to open selected file in VS Code
-export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(code {})+abort'"
+export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(code {})+abort' --history=$HOME/.fzf_history"
+#export FZF_DEFAULT_COMMAND='ag -g ""'
+export FZF_DEFAULT_COMMAND='rg --files'
 
 export DOTFILES_DIR=$HOME/projects/dotfiles
 #VI Mode

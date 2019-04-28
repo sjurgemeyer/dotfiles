@@ -210,6 +210,40 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>/bin/mkdir -p "${SCREENSHOT_DIR}"
+filename="${1:-$DEFAULT_NAME}"
+filename="${filename/:/.}.${SCREENSHOT_FORMAT}"
+filepath="${SCREENSHOT_DIR}/${filename}"
+cd "${SCREENSHOT_DIR}"
+/usr/sbin/screencapture ${SCREENSHOT_CLIPBOARD_ARGS} ${SCREENSHOT_ARGS} -t${SCREENSHOT_FORMAT} "$filename"
+
+if [ -z "${SCREENSHOT_CLIPBOARD_ARGS}" ]; then
+	echo "File: " "$filepath"
+else
+	echo "Copied to clipboard"
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>FB03A3B7-F396-4867-A925-2C501F868490</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
@@ -248,40 +282,6 @@
 			<string>27CEB4B8-BA8D-48B1-B591-5AAC36A5AA3C</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>/bin/mkdir -p "${SCREENSHOT_DIR}"
-filename="${1:-$DEFAULT_NAME}"
-filename="${filename/:/.}.${SCREENSHOT_FORMAT}"
-filepath="${SCREENSHOT_DIR}/${filename}"
-cd "${SCREENSHOT_DIR}"
-/usr/sbin/screencapture ${SCREENSHOT_CLIPBOARD_ARGS} ${SCREENSHOT_ARGS} -t${SCREENSHOT_FORMAT} "$filename"
-
-if [ -z "${SCREENSHOT_CLIPBOARD_ARGS}" ]; then
-	echo "File: " "$filepath"
-else
-	echo "Copied to clipboard"
-fi</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>FB03A3B7-F396-4867-A925-2C501F868490</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -504,7 +504,7 @@ Type your keyword into Alfred, followed by your input text if needed, and you'll
 	<key>variables</key>
 	<dict>
 		<key>SCREENSHOT_DIR</key>
-		<string>/Users/valrus/Pictures/Screenshots</string>
+		<string>/Users/z002pfx/Desktop</string>
 		<key>SCREENSHOT_FORMAT</key>
 		<string>jpg</string>
 	</dict>

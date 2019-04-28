@@ -32,8 +32,6 @@ rm -Rf ~/.gitconfig
 sudo ln -s ~/projects/dotfiles/.gitconfig ~/.gitconfig
 rm -Rf ~/.gitignore_global
 sudo ln -s ~/projects/dotfiles/.gitignore_global ~/.gitignore_global
-rm -Rf ~/.gitFunctions
-sudo ln -s ~/projects/dotfiles/.gitFunctions ~/.gitFunctions
 rm -Rf ~/.git.scmbrc
 sudo ln -s ~/projects/dotfiles/.git.scmbrc ~/.git.scmbrc
 
@@ -41,8 +39,6 @@ sudo ln -s ~/projects/dotfiles/.git.scmbrc ~/.git.scmbrc
 ~/projects/dotfiles/createVimAliases.sh
 
 # Used for syntastic
-sudo rm -Rf /usr/local/bin/grails-compile-file
-sudo ln -s ~/projects/dotfiles/config/grails-compile-file /usr/local/bin/grails-compile-file
 rm -Rf ~/.jshintrc
 sudo ln -s ~/projects/dotfiles/.jshintrc ~/.jshintrc
 rm -Rf /usr/local/bin/codenarc

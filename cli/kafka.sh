@@ -13,7 +13,7 @@ function consume() {
     configmap=kafka-ole
 
     if [ "${cluster}" = "tgt" ]; then
-        configmap=event-inbox
+        configmap=kafka-tgt
     fi
     if [ "${cluster}" = "bg" ]; then
         configmap=automation-berkshire
@@ -55,7 +55,7 @@ function consume() {
         --timeout-ms 3000 \
         --topic ${topic} \
         --consumer.config ${prop_file} \
-        --from-beginning >> ${topic}-messages.json
+        --from-beginning | tee ${topic}-messages.json
 
     # Clean up after ourselves
     rm -rf ${temp_key_path}
