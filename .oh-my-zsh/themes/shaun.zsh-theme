@@ -55,7 +55,7 @@ bindkey -v
 # define right prompt, if it wasn't defined by a theme
 if [[ "$RPS1" == "" && "$RPROMPT" == "" ]]; then
   ##RPS1='$(vi_mode_prompt_info)'
-  RPS1='$(prompt_kubecontext)'
+  #RPS1='$(prompt_kubecontext)'
 fi
 #
 function tab_title() {

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.omnifocus.unlocked</string>
+	<key>connections</key>
+	<dict>
+		<key>8605023C-13CE-494E-99D5-061D7130B052</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>FCFB38CD-0431-4610-8417-F983E2879809</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>FCFB38CD-0431-4610-8417-F983E2879809</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F07DCE7B-7D41-4E0C-8941-4D435E66F31B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>unlocked2412</string>
+	<key>description</key>
+	<string></string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Create OF Task</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>applescript</key>
+				<string>on alfred_script(q)
+  tell application "OmniFocus"
+        set oDoc to front document
+		set lst to parse tasks into oDoc ¬
+			with transport text q ¬
+			as single task false
+end tell
+return name of item 1 of lst
+end alfred_script</string>
+				<key>cachescript</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.applescript</string>
+			<key>uid</key>
+			<string>FCFB38CD-0431-4610-8417-F983E2879809</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>Created task "{query}"</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>F07DCE7B-7D41-4E0C-8941-4D435E66F31B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>keyword</key>
+				<string>todo</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Waiting....</string>
+				<key>script</key>
+				<string>on run argv	set str to item 1 of argv	set taskName to trimT(extractName(str))		tell application "OmniFocus"		set oDoc to front document		if str contains "::" then			set projectName to my trimT(my extractTag("::", str))			set xs to name of every flattened project of oDoc whose (name starts with projectName) and (completed is false)			if xs = {} then				set xs to {""}			end if			set apply to |λ|(str) of my curry(my createProjectRecord)			set ys to my map(apply, xs)		else if str contains "@" then			set contextName to my trimT(my extractTag("@", str))			set xs to name of every flattened tag of oDoc whose (name starts with contextName)			if xs = {} then				set xs to {""}			end if			set apply to |λ|(str) of my curry(my createContextRecord)			set ys to my map(apply, xs)		else			set xs to name of every flattened project of oDoc whose (completed is false)			set beginning of xs to "Inbox"			if xs = {} then				set xs to {""}			end if			set apply to |λ|(str) of my curry(my createInboxRecord)			set ys to my map(apply, xs)		end if	end tell	set jsonObjects to intercalate(", ", map(createObject, ys))	return "{\"items\": [" &amp; jsonObjects &amp; "]}"end runon trimT(str)	if (count (words of str)) = 0 then		""	else		intercalate(" ", words 1 thru -1 of str)	end ifend trimTon extractName(str)	set xs to splitOn({"!", "::", "@", "#", "//"}, str)	return item 1 of xsend extractNameon extractTag(s, str)	if str contains s then		set xs to splitOn(s, str)		set x to item 2 of xs		set xs to splitOn({"!", "::", "@", "#", "//"}, x)		if xs ≠ {} then			return item 1 of xs		else			""		end if	else		""	end ifend extractTagon q(str)	quote &amp; str &amp; quoteend qon createInboxRecord(str, projectName)	set taskName to trimT(extractName(str))	set projString to " ::" &amp; projectName	if projectName = "Inbox" then		set projString to ""	end if	{title:"Create task with project " &amp; projectName, subtitle:taskName &amp; " ::" &amp; projectName, autocomplete:taskName &amp; projString, arg:str &amp; projString}end createInboxRecordon createProjectRecord(str, projectName)	set taskName to trimT(extractName(str))	{title:"Create task with project " &amp; projectName, subtitle:taskName &amp; " ::" &amp; projectName, autocomplete:taskName &amp; " ::" &amp; projectName, arg:str}end createProjectRecordon createContextRecord(str, contextName)	set taskName to trimT(extractName(str))	{title:"Create task with context @" &amp; contextName, subtitle:taskName &amp; " @" &amp; contextName, autocomplete:taskName &amp; " @" &amp; contextName, arg:str}end createContextRecordon createObject(rec)	"{\"title\" : " &amp; q(title of rec) &amp; ", \"subtitle\" : " &amp; q(subtitle of rec) &amp; ", \"autocomplete\" : " &amp; q(autocomplete of rec) &amp; ", \"arg\" : " &amp; q(arg of rec) &amp; "}"end createObject-- GENERIC FUNCTIONS ----------------------------------------------------------- map :: (a -&gt; b) -&gt; [a] -&gt; [b]on map(f, xs)	tell mReturn(f)		set lng to length of xs		set lst to {}		repeat with i from 1 to lng			set end of lst to |λ|(item i of xs, i, xs)		end repeat		return lst	end tellend map-- Lift 2nd class handler function into 1st class script wrapper -- mReturn :: Handler -&gt; Scripton mReturn(f)	if class of f is script then		f	else		script			property |λ| : f		end script	end ifend mReturn-- intercalate :: String -&gt; [String] -&gt; Stringon intercalate(s, xs)	set {dlm, my text item delimiters} to {my text item delimiters, s}	set str to xs as text	set my text item delimiters to dlm	return strend intercalate-- splitOn :: Text -&gt; Text -&gt; [Text]on splitOn(strDelim, strMain)	set {dlm, my text item delimiters} to {my text item delimiters, strDelim}	set xs to text items of strMain	set my text item delimiters to dlm	return xsend splitOn-- curry :: (Script|Handler) -&gt; Scripton curry(f)	script		on |λ|(a)			script				on |λ|(b)					|λ|(a, b) of mReturn(f)				end |λ|			end script		end |λ|	end scriptend curry</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Create Task in OF</string>
+				<key>type</key>
+				<integer>6</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>8605023C-13CE-494E-99D5-061D7130B052</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string></string>
+	<key>uidata</key>
+	<dict>
+		<key>8605023C-13CE-494E-99D5-061D7130B052</key>
+		<dict>
+			<key>xpos</key>
+			<integer>30</integer>
+			<key>ypos</key>
+			<integer>40</integer>
+		</dict>
+		<key>F07DCE7B-7D41-4E0C-8941-4D435E66F31B</key>
+		<dict>
+			<key>xpos</key>
+			<integer>440</integer>
+			<key>ypos</key>
+			<integer>40</integer>
+		</dict>
+		<key>FCFB38CD-0431-4610-8417-F983E2879809</key>
+		<dict>
+			<key>xpos</key>
+			<integer>230</integer>
+			<key>ypos</key>
+			<integer>40</integer>
+		</dict>
+	</dict>
+	<key>webaddress</key>
+	<string></string>
+</dict>
+</plist>

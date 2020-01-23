@@ -4,6 +4,7 @@ let g:add_tabspace_mappings = 1
 let g:named_tabspaces = {
 	\ 'rest' : { 'cwd' : '~/REST', 'label' : 'REST' },
 	\ 'tabspace' : { 'cwd' : '~/projects/vim-plugins/vim-tabspace', 'label' : 'tabspace' },
+	\ 'dot' : { 'cwd' : '~/projects/dotfiles', 'label' : 'dotfiles' },
 	\ 'vimopen' : { 'cwd' : '~/projects/vim-plugins/vim-open', 'label' : 'vim-open' },
 	\ 'vimport' : { 'cwd' : '~/projects/vim-plugins/vimport', 'label' : 'vimport' },
 	\ 'vundleconfig' : { 'cwd' : '~/projects/vim-plugins/vundleconfig', 'label' : 'vundleconfig' },

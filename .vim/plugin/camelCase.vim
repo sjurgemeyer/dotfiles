@@ -1,4 +1,3 @@
-nnoremap <Leader>d :call DeleteCamelCaseWord()<CR>
 function! DeleteCamelCaseWord()
 	:let char = getline('.')[col('.')-1]
     :let [row, col] = searchpos('\<\|\u', 'Wn')

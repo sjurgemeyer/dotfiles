@@ -8,9 +8,10 @@ plugins=(lein redis-cli kubectl)
 source $ZSH/oh-my-zsh.sh
 setopt NO_BEEP
 
+export KAFKA_PATH=$HOME/app/kafka_2.11-1.1.1/bin/
 #export CASSANDRA_BIN=~/app/apache-cassandra-2.0.12/bin
 export CASSANDRA_BIN=~/app/apache-cassandra-3.0.16/bin
-export PATH=$HOME/app/kafka_2.11-1.1.0/bin:$HOME/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/share/npm/bin:/opt/local/bin:/opt/local/sbin:/usr/local/sbin:/usr/local/groovy/bin:/usr/local/mysql/bin:/usr/local/tomcat/bin:/usr/local/scripts:/usr/local/gradle/bin:/usr/local/Cellar/ruby/2.0.0-p247/bin:$HOME/.node/bin:$PATH:$CASSANDRA_BIN:$HOME/app/dasht-2.0.0/bin:/usr/local/Cellar/ctags/5.8_1/bin/
+export PATH=$KAFKA_PATH:$HOME/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/share/npm/bin:/opt/local/bin:/opt/local/sbin:/usr/local/sbin:/usr/local/groovy/bin:/usr/local/mysql/bin:/usr/local/tomcat/bin:/usr/local/scripts:/usr/local/gradle/bin:/usr/local/Cellar/ruby/2.0.0-p247/bin:$HOME/.node/bin:$PATH:$CASSANDRA_BIN:$HOME/app/dasht-2.0.0/bin:/usr/local/Cellar/ctags/5.8_1/bin/:$HOME/.config/composer/vendor/couscous/couscous/bin/
 
 #VI/VIM defaults
 export EDITOR=nvim
@@ -21,6 +22,22 @@ export XDG_CONFIG_HOME=$HOME/.config/
 alias n=nvim
 alias v=vim
 alias cat=bat
+
+function tailas() {
+    tail -f $1 | bat --paging=never -l $2
+}
+function tailj() {
+    tailas $1 json
+}
+function taill() {
+    tailas $1 log
+}
+function tailc() {
+    tailas $1 csv
+}
+
+#export LS_COLORS="*.java=33:*.groovy=33:*.kt=33:*.yml=35:*.yaml=35:*.json=35"
+#alias ls=exa
 alias ping='prettyping --nolegend'
 alias top=htop
 alias diff=diff-so-fancy
@@ -32,6 +49,23 @@ alias preview="fzf --preview 'bat --color \"always\" {}'"
 export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(code {})+abort' --history=$HOME/.fzf_history"
 #export FZF_DEFAULT_COMMAND='ag -g ""'
 export FZF_DEFAULT_COMMAND='rg --files'
+
+fid() {
+  local out file key
+  IFS=$'\n' out=("$(fzf-tmux --preview="bat {} --color=always" --query="$1" --exit-0 --expect=ctrl-o,ctrl-e)")
+  key=$(head -1 <<< "$out")
+  file=$(head -2 <<< "$out" | tail -1)
+  if [ -n "$file" ]; then
+    [ "$key" = ctrl-o ] && open "$file" || ${EDITOR:-vim} "$file"
+  fi
+}
+# using ripgrep combined with preview
+# find-in-file - usage: fif <searchTerm>
+fif() {
+  if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
+  rg --files-with-matches --no-messages "$1" | fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
+}
+#end fzf functions
 
 export DOTFILES_DIR=$HOME/projects/dotfiles
 #VI Mode
@@ -46,6 +80,7 @@ source $DOTFILES_DIR/cli/git.sh
 source $DOTFILES_DIR/cli/kafka.sh
 source $DOTFILES_DIR/cli/kubernetes.sh
 source $DOTFILES_DIR/cli/objectStore.sh
+source $DOTFILES_DIR/cli/bashHelpers.sh
 
 export JAVA_OPTS="-server -Djava.awt.headless=true -Xms2G -Xmx3G "
 export JAVA_HOME=`/usr/libexec/java_home`
@@ -189,6 +224,10 @@ function tabtitle() {
 	echo -ne "\e]1;$1\a"
 }
 
+function untilfails() {
+    while $@; do :; done
+}
+
 #Easier ZSH history
 source $HOME/projects/dotfiles/dependencies/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $HOME/projects/dotfiles/dependencies/zsh-history-substring-search/zsh-history-substring-search.zsh
@@ -203,23 +242,25 @@ bindkey -M vicmd 'j' history-substring-search-down
 alias python=/usr/local/opt/python@2/bin/python2
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# Allow for more open files on OSX
+ulimit -S -n 10000
+
 # NVM
 export NVM_DIR="/Users/sjurgemeyer/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # ITerm shell integration
-#source /Users/sjurgemeyer/.iterm2_shell_integration.zsh
+source $HOME/.iterm2_shell_integration.zsh
 
 # SDKMan
 source "${HOME}/.sdkman/bin/sdkman-init.sh"
 
 #SCM Breeze
-[ -s "${HOME}/.scm_breeze/scm_breeze.sh" ] && source "${HOME}/.scm_breeze/scm_breeze.sh"
+#[ -s "${HOME}/.scm_breeze/scm_breeze.sh" ] && source "${HOME}/.scm_breeze/scm_breeze.sh"
 
 [ -s "${HOME}/projects/secrets/scripts/k8s/k8sLoadAndSetContext.sh" ] && . "${HOME}/projects/secrets/scripts/k8s/k8sLoadAndSetContext.sh"
 
-alias t=tasky.py
-alias ta="t -a --title"
+alias t=/usr/local/opt/todo-txt/bin/todo.sh
 export USERNAME=z002pfx
 export ES_CERT_PATH=/Users/z002pfx/target_cacerts.cer
 [ -s "/Users/z002pfx/.scm_breeze/scm_breeze.sh" ] && source "/Users/z002pfx/.scm_breeze/scm_breeze.sh"

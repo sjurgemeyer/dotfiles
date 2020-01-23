@@ -34,6 +34,7 @@ Plugin 'scrooloose/nerdtree.git'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'mbbill/undotree'
 Plugin 'tpope/vim-unimpaired.git'
+Plugin 'junegunn/vim-peekaboo'
 
 "Searching
 set rtp+=/usr/local/opt/fzf
@@ -71,6 +72,7 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'navicore/vissort.vim'
+Plugin 'sbdchd/neoformat'
 "Plugin 'ciaranm/detectindent'
 
 " Required for other plugins?
@@ -111,12 +113,11 @@ Plugin 'rust-lang/rust.vim'
 Plugin 'sjl/splice.vim'
 if !exists('g:nofugitive')
     Plugin 'tpope/vim-fugitive.git'
+    Plugin 'tpope/vim-rhubarb.git'
 endif
 Plugin 'gregsexton/gitv.git'
 Plugin 'idanarye/vim-merginal'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'tyru/open-browser.vim'
-Plugin 'tyru/open-browser-github.vim'
 
 "Utils
 Plugin 'tpope/vim-repeat'
@@ -128,12 +129,19 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'luochen1990/rainbow'
+Plugin 'ryanoasis/vim-devicons'
+
 
 " REST / HTTP
 Plugin 'sjurgemeyer/vim-http-client'
 
 "Random
 Plugin 'nixon/vim-vmath'
+Plugin 'vimwiki/vimwiki'
+
+" TODO
+Plugin 'freitass/todo.txt-vim'
+Plugin 'sjurgemeyer/vim-todo.txt-plugin'
 
 " Drawing
 "Plugin 'gyim/vim-boxdraw'
@@ -225,8 +233,8 @@ function! RemoveSwapFile()
 endfunction
 command! RemoveSwapFile :call RemoveSwapFile()
 
-command! Big :set guifont=Source\ Code\ Pro\ for\ Powerline\ Semibold:h40
-command! Small :set guifont=Source\ Code\ Pro\ for\ Powerline\ Semibold:h13
+command! Big :set guifont=SauceCodePro\ Nerdfont\ Semibold:h40
+command! Small :set guifont=SauceCodePro\ Nerdfont\ Semibold:h13
 
 "Cleanup quickfix
 au Filetype qf setl nolist
@@ -271,9 +279,11 @@ autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2 expand
 autocmd FileType groovy setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
 autocmd FileType java setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
 
+nnoremap <Leader>bd :call CleanupBuffers()<CR>
 
-
-
+func! CleanupBuffers()
+    :w | %bd | e#
+endfu
 
 "Make vim work as a word processor
 func! WordProcessorMode()
@@ -404,3 +414,5 @@ function! RunTest()
     execute ':T cd ' . root
     execute ':T ./gradlew -p ' . project . ' test --tests ' . package . '.' . file
 endfunction
+
+nnoremap <Leader>gg :call RunTest()<CR>

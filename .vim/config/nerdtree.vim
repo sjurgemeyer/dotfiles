@@ -1,5 +1,5 @@
 nnoremap <Tab> :NERDTreeToggle<CR>
-nnoremap z :NERDTreeFind<CR>
+nnoremap <F12> :NERDTreeFind<CR>
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let NERDTreeQuitOnOpen = 1
