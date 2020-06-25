@@ -10,6 +10,8 @@
 	<false/>
 	<key>AppleAntiAliasingThreshold</key>
 	<integer>1</integer>
+	<key>ApplePressAndHoldEnabled</key>
+	<false/>
 	<key>AppleScrollAnimationEnabled</key>
 	<integer>0</integer>
 	<key>AppleSmoothFixedFontsSizeThreshold</key>
@@ -1787,11 +1789,11 @@
 		</array>
 	</dict>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>530 476 620 392 0 0 1680 1027 </string>
+	<string>2650 768 620 392 1680 0 2560 1417 </string>
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>256 287 796 486 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 13 1674 1014 0 0 1680 1027 </string>
+	<string>1680 0 2560 1417 1680 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>212 101 394 420 0 0 1680 1027 </string>
 	<key>NeverWarnAboutShortLivedSessions_86928FF9-F4EB-4ABC-8342-904B112E6D31</key>
@@ -4932,13 +4934,15 @@
 	</array>
 	<key>NoSyncAllAppVersions</key>
 	<array>
+		<string>3.3.5beta1</string>
 		<string>3.3.7beta4</string>
 		<string>3.3.7beta3</string>
+		<string>3.3.8beta5</string>
 		<string>3.3.0beta13</string>
 		<string>3.3.7beta1</string>
+		<string>3.3.8beta3</string>
 		<string>3.3.0beta10</string>
 		<string>3.3.0beta15</string>
-		<string>3.3.5beta1</string>
 		<string>3.3.3beta2</string>
 		<string>3.3.0beta12</string>
 	</array>
@@ -4961,6 +4965,8 @@
 		<key>topLeft</key>
 		<string>{201, 710}</string>
 	</dict>
+	<key>NoSyncHaveUsedCopyMode</key>
+	<true/>
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
@@ -4968,7 +4974,7 @@
 	<key>NoSyncLastTipTime</key>
 	<real>590645716.63589394</real>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>25</integer>
+	<integer>29</integer>
 	<key>NoSyncNextAnnoyanceTime</key>
 	<real>581049841.47943699</real>
 	<key>NoSyncOnboardingWindowHasBeenShown</key>
@@ -5697,32 +5703,6 @@
 			</dict>
 		</array>
 	</dict>
-	<key>NoSyncSearchHistory</key>
-	<array>
-		<string>byte</string>
-		<string>addcon</string>
-		<string>corr</string>
-		<string>055140200000000028</string>
-		<string>dock</string>
-		<string>elast</string>
-		<string>excep</string>
-		<string>delw</string>
-		<string>055140200000000079</string>
-		<string>nullpo</string>
-	</array>
-	<key>NoSyncSearchHistory2</key>
-	<array>
-		<string>groov</string>
-		<string>tap-com</string>
-		<string>download</string>
-		<string>downl./</string>
-		<string>fiffiftrail</string>
-		<string>fiffitrail</string>
-		<string>fifftrail</string>
-		<string>fiftrail</string>
-		<string>fitrail</string>
-		<string>ftrail</string>
-	</array>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
 	<real>578249768.63616705</real>
 	<key>NoSyncTipOfTheDayEligibilityBeganTime</key>
@@ -5880,11 +5860,11 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-12-19T18:53:40Z</date>
+	<date>2020-02-11T15:35:09Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateRelaunchingMarker</key>
-	<true/>
+	<false/>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>ShowBookmarkName</key>
@@ -12145,7 +12125,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.3.7beta4</string>
+	<string>3.3.8beta5</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>

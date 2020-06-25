@@ -294,6 +294,16 @@ windowLayoutMode:bindWithAutomaticExit({}, 'n', function()
   hs.window.focusedWindow():nextScreen()
 end)
 
+windowLayoutMode:bindWithAutomaticExit({}, 'up', function()
+  hs.window.focusedWindow():moveOneScreenNorth()
+  hs.window.focusedWindow():maximize()
+end)
+
+windowLayoutMode:bindWithAutomaticExit({}, 'down', function()
+  hs.window.focusedWindow():moveOneScreenSouth()
+  hs.window.focusedWindow():maximize()
+end)
+
 windowLayoutMode:bindWithAutomaticExit({}, 'right', function()
   hs.window.focusedWindow():moveOneScreenEast()
   hs.window.focusedWindow():maximize()

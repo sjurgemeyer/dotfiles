@@ -20,9 +20,11 @@ else
    "Plugin 'Shougo/neocomplete.vim'
    Plugin 'haya14busa/incsearch.vim'
 endif
+
+"Snippets
 Plugin 'sirver/ultisnips'
 Plugin 'honza/vim-snippets'
-Plugin 'gravle'
+"Plugin 'gravle'
 
 "Buffer management
 Plugin 'jlanzarotta/bufexplorer'
@@ -93,6 +95,9 @@ Plugin 'groenewege/vim-less'
 "Javascript stuff
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'othree/javascript-libraries-syntax.vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'MaxMEllon/vim-jsx-pretty'
 
 "Kotlin
 Plugin 'udalov/kotlin-vim'
@@ -108,6 +113,9 @@ Plugin 'markcornick/vim-terraform'
 
 "Rust
 Plugin 'rust-lang/rust.vim'
+
+"TOML
+Plugin 'cespare/vim-toml'
 
 "Git
 Plugin 'sjl/splice.vim'
@@ -130,7 +138,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'luochen1990/rainbow'
 Plugin 'ryanoasis/vim-devicons'
-
+Plugin 'yggdroot/indentline'
 
 " REST / HTTP
 Plugin 'sjurgemeyer/vim-http-client'

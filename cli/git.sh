@@ -251,6 +251,17 @@ function gitStashResetMaster() {
     git pop
 }
 
+#DOC Move to main and update to latest from upstream
+function gum() {
+    if [[ `git status --porcelain` ]]; then
+        echo "Changes exist to current branch, exiting"
+    else
+        git checkout main
+        git fetch upstream
+        git pull upstream main
+    fi
+}
+
 #DOC Move to master and update to latest from upstream
 function gitUpstreamMaster() {
     if [[ `git status --porcelain` ]]; then
@@ -276,9 +287,9 @@ function addRemote() {
     remote_user=$1
     remote_name=$2
     if [ -z "$remote_name" ]; then
-        remote_name=remote_user
+        remote_name=$remote_user
     fi
-    new_remote=`git remote -v | grep -m 1 origin | sed -En 's/origin[\s]*(.*\.git).*$/\1/p' | sed -En 's/(.*)'"$git_username"'(.*)/\1'"$1"'\2/p'`
+    new_remote=`git remote -v | grep -m 1 origin | sed -En 's/origin[\s]*(.*\.git).*$/\1/p' | sed -En 's/^[[:space:]]*(.*)'"$git_username"'(.*)/\1'"$1"'\2/p'`
     git remote add $remote_name $new_remote
     echo Added remote $remote_name for $new_remote
 }

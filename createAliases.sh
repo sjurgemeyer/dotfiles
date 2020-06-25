@@ -66,3 +66,7 @@ cp -r ~/projects/dotfiles/dependencies/scm_breeze ~/.scm_breeze
 #iTermocil
 rm -Rf ~/.teamocil
 sudo ln -s ~/projects/dotfiles/.teamocil ~/.teamocil
+
+# prompt
+sudo rm -Rf ~/.config/starship.toml
+sudo ln -s ~/projects/dotfiles/starship.toml ~/.config/starship.toml

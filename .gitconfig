@@ -34,13 +34,13 @@
     pr = pull --rebase
     cp = cherry-pick
     b = checkout -b
-    pum = pull upstream master
-	prum = pull --rebase upstream master
+    pum = pull upstream main
+	prum = pull --rebase upstream main
     amend = commit --amend
     aa = commit -a --amend
     d = branch -D
     co = checkout
-	com = checkout master
+	com = checkout main
 	cm = commit -m
 	cf = commit --fixup
 	cauto = commit --automerge

@@ -2,8 +2,19 @@ function dsa () {
     docker stop $(docker ps -a -q)
 }
 
+function dra () {
+    dsa
+    dcu
+}
+
 function dsu () {
     dsa
+    dcu
+}
+
+function dockerHardReset () {
+    dsa
+    dda
     dcu
 }
 

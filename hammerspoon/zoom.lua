@@ -1,0 +1,8 @@
+hs.hotkey.bind({'shift', 'ctrl', 'alt', 'cmd'}, 'F12', function()
+    launchApp('zoom.us')
+    keyUpDown({'shift', 'cmd'}, 'a')
+end)
+hs.hotkey.bind({'shift', 'ctrl', 'alt', 'cmd'}, 'F1', function()
+    launchApp('zoom.us')
+    keyUpDown({'cmd'}, 'w')
+end)

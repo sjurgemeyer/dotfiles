@@ -220,6 +220,16 @@ function matrix() {
     echo -e "\e[1;40m" ; clear ; while :; do echo $LINES $COLUMNS $(( $RANDOM % $COLUMNS)) $(( $RANDOM % 72 )) ;sleep 0.05; done|awk '{ letters="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()"; c=$4; letter=substr(letters,c,1);a[$3]=0;for (x in a) {o=a[x];a[x]=a[x]+1; printf "\033[%s;%sH\033[2;32m%s",o,x,letter; printf "\033[%s;%sH\033[1;37m%s\033[0;0H",a[x],x,letter;if (a[x] >= $1) { a[x]=0; } }}'
 }
 
+#function gradleTest() {
+    #project=("$(rg -e "'.*'" ./settings.gradle | sed -En "s/'(.*)'.*/\1/p"' | fzf -m)")
+
+    #test -n "$project" && print -z -- "./gradlew -p ${project[@]:q:q} test"
+#}
+function dostuff() {
+    sels=( "${$(fd "${fd_default[@]}" "${@:2}"| fzf -m)}" )
+    test -n "$sels" && print -z -- "$1 ${sels[@]:q:q}"
+}
+
 normal=$'\e[0m'                           # (works better sometimes)
 bold=$(tput bold)                         # make colors bold/bright
 red="$bold$(tput setaf 1)"                # bright red text

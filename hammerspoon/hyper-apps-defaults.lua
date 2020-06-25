@@ -5,10 +5,11 @@
 -- your preferred shortcuts.
 return {
   { 'b', 'Google Chrome' },     -- "B" for "Browser"
-  { 'c', 'Slack' },             -- "C for "Chat"
+  { 'd', 'Dash' },              -- "D" for "Dash"
   { 'f', 'Finder' },            -- "F" for "Finder"
-  { 'h', 'Hipchat' },           -- "H" for "Hipchat"
+  { 'i', 'Insomnia' },          -- "I" for "Insomnia"
   { 'm', 'Spotify' },           -- "M" for "Music"
   { 's', 'Slack' },             -- "S" for "Slack"
   { 't', 'iTerm' },             -- "T" for "Terminal"
+  { 'z', 'zoom.us' },           -- "Z" for "Zoom"
 }

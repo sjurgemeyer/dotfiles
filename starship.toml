@@ -1,0 +1,26 @@
+add_newline = false
+
+[character]
+#symbol = "숀"
+use_symbol_for_status = true
+
+[line_break]
+disabled = true
+
+[java]
+symbol = " "
+disabled = true
+
+
+[git_branch]
+style = "yellow"
+
+[git_status]
+stashed.value = ""
+modified = "𝚫"
+prefix = ""
+suffix = " "
+style = "red"
+
+[cmd_duration]
+style = "red"

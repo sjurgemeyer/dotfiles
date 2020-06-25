@@ -43,6 +43,7 @@ alias top=htop
 alias diff=diff-so-fancy
 eval "$(fasd --init auto)"
 alias v='f -e vim' # quick opening files with vim
+alias e=exa
 
 alias preview="fzf --preview 'bat --color \"always\" {}'"
 # add support for ctrl+o to open selected file in VS Code
@@ -77,6 +78,7 @@ source $DOTFILES_DIR/dependencies/opp.zsh/opp/*.zsh
 source ~/.otherFunctions
 source $DOTFILES_DIR/cli/cassandra.sh
 source $DOTFILES_DIR/cli/git.sh
+source $DOTFILES_DIR/cli/gradleScripts.sh
 source $DOTFILES_DIR/cli/kafka.sh
 source $DOTFILES_DIR/cli/kubernetes.sh
 source $DOTFILES_DIR/cli/objectStore.sh
@@ -264,3 +266,4 @@ alias t=/usr/local/opt/todo-txt/bin/todo.sh
 export USERNAME=z002pfx
 export ES_CERT_PATH=/Users/z002pfx/target_cacerts.cer
 [ -s "/Users/z002pfx/.scm_breeze/scm_breeze.sh" ] && source "/Users/z002pfx/.scm_breeze/scm_breeze.sh"
+eval "$(starship init zsh)"

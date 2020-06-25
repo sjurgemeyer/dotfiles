@@ -42,7 +42,7 @@ shift_handler = function(evt)
                 and not new_mods["alt"] then
                 left_shift_active = false
                 if (send_left_paren) then
-                    keyUpDown({"shift"}, '9')
+                    keyUpDown({}, 'F12')
                         check_left_paren_handler:stop()
                         send_left_paren = false
                 end

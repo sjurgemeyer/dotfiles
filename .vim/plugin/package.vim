@@ -1,7 +1,7 @@
 " Script for determining the java/groovy package from the current path.
 " Mostly useful for snippets.
 if !exists('g:package_seperators')
-    let g:package_seperators = ['domain', 'services', 'groovy', 'java', 'taglib', 'controllers', 'integration', 'unit']
+    let g:package_seperators = ['groovy', 'java', 'kotlin', 'domain', 'services', 'taglib', 'controllers', 'integration', 'unit']
 endif
 
 function! GetCurrentPackageFromPath()

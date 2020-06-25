@@ -3,7 +3,7 @@
 .vim/colors/ororo.vim
 z-zsh/*
 dependencies/hg-prompt/*
-./.vim/bundle/*
+.vim/bundle/*
 .todo.actions.d/recur
 
 .vim/init.vim
