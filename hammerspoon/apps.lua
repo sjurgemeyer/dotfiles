@@ -38,11 +38,6 @@ function appSelectMode.bindWithAutomaticExit(mode, modifiers, key, fn)
   end)
 end
 
-appSelectMode:bindWithAutomaticExit({}, 's', function()
-    launchApp('Spotify')
-end)
-
-
 local status, hyperModeAppMappings = pcall(require, 'keyboard.hyper-apps')
 
 if not status then

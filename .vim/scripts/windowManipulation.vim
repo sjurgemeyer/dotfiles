@@ -9,14 +9,8 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-"Resize windows
-map <C-S-Left> 8<C-w>>
-map <C-S-Up> 4<C-w>+
-map <C-S-Down> 4<C-w>-
-map <C-S-Right> 8<C-w><
-
 "Close all navigation windows
-map <BS> :call CloseNavigation()<CR>
+map <BS> ;call CloseNavigation()<CR>
 
 function! CloseNavigation()
     ":BuffergatorClose

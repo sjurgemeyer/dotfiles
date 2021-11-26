@@ -5,7 +5,7 @@ hs.window.animationDuration = 0
 -- |  HERE  |        |
 -- |        |        |
 -- +-----------------+
-function hs.window.left(win)
+function left(win)
   local f = win:frame()
   local screen = win:screen()
   local max = screen:frame()
@@ -22,7 +22,7 @@ end
 -- |        |  HERE  |
 -- |        |        |
 -- +-----------------+
-function hs.window.right(win)
+function right(win)
   local f = win:frame()
   local screen = win:screen()
   local max = screen:frame()
@@ -39,7 +39,7 @@ end
 -- +-----------------+
 -- |                 |
 -- +-----------------+
-function hs.window.up(win)
+function up(win)
   local f = win:frame()
   local screen = win:screen()
   local max = screen:frame()
@@ -56,7 +56,7 @@ end
 -- +-----------------+
 -- |      HERE       |
 -- +-----------------+
-function hs.window.down(win)
+function down(win)
   local f = win:frame()
   local screen = win:screen()
   local max = screen:frame()
@@ -73,7 +73,7 @@ end
 -- +--------+        |
 -- |                 |
 -- +-----------------+
-function hs.window.upLeft(win)
+function upLeft(win)
   local f = win:frame()
   local screen = win:screen()
   local max = screen:fullFrame()
@@ -90,7 +90,7 @@ end
 -- +--------+        |
 -- |  HERE  |        |
 -- +-----------------+
-function hs.window.downLeft(win)
+function downLeft(win)
   local f = win:frame()
   local screen = win:screen()
   local max = screen:fullFrame()
@@ -107,7 +107,7 @@ end
 -- |        +--------|
 -- |        |  HERE  |
 -- +-----------------+
-function hs.window.downRight(win)
+function downRight(win)
   local f = win:frame()
   local screen = win:screen()
   local max = screen:fullFrame()
@@ -125,7 +125,7 @@ end
 -- |        +--------|
 -- |                 |
 -- +-----------------+
-function hs.window.upRight(win)
+function upRight(win)
   local f = win:frame()
   local screen = win:screen()
   local max = screen:fullFrame()
@@ -144,7 +144,7 @@ end
 -- |  +--------+  |
 -- |              |
 -- +---------------+
-function hs.window.centerWithFullHeight(win)
+function centerWithFullHeight(win)
   local f = win:frame()
   local screen = win:screen()
   local max = screen:fullFrame()
@@ -161,7 +161,7 @@ end
 -- | HERE |          |
 -- |      |          |
 -- +-----------------+
-function hs.window.left40(win)
+function left40(win)
   local f = win:frame()
   local screen = win:screen()
   local max = screen:frame()
@@ -178,7 +178,7 @@ end
 -- |      |   HERE   |
 -- |      |          |
 -- +-----------------+
-function hs.window.right60(win)
+function right60(win)
   local f = win:frame()
   local screen = win:screen()
   local max = screen:frame()
@@ -190,7 +190,7 @@ function hs.window.right60(win)
   win:setFrame(f)
 end
 
-function hs.window.nextScreen(win)
+function nextScreen(win)
   local currentScreen = win:screen()
   local allScreens = hs.screen.allScreens()
   currentScreenIndex = hs.fnutils.indexOf(allScreens, currentScreen)
@@ -247,51 +247,51 @@ windowLayoutMode:bindWithAutomaticExit({}, 'return', function()
 end)
 
 windowLayoutMode:bindWithAutomaticExit({}, 'space', function()
-  hs.window.focusedWindow():centerWithFullHeight()
+  centerWithFullHeight(hs.window.focusedWindow())
 end)
 
 windowLayoutMode:bindWithAutomaticExit({}, 'h', function()
-  hs.window.focusedWindow():left()
+  left(hs.window.focusedWindow())
 end)
 
 windowLayoutMode:bindWithAutomaticExit({}, 'j', function()
-  hs.window.focusedWindow():down()
+  down(hs.window.focusedWindow())
 end)
 
 windowLayoutMode:bindWithAutomaticExit({}, 'k', function()
-  hs.window.focusedWindow():up()
+  up(hs.window.focusedWindow())
 end)
 
 windowLayoutMode:bindWithAutomaticExit({}, 'l', function()
-  hs.window.focusedWindow():right()
+  right(hs.window.focusedWindow())
 end)
 
 windowLayoutMode:bindWithAutomaticExit({'shift'}, 'h', function()
-  hs.window.focusedWindow():left40()
+  left40(hs.window.focusedWindow())
 end)
 
 windowLayoutMode:bindWithAutomaticExit({'shift'}, 'l', function()
-  hs.window.focusedWindow():right60()
+  right60(hs.window.focusedWindow())
 end)
 
 windowLayoutMode:bindWithAutomaticExit({}, 'i', function()
-  hs.window.focusedWindow():upLeft()
+  upLeft(hs.window.focusedWindow())
 end)
 
 windowLayoutMode:bindWithAutomaticExit({}, 'o', function()
-  hs.window.focusedWindow():upRight()
+  upRight(hs.window.focusedWindow())
 end)
 
 windowLayoutMode:bindWithAutomaticExit({}, ',', function()
-  hs.window.focusedWindow():downLeft()
+  downLeft(hs.window.focusedWindow())
 end)
 
 windowLayoutMode:bindWithAutomaticExit({}, '.', function()
-  hs.window.focusedWindow():downRight()
+  downRight(hs.window.focusedWindow())
 end)
 
 windowLayoutMode:bindWithAutomaticExit({}, 'n', function()
-  hs.window.focusedWindow():nextScreen()
+  nextScreen(hs.window.focusedWindow())
 end)
 
 windowLayoutMode:bindWithAutomaticExit({}, 'up', function()

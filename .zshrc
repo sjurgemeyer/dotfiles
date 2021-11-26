@@ -7,7 +7,7 @@ ZSH_THEME="shaun"
 plugins=(lein redis-cli kubectl)
 source $ZSH/oh-my-zsh.sh
 setopt NO_BEEP
-
+source <(echo "$(navi widget zsh)")
 export KAFKA_PATH=$HOME/app/kafka_2.11-1.1.1/bin/
 #export CASSANDRA_BIN=~/app/apache-cassandra-2.0.12/bin
 export CASSANDRA_BIN=~/app/apache-cassandra-3.0.16/bin
@@ -18,10 +18,15 @@ export EDITOR=nvim
 export SVN_EDITOR=vim
 export XDG_CONFIG_HOME=$HOME/.config/
 
+
 # use better versions of commands
 alias n=nvim
+alias nn=~/app/nvim-osx64/bin/nvim
 alias v=vim
 alias cat=bat
+
+export GARDENIA_SERVER=https://gardenia.target.com
+export GARDENIA_TOKEN=628a270a47c3d66c82bc524dfc386fa2deea4b85
 
 function tailas() {
     tail -f $1 | bat --paging=never -l $2
@@ -83,6 +88,7 @@ source $DOTFILES_DIR/cli/kafka.sh
 source $DOTFILES_DIR/cli/kubernetes.sh
 source $DOTFILES_DIR/cli/objectStore.sh
 source $DOTFILES_DIR/cli/bashHelpers.sh
+source $DOTFILES_DIR/cli/json.sh
 
 export JAVA_OPTS="-server -Djava.awt.headless=true -Xms2G -Xmx3G "
 export JAVA_HOME=`/usr/libexec/java_home`
@@ -134,9 +140,6 @@ alias myr='mysql -u root'
 ################################ Redis ###############################
 alias redisstart='sudo launchctl start io.redis.redis-server'
 alias redisstop='sudo launchctl stop io.redis.redis-server'
-
-################################ Rabbit ###############################
-alias rabbit='sudo /usr/local/Cellar/rabbitmq/3.3.5/sbin/rabbitmq-server -detached'
 
 ################################ Git ###############################
 #Using scm_breeze shortcuts
@@ -248,7 +251,7 @@ alias python=/usr/local/opt/python@2/bin/python2
 ulimit -S -n 10000
 
 # NVM
-export NVM_DIR="/Users/sjurgemeyer/.nvm"
+export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # ITerm shell integration
@@ -262,7 +265,6 @@ source "${HOME}/.sdkman/bin/sdkman-init.sh"
 
 [ -s "${HOME}/projects/secrets/scripts/k8s/k8sLoadAndSetContext.sh" ] && . "${HOME}/projects/secrets/scripts/k8s/k8sLoadAndSetContext.sh"
 
-alias t=/usr/local/opt/todo-txt/bin/todo.sh
 export USERNAME=z002pfx
 export ES_CERT_PATH=/Users/z002pfx/target_cacerts.cer
 [ -s "/Users/z002pfx/.scm_breeze/scm_breeze.sh" ] && source "/Users/z002pfx/.scm_breeze/scm_breeze.sh"

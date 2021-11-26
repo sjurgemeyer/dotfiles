@@ -9,6 +9,7 @@ return {
   { 'f', 'Finder' },            -- "F" for "Finder"
   { 'i', 'Insomnia' },          -- "I" for "Insomnia"
   { 'm', 'Spotify' },           -- "M" for "Music"
+  { 'o', 'Outlook' },           -- "O" for "Outlook"
   { 's', 'Slack' },             -- "S" for "Slack"
   { 't', 'iTerm' },             -- "T" for "Terminal"
   { 'z', 'zoom.us' },           -- "Z" for "Zoom"

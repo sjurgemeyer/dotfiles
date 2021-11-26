@@ -32,10 +32,11 @@ enableHotkeyForWindowsMatchingFilter = function(windowFilter, hotkey)
 end
 
 require('hammerspoon.apps')
-require('hammerspoon.caps')
-require('hammerspoon.shift')
-require('hammerspoon.hyper-braces')
+--require('hammerspoon.caps')
+--require('hammerspoon.shift')
+--require('hammerspoon.hyper-braces')
 require('hammerspoon.windows')
+require('hammerspoon.layouts')
 --require('hammerspoon.karabiner')
 require('hammerspoon.zoom')
 

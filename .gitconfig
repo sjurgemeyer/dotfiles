@@ -1,9 +1,17 @@
 [user]
 	name = Shaun Jurgemeyer
-	email = sjurgemeyer@gmail.com
+	email = Shaun.Jurgemeyer@target.com
 [core]
 	excludesfile = ~/.gitignore_global
-	pager = diff-so-fancy | less --tabs=4 -RFX
+	;pager = diff-so-fancy | less --tabs=4 -RFX
+    pager = delta
+[delta]
+    syntax-theme = TwoDark
+    side-by-side = true
+    hunk-header-decoration-style = "#666666" ol ul
+    line-numbers = true
+    line-numbers-right-format = "{np:>4} "
+    line-numbers-left-format = "{nm:>4} "
 [difftool]
     prompt = false
 [difftool "sourcetree"]
@@ -27,9 +35,12 @@
 	tool = splice
 [diff]
     tool = vim
+    ;colorMoved = default
 [alias]
     # Log display from screencast, with train tracks.
 	l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    changes = log --pretty=format:'%C(bold blue)%an%Creset %Cred%h%Creset %C(yellow)%s'
+    changelog = log --pretty=format:'%C(yellow)%s'
     pop = stash pop
     pr = pull --rebase
     cp = cherry-pick
@@ -66,3 +77,7 @@
 	old = red bold
 	new = green bold
 	whitespace = red reverse
+[gpg]
+	program = gpg
+[commit]
+	gpgsign = false

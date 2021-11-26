@@ -1,6 +1,6 @@
 "let g:csv_highlight_column = 'y'
 
-function! CSVUnHighlight() 
+function! CSVUnHighlight()
     :set filetype=csv
     :execute "unlet g:csv_highlight_column"
     :CSVInit
@@ -8,7 +8,7 @@ function! CSVUnHighlight()
 endfunction
 command! CSVUnHighlight silent call CSVUnHighlight()
 
-function! CSVHighlight() 
+function! CSVHighlight()
     let g:csv_highlight_column='y'
     :CSVInit
 endfunction
