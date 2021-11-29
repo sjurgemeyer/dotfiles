@@ -15,18 +15,6 @@ sudo ln -s ~/projects/dotfiles/.ackrc ~/.ackrc #For Ack 2.0
 rm -Rf ~/.agignore
 sudo ln -s ~/projects/dotfiles/.agignore ~/.agignore
 
-sudo rm -Rf /usr/local/bin/ffind
-sudo ln -s ~/projects/dotfiles/dependencies/friendly-find/ffind /usr/local/bin/ffind
-
-# Remapping keys
-sudo rm -Rf ~/.config/karabiner/karabiner.json
-sudo ln -s ~/projects/dotfiles/karabiner.json ~/.config/karabiner/karabiner.json
-
-
-# Slate for window management
-rm -Rf ~/.slate
-sudo ln -s ~/projects/dotfiles/.slate ~/.slate
-
 #Git
 rm -Rf ~/.gitconfig
 sudo ln -s ~/projects/dotfiles/.gitconfig ~/.gitconfig
@@ -49,10 +37,6 @@ rm -Rf ~/.zshrc
 sudo ln -s ~/projects/dotfiles/.zshrc ~/.zshrc
 rm -Rf ~/.oh-my-zsh/themes/shaun.zsh-theme
 sudo ln -s ~/projects/dotfiles/.oh-my-zsh/themes/shaun.zsh-theme ~/.oh-my-zsh/themes/shaun.zsh-theme
-sudo rm -Rf /usr/local/bin/bd
-sudo ln -s ~/projects/dotfiles/dependencies/bd /usr/local/bin/bd
-sudo rm -Rf /usr/local/bin/jq
-sudo ln -s ~/projects/dotfiles/dependencies/jq /usr/local/bin/jq
 
 #NPM
 rm -Rf ~/.npmrc
@@ -60,13 +44,13 @@ sudo ln -s ~/projects/dotfiles/.npmrc ~/.npmrc
 
 #SCM_BREEZE
 rm -Rf ~/.scm_breeze
-cp -r ~/projects/dotfiles/dependencies/scm_breeze ~/.scm_breeze
+git clone git://github.com/scmbreeze/scm_breeze.git ~/.scm_breeze
 ~/.scm_breeze/install.sh
-
-#iTermocil
-rm -Rf ~/.teamocil
-sudo ln -s ~/projects/dotfiles/.teamocil ~/.teamocil
 
 # prompt
 sudo rm -Rf ~/.config/starship.toml
 sudo ln -s ~/projects/dotfiles/starship.toml ~/.config/starship.toml
+
+# sdkman
+curl -s "https://get.sdkman.io" | bash
+

@@ -8,10 +8,7 @@ plugins=(lein redis-cli kubectl)
 source $ZSH/oh-my-zsh.sh
 setopt NO_BEEP
 source <(echo "$(navi widget zsh)")
-export KAFKA_PATH=$HOME/app/kafka_2.11-1.1.1/bin/
-#export CASSANDRA_BIN=~/app/apache-cassandra-2.0.12/bin
-export CASSANDRA_BIN=~/app/apache-cassandra-3.0.16/bin
-export PATH=$KAFKA_PATH:$HOME/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/share/npm/bin:/opt/local/bin:/opt/local/sbin:/usr/local/sbin:/usr/local/groovy/bin:/usr/local/mysql/bin:/usr/local/tomcat/bin:/usr/local/scripts:/usr/local/gradle/bin:/usr/local/Cellar/ruby/2.0.0-p247/bin:$HOME/.node/bin:$PATH:$CASSANDRA_BIN:$HOME/app/dasht-2.0.0/bin:/usr/local/Cellar/ctags/5.8_1/bin/:$HOME/.config/composer/vendor/couscous/couscous/bin/
+export PATH=$HOME/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/share/npm/bin:/opt/local/bin:/opt/local/sbin:/usr/local/sbin:/usr/local/groovy/bin:/usr/local/mysql/bin:/usr/local/tomcat/bin:/usr/local/scripts:/usr/local/gradle/bin:/usr/local/Cellar/ruby/2.0.0-p247/bin:$HOME/.node/bin:$PATH:$HOME/app/dasht-2.0.0/bin:/usr/local/Cellar/ctags/5.8_1/bin/
 
 #VI/VIM defaults
 export EDITOR=nvim
@@ -21,12 +18,8 @@ export XDG_CONFIG_HOME=$HOME/.config/
 
 # use better versions of commands
 alias n=nvim
-alias nn=~/app/nvim-osx64/bin/nvim
 alias v=vim
 alias cat=bat
-
-export GARDENIA_SERVER=https://gardenia.target.com
-export GARDENIA_TOKEN=628a270a47c3d66c82bc524dfc386fa2deea4b85
 
 function tailas() {
     tail -f $1 | bat --paging=never -l $2
@@ -46,7 +39,6 @@ function tailc() {
 alias ping='prettyping --nolegend'
 alias top=htop
 alias diff=diff-so-fancy
-eval "$(fasd --init auto)"
 alias v='f -e vim' # quick opening files with vim
 alias e=exa
 
@@ -77,8 +69,8 @@ export DOTFILES_DIR=$HOME/projects/dotfiles
 #VI Mode
 bindkey -v
 bindkey -M main '\C-r' history-incremental-search-backward
-source $DOTFILES_DIR/dependencies/opp.zsh/opp.zsh
-source $DOTFILES_DIR/dependencies/opp.zsh/opp/*.zsh
+#source $DOTFILES_DIR/dependencies/opp.zsh/opp.zsh
+#source $DOTFILES_DIR/dependencies/opp.zsh/opp/*.zsh
 
 source ~/.otherFunctions
 source $DOTFILES_DIR/cli/cassandra.sh
@@ -91,11 +83,7 @@ source $DOTFILES_DIR/cli/bashHelpers.sh
 source $DOTFILES_DIR/cli/json.sh
 
 export JAVA_OPTS="-server -Djava.awt.headless=true -Xms2G -Xmx3G "
-export JAVA_HOME=`/usr/libexec/java_home`
 
-
-# Searching
-#alias ag='ag --path-to-agignore ~/.agignore'
 #Project setup
 PROJECT_DIR=$HOME/projects
 source ~/projects/dotfiles/docker.sh
@@ -132,15 +120,6 @@ function printClassesInJar() {
     jar tf $1 | grep .class | grep -v '\$' | grep -v 'package-info' | sed s,/,.,g | sed s/.class//g
 }
 
-############################### Mysql ###############################
-alias mysqlstart='mysql.server.start'
-alias mysqlstop='mysql.server.stop'
-alias myr='mysql -u root'
-
-################################ Redis ###############################
-alias redisstart='sudo launchctl start io.redis.redis-server'
-alias redisstop='sudo launchctl stop io.redis.redis-server'
-
 ################################ Git ###############################
 #Using scm_breeze shortcuts
 
@@ -171,8 +150,6 @@ function git-pullify() {
 
 ###################### Generic Shell stuff ###########################
 export DISABLE_AUTO_TITLE="true"
-# Move up directories more easily
-alias bd='. bd -s'
 
 alias dot='cd $PROJECT_DIR/dotfiles'
 
@@ -182,51 +159,23 @@ mkcd () { mkdir -p "$@" && cd "$@"; }
 alias lla='ll -a' # ll is created by scm breeze
 
 
-## Friendly find alias
-alias ff=ffind
-infiles() {
-    egrep -ir "$@" .
-}
-
 # grep for process
-p() {
+function p() {
     ps -el | grep "$@"
-}
-
-vman() {
-	nvim -c "SuperMan $*"
-
-	if [ "$?" != "0" ]; then
-		echo "No manual entry for $*"
-	fi
-}
-
-# A bash function to display a growl notification using iTerm's magic
-# escape sequence. This version will work under screen.
-
-growl() {
-      local msg="\\e]9;\n\n${*}\\007"
-      case $TERM in
-        screen*)
-          echo -ne '\eP'${msg}'\e\\' ;;
-        *)
-          echo -ne ${msg} ;;
-      esac
-      return
 }
 
 # iTerm tabs
 function  resettab() {
-	echo -ne "\033]6;1;bg;*;default\a"
+    echo -ne "\033]6;1;bg;*;default\a"
 }
 
 function tabcolor() {
-	resettab
-	echo -ne "\033]6;1;bg;$1;brightness;255\a"
+    resettab
+    echo -ne "\033]6;1;bg;$1;brightness;255\a"
 }
 
 function tabtitle() {
-	echo -ne "\e]1;$1\a"
+    echo -ne "\e]1;$1\a"
 }
 
 function untilfails() {
@@ -234,8 +183,7 @@ function untilfails() {
 }
 
 #Easier ZSH history
-source $HOME/projects/dotfiles/dependencies/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $HOME/projects/dotfiles/dependencies/zsh-history-substring-search/zsh-history-substring-search.zsh
+source /opt/homebrew/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 zmodload zsh/terminfo
 
 # bind UP and DOWN arrow keys
@@ -255,17 +203,15 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # ITerm shell integration
-source $HOME/.iterm2_shell_integration.zsh
-
+#source $HOME/.iterm2_shell_integration.zsh
+. $(brew --prefix)/etc/profile.d/z.sh
 # SDKMan
 source "${HOME}/.sdkman/bin/sdkman-init.sh"
 
 #SCM Breeze
-#[ -s "${HOME}/.scm_breeze/scm_breeze.sh" ] && source "${HOME}/.scm_breeze/scm_breeze.sh"
+[ -s "${HOME}/.scm_breeze/scm_breeze.sh" ] && source "${HOME}/.scm_breeze/scm_breeze.sh"
 
 [ -s "${HOME}/projects/secrets/scripts/k8s/k8sLoadAndSetContext.sh" ] && . "${HOME}/projects/secrets/scripts/k8s/k8sLoadAndSetContext.sh"
 
-export USERNAME=z002pfx
-export ES_CERT_PATH=/Users/z002pfx/target_cacerts.cer
-[ -s "/Users/z002pfx/.scm_breeze/scm_breeze.sh" ] && source "/Users/z002pfx/.scm_breeze/scm_breeze.sh"
+[ -s "/Users/sjurgemeyer/.scm_breeze/scm_breeze.sh" ] && source "/Users/sjurgemeyer/.scm_breeze/scm_breeze.sh"
 eval "$(starship init zsh)"

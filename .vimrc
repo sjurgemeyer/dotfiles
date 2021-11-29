@@ -50,6 +50,7 @@ else
 
     "Searching
     set rtp+=/usr/local/opt/fzf
+    Plugin 'junegunn/fzf'
     Plugin 'junegunn/fzf.vim'
     Plugin 'zackhsi/fzf-tags'
     Plugin 'wincent/ferret'
