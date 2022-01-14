@@ -183,7 +183,8 @@ function untilfails() {
 }
 
 #Easier ZSH history
-source /opt/homebrew/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+#source /opt/homebrew/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+source /usr/local/var/homebrew/linked/zsh-history-substring-search/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 zmodload zsh/terminfo
 
 # bind UP and DOWN arrow keys
@@ -213,5 +214,5 @@ source "${HOME}/.sdkman/bin/sdkman-init.sh"
 
 [ -s "${HOME}/projects/secrets/scripts/k8s/k8sLoadAndSetContext.sh" ] && . "${HOME}/projects/secrets/scripts/k8s/k8sLoadAndSetContext.sh"
 
-[ -s "/Users/sjurgemeyer/.scm_breeze/scm_breeze.sh" ] && source "/Users/sjurgemeyer/.scm_breeze/scm_breeze.sh"
+[ -s "/Users/$USER/.scm_breeze/scm_breeze.sh" ] && source "/Users/$USER/.scm_breeze/scm_breeze.sh"
 eval "$(starship init zsh)"
