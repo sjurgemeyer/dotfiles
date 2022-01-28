@@ -1,6 +1,6 @@
 # Create aliases directly from navi cheat files.
 # Descriptions tagged with [shortcut] will create an alias called shortcut.
-# Descriptions tagged with [shortcut] {arg1 arg2] will allow paramers to be passed.  If all are provided the function is directly invoked, otherwise the navi UI will appear
+# Descriptions tagged with [shortcut] {arg1 arg2} will allow paramers to be passed.  If all are provided the function is directly invoked, otherwise the navi UI will appear
 function create_navi_alias() {
     tmp=${@:2}
     count=$(expr $# - 1)
