@@ -69,18 +69,18 @@ export DOTFILES_DIR=$HOME/projects/dotfiles
 #VI Mode
 bindkey -v
 bindkey -M main '\C-r' history-incremental-search-backward
-#source $DOTFILES_DIR/dependencies/opp.zsh/opp.zsh
-#source $DOTFILES_DIR/dependencies/opp.zsh/opp/*.zsh
 
 source ~/.otherFunctions
-source $DOTFILES_DIR/cli/cassandra.sh
-source $DOTFILES_DIR/cli/git.sh
+#source $DOTFILES_DIR/cli/cassandra.sh
+#source $DOTFILES_DIR/cli/git.sh
 source $DOTFILES_DIR/cli/gradleScripts.sh
-source $DOTFILES_DIR/cli/kafka.sh
-source $DOTFILES_DIR/cli/kubernetes.sh
-source $DOTFILES_DIR/cli/objectStore.sh
-source $DOTFILES_DIR/cli/bashHelpers.sh
+#source $DOTFILES_DIR/cli/kafka.sh
+#source $DOTFILES_DIR/cli/kubernetes.sh
+#source $DOTFILES_DIR/cli/objectStore.sh
+#source $DOTFILES_DIR/cli/bashHelpers.sh
 source $DOTFILES_DIR/cli/json.sh
+source $DOTFILES_DIR/cli/naviscripts.sh
+export PATH=$PATH:$DOTFILES_DIR/cli/
 
 export JAVA_OPTS="-server -Djava.awt.headless=true -Xms2G -Xmx3G "
 
@@ -205,7 +205,9 @@ export NVM_DIR="$HOME/.nvm"
 
 # ITerm shell integration
 #source $HOME/.iterm2_shell_integration.zsh
-. $(brew --prefix)/etc/profile.d/z.sh
+#. $(brew --prefix)/etc/profile.d/z.sh
+eval "$(zoxide init zsh)"
+eval "$(navi widget zsh)"
 # SDKMan
 source "${HOME}/.sdkman/bin/sdkman-init.sh"
 

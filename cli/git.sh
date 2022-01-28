@@ -252,15 +252,15 @@ function gitStashResetMaster() {
 }
 
 #DOC Move to main and update to latest from upstream
-function gum() {
-    if [[ `git status --porcelain` ]]; then
-        echo "Changes exist to current branch, exiting"
-    else
-        git checkout main
-        git fetch upstream
-        git pull upstream main
-    fi
-}
+#function gum() {
+    #if [[ `git status --porcelain` ]]; then
+        #echo "Changes exist to current branch, exiting"
+    #else
+        #git checkout main
+        #git fetch upstream
+        #git pull upstream main
+    #fi
+#}
 
 #DOC Move to master and update to latest from upstream
 function gitUpstreamMaster() {
@@ -271,11 +271,6 @@ function gitUpstreamMaster() {
         git fetch upstream
         git pull upstream master
     fi
-}
-
-#DOC List all branches with the latest commit details, sorted by last updated time
-function branches() {
-    git for-each-ref --sort=-committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
 }
 
 #DOC Add a remote based on current origin for a different user
