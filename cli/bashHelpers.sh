@@ -16,59 +16,6 @@ function printArgs() {
 }
 
 
-function printDocs() {
-    declare output
-    for f in $DOTFILES_DIR/cli/*.sh
-    do
-        grep_test=`grep -A 1 "^#DOC" $f`
-        if [ "$grep_test" = "" ]; then
-        else
-            output="$output`generateDocs $f`\n\n"
-        fi
-    done
-    echo "$output" | less
-}
-
-function generateDocs() {
-    echo "$green$(basename -- "$1")$normal"
-    echo "---------------------------------------------------------------"
-    declare doc_line
-    declare function_line
-    declare section=0
-    declare -A methods
-    while read -r line ; do
-        if [ "$line" = "--" ]; then
-        elif [ "$section" = "0" ]; then
-            doc_line=`parseDoc $line`
-            section=1
-        elif [ "$section" = "1" ]; then
-            function_line=`parseFunctionName "$line"`
-            methods[$function_line]="$doc_line"
-            section=0
-        fi
-    done < <(grep -A 1 "^#DOC" $1)
-
-
-    #TODO this is zsh specific, bash syntax:
-    #keys="${!methods_names[@]}"
-    keys=("${(@k)methods}")
-    IFS=$'\n'
-    sorted_keys=($(sort <<<"${keys[*]}"))
-    unset IFS
-
-    for key in $sorted_keys; do
-        echo "$blue$key$normal\n${methods[$key]}\n"
-    done
-}
-
-function parseFunctionName() {
-    echo "$1" | sed -En 's/function (.*)\(\).*/\1/p'
-}
-
-function parseDoc() {
-    echo "$1" | sed -En 's/#DOC (.*)/\1/p'
-}
-
 function my_test() {
     validateParams myfunction \
         `string_flag f format` \
@@ -220,11 +167,6 @@ function matrix() {
     echo -e "\e[1;40m" ; clear ; while :; do echo $LINES $COLUMNS $(( $RANDOM % $COLUMNS)) $(( $RANDOM % 72 )) ;sleep 0.05; done|awk '{ letters="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()"; c=$4; letter=substr(letters,c,1);a[$3]=0;for (x in a) {o=a[x];a[x]=a[x]+1; printf "\033[%s;%sH\033[2;32m%s",o,x,letter; printf "\033[%s;%sH\033[1;37m%s\033[0;0H",a[x],x,letter;if (a[x] >= $1) { a[x]=0; } }}'
 }
 
-#function gradleTest() {
-    #project=("$(rg -e "'.*'" ./settings.gradle | sed -En "s/'(.*)'.*/\1/p"' | fzf -m)")
-
-    #test -n "$project" && print -z -- "./gradlew -p ${project[@]:q:q} test"
-#}
 function dostuff() {
     sels=( "${$(fd "${fd_default[@]}" "${@:2}"| fzf -m)}" )
     test -n "$sels" && print -z -- "$1 ${sels[@]:q:q}"

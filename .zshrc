@@ -20,6 +20,7 @@ export XDG_CONFIG_HOME=$HOME/.config/
 alias n=nvim
 alias v=vim
 alias cat=bat
+alias ls=lsd
 
 function tailas() {
     tail -f $1 | bat --paging=never -l $2
