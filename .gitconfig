@@ -81,3 +81,5 @@
 	program = gpg
 [commit]
 	gpgsign = false
+[init]
+	defaultBranch = main
