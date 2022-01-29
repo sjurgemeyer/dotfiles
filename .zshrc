@@ -22,19 +22,6 @@ alias v=vim
 alias cat=bat
 alias ls=lsd
 
-function tailas() {
-    tail -f $1 | bat --paging=never -l $2
-}
-function tailj() {
-    tailas $1 json
-}
-function taill() {
-    tailas $1 log
-}
-function tailc() {
-    tailas $1 csv
-}
-
 #export LS_COLORS="*.java=33:*.groovy=33:*.kt=33:*.yml=35:*.yaml=35:*.json=35"
 #alias ls=exa
 alias ping='prettyping --nolegend'
@@ -58,12 +45,6 @@ fid() {
     [ "$key" = ctrl-o ] && open "$file" || ${EDITOR:-vim} "$file"
   fi
 }
-# using ripgrep combined with preview
-# find-in-file - usage: fif <searchTerm>
-fif() {
-  if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
-  rg --files-with-matches --no-messages "$1" | fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
-}
 #end fzf functions
 
 export DOTFILES_DIR=$HOME/projects/dotfiles
@@ -72,13 +53,6 @@ bindkey -v
 bindkey -M main '\C-r' history-incremental-search-backward
 
 source ~/.otherFunctions
-#source $DOTFILES_DIR/cli/cassandra.sh
-#source $DOTFILES_DIR/cli/git.sh
-source $DOTFILES_DIR/cli/gradleScripts.sh
-#source $DOTFILES_DIR/cli/kafka.sh
-#source $DOTFILES_DIR/cli/kubernetes.sh
-#source $DOTFILES_DIR/cli/objectStore.sh
-#source $DOTFILES_DIR/cli/bashHelpers.sh
 source $DOTFILES_DIR/cli/json.sh
 source $DOTFILES_DIR/cli/naviscripts.sh
 export PATH=$PATH:$DOTFILES_DIR/cli/
@@ -87,7 +61,6 @@ export JAVA_OPTS="-server -Djava.awt.headless=true -Xms2G -Xmx3G "
 
 #Project setup
 PROJECT_DIR=$HOME/projects
-source ~/projects/dotfiles/docker.sh
 alias N="tabcolor green;n -c 'call CreateTabspaces(g:initial_tabspaces_event, 1)';resettab"
 
 #Start web server
@@ -184,8 +157,8 @@ function untilfails() {
 }
 
 #Easier ZSH history
-#source /opt/homebrew/share/zsh-history-substring-search/zsh-history-substring-search.zsh
-source /usr/local/var/homebrew/linked/zsh-history-substring-search/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+source /opt/homebrew/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+#source /usr/local/var/homebrew/linked/zsh-history-substring-search/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 zmodload zsh/terminfo
 
 # bind UP and DOWN arrow keys
@@ -219,3 +192,5 @@ source "${HOME}/.sdkman/bin/sdkman-init.sh"
 
 [ -s "/Users/$USER/.scm_breeze/scm_breeze.sh" ] && source "/Users/$USER/.scm_breeze/scm_breeze.sh"
 eval "$(starship init zsh)"
+
+
