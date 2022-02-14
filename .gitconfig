@@ -24,7 +24,7 @@
     cmd = mvim -df $BASE $LOCAL $MERGED $REMOTE -c \"wincmd J\"
     mvim
 [mergetool "splice"]
-    cmd = "vim --cmd 'let g:nofugitive=1' -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
+    cmd = "nvim --cmd 'let g:nofugitive=1' -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
     trustExitCode = true
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
@@ -32,9 +32,9 @@
 [color]
 	ui = true
 [merge]
-	tool = splice
+	tool = bc
 [diff]
-    tool = vim
+	tool = bc
     ;colorMoved = default
 [alias]
     # Log display from screencast, with train tracks.
@@ -83,3 +83,5 @@
 	gpgsign = false
 [init]
 	defaultBranch = main
+[mergetool "bc"]
+	trustExitCode = true

@@ -31,13 +31,36 @@ enableHotkeyForWindowsMatchingFilter = function(windowFilter, hotkey)
   end)
 end
 
-require('hammerspoon.apps')
---require('hammerspoon.caps')
---require('hammerspoon.shift')
---require('hammerspoon.hyper-braces')
+hyper = {"cmd","alt","ctrl","shift"}
+
+hs.loadSpoon("SpoonInstall")
+
+spoon.SpoonInstall:andUse("Caffeine", {
+    start = true,
+    hotkeys = {
+        toggle = { hyper, "1" }
+    },
+})
+spoon.SpoonInstall:andUse("KSheet", {
+    hotkeys = {
+        toggle = { hyper, "2" }
+    }
+})
+spoon.SpoonInstall:andUse("MicMute", {
+    hotkeys = {
+        toggle = { hyper, "3" }
+    },
+})
+
+navigationMode = require('hammerspoon.navigation')
+
 require('hammerspoon.windows')
+require('hammerspoon.apps')
 require('hammerspoon.layouts')
---require('hammerspoon.karabiner')
+
+navigationMode:setHelpData()
+
 require('hammerspoon.zoom')
 
 hs.notify.new({title='Hammerspoon', informativeText='Ready to rock 🤘'}):send()
+

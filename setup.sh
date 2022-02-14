@@ -8,6 +8,9 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 curl -s "https://get.sdkman.io" | bash
 source "$HOME/.sdkman/bin/sdkman-init.sh"
 
+/usr/bin/python -m pip install pynvim
+/usr/bin/python3 -m pip install pynvim
+
 pip3 install neovim
 
 ./createAliases.sh

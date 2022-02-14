@@ -9,7 +9,8 @@ statusmessage.new = function(messageText)
     local frame = screen.primaryScreen():frame()
 
     local styledTextAttributes = {
-      font = { name = 'Monaco', size = 24 },
+      font = { name = 'Monaco', size = 32 },
+      color = { red = 0, green = 0, blue = 0, alpha=0.9}
     }
 
     local styledText = styledtext.new('🔨 ' .. messageText, styledTextAttributes)
@@ -21,18 +22,18 @@ statusmessage.new = function(messageText)
       w = styledTextSize.w + 40,
       h = styledTextSize.h + 40,
     }
-    local text = drawing.text(textRect, styledText):setAlpha(0.7)
+    local text = drawing.text(textRect, styledText):setAlpha(0.9)
 
     local background = drawing.rectangle(
       {
         x = frame.w - styledTextSize.w - 45,
-        y = frame.h - styledTextSize.h - 3,
+        y = frame.h - styledTextSize.h - 6,
         w = styledTextSize.w + 15,
-        h = styledTextSize.h + 6
+        h = styledTextSize.h + 12
       }
     )
     background:setRoundedRectRadii(10, 10)
-    background:setFillColor({ red = 0, green = 0, blue = 0, alpha=0.6 })
+    background:setFillColor({ red = .8, green = .8, blue = .8, alpha=0.9 })
 
     return background, text
   end
@@ -60,6 +61,13 @@ statusmessage.new = function(messageText)
       local seconds = seconds or 1
       self:show()
       hs.timer.delayed.new(seconds, function() self:hide() end):start()
+    end,
+    toggle = function(self)
+        if self.text or self.background then
+            self:hide()
+        else
+            self:show()
+        end
     end
   }
 end

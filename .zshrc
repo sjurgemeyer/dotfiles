@@ -190,7 +190,6 @@ source "${HOME}/.sdkman/bin/sdkman-init.sh"
 
 [ -s "${HOME}/projects/secrets/scripts/k8s/k8sLoadAndSetContext.sh" ] && . "${HOME}/projects/secrets/scripts/k8s/k8sLoadAndSetContext.sh"
 
-[ -s "/Users/$USER/.scm_breeze/scm_breeze.sh" ] && source "/Users/$USER/.scm_breeze/scm_breeze.sh"
 eval "$(starship init zsh)"
 
-
+[ -s "/Users/sjurgemeyer/.scm_breeze/scm_breeze.sh" ] && source "/Users/sjurgemeyer/.scm_breeze/scm_breeze.sh"
