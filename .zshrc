@@ -174,8 +174,9 @@ alias python=/usr/local/opt/python@2/bin/python2
 ulimit -S -n 10000
 
 # NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+ export NVM_DIR="$HOME/.nvm"
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # ITerm shell integration
 #source $HOME/.iterm2_shell_integration.zsh
@@ -192,4 +193,8 @@ source "${HOME}/.sdkman/bin/sdkman-init.sh"
 
 eval "$(starship init zsh)"
 
-[ -s "/Users/sjurgemeyer/.scm_breeze/scm_breeze.sh" ] && source "/Users/sjurgemeyer/.scm_breeze/scm_breeze.sh"
+# AWS Confiig TODO make some dynamic scripts for this
+export AWS_PROFILE=staging-nebula
+export AWS_REGION=us-east-1
+
+[ -s "${HOME}/.scm_breeze/scm_breeze.sh" ] && source "${HOME}/.scm_breeze/scm_breeze.sh"

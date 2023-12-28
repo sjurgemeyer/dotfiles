@@ -4,6 +4,15 @@
 -- this file, save it as `hyper-apps.lua`, and edit the table below to configure
 -- your preferred shortcuts.
 return {
-  { '1', 'Desk' },
-  { '2', 'Office' }
+  { 'F1', 'Warp' },
+  { 'F2', 'Intellij IDEA' },
+  { 'F3', 'Google Chrome' },
+  { 'F4', 'Postman' },
+  { 'F5', 'DbVisualizer' },
+
+  { 'F6', 'zoom.us' },
+  { 'F7', 'Slack' },
+  { 'F8', 'Microsoft Outlook' },
+  { 'F9', 'Obsidian' },
+  { 'F10', 'Todoist' },
 }

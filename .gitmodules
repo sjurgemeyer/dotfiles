@@ -1,21 +1,6 @@
-[submodule "dependencies/zsh-syntax-highlighting"]
-	path = dependencies/zsh-syntax-highlighting
-	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
-[submodule "dependencies/zsh-history-substring-search"]
-	path = dependencies/zsh-history-substring-search
-	url = https://github.com/zsh-users/zsh-history-substring-search.git
-[submodule "dependencies/friendly-find"]
-	path = dependencies/friendly-find
-	url = https://github.com/sjl/friendly-find.git
 [submodule "dependencies/vim-ororo"]
 	path = dependencies/vim-ororo
 	url = https://github.com/sjurgemeyer/vim-ororo.git
-[submodule "dependencies/scm_breeze"]
-	path = dependencies/scm_breeze
-	url = https://github.com/ndbroadbent/scm_breeze
-[submodule "dependencies/opp.zsh"]
-	path = dependencies/opp.zsh
-	url = https://github.com/hchbaw/opp.zsh.git
 [submodule "dependencies/tpr"]
 	path = dependencies/tpr
 	url = https://github.com/ric03uec/tpr.git

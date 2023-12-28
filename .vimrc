@@ -107,6 +107,7 @@ else
     Plugin 'othree/javascript-libraries-syntax.vim'
     Plugin 'pangloss/vim-javascript'
     Plugin 'leafgarland/typescript-vim'
+    "React
     Plugin 'MaxMEllon/vim-jsx-pretty'
 
     "Kotlin

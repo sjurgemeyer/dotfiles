@@ -1,6 +1,6 @@
 [user]
 	name = Shaun Jurgemeyer
-	email = Shaun.Jurgemeyer@target.com
+	email = sjurgemeye@chewy.com
 [core]
 	excludesfile = ~/.gitignore_global
 	;pager = diff-so-fancy | less --tabs=4 -RFX
@@ -47,6 +47,8 @@
     b = checkout -b
     pum = pull upstream main
 	prum = pull --rebase upstream main
+    pom = pull origin main
+	prom = pull --rebase origin main
     amend = commit --amend
     aa = commit -a --amend
     d = branch -D
@@ -85,3 +87,7 @@
 	defaultBranch = main
 [mergetool "bc"]
 	trustExitCode = true
+[web]
+	browser = ch
+[browser "ch"]
+	cmd = open -a \"/Applications/Google Chrome.app\"

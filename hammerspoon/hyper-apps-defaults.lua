@@ -5,12 +5,15 @@
 -- your preferred shortcuts.
 return {
   { 'b', 'Google Chrome' },     -- "B" for "Browser"
-  { 'd', 'Dash' },              -- "D" for "Dash"
   { 'f', 'Finder' },            -- "F" for "Finder"
-  { 'i', 'Insomnia' },          -- "I" for "Insomnia"
-  { 'm', 'Spotify' },           -- "M" for "Music"
-  { 'o', 'Outlook' },           -- "O" for "Outlook"
+  { 'p', 'Postman' },           -- "P" for "Postman"
+  { 'o', 'Microsoft Outlook' }, -- "O" for "Outlook"
   { 's', 'Slack' },             -- "S" for "Slack"
-  { 't', 'iTerm' },             -- "T" for "Terminal"
+  { 'w', 'Warp' },              -- "W" for "Warp"
+  { 't', 'Todoist' },           -- "T" for "Todoist"
+  { 'o', 'Obsidian' },          -- "O" for "Obsidian"
   { 'z', 'zoom.us' },           -- "Z" for "Zoom"
+  { 'd', 'DbVisualizer' },      -- "D" for "DbVisualizer"
+  { 'i', 'Intellij IDEA' },     -- "I" for "Intellij"
+  { 'u', 'DevToys' }            -- "U" for "Utils"
 }

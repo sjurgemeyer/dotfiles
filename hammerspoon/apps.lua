@@ -18,3 +18,12 @@ launchApp = function(appName)
       hs.application.launchOrFocus(appName)
     end
 end
+
+
+local hyperModeFkeyAppMappings = require('hammerspoon.hyper-apps-fkey-defaults')
+
+for i, mapping in ipairs(hyperModeFkeyAppMappings) do
+    hs.hotkey.bind({'shift', 'alt', 'cmd', 'ctrl'}, mapping[1], function()
+        launchApp(mapping[2])
+    end)
+end

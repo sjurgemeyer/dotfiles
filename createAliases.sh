@@ -52,6 +52,10 @@ git clone git://github.com/scmbreeze/scm_breeze.git ~/.scm_breeze
 sudo rm -Rf ~/.config/starship.toml
 sudo ln -s ~/projects/dotfiles/starship.toml ~/.config/starship.toml
 
+# karabiner
+sudo rm -Rf ~/.config/karabiner/karabiner.json
+sudo ln -s ~/projects/dotfiles/karabiner.json ~/.config/karabiner/karabiner.json
+
 # sdkman
 curl -s "https://get.sdkman.io" | bash
 

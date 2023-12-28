@@ -46,11 +46,6 @@ spoon.SpoonInstall:andUse("KSheet", {
         toggle = { hyper, "2" }
     }
 })
-spoon.SpoonInstall:andUse("MicMute", {
-    hotkeys = {
-        toggle = { hyper, "3" }
-    },
-})
 
 navigationMode = require('hammerspoon.navigation')
 
@@ -59,8 +54,6 @@ require('hammerspoon.apps')
 require('hammerspoon.layouts')
 
 navigationMode:setHelpData()
-
-require('hammerspoon.zoom')
 
 hs.notify.new({title='Hammerspoon', informativeText='Ready to rock 🤘'}):send()
 

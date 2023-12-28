@@ -17,8 +17,8 @@ statusmessage.new = function(messageText)
 
     local styledTextSize = drawing.getTextDrawingSize(styledText)
     local textRect = {
-      x = frame.w - styledTextSize.w - 40,
-      y = frame.h - styledTextSize.h,
+      x = (frame.w - styledTextSize.w - 40) /2,
+      y = (frame.h - styledTextSize.h) /2,
       w = styledTextSize.w + 40,
       h = styledTextSize.h + 40,
     }
@@ -26,8 +26,8 @@ statusmessage.new = function(messageText)
 
     local background = drawing.rectangle(
       {
-        x = frame.w - styledTextSize.w - 45,
-        y = frame.h - styledTextSize.h - 6,
+        x = (frame.w - styledTextSize.w - 45) / 2,
+        y = (frame.h - styledTextSize.h - 6) / 2,
         w = styledTextSize.w + 15,
         h = styledTextSize.h + 12
       }
