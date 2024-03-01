@@ -20,6 +20,7 @@ alias top=htop
 alias diff=diff-so-fancy
 alias v='f -e vim' # quick opening files with vim
 alias e=exa
+alias ..='cd ..'
 
 alias preview="fzf --preview 'bat --color \"always\" {}'"
 # add support for ctrl+o to open selected file in VS Code
