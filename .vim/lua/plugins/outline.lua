@@ -1,7 +1,12 @@
 -- symbols in file
 return {
-	"simrat39/symbols-outline.nvim",
+	"hedyhli/outline.nvim",
 	config = function()
-		vim.keymap.set("n", "<F6>", ":Outline<CR>", { noremap = true, desc = "Code Outline" })
+		-- Example mapping to toggle outline
+		vim.keymap.set("n", "<F6>", "<cmd>Outline<CR>", { desc = "Toggle Outline" })
+
+		require("outline").setup({
+			-- Your setup opts here (leave empty to use defaults)
+		})
 	end,
 }
