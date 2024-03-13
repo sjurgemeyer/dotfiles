@@ -1,7 +1,6 @@
-
 setopt NO_BEEP
 source <(echo "$(navi widget zsh)")
-export PATH=$HOME/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/share/npm/bin:/opt/local/bin:/opt/local/sbin:/usr/local/sbin:/usr/local/groovy/bin:/usr/local/mysql/bin:/usr/local/tomcat/bin:/usr/local/scripts:/usr/local/gradle/bin:/usr/local/Cellar/ruby/2.0.0-p247/bin:$HOME/.node/bin:$PATH:$HOME/app/dasht-2.0.0/bin:/usr/local/Cellar/ctags/5.8_1/bin/
+export PATH=$HOME/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/share/npm/bin:/opt/local/bin:/opt/local/sbin:/usr/local/sbin:/usr/local/groovy/bin:/usr/local/mysql/bin:/usr/local/tomcat/bin:/usr/local/scripts:/usr/local/gradle/bin:/usr/local/Cellar/ruby/2.0.0-p247/bin:$HOME/.node/bin:$HOME/app/dasht-2.0.0/bin:/usr/local/Cellar/ctags/5.8_1/bin/:~/Library/Python/3.9/bin:$PATH
 
 #VI/VIM defaults
 export EDITOR=nvim
@@ -9,11 +8,11 @@ export SVN_EDITOR=vim
 export XDG_CONFIG_HOME=$HOME/.config/
 
 # use better versions of commands
-alias n=nvim
+alias n=nvr
 alias v=vim
 alias cat=bat
 alias ls=lsd
-alias ll=ls -la
+alias ll=lsd -la
 
 alias ping='prettyping --nolegend'
 alias top=htop
@@ -79,11 +78,12 @@ function printClassesInJar() {
 }
 
 ################################ Git ###############################
-#Using scm_breeze shortcuts
-
 # open all changed files in vim
 alias git-changed='mvim -p `git diff --name-only --relative`'
 alias bc='git difftool --tool=bc3 -d HEAD~1'
+alias gs='git status'
+alias ga='git add'
+alias gaa='git add --all'
 
 
 #Add pull request branches to upstream fetch
@@ -100,7 +100,6 @@ alias dot='cd $PROJECT_DIR/dotfiles'
 alias mkdir='mkdir -p' #create intermediate directories
 # mkdir and cd
 mkcd () { mkdir -p "$@" && cd "$@"; }
-alias lla='ll -a' # ll is created by scm breeze
 
 
 # grep for process
@@ -130,8 +129,6 @@ eval "$(navi widget zsh)"
 # SDKMan
 source "${HOME}/.sdkman/bin/sdkman-init.sh"
 
-#SCM Breeze
-[ -s "${HOME}/.scm_breeze/scm_breeze.sh" ] && source "${HOME}/.scm_breeze/scm_breeze.sh"
 
 [ -s "${HOME}/projects/secrets/scripts/k8s/k8sLoadAndSetContext.sh" ] && . "${HOME}/projects/secrets/scripts/k8s/k8sLoadAndSetContext.sh"
 
@@ -140,5 +137,3 @@ eval "$(starship init zsh)"
 # AWS Confiig TODO make some dynamic scripts for this
 export AWS_PROFILE=staging-nebula
 export AWS_REGION=us-east-1
-
-[ -s "${HOME}/.scm_breeze/scm_breeze.sh" ] && source "${HOME}/.scm_breeze/scm_breeze.sh"
