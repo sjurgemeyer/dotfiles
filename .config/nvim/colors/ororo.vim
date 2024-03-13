@@ -1,0 +1,1 @@
+/Users/sjurgemeye/projects/dotfiles/dependencies/vim-ororo/ororo.vim

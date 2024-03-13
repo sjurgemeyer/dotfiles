@@ -21,6 +21,9 @@ return {
 	config = function()
 		require("telescope").setup({
 			defaults = {
+				path_display = {
+					truncate = 3,
+				},
 				sorting_strategy = "ascending",
 				layout_config = {
 					horizontal = {
@@ -49,6 +52,7 @@ return {
 		pcall(require("telescope").load_extension, "ui-select")
 		pcall(require("telescope").load_extension, "lazy_plugins")
 		pcall(require("telescope").load_extension, "undo")
+
 		local builtin = require("telescope.builtin")
 		vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
 		vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
