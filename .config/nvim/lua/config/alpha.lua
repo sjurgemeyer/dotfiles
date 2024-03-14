@@ -2,6 +2,8 @@ local alpha = require("alpha")
 local if_nil = vim.F.if_nil
 local fnamemodify = vim.fn.fnamemodify
 local filereadable = vim.fn.filereadable
+local divider_line =
+	"══════════════════════════════════════════════════════════════════════════════════════════"
 
 local default_header = {
 	type = "text",
@@ -163,15 +165,18 @@ local function mru_title()
 	return "MRU " .. vim.fn.getcwd()
 end
 
-local function create_bookmark(fn, index)
+local function create_bookmark(fn, shortcut)
 	local short_fn = fnamemodify(fn, ":~")
-	return file_button(fn, tostring(index), short_fn, false)
+	return file_button(fn, shortcut, short_fn, false)
 end
 
 local function bookmarks_fn()
-	local tbl = {}
-	-- TODO add more bookmarks
-	tbl[0] = create_bookmark("/Users/sjurgemeyer/.config/nvim/init.lua", 30)
+	local tbl = {
+		create_bookmark("~/.config/nvim/init.lua", "I"),
+		create_bookmark("~/.config/nvim/lua/plugins/init.lua", "P"),
+		create_bookmark("~/.zshrc", "Z"),
+		create_bookmark("~/.config/nvim/colors/slater.vim", "C"),
+	}
 	return {
 		type = "group",
 		val = tbl,
@@ -187,18 +192,12 @@ local section = {
 			button("e", "New file", "<cmd>ene <CR>"),
 		},
 	},
-	-- note about MRU: currently this is a function,
-	-- since that means we can get a fresh mru
-	-- whenever there is a DirChanged. this is *really*
-	-- inefficient on redraws, since mru does a lot of I/O.
-	-- should probably be cached, or maybe figure out a way
-	-- to make it a reference to something mutable
-	-- and only mutate that thing on DirChanged
 	mru = {
 		type = "group",
 		val = {
 			{ type = "padding", val = 1 },
 			{ type = "text", val = "MRU", opts = { hl = "String" } },
+			{ type = "text", val = divider_line, opts = { hl = "Directory" } },
 			{ type = "padding", val = 1 },
 			{
 				type = "group",
@@ -213,6 +212,7 @@ local section = {
 		val = {
 			{ type = "padding", val = 1 },
 			{ type = "text", val = mru_title, opts = { hl = "String", shrink_margin = false } },
+			{ type = "text", val = divider_line, opts = { hl = "Directory" } },
 			{ type = "padding", val = 1 },
 			{
 				type = "group",
@@ -223,12 +223,12 @@ local section = {
 			},
 		},
 	},
-
 	bookmarks = {
 		type = "group",
 		val = {
 			{ type = "padding", val = 1 },
 			{ type = "text", val = "Bookmarks", opts = { hl = "String" } },
+			{ type = "text", val = divider_line, opts = { hl = "Directory" } },
 			{ type = "padding", val = 1 },
 			{
 				type = "group",
@@ -247,11 +247,25 @@ local section = {
 	},
 	footer = {
 		type = "group",
-		val = {},
+		val = {
+			{ type = "padding", val = 1 },
+			{ type = "text", val = divider_line, opts = { hl = "Directory" } },
+			{
+				type = "text",
+				val = require("alpha.fortune")({
+					max_width = 100,
+					shrink_margin = false,
+					fortune_list = require("config/fortune_list"),
+				}),
+			},
+			{ type = "padding", val = 1 },
+			{ type = "text", val = divider_line, opts = { hl = "Directory" } },
+		},
 	},
 }
 
 local config = {
+	section = section,
 	layout = {
 		{ type = "padding", val = 1 },
 		section.header,
