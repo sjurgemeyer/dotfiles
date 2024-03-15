@@ -18,76 +18,73 @@
 --   right => send window to the monitor on the right (if there is one)
 --------------------------------------------------------------------------------
 
-local navigationMode = hs.hotkey.modal.new({}, 'F16')
+local navigationMode = hs.hotkey.modal.new({}, "F16")
 
-navigationMode.statusMessage = require('hammerspoon.status-message').new('Navigation Mode')
-navigationMode.helpMenu = require('hammerspoon.help-message').new()
-navigationMode.helpData = require('hammerspoon.help-data').new()
+navigationMode.statusMessage = require("hammerspoon.status-message").new("Navigation Mode")
+navigationMode.helpMenu = require("hammerspoon.help-message").new()
+navigationMode.helpData = require("hammerspoon.help-data").new()
 
 navigationMode.entered = function()
-  navigationMode.statusMessage:show()
+	navigationMode.statusMessage:show()
 end
 navigationMode.exited = function()
-  navigationMode.statusMessage:hide()
-  navigationMode.helpMenu:hide()
+	navigationMode.statusMessage:hide()
+	navigationMode.helpMenu:hide()
 end
 
 -- Bind the given key to call the given function and exit WindowLayout mode
 function navigationMode.bindWithAutomaticExit(mode, modifiers, key, fn)
-  mode:bind(modifiers, key, function()
-    mode:exit()
-    fn()
-  end)
+	mode:bind(modifiers, key, function()
+		mode:exit()
+		fn()
+	end)
 end
 
 function navigationMode.bindWithHelpText(mode, text, modifiers, key, fn)
-  navigationMode.helpData.windowMenu[#navigationMode.helpData.windowMenu+1] = { key=key, text=text }
-  mode:bind(modifiers, key, function()
-    fn()
-  end)
+	navigationMode.helpData.windowMenu[#navigationMode.helpData.windowMenu + 1] = { key = key, text = text }
+	mode:bind(modifiers, key, function()
+		fn()
+	end)
 end
 
 function navigationMode.setHelpData(mode)
+	--menuText = 'Apps\n'
+	--for mapping, description in pairs(helpData.appMenu) do
+	--menuText = menuText .. '\n' .. mapping .. ' - ' .. description
+	--end
+	--menuText = menuText .. '\n\nWindow Manipulation\n'
+	--for mapping, description in pairs(helpData.windowMenu) do
+	--menuText = menuText .. '\n' .. mapping .. ' - ' .. description
+	--end
 
-    --menuText = 'Apps\n'
-    --for mapping, description in pairs(helpData.appMenu) do
-        --menuText = menuText .. '\n' .. mapping .. ' - ' .. description
-    --end
-    --menuText = menuText .. '\n\nWindow Manipulation\n'
-    --for mapping, description in pairs(helpData.windowMenu) do
-        --menuText = menuText .. '\n' .. mapping .. ' - ' .. description
-    --end
-
-    --mode.helpMenu.message = menuText
-    mode.helpMenu.helpData = navigationMode.helpData
+	--mode.helpMenu.message = menuText
+	mode.helpMenu.helpData = navigationMode.helpData
 end
 -- Use hyper+q to toggle WindowLayout Mode
-hs.hotkey.bind({'shift','alt','cmd','ctrl'}, 'q', function()
-  navigationMode:enter()
+hs.hotkey.bind({ "shift", "alt", "cmd", "ctrl" }, "q", function()
+	navigationMode:enter()
 end)
-navigationMode:bind({'shift','alt','cmd','ctrl'}, 'q', function()
-  navigationMode:exit()
+navigationMode:bind({ "shift", "alt", "cmd", "ctrl" }, "q", function()
+	navigationMode:exit()
 end)
-navigationMode:bind({}, 'escape', function()
-  navigationMode:exit()
+navigationMode:bind({}, "escape", function()
+	navigationMode:exit()
 end)
-navigationMode:bind({'shift'}, '/', function()
-    navigationMode.helpMenu:toggle()
+navigationMode:bind({ "shift" }, "/", function()
+	navigationMode.helpMenu:toggle()
 end)
 
-
-local status, appShortcuts = pcall(require, 'keyboard.hyper-apps')
+local status, appShortcuts = pcall(require, "keyboard.hyper-apps")
 
 if not status then
-  appShortcuts = require('hammerspoon.hyper-apps-defaults')
+	appShortcuts = require("hammerspoon.hyper-apps-defaults")
 end
 
 for i, mapping in ipairs(appShortcuts) do
-    navigationMode.helpData.appMenu[#navigationMode.helpData.appMenu+1] = { key = mapping[1], text = mapping[2] }
-    navigationMode:bindWithAutomaticExit({}, mapping[1], function()
-        launchApp(mapping[2])
-    end)
+	navigationMode.helpData.appMenu[#navigationMode.helpData.appMenu + 1] = { key = mapping[1], text = mapping[2] }
+	navigationMode:bindWithAutomaticExit({}, mapping[1], function()
+		launchApp(mapping[2])
+	end)
 end
 
 return navigationMode
-

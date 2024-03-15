@@ -126,6 +126,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins")
 require("config/alpha")
+require("config/telescope-any-custom")
 vim.cmd("colorscheme slater")
 vim.opt.termguicolors = true
 -- The line beneath this is called `modeline`. See `:help modeline`
