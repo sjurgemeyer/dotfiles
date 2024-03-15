@@ -1,30 +1,27 @@
 setopt NO_BEEP
 source <(echo "$(navi widget zsh)")
-export PATH=$HOME/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/share/npm/bin:/opt/local/bin:/opt/local/sbin:/usr/local/sbin:/usr/local/groovy/bin:/usr/local/mysql/bin:/usr/local/tomcat/bin:/usr/local/scripts:/usr/local/gradle/bin:/usr/local/Cellar/ruby/2.0.0-p247/bin:$HOME/.node/bin:$HOME/app/dasht-2.0.0/bin:/usr/local/Cellar/ctags/5.8_1/bin/:~/Library/Python/3.9/bin:$PATH
+export PATH=$HOME/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/share/npm/bin:/opt/local/bin:/opt/local/sbin:/usr/local/sbin:/usr/local/groovy/bin:/usr/local/mysql/bin:/usr/local/tomcat/bin:/usr/local/scripts:/usr/local/gradle/bin:/usr/local/Cellar/ruby/2.0.0-p247/bin:$HOME/.node/bin:$HOME/app/dasht-2.0.0/bin:/usr/local/Cellar/ctags/5.8_1/bin/:~/Library/Python/3.9/bin:$DOTFILES_DIR/cli/:$PATH
 
 #VI/VIM defaults
 export EDITOR=nvim
+
 export SVN_EDITOR=vim
 export XDG_CONFIG_HOME=$HOME/.config/
 
 # use better versions of commands
 alias n=nvr
-alias v=vim
 alias cat=bat
 alias ls=lsd
-alias ll=lsd -la
+alias ll='lsd -la'
 
 alias ping='prettyping --nolegend'
 alias top=htop
 alias diff=diff-so-fancy
-alias v='f -e vim' # quick opening files with vim
-alias e=exa
-alias ..='cd ..'
 
+# fzf functions
 alias preview="fzf --preview 'bat --color \"always\" {}'"
 # add support for ctrl+o to open selected file in VS Code
 export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(code {})+abort' --history=$HOME/.fzf_history"
-#export FZF_DEFAULT_COMMAND='ag -g ""'
 export FZF_DEFAULT_COMMAND='rg --files'
 
 fid() {
@@ -38,21 +35,15 @@ fid() {
 }
 #end fzf functions
 
-export DOTFILES_DIR=$HOME/projects/dotfiles
+export PROJECT_DIR=$HOME/projects
+export DOTFILES_DIR=$PROJECT_DIR/dotfiles
+
 #VI Mode
 bindkey -v
-#bindkey -M main '\C-r' history-incremental-search-backward
 
 source ~/.otherFunctions
 source $DOTFILES_DIR/cli/json.sh
 source $DOTFILES_DIR/cli/naviscripts.sh
-export PATH=$PATH:$DOTFILES_DIR/cli/
-
-export JAVA_OPTS="-server -Djava.awt.headless=true -Xms2G -Xmx3G "
-
-#Project setup
-PROJECT_DIR=$HOME/projects
-alias N="tabcolor green;n -c 'call CreateTabspaces(g:initial_tabspaces_event, 1)';resettab"
 
 #Start web server
 alias serve='python -m SimpleHTTPServer'
@@ -95,23 +86,17 @@ function git-pullify() {
 ###################### Generic Shell stuff ###########################
 export DISABLE_AUTO_TITLE="true"
 
-alias dot='cd $PROJECT_DIR/dotfiles'
+alias dot='cd $DOTFILES_DIR'
 
 alias mkdir='mkdir -p' #create intermediate directories
 # mkdir and cd
 mkcd () { mkdir -p "$@" && cd "$@"; }
-
 
 # grep for process
 function p() {
     ps -el | grep "$@"
 }
 
-
-#Easier ZSH history
-source /opt/homebrew/share/zsh-history-substring-search/zsh-history-substring-search.zsh
-#source /usr/local/var/homebrew/linked/zsh-history-substring-search/share/zsh-history-substring-search/zsh-history-substring-search.zsh
-zmodload zsh/terminfo
 
 alias python=/usr/local/opt/python@2/bin/python2
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -128,7 +113,6 @@ eval "$(zoxide init zsh)"
 eval "$(navi widget zsh)"
 # SDKMan
 source "${HOME}/.sdkman/bin/sdkman-init.sh"
-
 
 [ -s "${HOME}/projects/secrets/scripts/k8s/k8sLoadAndSetContext.sh" ] && . "${HOME}/projects/secrets/scripts/k8s/k8sLoadAndSetContext.sh"
 
