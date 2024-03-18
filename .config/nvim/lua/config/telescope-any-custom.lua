@@ -1,6 +1,7 @@
 local function create_default_config()
 	local builtin = require("telescope.builtin")
 	local frecency = require("telescope").extensions.frecency.frecency
+	local git_file_history = require("telescope").extensions.git_file_history.git_file_history
 	local undo = require("telescope").extensions.undo.undo
 	local lazy_plugins = require("telescope").extensions.lazy_plugins.lazy_plugins
 	return {
@@ -69,6 +70,8 @@ local function create_default_config()
 			--  Similar to document symbols, except searches over your whole project.
 			["wssymbols"] = { cmd = builtin.lsp_dynamic_workspace_symbols, desc = "LSP Workspace Symbols" },
 
+			-- plugin additions
+			-- ["g "] = { cmd = git_file_history, desc = "git file history" },
 			-- plugin additions
 			["f "] = { cmd = frecency, desc = "Frecency" },
 			-- Getting the undolist doesn't work quite right when launching from the picker

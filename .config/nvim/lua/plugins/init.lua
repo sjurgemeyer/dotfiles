@@ -1,4 +1,10 @@
 return {
+	{
+		"stevearc/oil.nvim",
+		opts = {},
+		-- Optional dependencies
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+	},
 	-- window resize mode with C-e
 	"simeji/winresizer",
 	-- rainbow brances

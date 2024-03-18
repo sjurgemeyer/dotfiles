@@ -17,8 +17,13 @@ return {
 		{ "nvim-telescope/telescope-ui-select.nvim" },
 		-- requires nerdfont
 		{ "nvim-tree/nvim-web-devicons" },
+		{
+			"isak102/telescope-git-file-history.nvim",
+			dependencies = { "tpope/vim-fugitive" },
+		},
 	},
 	config = function()
+		local gfh_actions = require("telescope").extensions.git_file_history.actions
 		require("telescope").setup({
 			defaults = {
 				path_display = {
@@ -43,6 +48,9 @@ return {
 				["ui-select"] = {
 					require("telescope.themes").get_dropdown(),
 				},
+				git_file_history = {
+					mappings = {},
+				},
 			},
 		})
 
@@ -52,6 +60,7 @@ return {
 		pcall(require("telescope").load_extension, "ui-select")
 		pcall(require("telescope").load_extension, "lazy_plugins")
 		pcall(require("telescope").load_extension, "undo")
+		require("telescope").load_extension("git_file_history")
 
 		local builtin = require("telescope.builtin")
 		vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
@@ -67,6 +76,7 @@ return {
 		vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
 		vim.keymap.set("n", "<leader>sp", ":Telescope lazy_plugins<CR>", { desc = "[P]lugin Config" })
 		vim.keymap.set("n", "<leader>su", ":Telescope undo<CR>", { desc = "[U]ndo tree" })
+		vim.keymap.set("n", "<leader>sc", ":Telescope git_file_history<CR>", { desc = "[S]earch [C]ommits" })
 
 		-- fuzzy finder within file
 		vim.keymap.set("n", "<leader>/", function()
