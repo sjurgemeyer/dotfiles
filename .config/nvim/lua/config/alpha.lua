@@ -20,7 +20,7 @@ local default_header = {
 		[[                                                                       ]],
 	},
 	opts = {
-		hl = "Directory",
+		hl = "Structure",
 		shrink_margin = false,
 		-- wrap = "overflow";
 	},
@@ -197,7 +197,7 @@ local section = {
 		val = {
 			{ type = "padding", val = 1 },
 			{ type = "text", val = "MRU", opts = { hl = "String" } },
-			{ type = "text", val = divider_line, opts = { hl = "Directory" } },
+			{ type = "text", val = divider_line, opts = { hl = "Structure" } },
 			{ type = "padding", val = 1 },
 			{
 				type = "group",
@@ -212,7 +212,7 @@ local section = {
 		val = {
 			{ type = "padding", val = 1 },
 			{ type = "text", val = mru_title, opts = { hl = "String", shrink_margin = false } },
-			{ type = "text", val = divider_line, opts = { hl = "Directory" } },
+			{ type = "text", val = divider_line, opts = { hl = "Structure" } },
 			{ type = "padding", val = 1 },
 			{
 				type = "group",
@@ -228,7 +228,7 @@ local section = {
 		val = {
 			{ type = "padding", val = 1 },
 			{ type = "text", val = "Bookmarks", opts = { hl = "String" } },
-			{ type = "text", val = divider_line, opts = { hl = "Directory" } },
+			{ type = "text", val = divider_line, opts = { hl = "Structure" } },
 			{ type = "padding", val = 1 },
 			{
 				type = "group",
@@ -249,7 +249,7 @@ local section = {
 		type = "group",
 		val = {
 			{ type = "padding", val = 1 },
-			{ type = "text", val = divider_line, opts = { hl = "Directory" } },
+			{ type = "text", val = divider_line, opts = { hl = "Structure" } },
 			{
 				type = "text",
 				val = require("alpha.fortune")({
@@ -259,7 +259,7 @@ local section = {
 				}),
 			},
 			{ type = "padding", val = 1 },
-			{ type = "text", val = divider_line, opts = { hl = "Directory" } },
+			{ type = "text", val = divider_line, opts = { hl = "Structure" } },
 		},
 	},
 }
