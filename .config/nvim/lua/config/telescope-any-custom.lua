@@ -71,13 +71,16 @@ local function create_default_config()
 			["wssymbols"] = { cmd = builtin.lsp_dynamic_workspace_symbols, desc = "LSP Workspace Symbols" },
 
 			-- plugin additions
-			-- ["g "] = { cmd = git_file_history, desc = "git file history" },
-			-- plugin additions
 			["f "] = { cmd = frecency, desc = "Frecency" },
-			-- Getting the undolist doesn't work quite right when launching from the picker
+
+			-- TODO Can't get context of current file
+			-- ["g "] = { cmd = git_file_history, desc = "git file history" },
+			--
+
+			-- TODO Can't get context of current file
 			-- ["u "] = { cmd = undo, desc = "Undo Tree" },
 
-			-- This one takes over the prompt and I haven't figure dout how to make it give it back yet
+			-- TODO This one takes over the prompt and I haven't figure dout how to make it give it back yet
 			-- ["p "] = { cmd = lazy_plugins, desc = "Plugin config" },
 		},
 	}
@@ -109,6 +112,7 @@ local function create_picker_list_fn(pickers)
 	table.sort(output_list)
 	return output_list
 end
+
 local function create_prefix_help_picker(prefixes)
 	return function(opts)
 		local Picker = require("telescope.pickers")
@@ -128,9 +132,10 @@ local function create_prefix_help_picker(prefixes)
 end
 
 local function create_telescope_any(opts)
-	if opts == nil or vim.tbl_count(opts) == 0 then
-		opts = create_default_config()
-	end
+	opts.pickers = create_default_config().pickers
+	-- if opts == nil or vim.tbl_count(opts) == 0 then
+	-- 	opts = create_default_config()
+	-- end
 	local pickers, default_picker = split_pickers(opts.pickers or {})
 	local prefix_help_picker = create_prefix_help_picker(opts.pickers)
 	local prev_input = ""
@@ -150,9 +155,9 @@ local function create_telescope_any(opts)
 		end)
 	end
 
-	local function apply_picker_new(picker, func, text)
-		opts["winnr"] = vim.api.nvim_get_current_win()
-		opts["bufnr"] = vim.api.nvim_get_current_buf()
+	local function apply_picker_current(picker, func, text)
+		-- opts["winnr"] = vim.api.nvim_get_current_win()
+		-- opts["bufnr"] = vim.api.nvim_get_current_buf()
 		opts["on_input_filter_cb"] = func
 		opts["default_text"] = text
 
@@ -171,17 +176,20 @@ local function create_telescope_any(opts)
 			end
 
 			if curr_picker ~= prev_picker then
-				apply_picker_new(curr_picker, on_input_filter_cb, input)
+				apply_picker_current(curr_picker, on_input_filter_cb, input)
 			else
 				return { prompt = text }
 			end
 		end
 
-		apply_picker_new(prev_picker, on_input_filter_cb, prev_input)
+		apply_picker_current(prev_picker, on_input_filter_cb, prev_input)
 	end
 end
 
-local telescope_any = create_telescope_any({})
+local telescope_any = create_telescope_any({
+	winnr = vim.api.nvim_get_current_win(),
+	bufnr = vim.api.nvim_get_current_buf(),
+})
 vim.api.nvim_set_keymap("n", "<leader><leader>", "", {
 	noremap = true,
 	silent = true,
