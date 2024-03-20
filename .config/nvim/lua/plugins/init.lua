@@ -72,7 +72,7 @@ return {
 				["<leader>tt"] = { name = "[T]erminal", _ = "which_key_ignore" },
 				["<leader>tg"] = { name = "Lazy[G]it", _ = "which_key_ignore" },
 				["vv"] = { name = "Expand code block select", _ = "which_key_ignore" },
-				["bb"] = { name = "Decrease code block select", _ = "which_key_ignore" },
+				["V"] = { name = "Decrease code block select", _ = "which_key_ignore" },
 				["t"] = { name = "[T]abs", _ = "which_key_ignore" },
 				["tm"] = { name = "[T]ab [M]ove", _ = "which_key_ignore" },
 			})
@@ -221,7 +221,7 @@ return {
 						init_selection = "vv", -- set to `false` to disable one of the mappings
 						node_incremental = "vv",
 						scope_incremental = "vb",
-						node_decremental = "bb",
+						node_decremental = "V",
 					},
 				},
 			})
