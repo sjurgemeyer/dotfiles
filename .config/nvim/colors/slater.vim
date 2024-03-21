@@ -42,7 +42,7 @@ hi PmenuSel guifg=#262626 guibg=#d7d787 gui=NONE cterm=NONE
 hi Pmenu guifg=NONE guibg=#4a4a4a gui=NONE cterm=NONE
 hi PmenuSbar guifg=NONE guibg=#262626 gui=NONE cterm=NONE
 hi PmenuThumb guifg=NONE guibg=#ffd700 gui=NONE cterm=NONE
-hi TabLineSel guifg=#000000 guibg=#cccccc gui=NONE cterm=NONE
+hi TabLineSel guifg=#000000 guibg=#608b4e gui=NONE cterm=NONE
 hi TabLine guifg=#666666 guibg=#333333 gui=NONE cterm=NONE
 hi TabLineFill guifg=#ff8787 guibg=#333333 gui=NONE cterm=NONE
 hi ToolbarLine guifg=NONE guibg=NONE gui=NONE ctermfg=NONE ctermbg=NONE cterm=NONE
@@ -90,7 +90,7 @@ hi Type guifg=#5f87d7 guibg=NONE gui=bold cterm=bold
 hi Operator guifg=#d7875f guibg=NONE gui=NONE cterm=NONE
 hi Define guifg=#ffd700 guibg=NONE gui=bold cterm=bold
 hi Structure guifg=#009B00 guibg=NONE gui=NONE cterm=NONE
-hi Directory guifg=#00875f guibg=NONE gui=bold cterm=bold
+hi Directory guifg=#608b4e guibg=NONE gui=bold cterm=bold
 hi Conceal guifg=#666666 guibg=NONE gui=NONE cterm=NONE
 hi Ignore guifg=NONE guibg=NONE gui=NONE ctermfg=NONE ctermbg=NONE cterm=NONE
 hi Title guifg=#ffd700 guibg=NONE gui=bold cterm=bold

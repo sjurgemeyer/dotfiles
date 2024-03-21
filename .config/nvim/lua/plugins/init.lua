@@ -214,7 +214,7 @@ return {
 				auto_install = true,
 				highlight = { enable = true },
 				indent = { enable = true },
-				-- select blocks of code, by continuously hitting `vv`.  `bb` to reduce scope of selection
+				-- select blocks of code, by continuously hitting `vv`.  `V` to reduce scope of selection
 				incremental_selection = {
 					enable = true,
 					keymaps = {
