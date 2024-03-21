@@ -33,4 +33,3 @@ function create_navi_aliases() {
 }
 
 create_navi_aliases sjurgemeyer__cheats/shaun.cheat
-create_navi_aliases chewy.cheat
