@@ -3,11 +3,13 @@ return {
 	event = "VimEnter",
 	dependencies = "nvim-tree/nvim-web-devicons",
 	config = function()
-		vim.keymap.set("n", "ta", ":$tabnew<CR>", { noremap = true, desc = "New Tab" })
-		vim.keymap.set("n", "tc", ":tabclose<CR>", { noremap = true, desc = "Close Tab" })
-		vim.keymap.set("n", "to", ":tabonly<CR>", { noremap = true, desc = "Close all other tabs" })
-		vim.keymap.set("n", "tn", ":tabn<CR>", { noremap = true, desc = "Next Tab" })
-		vim.keymap.set("n", "tp", ":tabp<CR>", { noremap = true, desc = "Previous Tab" })
+		vim.keymap.set("n", "<leader>ta", ":$tabnew<CR>", { noremap = true, desc = "New Tab" })
+		vim.keymap.set("n", "<leader>tc", ":tabclose<CR>", { noremap = true, desc = "Close Tab" })
+		vim.keymap.set("n", "<leader>to", ":tabonly<CR>", { noremap = true, desc = "Close all other tabs" })
+		vim.keymap.set("n", "<Right>", ":tabn<CR>", { noremap = true, desc = "Next Tab" })
+		vim.keymap.set("n", "<leader>tn", ":tabn<CR>", { noremap = true, desc = "Next Tab" })
+		vim.keymap.set("n", "<Left>", ":tabp<CR>", { noremap = true, desc = "Previous Tab" })
+		vim.keymap.set("n", "<leaader>tn", ":tabp<CR>", { noremap = true, desc = "Previous Tab" })
 		-- move current tab to previous position
 		vim.api.nvim_set_keymap(
 			"n",
@@ -62,11 +64,11 @@ return {
 			line.tabs().foreach(function(tab)
 				local wins = require("tabby.module.api").get_tab_wins(tab.id)
 				local tab_theme = tab.is_current() and theme.current_tab or theme.tab
-				local tab_name = tab.name()
+				local tab_name = " " .. tab.name()
 
 				table.insert(tbl, {
 					line.sep(",", tab_theme, theme.fill),
-					tab.is_current() and "" or "",
+					-- tab.is_current() and "" or "",
 					tab_name,
 					line.sep("", tab_theme, theme.fill),
 					hl = tab_theme,
@@ -76,11 +78,19 @@ return {
 				-- Create tab-like views for windows if there is more than one window in the tab
 				if tab.is_current() and (#wins > 1) then
 					line.wins_in_tab(tab.id).foreach(function(win)
+						local win_name = " " .. win.buf_name()
+
+						if string.find(win_name, "toggleterm#") then
+							win_name = ""
+						elseif string.find(win_name, "tree filesystem") then
+							win_name = ""
+						elseif string.find(win_name, "Trouble") then
+							win_name = " "
+						end
 						local win_theme = win.is_current() and theme.current_win or theme.win
 						table.insert(tbl, {
 							line.sep(",", win_theme, theme.fill),
-							win.is_current() and "" or "",
-							win.buf_name(),
+							win_name,
 							line.sep("", win_theme, theme.fill),
 							hl = win_theme,
 							margin = " ",

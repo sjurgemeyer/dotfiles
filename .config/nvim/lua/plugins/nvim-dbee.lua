@@ -1,0 +1,27 @@
+-- Doesn't currently support MacOS 14
+return {
+	-- "kndndrj/nvim-dbee",
+	-- dependencies = {
+	-- 	"MunifTanjim/nui.nvim",
+	-- },
+	-- build = function()
+	-- 	-- Install tries to automatically detect the install method.
+	-- 	-- if it fails, try calling it with one of these parameters:
+	-- 	--    "curl", "wget", "bitsadmin", "go"
+	-- 	require("dbee").install("go")
+	-- end,
+	-- config = function()
+	-- 	require("dbee").setup({
+	-- 		sources = {
+	-- 			require("dbee.sources").MemorySource:new({
+	--
+	-- 				id = "localpostgres",
+	-- 				name = "localpostgres",
+	-- 				url = "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable",
+	-- 				type = "postgres",
+	-- 			}),
+	-- 			require("dbee.sources").FileSource:new("~/dbee-config.json"),
+	-- 		},
+	-- 	})
+	-- end,
+}

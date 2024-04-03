@@ -3,7 +3,7 @@
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-
+vim.wo.wrap = false
 -- Make line numbers default
 vim.opt.number = true
 
@@ -81,13 +81,13 @@ vim.api.nvim_set_keymap(
 	{ noremap = true, desc = "File [B]rowser" }
 )
 vim.api.nvim_set_keymap("v", "<F5>", ":SnipRun<CR>", { noremap = true, silent = false, desc = "Execute code" })
+vim.api.nvim_set_keymap("n", "<F5>", ":%SnipRun<CR>", { noremap = true, silent = false, desc = "Execute code" })
 vim.api.nvim_set_keymap(
 	"n",
-	"<leader>e",
-	"<Plug>SnipRunOperator",
-	{ noremap = true, silent = false, desc = "Execute Code" }
+	"<F7>",
+	":SnipClose<CR>",
+	{ noremap = true, silent = false, desc = "Close code execution window" }
 )
-vim.api.nvim_set_keymap("n", "<leader>ee", "<Plug>SnipRun", { noremap = true, silent = false, desc = "Execute Code" })
 --
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
