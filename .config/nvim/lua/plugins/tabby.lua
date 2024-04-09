@@ -67,7 +67,7 @@ return {
 				local tab_name = " " .. tab.name()
 
 				table.insert(tbl, {
-					line.sep(",", tab_theme, theme.fill),
+					line.sep("", tab_theme, theme.fill),
 					-- tab.is_current() and "" or "",
 					tab_name,
 					line.sep("", tab_theme, theme.fill),
@@ -89,7 +89,7 @@ return {
 						end
 						local win_theme = win.is_current() and theme.current_win or theme.win
 						table.insert(tbl, {
-							line.sep(",", win_theme, theme.fill),
+							line.sep("", win_theme, theme.fill),
 							win_name,
 							line.sep("", win_theme, theme.fill),
 							hl = win_theme,

@@ -1,4 +1,5 @@
 return {
+	"onsails/lspkind.nvim",
 	{
 		"stevearc/oil.nvim",
 		opts = {},

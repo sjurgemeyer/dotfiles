@@ -8,6 +8,11 @@ return {
 				b = { fg = "#FFFFFF", bg = "#4D6F3E" },
 				c = { fg = "#FFFFFF", bg = "#415D34" },
 			},
+			command = {
+				a = { fg = "#FFFFFF", bg = "#D16969", gui = "bold" },
+				b = { fg = "#FFFFFF", bg = "#9C4F4F" },
+				c = { fg = "#FFFFFF", bg = "#7C3F3F" },
+			},
 			visual = {
 				a = { fg = "#FFFFFF", bg = "#D16969", gui = "bold" },
 				b = { fg = "#FFFFFF", bg = "#9C4F4F" },
