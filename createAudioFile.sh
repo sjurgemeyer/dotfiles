@@ -3,7 +3,8 @@
 # Convert to an audio file
 
 video_dir=$HOME/Desktop
-attachments_path=$HOME/Documents/Notes/Attachments/
+attachments_path=$HOME/Documents/Notes/Transcripts
+file_name=`ls -tUc1 $video_dir | head -n 1`
 
 while getopts d: option
 do
@@ -11,10 +12,11 @@ do
     in
         i) video_dir=${OPTARG};;
         o) attacments_path=${OPTARG};;
+        f) file_name=${OPTARG};;
     esac
 done
 
-filename=`ls -tUc1 $video_dir | head -n 1`
 
-filename_without_extension="${filename%.*}"
-ffmpeg -i "$HOME/Desktop/$filename" -vn -acodec copy "$attachments_path/$filename_without_extension.m4a"
+filename_without_extension="${file_name%.*}"
+new_filename="${filename_without_extension/CleanShot /Audio Transcript }"
+ffmpeg -i "$HOME/Desktop/$file_name" -vn -acodec copy "$attachments_path/$new_filename.m4a"
