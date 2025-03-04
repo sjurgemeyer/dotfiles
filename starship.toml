@@ -16,7 +16,7 @@ disabled = true
 style = "yellow"
 
 [git_status]
-stashed.value = ""
+stashed = ""
 modified = "𝚫"
 style = "red"
 
