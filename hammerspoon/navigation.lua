@@ -20,7 +20,7 @@
 
 local navigationMode = hs.hotkey.modal.new({}, "F16")
 
-navigationMode.statusMessage = require("hammerspoon.status-message").new("Navigation Mode")
+navigationMode.statusMessage = require("hammerspoon.status-message").new("Adjust Windows")
 navigationMode.helpMenu = require("hammerspoon.help-message").new()
 navigationMode.helpData = require("hammerspoon.help-data").new()
 

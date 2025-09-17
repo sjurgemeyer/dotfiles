@@ -33,6 +33,7 @@ end
 
 hyper = {"cmd","alt","ctrl","shift"}
 
+
 hs.loadSpoon("SpoonInstall")
 
 spoon.SpoonInstall:andUse("Caffeine", {
@@ -52,6 +53,7 @@ navigationMode = require('hammerspoon.navigation')
 require('hammerspoon.windows')
 require('hammerspoon.apps')
 require('hammerspoon.layouts')
+require('hammerspoon.recording')
 
 navigationMode:setHelpData()
 

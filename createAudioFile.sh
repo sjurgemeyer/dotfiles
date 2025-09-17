@@ -19,4 +19,4 @@ done
 
 filename_without_extension="${file_name%.*}"
 new_filename="${filename_without_extension/CleanShot /Audio Transcript }"
-ffmpeg -i "$HOME/Desktop/$file_name" -vn -acodec copy "$attachments_path/$new_filename.m4a"
+/opt/homebrew/bin/ffmpeg -i "$HOME/Desktop/$file_name" -vn -acodec copy "$attachments_path/$new_filename.m4a"

@@ -60,36 +60,38 @@ return {
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy", -- Sets the loading event to 'VeryLazy'
-		config = function() -- This is the function that runs, AFTER loading
-			require("which-key").setup()
+		keys = {
+			--config = function() -- This is the function that runs, AFTER loading
+			-- require("which-key").setup()
 			-- Create heading descriptions
-			require("which-key").add({
-				{ "<leader>c", group = "[C]ode" },
-				{ "<leader>c_", hidden = true },
-				{ "<leader>d", group = "[D]ocument" },
-				{ "<leader>d_", hidden = true },
-				{ "<leader>e", group = "[E]xecute" },
-				{ "<leader>e_", hidden = true },
-				{ "<leader>g", group = "[G]o" },
-				{ "<leader>g_", hidden = true },
-				{ "<leader>s", group = "[S]earch" },
-				{ "<leader>s_", hidden = true },
-				{ "<leader>t", group = "[T]erminal" },
-				{ "<leader>t_", hidden = true },
-				{ "<leader>tg", group = "Lazy[G]it" },
-				{ "<leader>tg_", hidden = true },
-				{ "<leader>tt", group = "[T]erminal" },
-				{ "<leader>tt_", hidden = true },
-				{ "V", group = "Decrease code block select" },
-				{ "V_", hidden = true },
-				{ "t", group = "[T]abs" },
-				{ "t_", hidden = true },
-				{ "tm", group = "[T]ab [M]ove" },
-				{ "tm_", hidden = true },
-				{ "vv", group = "Expand code block select" },
-				{ "vv_", hidden = true },
-			})
-		end,
+			-- require("which-key").add({
+			{ "<leader>c", group = "[C]ode" },
+			{ "<leader>c_", hidden = true },
+			{ "<leader>d", group = "[D]ocument" },
+			{ "<leader>d_", hidden = true },
+			{ "<leader>e", group = "[E]xecute" },
+			{ "<leader>e_", hidden = true },
+			{ "<leader>g", group = "[G]o" },
+			{ "<leader>g_", hidden = true },
+			{ "<leader>s", group = "[S]earch" },
+			{ "<leader>s_", hidden = true },
+			{ "<leader>t", group = "[T]erminal" },
+			{ "<leader>t_", hidden = true },
+			{ "<leader>tg", group = "Lazy[G]it" },
+			{ "<leader>tg_", hidden = true },
+			{ "<leader>tt", group = "[T]erminal" },
+			{ "<leader>tt_", hidden = true },
+			{ "V", group = "Decrease code block select" },
+			{ "V_", hidden = true },
+			{ "t", group = "[T]abs" },
+			{ "t_", hidden = true },
+			{ "tm", group = "[T]ab [M]ove" },
+			{ "tm_", hidden = true },
+			{ "vv", group = "Expand code block select" },
+			{ "vv_", hidden = true },
+		},
+		--)
+		--end,
 	},
 	-- Tree view
 	{

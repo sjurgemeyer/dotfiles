@@ -203,3 +203,9 @@ function nextScreen(win)
   end
 end
 
+
+function getMaxFrame()
+    local win = hs.window.focusedWindow()
+    local screen = win:screen()
+    return screen:frame()
+end

@@ -1,1 +1,1 @@
-/Users/sjurgemeye/projects/dotfiles/dependencies/vim-ororo/ororo_light.vim
+/Users/sjurgemeyer/projects/dotfiles/dependencies/vim-ororo/ororo_light.vim

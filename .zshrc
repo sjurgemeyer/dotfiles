@@ -1,6 +1,8 @@
 setopt NO_BEEP
 source <(echo "$(navi widget zsh)")
-export PATH=$HOME/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/share/npm/bin:/opt/local/bin:/opt/local/sbin:/usr/local/sbin:/usr/local/groovy/bin:/usr/local/mysql/bin:/usr/local/tomcat/bin:/usr/local/scripts:/usr/local/gradle/bin:/usr/local/Cellar/ruby/2.0.0-p247/bin:$HOME/.node/bin:$HOME/app/dasht-2.0.0/bin:/usr/local/Cellar/ctags/5.8_1/bin/:~/Library/Python/3.9/bin:$DOTFILES_DIR/cli/:/usr/local/lib/docker/cli-plugins:/Applications/Docker.app/Contents//Resources/bin/:/Users/sjurgemeyer/nvim_nightly/bin/:$HOME/go/bin:$PATH
+export PROJECT_DIR=$HOME/projects
+export DOTFILES_DIR=$PROJECT_DIR/dotfiles
+export PATH=$HOME/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/share/npm/bin:/opt/local/bin:/opt/local/sbin:/usr/local/sbin:/usr/local/groovy/bin:/usr/local/mysql/bin:/usr/local/tomcat/bin:/usr/local/scripts:/usr/local/gradle/bin:/usr/local/Cellar/ruby/2.0.0-p247/bin:$HOME/.node/bin:$HOME/app/dasht-2.0.0/bin:/usr/local/Cellar/ctags/5.8_1/bin/:~/Library/Python/3.9/bin:$DOTFILES_DIR/cli/:/usr/local/lib/docker/cli-plugins:/Applications/Docker.app/Contents//Resources/bin/:/Users/sjurgemeyer/nvim_nightly/bin/:$HOME/go/bin:/opt/homebrew/Cellar/dateutils/0.4.11/bin/:$PROJECT_DIR/screenpipe-scripts/:$PATH
 setopt auto_cd
 #VI/VIM defaults
 export EDITOR=nvim
@@ -98,7 +100,6 @@ function p() {
 }
 
 
-alias python=/usr/local/opt/python@2/bin/python2
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Allow for more open files on OSX
@@ -124,3 +125,22 @@ export AWS_REGION=us-east-1
 
 # Added by Windsurf
 export PATH="/Users/sjurgemeye/.codeium/windsurf/bin:$PATH"
+
+# Added by Windsurf
+export PATH="/Users/sjurgemeyer/.codeium/windsurf/bin:$PATH"
+
+# bun completions
+[ -s "/Users/sjurgemeyer/.bun/_bun" ] && source "/Users/sjurgemeyer/.bun/_bun"
+
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+export PATH="$HOME/.local/bin:$PATH"
+
+export PATH="$HOME/.local/bin:$PATH"

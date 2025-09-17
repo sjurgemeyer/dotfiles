@@ -44,9 +44,9 @@ rm -Rf ~/.npmrc
 sudo ln -s ~/projects/dotfiles/.npmrc ~/.npmrc
 
 #SCM_BREEZE
-rm -Rf ~/.scm_breeze
-git clone git://github.com/scmbreeze/scm_breeze.git ~/.scm_breeze
-~/.scm_breeze/install.sh
+# rm -Rf ~/.scm_breeze
+# git clone git://github.com/scmbreeze/scm_breeze.git ~/.scm_breeze
+# ~/.scm_breeze/install.sh
 
 # prompt
 sudo rm -Rf ~/.config/starship.toml
