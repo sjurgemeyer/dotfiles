@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "Bash(kitty @ --help)",
+      "Bash(kitty @ goto-layout --help)",
+      "Bash(kitty --help)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:oxide.md)",
+      "Read(//opt/homebrew/lib/node_modules/@anthropic-ai/claude-code/**)",
+      "Bash(kitty @ launch --help)",
+      "Bash(kitty +runpy 'from kitty.session import *; help\\(parse_session\\)')",
+      "Bash(kitty +runpy 'from kitty.session import parse_session; import inspect; print\\(inspect.getsource\\(parse_session\\)\\)')",
+      "Bash(kitty +runpy 'import kitty.session; print\\(kitty.session.__file__\\)')",
+      "Bash(kitty +runpy ':*)",
+      "Bash(cat)",
+      "Read(//Applications/kitty.app/Contents/Resources/doc/**)",
+      "Bash(kitty --session /tmp/test_layout.kitty-session --title \"Layout Test\")",
+      "Bash(disown)",
+      "Bash(kitty --session /tmp/test_layout_resized.kitty-session --title \"Layout Resized Test\")",
+      "WebFetch(domain:www.qu8n.com)",
+      "Bash(tree-sitter --version)",
+      "Bash(brew info:*)",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "Bash(kitty +kitten hints --help)",
+      "WebFetch(domain:sw.kovidgoyal.net)",
+      "Bash(mkdir -p /tmp/lsd_test)",
+      "Read(//tmp/**)",
+      "Bash(touch \"normal.txt\" \"file with spaces.txt\" \"another file.py\" \"simple.sh\")",
+      "Bash(lsd)",
+      "Bash(xxd)",
+      "Bash(lsd --icon always)",
+      "Bash(mkdir subdir:*)",
+      "Bash(lsd -la --icon always)",
+      "Bash(COLUMNS=200 lsd --icon always)"
+    ]
+  }
+}

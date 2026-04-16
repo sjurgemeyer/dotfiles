@@ -1,0 +1,3 @@
+new_tab NeoVIM
+layout fat
+launch --cwd=current nvim

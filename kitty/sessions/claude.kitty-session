@@ -1,0 +1,3 @@
+new_tab Claude
+layout fat
+launch --cwd=current --env=PATH=/opt/homebrew/bin:/usr/bin:/bin claude

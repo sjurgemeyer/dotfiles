@@ -1,17 +1,9 @@
 [user]
 	name = Shaun Jurgemeyer
-	email = sjurgemeye@chewy.com
+	email = sjurgemeyer@ritchiebros.com
 [core]
 	excludesfile = ~/.gitignore_global
-	;pager = diff-so-fancy | less --tabs=4 -RFX
-    pager = delta
-[delta]
-    syntax-theme = TwoDark
-    side-by-side = true
-    hunk-header-decoration-style = "#666666" ol ul
-    line-numbers = true
-    line-numbers-right-format = "{np:>4} "
-    line-numbers-left-format = "{nm:>4} "
+	pager = diff-so-fancy | less --tabs=4 -RFX
 [difftool]
     prompt = false
 [difftool "sourcetree"]
@@ -91,3 +83,8 @@
 	browser = ch
 [browser "ch"]
 	cmd = open -a \"/Applications/Google Chrome.app\"
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f

@@ -23,7 +23,6 @@ statusmessage.new = function(messageText)
     }
 
     -- Create a canvas that covers the entire screen
-
     -- Add background rectangle (covers the entire screen)
     canvasObj[1] = {
       type = "rectangle",
@@ -53,11 +52,11 @@ statusmessage.new = function(messageText)
 
       -- Create a canvas for each screen
       local allScreens = hs.screen.allScreens()
-      for _, screen in ipairs(allScreens) do
-        local canvas = self._buildParts(messageText, screen)
-        canvas:show()
-        table.insert(self.canvases, canvas)
-      end
+
+      local builtin = hs.screen 'Built%-in'
+      local canvas = self._buildParts(messageText, builtin)
+      canvas:show()
+      table.insert(self.canvases, canvas)
     end,
     hide = function(self)
       -- Delete all canvases
@@ -71,13 +70,6 @@ statusmessage.new = function(messageText)
       self:show()
       hs.timer.delayed.new(seconds, function() self:hide() end):start()
     end,
-    toggle = function(self)
-        if #self.canvases > 0 then
-            self:hide()
-        else
-            self:show()
-        end
-    end
   }
 end
 

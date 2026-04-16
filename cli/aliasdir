@@ -1,0 +1,115 @@
+#!/usr/bin/env bash
+
+# create_symlinks.sh
+# Usage: ./create_symlinks.sh /path/to/sourceDir /path/to/destDir
+# For each subdirectory "sub" directly under sourceDir,
+# create a symlink destDir/sub -> sourceDir/sub
+# - skips non-directories
+# - preserves existing correct symlinks
+# - backs up or reports conflicts for existing non-matching files/links
+
+set -euo pipefail
+
+print_usage() {
+    cat <<EOF
+Usage: $0 SOURCE_DIR DEST_DIR
+
+Creates symbolic links in DEST_DIR for each subdirectory (one level) in SOURCE_DIR.
+For each directory SOURCE_DIR/sub the script creates DEST_DIR/sub -> SOURCE_DIR/sub
+
+Notes:
+* Both SOURCE_DIR and DEST_DIR will be resolved to absolute paths.
+* If DEST_DIR does not exist the script will attempt to create it.
+* If DEST_DIR/sub already exists:
+    - If it's a symlink pointing to SOURCE_DIR/sub, it is left as-is.
+    - If it's a symlink pointing elsewhere or a regular file/directory, the original is moved to DEST_DIR/.backup_TIMESTAMP/sub.orig
+EOF
+}
+
+# Require two args
+if [ "${#}" -ne 2 ]; then
+    print_usage
+    exit 2
+fi
+
+SOURCE_DIR="$1"
+DEST_DIR="$2"
+
+# Resolve to absolute paths (works in most shells)
+resolve_abs() {
+    local p="$1"
+    if command -v realpath >/dev/null 2>&1; then
+        realpath "$p"
+    else
+        # fallback: use python if available
+        if command -v python3 >/dev/null 2>&1; then
+            python3 -c "import os,sys; print(os.path.abspath(sys.argv[1]))" "$p"
+        else
+            # naive fallback: join with PWD if relative
+            if [[ "$p" = /* ]]; then
+                printf '%s\n' "$p"
+            else
+                printf '%s\n' "$(pwd)/$p"
+            fi
+        fi
+    fi
+}
+
+SOURCE_DIR_ABS="$(resolve_abs "$SOURCE_DIR")"
+DEST_DIR_ABS="$(resolve_abs "$DEST_DIR")"
+
+# Validate source
+if [ ! -d "$SOURCE_DIR_ABS" ]; then
+    echo "Source directory does not exist or is not a directory: $SOURCE_DIR_ABS" >&2
+    exit 3
+fi
+
+# Create dest if missing
+if [ ! -e "$DEST_DIR_ABS" ]; then
+    mkdir -p "$DEST_DIR_ABS"
+elif [ ! -d "$DEST_DIR_ABS" ]; then
+    echo "Destination exists but is not a directory: $DEST_DIR_ABS" >&2
+    exit 4
+fi
+
+# Prepare backup dir for conflicts
+TIMESTAMP="$(date +%Y%m%dT%H%M%S)"
+BACKUP_DIR="$DEST_DIR_ABS/.backup_$TIMESTAMP"
+mkdir -p "$BACKUP_DIR"
+
+# Iterate over immediate subdirectories (not recursive)
+shopt -s nullglob dotglob
+for entry in "$SOURCE_DIR_ABS"/*; do
+    # skip non-directories
+    [ -d "$entry" ] || continue
+
+    sub="$(basename "$entry")"
+    target_src="$entry"
+    link_path="$DEST_DIR_ABS/$sub"
+
+    if [ -L "$link_path" ]; then
+        # existing symlink: check where it points
+        current_target="$(readlink -f "$link_path" || true)"
+        desired_target="$(readlink -f "$target_src" || true)"
+        if [ "$current_target" = "$desired_target" ]; then
+            echo "OK: symlink exists and points to correct target: $link_path -> $desired_target"
+            continue
+        else
+            echo "CONFLICT: symlink $link_path points to $current_target (will be moved to backup)"
+            mkdir -p "$BACKUP_DIR"
+            mv "$link_path" "$BACKUP_DIR/$sub.orig"
+        fi
+    elif [ -e "$link_path" ]; then
+        # exists but not a symlink (file or directory)
+        echo "CONFLICT: $link_path exists and is not a symlink (will be moved to backup)"
+        mkdir -p "$BACKUP_DIR"
+        mv "$link_path" "$BACKUP_DIR/$sub.orig"
+    fi
+
+    # Create the symlink
+    ln -s "$target_src" "$link_path"
+    echo "Linked: $link_path -> $target_src"
+done
+shopt -u nullglob dotglob
+
+echo "Done. Any conflicts moved to: $BACKUP_DIR (if created)."

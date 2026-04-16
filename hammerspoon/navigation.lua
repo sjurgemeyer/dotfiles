@@ -48,16 +48,6 @@ function navigationMode.bindWithHelpText(mode, text, modifiers, key, fn)
 end
 
 function navigationMode.setHelpData(mode)
-	--menuText = 'Apps\n'
-	--for mapping, description in pairs(helpData.appMenu) do
-	--menuText = menuText .. '\n' .. mapping .. ' - ' .. description
-	--end
-	--menuText = menuText .. '\n\nWindow Manipulation\n'
-	--for mapping, description in pairs(helpData.windowMenu) do
-	--menuText = menuText .. '\n' .. mapping .. ' - ' .. description
-	--end
-
-	--mode.helpMenu.message = menuText
 	mode.helpMenu.helpData = navigationMode.helpData
 end
 -- Use hyper+q to toggle WindowLayout Mode

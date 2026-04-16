@@ -1,4 +1,14 @@
 return {
+	"echasnovski/mini.files", {},
+	"mikesmithgh/kitty-scrollback.nvim", {},
+	"sindrets/diffview.nvim", {},
+	{
+	  "leath-dub/snipe.nvim",
+	  keys = {
+	    {"gb", function () require("snipe").open_buffer_menu() end, desc = "Open Snipe buffer menu"}
+	  },
+	  opts = {}
+	},
 	"onsails/lspkind.nvim",
 	{
 		"stevearc/oil.nvim",
@@ -219,34 +229,67 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
-		config = function()
-			-- [[ Configure Treesitter ]] See `:help nvim-treesitter`
+		init = function()
+			-- Ensure parsers are installed
+			local ensure_installed = { "bash", "c", "html", "lua", "markdown", "markdown_inline", "vim", "vimdoc" }
+			local already_installed = require("nvim-treesitter.config").get_installed()
+			local to_install = vim.iter(ensure_installed)
+				:filter(function(parser)
+					return not vim.tbl_contains(already_installed, parser)
+				end)
+				:totable()
+			if #to_install > 0 then
+				require("nvim-treesitter").install(to_install)
+			end
 
-			---@diagnostic disable-next-line: missing-fields
-			require("nvim-treesitter.configs").setup({
-				ensure_installed = { "bash", "c", "html", "lua", "markdown", "vim", "vimdoc" },
-				-- Autoinstall languages that are not installed
-				auto_install = true,
-				highlight = { enable = true },
-				indent = { enable = true },
-				-- select blocks of code, by continuously hitting `vv`.  `V` to reduce scope of selection
-				incremental_selection = {
-					enable = true,
-					keymaps = {
-						init_selection = "vv", -- set to `false` to disable one of the mappings
-						node_incremental = "vv",
-						scope_incremental = "vb",
-						node_decremental = "V",
-					},
-				},
+			-- Enable highlighting and indentation via built-in treesitter
+			vim.api.nvim_create_autocmd("FileType", {
+				callback = function()
+					pcall(vim.treesitter.start)
+					vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+				end,
 			})
 
-			-- There are additional nvim-treesitter modules that you can use to interact
-			-- with nvim-treesitter. You should go explore a few and see what interests you:
-			--
-			--    - Incremental selection: Included, see :help nvim-treesitter-incremental-selection-mod
-			--    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
-			--    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+			-- Incremental selection keymaps (using Neovim 0.12 built-in)
+			vim.keymap.set({ "n", "x" }, "vv", "an", { remap = true, desc = "Expand treesitter selection" })
+			vim.keymap.set("x", "V", "in", { remap = true, desc = "Shrink treesitter selection" })
 		end,
+	},
+	{
+	  "folke/noice.nvim",
+	  event = "VeryLazy",
+	  opts = {
+	    -- add any options here
+	  },
+	  dependencies = {
+	    -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+	    "MunifTanjim/nui.nvim",
+	    -- OPTIONAL:
+	    --   `nvim-notify` is only needed, if you want to use the notification view.
+	    --   If not available, we use `mini` as the fallback
+	    "rcarriga/nvim-notify",
+	  }
+	},
+	{
+		'MeanderingProgrammer/render-markdown.nvim',
+		dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
+		opts = {},
+	},
+	{ "rebelot/kanagawa.nvim" },
+	{
+		"folke/styler.nvim",
+		opts = {
+			themes = {
+				markdown = { colorscheme = "kanagawa-wave" },
+			},
+		},
+	},{
+	    "folke/snacks.nvim",
+	    opts = {
+		image = {
+		    enabled = true,
+		    backend = "kitty",
+		},
+	    },
 	},
 }

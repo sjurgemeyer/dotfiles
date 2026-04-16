@@ -1,0 +1,4 @@
+new_tab Notes
+layout fat
+cd ~/Documents/Notes/
+launch nvim

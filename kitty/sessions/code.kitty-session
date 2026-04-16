@@ -1,0 +1,7 @@
+new_tab Coding
+layout splits
+launch --title=code-session-nvim --cwd=current nvim
+launch --location=hsplit --cwd=current --title=code-session-term
+resize_window shorter 30
+focus_matching_window title:code-session-nvim
+launch --location=vsplit --title=topright --cwd=current --env=PATH=/opt/homebrew/bin:/usr/bin:/bin claude

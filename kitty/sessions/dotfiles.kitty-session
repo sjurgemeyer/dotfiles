@@ -1,0 +1,4 @@
+new_tab dotfiles
+layout fat
+cd ~/projects/dotfiles
+launch 

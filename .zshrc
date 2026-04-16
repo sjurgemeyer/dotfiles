@@ -35,6 +35,7 @@ fid() {
     [ "$key" = ctrl-o ] && open "$file" || ${EDITOR:-vim} "$file"
   fi
 }
+source $DOTFILES_DIR/cli/fzf-shell.sh
 #end fzf functions
 
 export PROJECT_DIR=$HOME/projects
@@ -144,3 +145,26 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
 export PATH="$HOME/.local/bin:$PATH"
+# Added by dbt Fusion extension (ensure dbt binary dir on PATH)
+if [[ ":$PATH:" != *":/Users/sjurgemeyer/.local/bin:"* ]]; then
+  export PATH=/Users/sjurgemeyer/.local/bin:"$PATH"
+fi
+# Added by dbt Fusion extension
+alias dbtf=/Users/sjurgemeyer/.local/bin/dbt
+
+# Change cursor shape for vi modes
+function zle-keymap-select {
+  if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]]; then
+    echo -ne '\e[2 q'  # block cursor for normal mode
+  elif [[ ${KEYMAP} == main ]] || [[ ${KEYMAP} == viins ]] || [[ $1 = 'beam' ]]; then
+    echo -ne '\e[6 q'  # beam cursor for insert mode
+  fi
+}
+zle -N zle-keymap-select
+
+# Start with beam cursor
+function zle-line-init {
+  echo -ne '\e[6 q'
+}
+zle -N zle-line-init
+

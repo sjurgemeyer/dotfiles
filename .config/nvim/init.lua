@@ -48,6 +48,7 @@ vim.opt.inccommand = "split"
 
 -- Show which line your cursor is on
 vim.opt.cursorline = true
+-- vim.opt.guicursor = "a:ver25"
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
@@ -131,3 +132,54 @@ vim.cmd("colorscheme slater")
 vim.opt.termguicolors = true
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+--
+--
+--
+
+-- Open current markdown file in Obsidian
+vim.keymap.set("n", "<leader>oo", function()
+    local path = vim.fn.expand("%:p")
+    if vim.bo.filetype ~= "markdown" then
+        vim.notify("Not a markdown file", vim.log.levels.WARN)
+        return
+    end
+    local encoded_path = path:gsub(" ", "%%20")
+    vim.fn.system({ "open", "obsidian://open?path=" .. encoded_path })
+end, { desc = "Open in [O]bsidian" })
+
+vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function(event)
+        local map = function(keys, func, desc)
+            vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+        end
+
+        map("gd", vim.lsp.buf.definition, "Go to definition")
+        map("gr", vim.lsp.buf.references, "Go to references")
+        map("K", vim.lsp.buf.hover, "Hover documentation")
+        map("<leader>cr", vim.lsp.buf.rename, "Rename")
+        map("<leader>ca", vim.lsp.buf.code_action, "Code action")
+    end,
+})
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+-- If using nvim-cmp, extend capabilities (optional)
+-- local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+-- Use the function call form to MERGE (not replace) the config
+vim.lsp.config('markdown_oxide', {
+    -- Ensure that dynamicRegistration is enabled! This allows the LS to take into account actions like the
+    -- Create Unresolved File code action, resolving completions for unindexed code blocks, ...
+    capabilities = vim.tbl_deep_extend(
+        'force',
+        capabilities,
+        {
+            workspace = {
+                didChangeWatchedFiles = {
+                    dynamicRegistration = true,
+                },
+            },
+        }
+    ),
+})
+vim.lsp.enable('markdown_oxide')
