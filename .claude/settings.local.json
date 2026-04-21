@@ -32,7 +32,11 @@
       "Bash(lsd --icon always)",
       "Bash(mkdir subdir:*)",
       "Bash(lsd -la --icon always)",
-      "Bash(COLUMNS=200 lsd --icon always)"
+      "Bash(COLUMNS=200 lsd --icon always)",
+      "Bash(pip3 show:*)",
+      "Bash(npm list:*)",
+      "Skill(update-config)",
+      "Bash(kitty @ resize-window --help)"
     ]
   }
 }

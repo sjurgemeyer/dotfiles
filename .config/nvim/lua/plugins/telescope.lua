@@ -2,7 +2,6 @@
 return {
 	"nvim-telescope/telescope.nvim",
 	event = "VeryLazy",
-	branch = "0.1.x",
 	dependencies = {
 		"polirritmico/telescope-lazy-plugins.nvim",
 		"nvim-lua/plenary.nvim",

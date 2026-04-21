@@ -40,13 +40,48 @@ def _shell_escape(name):
     return f'"{escaped}"'
 
 
+LINE_RE = re.compile(r'^(.+)$', re.MULTILINE)
+ICON_RE = re.compile(r'[\ue000-\uf8ff\U000f0000-\U000fffff]')
+
+
+def _overlaps(start, end, ranges):
+    """True if [start, end) overlaps any (s, e) range in ranges."""
+    for s, e in ranges:
+        if start < e and s < end:
+            return True
+    return False
+
+
 def mark(text, args, Mark, extra_cli_args, *a):
-    for idx, match in enumerate(ICON_THEN_NAME.finditer(text)):
+    candidates = []  # list of (start, end, mark_text)
+
+    # Pass 1: icon-based matches (lsd-style output)
+    for match in ICON_THEN_NAME.finditer(text):
         start = match.start(1)
         end = match.end(1)
         mark_text = _clean(match.group(1))
         if mark_text:
-            yield Mark(idx, start, end, mark_text, {})
+            candidates.append((start, end, mark_text))
+
+    # Pass 2: whole-line matches (fd-style output) for lines with no icon.
+    for match in LINE_RE.finditer(text):
+        raw = match.group(1)
+        if ICON_RE.search(raw):
+            continue
+        mark_text = _clean(raw)
+        if mark_text:
+            candidates.append((match.start(1), match.end(1), mark_text))
+
+    # Sort by start position, drop any that overlap an earlier kept range.
+    candidates.sort(key=lambda c: (c[0], c[1]))
+    kept = []
+    for start, end, mark_text in candidates:
+        if kept and start < kept[-1][1]:
+            continue
+        kept.append((start, end, mark_text))
+
+    for idx, (start, end, mark_text) in enumerate(kept):
+        yield Mark(idx, start, end, mark_text, {})
 
 
 def handle_result(args, data, target_window_id, boss, extra_cli_args, *a):

@@ -1,3 +1,6 @@
+-- Ensure Homebrew binaries are available (for rg, etc.)
+vim.env.PATH = "/opt/homebrew/bin:" .. vim.env.PATH
+
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -118,6 +121,14 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "markdown",
+	callback = function()
+		vim.wo.wrap = true
+		vim.wo.linebreak = true
+	end,
+})
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
 	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -183,3 +194,4 @@ vim.lsp.config('markdown_oxide', {
     ),
 })
 vim.lsp.enable('markdown_oxide')
+vim.lsp.enable('pyright')

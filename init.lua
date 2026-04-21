@@ -54,6 +54,7 @@ require('hammerspoon.windows')
 require('hammerspoon.apps')
 require('hammerspoon.layouts')
 require('hammerspoon.recording')
+require('hammerspoon.meeting-watcher')
 
 navigationMode:setHelpData()
 

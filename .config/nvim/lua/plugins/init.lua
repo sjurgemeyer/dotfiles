@@ -1,7 +1,23 @@
 return {
-	"echasnovski/mini.files", {},
 	"mikesmithgh/kitty-scrollback.nvim", {},
 	"sindrets/diffview.nvim", {},
+	{
+		"chrisgrieser/nvim-spider",
+		keys = {
+			{ "w", "<cmd>lua require('spider').motion('w')<CR>", mode = { "n", "o", "x" } },
+			{ "e", "<cmd>lua require('spider').motion('e')<CR>", mode = { "n", "o", "x" } },
+			{ "b", "<cmd>lua require('spider').motion('b')<CR>", mode = { "n", "o", "x" } },
+			{ "ge", "<cmd>lua require('spider').motion('ge')<CR>", mode = { "n", "o", "x" } },
+		},
+		config = function()
+			require("neo-tree").setup({
+				skipInsignificantPunctuation = true,
+				subwordMovement = false,
+				consistentOperatorPending = false, -- see the README for details
+				customPatterns = {},
+			})
+		end
+	},
 	{
 	  "leath-dub/snipe.nvim",
 	  keys = {
@@ -206,7 +222,7 @@ return {
 	{ "folke/todo-comments.nvim", dependencies = { "nvim-lua/plenary.nvim" }, opts = {} },
 	-- Collection of various small independent plugins/modules
 	{
-		"echasnovski/mini.nvim",
+		"nvim-mini/mini.nvim",
 		config = function()
 			-- Better Around/Inside textobjects
 			--
@@ -215,6 +231,15 @@ return {
 			--  - yinq - [Y]ank [I]nside [N]ext [']quote
 			--  - ci'  - [C]hange [I]nside [']quote
 			require("mini.ai").setup({ n_lines = 500 })
+			require("mini.files").setup()
+
+			-- Toggle mini.files
+			vim.keymap.set("n", "<leader>e", function()
+				local MiniFiles = require("mini.files")
+				if not MiniFiles.close() then
+					MiniFiles.open(vim.api.nvim_buf_get_name(0))
+				end
+			end, { desc = "Toggle mini.files" })
 
 			-- Add/delete/replace surroundings (brackets, quotes, etc.)
 			--
@@ -228,20 +253,9 @@ return {
 	-- Highlight, edit, and navigate code
 	{
 		"nvim-treesitter/nvim-treesitter",
+		branch = "main",
 		build = ":TSUpdate",
 		init = function()
-			-- Ensure parsers are installed
-			local ensure_installed = { "bash", "c", "html", "lua", "markdown", "markdown_inline", "vim", "vimdoc" }
-			local already_installed = require("nvim-treesitter.config").get_installed()
-			local to_install = vim.iter(ensure_installed)
-				:filter(function(parser)
-					return not vim.tbl_contains(already_installed, parser)
-				end)
-				:totable()
-			if #to_install > 0 then
-				require("nvim-treesitter").install(to_install)
-			end
-
 			-- Enable highlighting and indentation via built-in treesitter
 			vim.api.nvim_create_autocmd("FileType", {
 				callback = function()
