@@ -139,14 +139,10 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins")
 require("config/alpha")
 require("config/telescope-any-custom")
-vim.cmd("colorscheme slater")
+-- vim.cmd("colorscheme slater")
+ vim.cmd("colorscheme tender")
+--
 vim.opt.termguicolors = true
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
---
---
---
-
 -- Open current markdown file in Obsidian
 vim.keymap.set("n", "<leader>oo", function()
     local path = vim.fn.expand("%:p")

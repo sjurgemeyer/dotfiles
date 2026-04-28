@@ -1,0 +1,86 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat *)",
+      "Bash(dbt *)",
+      "Bash(find *)",
+      "Bash(git add *)",
+      "Bash(git blame *)",
+      "Bash(git branch)",
+      "Bash(git branch -l *)",
+      "Bash(git branch --list *)",
+      "Bash(git cat-file *)",
+      "Bash(git config --get *)",
+      "Bash(git config --list *)",
+      "Bash(git describe *)",
+      "Bash(git diff *)",
+      "Bash(git fetch)",
+      "Bash(git fetch *)",
+      "Bash(git for-each-ref *)",
+      "Bash(git grep *)",
+      "Bash(git log *)",
+      "Bash(git ls-files *)",
+      "Bash(git ls-remote *)",
+      "Bash(git ls-tree *)",
+      "Bash(git merge-base *)",
+      "Bash(git name-rev *)",
+      "Bash(git reflog *)",
+      "Bash(git remote)",
+      "Bash(git remote -v)",
+      "Bash(git remote get-url *)",
+      "Bash(git remote show *)",
+      "Bash(git rev-list *)",
+      "Bash(git rev-parse *)",
+      "Bash(git shortlog *)",
+      "Bash(git show *)",
+      "Bash(git stash list)",
+      "Bash(git stash list *)",
+      "Bash(git stash show *)",
+      "Bash(git status)",
+      "Bash(git status *)",
+      "Bash(git tag)",
+      "Bash(git tag -l *)",
+      "Bash(git tag --list *)",
+      "Bash(git worktree list *)",
+      "Bash(grep *)",
+      "Bash(head:*)",
+      "Bash(ls *)",
+      "Bash(python *)",
+      "Bash(python3 *)",
+      "Bash(uv run *)",
+      "Edit(~/.claude/settings.json)",
+      "Edit(~/.claude/settings.local.json)",
+      "Edit(~/.claude/CLAUDE.md)",
+      "Edit(~/projects/dotfiles/.claude/**)",
+      "Edit(.claude/settings.json)",
+      "Edit(.claude/settings.local.json)",
+      "Write~E(/.claude/settings.json)",
+      "Write~E(/.claude/settings.local.json)",
+      "Write(~/.claude/CLAUDE.md)",
+      "Write(~/projects/dotfiles/.claude/**)",
+      "Write(.claude/settings.json)",
+      "Write(.claude/settings.local.json)",
+      "Write(~/Documents/Notes/generated-docs/**)"
+    ],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Bash(git push *)",
+      "Bash(git reset --hard *)"
+    ],
+    "additionalDirectories": [
+      "~/projects"
+    ]
+  },
+  "enabledPlugins": {
+    "github@claude-plugins-official": true,
+    "pyright-lsp@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "claude-plugins-official": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
+      }
+    }
+  }
+}

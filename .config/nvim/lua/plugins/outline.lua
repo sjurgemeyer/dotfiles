@@ -1,4 +1,4 @@
--- symbols in file
+-- code file structure
 return {
 	"hedyhli/outline.nvim",
 	config = function()

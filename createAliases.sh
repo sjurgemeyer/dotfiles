@@ -30,8 +30,6 @@ sudo ln -s ~/projects/dotfiles/.git.scmbrc ~/.git.scmbrc
 # Used for syntastic
 rm -Rf ~/.jshintrc
 sudo ln -s ~/projects/dotfiles/.jshintrc ~/.jshintrc
-rm -Rf /usr/local/bin/codenarc
-sudo ln -s ~/.vim/tools/codenarc /usr/local/bin/codenarc
 
 #ZSH
 rm -Rf ~/.zshrc
@@ -43,11 +41,6 @@ sudo ln -s ~/projects/dotfiles/.oh-my-zsh/themes/shaun.zsh-theme ~/.oh-my-zsh/th
 rm -Rf ~/.npmrc
 sudo ln -s ~/projects/dotfiles/.npmrc ~/.npmrc
 
-#SCM_BREEZE
-# rm -Rf ~/.scm_breeze
-# git clone git://github.com/scmbreeze/scm_breeze.git ~/.scm_breeze
-# ~/.scm_breeze/install.sh
-
 # prompt
 sudo rm -Rf ~/.config/starship.toml
 sudo ln -s ~/projects/dotfiles/starship.toml ~/.config/starship.toml
@@ -56,6 +49,10 @@ sudo ln -s ~/projects/dotfiles/starship.toml ~/.config/starship.toml
 sudo rm -Rf ~/.config/karabiner/karabiner.json
 sudo ln -s ~/projects/dotfiles/karabiner.json ~/.config/karabiner/karabiner.json
 
-# sdkman
-curl -s "https://get.sdkman.io" | bash
+# claude
+sudo rm -Rf ~/.claude/settings.json
+sudo ln -s ~/projects/dotfiles/claude/settings.json ~/.claude/settings.json
 
+# lsd
+sudo rm -Rf ~/.config/lsd/
+sudo ln -s ~/projects/dotfiles/.config/lsd ~/.config/lsd

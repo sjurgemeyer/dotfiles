@@ -1,3 +1,4 @@
+-- Home screen
 return {
 	"goolord/alpha-nvim",
 	dependencies = {

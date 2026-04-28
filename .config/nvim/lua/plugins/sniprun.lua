@@ -1,3 +1,4 @@
+-- Run selected code
 return {
 	"michaelb/sniprun",
 	branch = "master",

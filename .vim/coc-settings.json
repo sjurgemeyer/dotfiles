@@ -1,8 +1,0 @@
-{
-    "languageserver": {
-        "kotlin": {
-            "command": "/Users/z002pfx/projects/kotlin-language-server/server/build/install/server/bin/kotlin-language-server",
-            "filetypes": ["kotlin"]
-        }
-    }
-}

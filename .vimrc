@@ -5,10 +5,6 @@ else
     set nocompatible
     filetype off
     set conceallevel=3
-    set rtp+=~/.vim/bundle/Vundle.vim/
-    call vundle#rc()
-    set rtp+=~/.vim/bundle/vundleconfig/
-    call vundleconfig#init()
     "let g:deoplete#enable_at_startup = 1
     nnoremap ; :
     nnoremap : ;
@@ -16,152 +12,9 @@ else
     vnoremap : ;
     let mapleader = "\<Space>"
     let g:mapleader = "\<Space>"
-    "Plugins management
-    Plugin 'sjurgemeyer/vundleconfig.git'
-    Plugin 'VundleVim/Vundle.vim'
-
-    ""Code completion
-    if has('nvim')
-        "Plugin 'Shougo/deoplete.nvim'
-        set inccommand=nosplit
-        tnoremap <Esc> <C-\><C-n>
-    else
-        "Plugin 'Shougo/neocomplete.vim'
-        Plugin 'haya14busa/incsearch.vim'
-    endif
-
-    "Snippets
-    Plugin 'sirver/ultisnips'
-    Plugin 'honza/vim-snippets'
-    Plugin 'gravle'
-
-    "Buffer management
-    Plugin 'jlanzarotta/bufexplorer'
-    Plugin 'szw/vim-maximizer'
-    Plugin 'simeji/winresizer'
-
-    "Navigation
-    Plugin 'scrooloose/nerdtree.git'
-    Plugin 'Xuyuanp/nerdtree-git-plugin'
-    Plugin 'mbbill/undotree'
-    Plugin 'tpope/vim-unimpaired.git'
-    " show register details in sidebar
-    Plugin 'junegunn/vim-peekaboo'
 
     "Searching
     set rtp+=/usr/local/opt/fzf
-    Plugin 'junegunn/fzf'
-    Plugin 'junegunn/fzf.vim'
-    Plugin 'zackhsi/fzf-tags'
-    Plugin 'wincent/ferret'
-    Plugin 'RRethy/vim-illuminate'
-
-    " find replace with case, case changing functions etc
-    Plugin 'tpope/vim-abolish.git'
-    Plugin 'terryma/vim-expand-region'
-
-    "terminal clipboard
-    Plugin 'kana/vim-fakeclip'
-
-    "Dash
-    Plugin 'rizzatti/funcoo.vim'
-    Plugin 'rizzatti/dash.vim'
-
-    "Editing
-    Plugin 'scrooloose/syntastic.git'
-    Plugin 'benekastah/neomake'
-    Plugin 'tpope/vim-surround'
-    Plugin 'wellle/targets.vim'
-    Plugin 'scrooloose/nerdcommenter.git'
-    Plugin 'sjurgemeyer/vimport'
-    Plugin 'sjurgemeyer/vim-open'
-    Plugin 'sjurgemeyer/vim-gradle'
-    Plugin 'sjurgemeyer/vim-tabspace'
-    Plugin 'sjurgemeyer/vim-uuid'
-
-    "Formatting
-    Plugin 'vim-scripts/Align.git'
-    Plugin 'editorconfig/editorconfig-vim'
-    " highlight trailing whitespace
-    Plugin 'ntpeters/vim-better-whitespace'
-    "Sort by column
-    Plugin 'navicore/vissort.vim'
-
-    " Required for other plugins?
-    Plugin 'vim-scripts/SyntaxRange'
-
-    ""Filetype
-    Plugin 'tpope/vim-markdown'
-    Plugin 'csv.vim'
-
-    " plantuml
-    Plugin 'sjurgemeyer/vim-plantuml'
-    Plugin 'aklt/plantuml-syntax'
-
-    "CSS
-    "Plugin 'https://github.com/gorodinskiy/vim-coloresque.git'
-    Plugin 'groenewege/vim-less'
-
-    "Javascript stuff
-    Plugin 'jelera/vim-javascript-syntax'
-    Plugin 'othree/javascript-libraries-syntax.vim'
-    Plugin 'pangloss/vim-javascript'
-    Plugin 'leafgarland/typescript-vim'
-    "React
-    Plugin 'MaxMEllon/vim-jsx-pretty'
-
-    "Kotlin
-    Plugin 'udalov/kotlin-vim'
-
-    "Scala
-    Plugin 'derekwyatt/vim-scala'
-
-    " Terraform
-    Plugin 'markcornick/vim-terraform'
-
-    "Golang
-    "Plugin 'fatih/vim-go'
-
-    "Rust
-    Plugin 'rust-lang/rust.vim'
-
-    "TOML
-    Plugin 'cespare/vim-toml'
-
-    "Git
-    Plugin 'sjl/splice.vim'
-    if !exists('g:nofugitive')
-        Plugin 'tpope/vim-fugitive.git'
-        Plugin 'tpope/vim-rhubarb.git'
-    endif
-    Plugin 'idanarye/vim-merginal'
-    Plugin 'airblade/vim-gitgutter'
-
-    "Utils
-    Plugin 'tpope/vim-repeat'
-    Plugin 'tpope/vim-dispatch'
-    Plugin 'tpope/vim-eunuch'
-
-    "Pretty
-    Plugin 'altercation/vim-colors-solarized'
-    " pretty status line
-    Plugin 'vim-airline/vim-airline'
-    Plugin 'vim-airline/vim-airline-themes'
-    "Plugin 'luochen1990/rainbow'
-    "Plugin 'frazrepo/vim-rainbow'
-
-    " nice icons in nerdtree
-    Plugin 'ryanoasis/vim-devicons'
-    " display vertical lines at tabs
-    Plugin 'yggdroot/indentline'
-
-    " REST / HTTP
-    Plugin 'sjurgemeyer/vim-http-client'
-
-    " NeoVim terminal
-    if has('nvim')
-        Plugin 'kassio/neoterm'
-    endif
 
     syntax on
     if filereadable("~/.vimrc-private")
@@ -215,9 +68,6 @@ else
     nnoremap ` '
 
     autocmd BufWritePre *.groovy OrganizeImports
-    "autocmd BufWritePre *.kt OrganizeImports
-    "autocmd BufWritePre *.java RemoveUnneededImports
-    "autocmd BufWritePre *.java OrganizeImports
 
     autocmd BufWritePre * StripWhitespace
 
@@ -344,25 +194,6 @@ else
     endfu
     command! CodeMode :call CodeMode()
 
-    "Neovim terminal
-    if has('nvim')
-    "let g:loaded_python_provider = 0
-    let g:python_host_skip_check = 1
-    let g:python_host_prog = 'python'
-
-    "let g:loaded_python3_provider = 0
-    let g:python3_host_skip_check = 1
-    let g:python3_host_prog = 'python3'
-
-    set termguicolors
-    tnoremap <C-q> <C-\><C-n>
-
-    function! Term()
-        :e term://zsh
-    endfunction
-    command! Term :call Term()
-    endif
-
     " vp doesn't replace paste buffer
     function! RestoreRegister()
     let @" = s:restore_reg
@@ -374,12 +205,6 @@ else
     endfunction
     vmap <silent> <expr> p <sid>Repl()
 
-    "Code mode by default
-    :CodeMode
-
-    "Cursor in terminal mode
-    "let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
-    "let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode"
 
     if ! has('gui_running')
         set ttimeoutlen=10
@@ -390,43 +215,4 @@ else
         augroup END
     endif
 
-
-    function! PasteTime()
-        let t = strftime("%FT%T%z")
-        execute 'normal i' . t
-    endfunction
-
-
-    " Need to move these functions elsewhere
-    function! SmallTerm()
-        :vertical rightbelow Topen resize=100
-    endfunction
-    command! SmallTerm :call SmallTerm()
-
-    function! Time()
-        :put =strftime('%FT%T%z')
-    endfunction
-    command! Time :call Time()
-
-    let g:neoterm_size = 10
-    let g:neoterm_open_in_all_tabs = 1
-    "let g:neoterm_autojump = 1
-    let g:neoterm_fixedsize = 1
-
-
-    function! RunTest()
-        let file = expand('%:t:r')
-        let root = GradleRootDir()
-        let project = GradleSubprojectName()
-        let package = GetCurrentPackage()
-        call SmallTerm()
-        execute ':T cd ' . root
-        execute ':T ./gradlew -p ' . project . ' test --tests ' . package . '.' . file
-    endfunction
-
-    nnoremap <Leader>gg :call RunTest()<CR>
-
-    source $HOME/projects/dotfiles/.vim/scripts/windowManipulation.vim
-
-    nnoremap <leader>n :noh<CR>
 endif

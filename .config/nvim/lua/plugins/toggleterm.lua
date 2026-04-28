@@ -1,3 +1,4 @@
+-- Vim terminal management
 return {
 	"akinsho/toggleterm.nvim",
 	version = "*",

@@ -1,6 +1,11 @@
 return {
 	"mikesmithgh/kitty-scrollback.nvim", {},
-	"sindrets/diffview.nvim", {},
+	{"sindrets/diffview.nvim", 
+		config = function()
+			vim.keymap.set("n", "<leader>go", ":DiffviewOpen<CR>", { desc = "[G]it Diff [O]pen" })
+			vim.keymap.set("n", "<leader>gc", ":DiffviewOpen<CR>", { desc = "[G]it Diff [C]lose"})
+		end
+	},
 	{
 		"chrisgrieser/nvim-spider",
 		keys = {
@@ -18,6 +23,7 @@ return {
 			})
 		end
 	},
+	-- quick navigation of buffers
 	{
 	  "leath-dub/snipe.nvim",
 	  keys = {
@@ -25,6 +31,7 @@ return {
 	  },
 	  opts = {}
 	},
+	-- better completion windows
 	"onsails/lspkind.nvim",
 	{
 		"stevearc/oil.nvim",
@@ -39,21 +46,6 @@ return {
 	-- Detect tabstop and shiftwidth automatically
 	"tpope/vim-sleuth",
 	-- maximize window
-	{
-		"caenrique/nvim-maximize-window-toggle",
-		config = function()
-			vim.keymap.set("n", "<CR>", ":ToggleOnly<CR>")
-		end,
-	},
-	-- highlight RGB colors in files
-	{ "brenoprata10/nvim-highlight-colors", opts = {} },
-	{
-		"max397574/colortils.nvim",
-		opts = {},
-		config = function()
-			require("colortils").setup({})
-		end,
-	},
 	-- Adds git related signs to the gutter, as well as utilities for managing changes
 	{
 		"lewis6991/gitsigns.nvim",
@@ -66,58 +58,6 @@ return {
 				changedelete = { text = "~" },
 			},
 		},
-	},
-	-- indentation guides
-	-- { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
-	--
-
-	-- status line of code context
-	{
-		"SmiteshP/nvim-navic",
-		requires = "neovim/nvim-lspconfig",
-		config = function() -- This is the function that runs, AFTER loading
-			require("nvim-navic").setup({ lsp = {
-				auto_attach = false,
-				preference = nil,
-			} })
-		end,
-	},
-	-- Help text for key bindings
-	{
-		"folke/which-key.nvim",
-		event = "VeryLazy", -- Sets the loading event to 'VeryLazy'
-		keys = {
-			--config = function() -- This is the function that runs, AFTER loading
-			-- require("which-key").setup()
-			-- Create heading descriptions
-			-- require("which-key").add({
-			{ "<leader>c", group = "[C]ode" },
-			{ "<leader>c_", hidden = true },
-			{ "<leader>d", group = "[D]ocument" },
-			{ "<leader>d_", hidden = true },
-			{ "<leader>e", group = "[E]xecute" },
-			{ "<leader>e_", hidden = true },
-			{ "<leader>g", group = "[G]o" },
-			{ "<leader>g_", hidden = true },
-			{ "<leader>s", group = "[S]earch" },
-			{ "<leader>s_", hidden = true },
-			{ "<leader>t", group = "[T]erminal" },
-			{ "<leader>t_", hidden = true },
-			{ "<leader>tg", group = "Lazy[G]it" },
-			{ "<leader>tg_", hidden = true },
-			{ "<leader>tt", group = "[T]erminal" },
-			{ "<leader>tt_", hidden = true },
-			{ "V", group = "Decrease code block select" },
-			{ "V_", hidden = true },
-			{ "t", group = "[T]abs" },
-			{ "t_", hidden = true },
-			{ "tm", group = "[T]ab [M]ove" },
-			{ "tm_", hidden = true },
-			{ "vv", group = "Expand code block select" },
-			{ "vv_", hidden = true },
-		},
-		--)
-		--end,
 	},
 	-- Tree view
 	{
@@ -148,16 +88,6 @@ return {
 				),
 			})
 		end,
-	},
-	-- file browser in telescope
-	{
-		"nvim-telescope/telescope-file-browser.nvim",
-		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
-		mappings = {
-			["n"] = {
-				["<leader>fb"] = ":Telescope file_browser path=%:p:h select_buffer=true<CR>",
-			},
-		},
 	},
 	-- smart sorting on search
 	{
@@ -232,9 +162,10 @@ return {
 			--  - ci'  - [C]hange [I]nside [']quote
 			require("mini.ai").setup({ n_lines = 500 })
 			require("mini.files").setup()
+			-- require("mini.icons")setup()
 
 			-- Toggle mini.files
-			vim.keymap.set("n", "<leader>e", function()
+			vim.keymap.set("n", "<leader>f", function()
 				local MiniFiles = require("mini.files")
 				if not MiniFiles.close() then
 					MiniFiles.open(vim.api.nvim_buf_get_name(0))
@@ -247,7 +178,6 @@ return {
 			-- - sd'   - [S]urround [D]elete [']quotes
 			-- - sr)'  - [S]urround [R]eplace [)] [']
 			require("mini.surround").setup()
-			--  More at: https://github.com/echasnovski/mini.nvim
 		end,
 	},
 	-- Highlight, edit, and navigate code
@@ -255,6 +185,7 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		branch = "main",
 		build = ":TSUpdate",
+
 		init = function()
 			-- Enable highlighting and indentation via built-in treesitter
 			vim.api.nvim_create_autocmd("FileType", {
@@ -265,10 +196,11 @@ return {
 			})
 
 			-- Incremental selection keymaps (using Neovim 0.12 built-in)
-			vim.keymap.set({ "n", "x" }, "vv", "an", { remap = true, desc = "Expand treesitter selection" })
-			vim.keymap.set("x", "V", "in", { remap = true, desc = "Shrink treesitter selection" })
+			vim.keymap.set("v", "v", "an", { remap = true, desc = "Expand treesitter selection" })
+			vim.keymap.set("v", "V", "in", { remap = true, desc = "Shrink treesitter selection" })
 		end,
 	},
+	-- fancy UI
 	{
 	  "folke/noice.nvim",
 	  event = "VeryLazy",
@@ -284,20 +216,15 @@ return {
 	    "rcarriga/nvim-notify",
 	  }
 	},
+	-- pretty markdown
+	-- {
+	-- 	'MeanderingProgrammer/render-markdown.nvim',
+	-- 	dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
+	-- 	opts = {},
+	-- },
+	-- Extra theme, currently used for markdown
+	-- many small plugins, currently using the image rendering
 	{
-		'MeanderingProgrammer/render-markdown.nvim',
-		dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
-		opts = {},
-	},
-	{ "rebelot/kanagawa.nvim" },
-	{
-		"folke/styler.nvim",
-		opts = {
-			themes = {
-				markdown = { colorscheme = "kanagawa-wave" },
-			},
-		},
-	},{
 	    "folke/snacks.nvim",
 	    opts = {
 		image = {

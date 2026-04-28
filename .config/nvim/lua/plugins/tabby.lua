@@ -1,3 +1,4 @@
+-- vim tab management
 return {
 	"nanozuki/tabby.nvim",
 	event = "VimEnter",

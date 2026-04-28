@@ -190,7 +190,7 @@ local telescope_any = create_telescope_any({
 	winnr = vim.api.nvim_get_current_win(),
 	bufnr = vim.api.nvim_get_current_buf(),
 })
-vim.api.nvim_set_keymap("n", "<leader><leader>", "", {
+vim.api.nvim_set_keymap("n", "<leader><leader><leader>", "", {
 	noremap = true,
 	silent = true,
 	callback = telescope_any,
