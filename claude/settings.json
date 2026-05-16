@@ -4,6 +4,75 @@
       "Bash(cat *)",
       "Bash(dbt *)",
       "Bash(find *)",
+      "Bash(gh alias list)",
+      "Bash(gh alias list *)",
+      "Bash(gh api -X GET *)",
+      "Bash(gh api --method GET *)",
+      "Bash(gh attestation list *)",
+      "Bash(gh attestation verify *)",
+      "Bash(gh auth status)",
+      "Bash(gh auth status *)",
+      "Bash(gh browse *)",
+      "Bash(gh cache list)",
+      "Bash(gh cache list *)",
+      "Bash(gh codespace list)",
+      "Bash(gh codespace list *)",
+      "Bash(gh codespace logs *)",
+      "Bash(gh codespace ports *)",
+      "Bash(gh codespace view *)",
+      "Bash(gh config get *)",
+      "Bash(gh config list)",
+      "Bash(gh config list *)",
+      "Bash(gh extension browse)",
+      "Bash(gh extension browse *)",
+      "Bash(gh extension list)",
+      "Bash(gh extension list *)",
+      "Bash(gh extension search *)",
+      "Bash(gh gist list)",
+      "Bash(gh gist list *)",
+      "Bash(gh gist view *)",
+      "Bash(gh gpg-key list)",
+      "Bash(gh gpg-key list *)",
+      "Bash(gh issue list *)",
+      "Bash(gh issue status)",
+      "Bash(gh issue status *)",
+      "Bash(gh issue view *)",
+      "Bash(gh label list)",
+      "Bash(gh label list *)",
+      "Bash(gh org list)",
+      "Bash(gh org list *)",
+      "Bash(gh pr checks *)",
+      "Bash(gh pr diff *)",
+      "Bash(gh pr list)",
+      "Bash(gh pr list *)",
+      "Bash(gh pr status)",
+      "Bash(gh pr status *)",
+      "Bash(gh pr view)",
+      "Bash(gh pr view *)",
+      "Bash(gh project list *)",
+      "Bash(gh project view *)",
+      "Bash(gh release list)",
+      "Bash(gh release list *)",
+      "Bash(gh release view *)",
+      "Bash(gh repo list *)",
+      "Bash(gh repo view)",
+      "Bash(gh repo view *)",
+      "Bash(gh run list)",
+      "Bash(gh run list *)",
+      "Bash(gh run view *)",
+      "Bash(gh run watch *)",
+      "Bash(gh ruleset list *)",
+      "Bash(gh ruleset view *)",
+      "Bash(gh search *)",
+      "Bash(gh secret list *)",
+      "Bash(gh ssh-key list)",
+      "Bash(gh ssh-key list *)",
+      "Bash(gh status)",
+      "Bash(gh status *)",
+      "Bash(gh variable list *)",
+      "Bash(gh workflow list)",
+      "Bash(gh workflow list *)",
+      "Bash(gh workflow view *)",
       "Bash(git add *)",
       "Bash(git blame *)",
       "Bash(git branch)",
@@ -45,22 +114,79 @@
       "Bash(grep *)",
       "Bash(head:*)",
       "Bash(ls *)",
+      "Bash(rg:*)",
+      "Bash(tail:*)",
       "Bash(python *)",
       "Bash(python3 *)",
       "Bash(uv run *)",
+      "Bash(ln -s *)",
+      "Bash(curl -X GET *)",
+      "Bash(curl --request GET *)",
+      "Bash(curl http://*)",
+      "Bash(curl https://*)",
+      "WebSearch",
       "Edit(~/.claude/settings.json)",
       "Edit(~/.claude/settings.local.json)",
       "Edit(~/.claude/CLAUDE.md)",
       "Edit(~/projects/dotfiles/.claude/**)",
       "Edit(.claude/settings.json)",
       "Edit(.claude/settings.local.json)",
-      "Write~E(/.claude/settings.json)",
-      "Write~E(/.claude/settings.local.json)",
+      "Edit(**/.claude/settings.json)",
+      "Edit(**/.claude/settings.local.json)",
+      "Write(~/.claude/settings.json)",
+      "Write(~/.claude/settings.local.json)",
       "Write(~/.claude/CLAUDE.md)",
       "Write(~/projects/dotfiles/.claude/**)",
       "Write(.claude/settings.json)",
       "Write(.claude/settings.local.json)",
-      "Write(~/Documents/Notes/generated-docs/**)"
+      "Write(**/.claude/settings.json)",
+      "Write(**/.claude/settings.local.json)",
+      "Write(~/Documents/Notes/generated-docs/**)",
+      "mcp__claude_ai_Atlassian__getConfluencePage",
+      "mcp__claude_ai_Atlassian__getConfluencePageDescendants",
+      "mcp__claude_ai_Atlassian__getConfluenceSpaces",
+      "mcp__claude_ai_Atlassian__getPagesInConfluenceSpace",
+      "mcp__claude_ai_Atlassian__searchConfluenceUsingCql",
+      "mcp__claude_ai_Atlassian__getConfluencePageFooterComments",
+      "mcp__claude_ai_Atlassian__getConfluencePageInlineComments",
+      "mcp__claude_ai_Atlassian__getConfluenceCommentChildren",
+      "mcp__claude_ai_Atlassian__getJiraIssue",
+      "mcp__claude_ai_Atlassian__getVisibleJiraProjects",
+      "mcp__claude_ai_Atlassian__getJiraIssueTypeMetaWithFields",
+      "mcp__claude_ai_Atlassian__getJiraProjectIssueTypesMetadata",
+      "mcp__claude_ai_Atlassian__getTransitionsForJiraIssue",
+      "mcp__claude_ai_Atlassian__getJiraIssueRemoteIssueLinks",
+      "mcp__claude_ai_Atlassian__searchJiraIssuesUsingJql",
+      "mcp__claude_ai_Atlassian__lookupJiraAccountId",
+      "mcp__claude_ai_Atlassian__getIssueLinkTypes",
+      "mcp__claude_ai_Atlassian__atlassianUserInfo",
+      "mcp__claude_ai_Atlassian__getAccessibleAtlassianResources",
+      "mcp__claude_ai_Atlassian__fetch",
+      "mcp__datadog__aggregate_events",
+      "mcp__datadog__aggregate_rum_events",
+      "mcp__datadog__aggregate_spans",
+      "mcp__datadog__analyze_datadog_logs",
+      "mcp__datadog__get_datadog_dashboard",
+      "mcp__datadog__get_datadog_incident",
+      "mcp__datadog__get_datadog_metric",
+      "mcp__datadog__get_datadog_metric_context",
+      "mcp__datadog__get_datadog_notebook",
+      "mcp__datadog__get_datadog_trace",
+      "mcp__datadog__get_widget_reference",
+      "mcp__datadog__list_datadog_skills",
+      "mcp__datadog__load_datadog_skill",
+      "mcp__datadog__search_datadog_dashboards",
+      "mcp__datadog__search_datadog_events",
+      "mcp__datadog__search_datadog_hosts",
+      "mcp__datadog__search_datadog_incidents",
+      "mcp__datadog__search_datadog_logs",
+      "mcp__datadog__search_datadog_metrics",
+      "mcp__datadog__search_datadog_monitors",
+      "mcp__datadog__search_datadog_notebooks",
+      "mcp__datadog__search_datadog_rum_events",
+      "mcp__datadog__search_datadog_service_dependencies",
+      "mcp__datadog__search_datadog_services",
+      "mcp__datadog__search_datadog_spans"
     ],
     "deny": [
       "Bash(rm -rf *)",
@@ -68,8 +194,35 @@
       "Bash(git reset --hard *)"
     ],
     "additionalDirectories": [
-      "~/projects"
+      "~/projects",
+      "/tmp"
     ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"/Users/sjurgemeyer/.claude/hooks/context-mode-cache-heal.mjs\""
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"/Users/sjurgemeyer/.claude/hooks/stop-token-summary.sh\""
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/custom-scripts/status.sh"
   },
   "enabledPlugins": {
     "github@claude-plugins-official": true,
@@ -81,6 +234,15 @@
         "source": "github",
         "repo": "anthropics/claude-plugins-official"
       }
+    },
+    "context-mode": {
+      "source": {
+        "source": "github",
+        "repo": "mksglu/context-mode"
+      }
     }
-  }
+  },
+  "theme": "dark",
+  "editorMode": "vim",
+  "skipAutoPermissionPrompt": true
 }

@@ -1,3 +1,5 @@
+
+include current-theme.conf
 # vim:fileencoding=utf-8:foldmethod=marker
 
 #: Fonts {{{
@@ -6,7 +8,7 @@
 #: individual font faces and even specify special fonts for particular
 #: characters.
 
-font_family JetBrainsMono Nerd Font Mono
+font_family SpaceMono Nerd Font
 # bold_font        auto
 # italic_font      auto
 # bold_italic_font auto
@@ -20,7 +22,7 @@ font_family JetBrainsMono Nerd Font Mono
 #: <https://sw.kovidgoyal.net/kitty/kittens/choose-fonts/#font-spec-
 #: syntax>.
 
-# font_size 11.0
+font_size 13.0
 
 #: Font size (in pts).
 
@@ -267,8 +269,7 @@ font_family JetBrainsMono Nerd Font Mono
 #: }}}
 
 #: Text cursor customization {{{
-
-# cursor #cccccc
+# cursor #FF4444
 
 #: Default text cursor color. If set to the special value none the
 #: cursor will be rendered with a "reverse video" effect. Its color
@@ -289,7 +290,7 @@ font_family JetBrainsMono Nerd Font Mono
 #: so if you want to override it, place your value after the lines
 #: where the theme file is included.
 
-cursor_shape beam
+cursor_shape block
 
 #: The cursor shape can be one of block, beam, underline. Note that
 #: when reloading the config this will be changed only if the cursor
@@ -300,7 +301,7 @@ cursor_shape beam
 #: the cursor shape to beam at shell prompts. You can avoid this by
 #: setting shell_integration to no-cursor.
 
-# cursor_shape_unfocused hollow
+cursor_shape_unfocused block
 
 #: Defines the text cursor shape when the OS window is not focused.
 #: The unfocused cursor shape can be one of block, beam, underline,
@@ -339,7 +340,7 @@ cursor_stop_blinking_after 0
 #: setting also controls blinking text, which blinks in exact rhythm
 #: with the cursor.
 
-cursor_trail 10
+cursor_trail 5
 
 #: Set this to a value larger than zero to enable a "cursor trail"
 #: animation. This is an animation that shows a "trail" following the
@@ -355,7 +356,7 @@ cursor_trail 10
 #: cursor_trail_start_threshold to control when a cursor trail is
 #: started.
 
-cursor_trail_decay 0.1 0.5
+cursor_trail_decay 0.05 0.6
 
 #: Controls the decay times for the cursor trail effect when the
 #: cursor_trail is enabled. This option accepts two positive float
@@ -374,8 +375,7 @@ cursor_trail_decay 0.1 0.5
 #: number of cells the cursor must move before the trail is started.
 #: When the cursor moves less than this threshold, the trail is
 #: skipped, reducing unnecessary cursor trail animation.
-
-# cursor_trail_color none
+# cursor_trail_color #883333
 
 #: Set the color of the cursor trail when cursor_trail is enabled. If
 #: set to 'none' (the default), the cursor trail will use the cursor's
@@ -501,7 +501,7 @@ scrollback_lines 20000
 #: If you would rather use neovim to view the scrollback, use
 #: something like this::
 
-scrollback_pager nvim --cmd 'set eventignore=FileType' +'nnoremap q ZQ' +'call nvim_open_term(0, {})' +'set nomodified nolist' +'$' -
+scrollback_pager /Users/sjurgemeyer/projects/dotfiles/.config/kitty/scrollback-pager.sh
 
 #: The above works for neovim 0.12 and newer. There is also a
 #: dedicated plugin kitty-scrollback.nvim
@@ -521,7 +521,7 @@ scrollback_pager nvim --cmd 'set eventignore=FileType' +'nnoremap q ZQ' +'call n
 #: is changed it will only affect newly created windows, not existing
 #: ones.
 
-# scrollback_fill_enlarged_window no
+scrollback_fill_enlarged_window yes
 
 #: Fill new space with lines from the scrollback buffer after
 #: enlarging a window.
@@ -626,7 +626,7 @@ scrollback_pager nvim --cmd 'set eventignore=FileType' +'nnoremap q ZQ' +'call n
 #: The color and style for highlighting URLs on mouse-over. url_style
 #: can be one of: none, straight, double, curly, dotted, dashed.
 
-# open_url_with default
+open_url_with default
 
 #: The program to open clicked URLs. The special value default will
 #: first look for any URL handlers defined via the open_actions
@@ -639,7 +639,7 @@ scrollback_pager nvim --cmd 'set eventignore=FileType' +'nnoremap q ZQ' +'call n
 #: The set of URL prefixes to look for when detecting a URL under the
 #: mouse cursor.
 
-# detect_urls yes
+detect_urls yes
 
 #: Detect URLs under the mouse. Detected URLs are highlighted with an
 #: underline and the mouse cursor becomes a hand over them. Even if
@@ -658,7 +658,7 @@ scrollback_pager nvim --cmd 'set eventignore=FileType' +'nnoremap q ZQ' +'call n
 #: specified using backslash escapes, to specify a backslash use a
 #: double backslash.
 
-# show_hyperlink_targets no
+show_hyperlink_targets yes
 
 #: When the mouse hovers over a terminal hyperlink, show the actual
 #: URL that will be activated when the hyperlink is clicked.
@@ -731,7 +731,7 @@ copy_on_select yes
 #: no-op:
 #:     Has no effect.
 
-# strip_trailing_spaces never
+strip_trailing_spaces always
 
 #: Remove spaces at the end of lines when copying to clipboard. A
 #: value of smart will do it when using normal selections, but not
@@ -981,12 +981,12 @@ copy_on_select yes
 
 #: Terminal bell {{{
 
-# enable_audio_bell yes
+enable_audio_bell no
 
 #: The audio bell. Useful to disable it in environments that require
 #: silence.
 
-# visual_bell_duration 0.0
+visual_bell_duration 0.5
 
 #: The visual bell duration (in seconds). Flash the screen when a bell
 #: occurs for the specified number of seconds. Set to zero to disable.
@@ -1070,6 +1070,7 @@ copy_on_select yes
 
 #: Window layout {{{
 
+new_window_cwd current
 # remember_window_size  yes
 # initial_window_width  640
 # initial_window_height 400
@@ -1304,21 +1305,22 @@ copy_on_select yes
 #: the layout row/column/slot, which can result in multiple windows
 #: getting resized.
 
-# window_title_bar top
+window_title_bar top
 
 #: Control the position of the window title bar relative to the window
 #: content. Use window_title_bar_min_windows to control when title
 #: bars are shown. Use window_title_template to format the displayed
 #: window title.
 
-# window_title_bar_min_windows 0
+window_title_bar_min_windows 2
 
 #: The minimum number of visible windows in a tab before window title
 #: bars are shown. A value of 0 means never show. 1 means always show.
 #: 2 or more means show only when at least that many windows are
 #: visible. Similar to tab_bar_min_tabs for the tab bar.
 
-# window_title_template "{fmt.fg.red}{bell_symbol}{activity_symbol}{fmt.fg.window}{progress_percent}{title}"
+#window_title_template "{fmt.fg.red}{bell_symbol}{activity_symbol}{fmt.fg.window}{progress_percent}{title}"
+window_title_template "{bell_symbol}{activity_symbol}{fmt.fg.window}{progress_percent}{title}"
 
 #: A template to render the window title bar text. Uses the same
 #: template syntax as tab_title_template. Available variables include:
@@ -1364,7 +1366,7 @@ copy_on_select yes
 
 #: Tab bar {{{
 
-# tab_bar_edge bottom
+tab_bar_edge top
 
 #: The edge to show the tab bar on, top or bottom.
 
@@ -1379,8 +1381,8 @@ copy_on_select yes
 #: The second number is the margin between the tab bar and the
 #: contents of the current tab.
 
-# tab_bar_style fade
-tab_bar_style powerline 
+tab_bar_style powerline
+# tab_bar_style powerline 
 
 #: The tab bar style, can be one of:
 
@@ -1421,12 +1423,12 @@ tab_bar_style powerline
 #: such as goto_tab, next_tab, previous_tab, etc. are automatically
 #: restricted to work only on matching tabs.
 
-# tab_bar_align left
+tab_bar_align right
 
 #: The horizontal alignment of the tab bar, can be one of: left,
 #: center, right.
 
-# tab_bar_min_tabs 2
+tab_bar_min_tabs 1
 
 #: The minimum number of tabs that must exist before the tab bar is
 #: shown.
@@ -1453,7 +1455,7 @@ tab_bar_style powerline
 #: The separator between tabs in the tab bar when using separator as
 #: the tab_bar_style.
 
-# tab_powerline_style angled
+tab_powerline_style round
 
 #: The powerline separator style between tabs in the tab bar when
 #: using powerline as the tab_bar_style, can be one of: angled,
@@ -1471,7 +1473,7 @@ tab_bar_style powerline
 #: The maximum number of cells that can be used to render the text in
 #: a tab. A value of zero means that no limit is applied.
 
-# tab_title_template "{fmt.fg.red}{bell_symbol}{activity_symbol}{fmt.fg.tab}{tab.last_focused_progress_percent}{title}"
+tab_title_template "{bell_symbol}{activity_symbol}{tab.last_focused_progress_percent}{title}"
 
 #: A template to render the tab title. The default just renders the
 #: title with optional symbols for bell and activity. If you wish to
@@ -1538,13 +1540,12 @@ tab_bar_style powerline
 
 #: Template to use for active tabs. If not specified falls back to
 #: tab_title_template.
-
-# active_tab_foreground   #000
-# active_tab_background   #eee
-# active_tab_font_style   bold-italic
-# inactive_tab_foreground #444
-# inactive_tab_background #999
-# inactive_tab_font_style normal
+# active_tab_foreground  #CCC
+# active_tab_background #532E2E
+active_tab_font_style bold-italic
+# inactive_tab_foreground #532E2E
+# inactive_tab_background #666
+inactive_tab_font_style normal
 
 #: Tab bar colors and styles.
 
@@ -1727,46 +1728,31 @@ background_blur 5
 #: dull and bright version, for the first 16 colors. You can set the
 #: remaining 240 colors as color16 to color255.
 
-# color0 #000000
-# color8 #767676
+# Colours (Tender) for Kitty
 
-#: black
+# Default colours
+# background #282828
+# foreground #eeeeee
 
-# color1 #cc0403
-# color9 #f2201f
+# Normal colours
+# color0 #282828
+# color1 #f43753
+# color2 #c9d05c
+# color3 #ffc24b
+# color4 #b3deef
+# color5 #d3b987
+# color6 #73cef4
+# color7 #eeeeee
 
-#: red
-
-# color2  #19cb00
-# color10 #23fd00
-
-#: green
-
-# color3  #cecb00
-# color11 #fffd00
-
-#: yellow
-
-# color4  #0d73cc
-# color12 #1a8fff
-
-#: blue
-
-# color5  #cb1ed1
-# color13 #fd28ff
-
-#: magenta
-
-# color6  #0dcdcd
-# color14 #14ffff
-
-#: cyan
-
-# color7  #dddddd
-# color15 #ffffff
-
-#: white
-
+# Bright colours
+# color8 #4c4c4c
+# color9 #f43753
+# color10 #c9d05c
+# color11 #ffc24b
+# color12 #b3deef
+# color13 #d3b987
+# color14 #73cef4
+# color15 #feffff
 # mark1_foreground black
 
 #: Color for marks of type 1
@@ -1878,7 +1864,7 @@ editor nvim
 #: See rc_custom_auth <https://sw.kovidgoyal.net/kitty/remote-
 #: control/#rc-custom-auth> for details.
 
-allow_remote_control no
+allow_remote_control yes
 
 #: Allow other programs to control kitty. If you turn this on, other
 #: programs can control all aspects of kitty, including sending text
@@ -1907,7 +1893,7 @@ allow_remote_control no
 #: yes
 #:     Remote control requests are always accepted.
 
-# listen_on none
+listen_on unix:/tmp/kitty
 
 #: Listen to the specified socket for remote control connections. Note
 #: that this will apply to all kitty instances. It can be overridden
@@ -2364,7 +2350,7 @@ shell_integration no-cursor
 #: actions that can be mapped to key presses is available here
 #: <https://sw.kovidgoyal.net/kitty/actions/>.
 
-# kitty_mod ctrl+shift
+kitty_mod ctrl+shift
 
 #: Special modifier key alias for default shortcuts. You can change
 #: the value of this option to alter all default shortcuts that use
@@ -2518,7 +2504,8 @@ shell_integration no-cursor
 
 #: Browse scrollback buffer in pager
 
-# map kitty_mod+h show_scrollback
+map kitty_mod+h show_scrollback
+map cmd+f       show_scrollback
 
 #::  You can pipe the contents of the current screen and history
 #::  buffer as STDIN to an arbitrary program using launch --stdin-
@@ -2795,7 +2782,8 @@ shell_integration no-cursor
 #: Useful to temporarily "zoom" the active window by switching to the
 #: stack layout::
 
-#:     map ctrl+alt+z toggle_layout stack
+# map ctrl+alt+z toggle_layout stack
+map cmd+z toggle_layout stack
 #: }}}
 
 #: Font sizes {{{
@@ -2840,6 +2828,8 @@ shell_integration no-cursor
 #:     map kitty_mod+f6 change_font_size all /2.0
 #: }}}
 
+map kitty_mod+f>m change_font_size all 24.0
+map kitty_mod+f>n change_font_size all 13.0
 #: Select and act on visible text {{{
 
 #: Use the hints kitten to select text and either pass it to an
@@ -2847,6 +2837,7 @@ shell_integration no-cursor
 #: clipboard.
 
 #: Open URL
+
 
 # map kitty_mod+e open_url_with_hints
 
@@ -2856,7 +2847,7 @@ shell_integration no-cursor
 #: Insert selected path
 
 # map kitty_mod+p>f kitten hints --type path --program -
-
+map kitty_mod+p>f kitten hints --customize-processing escaped_path_hints.py
 #::  Select a path/filename and insert it into the terminal. Useful,
 #::  for instance to run git commands on a filename output from a
 #::  previous git command.
@@ -2911,7 +2902,7 @@ shell_integration no-cursor
 #::  Select something that looks like filename:linenum and open it in
 #::  your default editor at the specified line number.
 
-#: Open the selected hyperlink
+#: Ope the selected hyperlink
 
 # map kitty_mod+p>y kitten hints --type hyperlink
 
@@ -3105,7 +3096,7 @@ shell_integration no-cursor
 #::  This will send "Special text" when you press the Ctrl+Alt+A key
 #::  combination. The text to be sent decodes ANSI C escapes
 #::  <https://www.gnu.org/software/bash/manual/html_node/ANSI_002dC-
-#::  Quoting.html> so you can use escapes like \e to send control
+#::  Quotin.html> so you can use escapes like \e to send control
 #::  codes or \u21fb to send Unicode characters (or you can just input
 #::  the Unicode characters directly as UTF-8 text). You can use
 #::  `kitten show-key` to get the key escape codes you want to
@@ -3164,14 +3155,34 @@ shell_integration no-cursor
 # ~/github/dotfiles-latest/kitty/sessions/dotfiles.kitty-session
 map ctrl+shift+s save_as_session --use-foreground-process --relocatable
 # Switch to alternate kitty session or previous session
-map ctrl+b>l goto_session -1
+map cmd+6 goto_session -1
 # map ctrl+b>l combine : goto_session -1 : update_kitty_name
+# map f7>s save_as_session --use-foreground-process --base-dir ~/projects/dotfiles/kitty/sessions/
+map cmd+s launch --type overlay /bin/zsh -c "/Users/sjurgemeyer/projects/dotfiles/kitty/search-sessions.sh"
+# action_alias launch_session_select launch --type=overlay /bin/zsh -c "$HOME/projects/dotfiles/kitty/kitty-list-sessions.sh"
+# map ctrl+b>s launch_session_select
 
-action_alias launch_session_select launch --type=overlay /bin/zsh -c "$HOME/github/dotfiles-latest/kitty/scripts/kitty-list-sessions.sh"
-map ctrl+b>s launch_session_select
+# action_alias launch_zoxide_session launch --type=overlay /bin/zsh -c "$HOME/projects/dotfiles/kitty/kitty-zoxide-session.sh"
+# map ctrl+b>z launch_zoxide_session
 
-action_alias launch_zoxide_session launch --type=overlay /bin/zsh -c "$HOME/github/dotfiles-latest/kitty/scripts/kitty-zoxide-session.sh"
-map ctrl+b>z launch_zoxide_session
+#: The minimum number of tabs that must exist before the tab bar is
+#: shown.
 
-# Browse and select from the list of known projects defined via goto_session commands
-map ctrl+b>n goto_session
+# kitty tab bar only shows tabs from the currently active session
+# this works even if all the sessions run in the same os window
+# https://github.com/kovidgoyal/kitty/issues/8911#issuecomment-3222346493
+# tab_bar_filter session:~ or session:^$
+
+# When I open a new tab in a session, I want this tab to only show for that
+#
+# session
+# https://github.com/kovidgoyal/kitty/issues/8911#issuecomment-3224876629
+map cmd+t new_tab_with_cwd
+map shift+cmd+n launch --cwd=current $HOME/projects/dotfiles/kitty/new-coding-tab.sh 
+
+# BEGIN_KITTY_THEME
+# Oasis Canyon Dark
+include current-theme.conf
+# END_KITTY_THEME
+#
+map shift+cmd+i set_tab_title

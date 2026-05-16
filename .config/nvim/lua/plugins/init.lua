@@ -1,5 +1,6 @@
 return {
 	"mikesmithgh/kitty-scrollback.nvim", {},
+	"knubie/vim-kitty-navigator", {}, 
 	{"sindrets/diffview.nvim", 
 		config = function()
 			vim.keymap.set("n", "<leader>go", ":DiffviewOpen<CR>", { desc = "[G]it Diff [O]pen" })
@@ -15,7 +16,7 @@ return {
 			{ "ge", "<cmd>lua require('spider').motion('ge')<CR>", mode = { "n", "o", "x" } },
 		},
 		config = function()
-			require("neo-tree").setup({
+			require("spider").setup({
 				skipInsignificantPunctuation = true,
 				subwordMovement = false,
 				consistentOperatorPending = false, -- see the README for details

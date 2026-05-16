@@ -47,6 +47,9 @@ return {
 			sections = { lualine_a = { "mode" }, lualine_b = { toggleterm_statusline } },
 			filetypes = { "toggleterm" },
 		}
-		require("lualine").setup({ options = { theme = custom_theme }, extensions = { "neo-tree", my_extension } })
+		require("lualine").setup({ 
+			-- options = { theme = custom_theme }, 
+			extensions = { "neo-tree", my_extension } 
+		})
 	end,
 }

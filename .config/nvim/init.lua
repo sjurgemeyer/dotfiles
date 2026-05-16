@@ -1,5 +1,5 @@
 -- Ensure Homebrew binaries are available (for rg, etc.)
-vim.env.PATH = "/opt/homebrew/bin:" .. vim.env.PATH
+vim.env.PATH = "/opt/homebrew/bin:" .. "/Users/sjurgemeyer/Library/Python/3.9/bin:" .. vim.env.PATH
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
@@ -139,8 +139,17 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins")
 require("config/alpha")
 require("config/telescope-any-custom")
--- vim.cmd("colorscheme slater")
- vim.cmd("colorscheme tender")
+vim.cmd("colorscheme oasis-abyss")
+vim.api.nvim_create_autocmd("VimEnter", {
+    once = true,
+    callback = function()
+	print('scrollback is:', vim.g.scrollback)
+	print('SCROLLBACK is:', vim.env.SCROLLBACK)
+	if vim.g.scrollback == "1" then
+	    vim.cmd("colorscheme oasis-canyon")
+	end
+    end,
+})
 --
 vim.opt.termguicolors = true
 -- Open current markdown file in Obsidian

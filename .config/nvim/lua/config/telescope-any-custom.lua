@@ -1,16 +1,19 @@
 local function create_default_config()
 	local builtin = require("telescope.builtin")
-	local frecency = require("telescope").extensions.frecency.frecency
-	local git_file_history = require("telescope").extensions.git_file_history.git_file_history
-	local undo = require("telescope").extensions.undo.undo
-	local lazy_plugins = require("telescope").extensions.lazy_plugins.lazy_plugins
+	local extensions = require("telescope").extensions
+	local frecency = extensions.frecency.frecency
+	local git_file_history = extensions.git_file_history.git_file_history
+	local undo = extensions.undo.undo
+	local notify = extensions.notify.notify
+	local lazy_plugins = extensions.lazy_plugins.lazy_plugins
 	return {
 		pickers = {
-			[":"] = { cmd = builtin.current_buffer_fuzzy_find, desc = "Find in Current Buffer" },
+			[";"] = { cmd = builtin.current_buffer_fuzzy_find, desc = "Find in Current Buffer" },
 			["/"] = { cmd = builtin.live_grep, desc = "Live Grep" },
 
 			["h "] = { cmd = builtin.help_tags, desc = "Help Tags" },
 			["m "] = { cmd = builtin.marks, desc = "Marks" },
+			["n "] = { cmd = notify, desc = "Notifications"},
 			["q "] = { cmd = builtin.quickfix, desc = "Quickfix" },
 			["l "] = { cmd = builtin.loclist, desc = "Location List" },
 			["j "] = { cmd = builtin.jumplist, desc = "Jump List" },
@@ -19,16 +22,12 @@ local function create_default_config()
 			["options "] = { cmd = builtin.vim_options, desc = "VIM Options" },
 			["keymaps "] = { cmd = builtin.keymaps, desc = "Keymaps" },
 
-			["colorscheme "] = { cmd = builtin.colorscheme, desc = "Color schemes" },
 			["colo "] = { cmd = builtin.colorscheme, desc = "Color Schemes" },
 
 			["com "] = { cmd = builtin.commands, desc = "Commaands" },
-			["command "] = { cmd = builtin.commands, desc = "Commaands" },
 
 			["au "] = { cmd = builtin.autocommands, desc = "Autocommands" },
-			["autocommand "] = { cmd = builtin.autocommands, desc = "Autocommands" },
 
-			["highlight "] = { cmd = builtin.highlights, desc = "Highlight groups" },
 			["hi "] = { cmd = builtin.highlights, desc = "Highlight groups" },
 
 			["ctags "] = { cmd = builtin.current_buffer_tags, desc = "Ctags in Current Buffer" },
