@@ -1,0 +1,68 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "nvim-file-search",
+  "title": "Neovim File Search",
+  "description": "Search for files and open them in a new Neovim tab",
+  "icon": "command-icon.png",
+  "author": "sjurgemeyer",
+  "categories": ["Developer Tools"],
+  "license": "MIT",
+  "commands": [
+    {
+      "name": "index",
+      "title": "Open File in Neovim",
+      "description": "Search for a file and open it in a new Neovim tab",
+      "mode": "view"
+    }
+  ],
+  "preferences": [
+    {
+      "name": "searchRoot",
+      "title": "Search Root Directory",
+      "description": "Root directory to search files in (e.g. ~/projects)",
+      "type": "textfield",
+      "required": true,
+      "default": "~"
+    },
+    {
+      "name": "fdPath",
+      "title": "fd Path",
+      "description": "Path to the fd binary",
+      "type": "textfield",
+      "required": false,
+      "default": "/opt/homebrew/bin/fd"
+    },
+    {
+      "name": "nvimPath",
+      "title": "nvim Path",
+      "description": "Path to the nvim binary",
+      "type": "textfield",
+      "required": false,
+      "default": "/opt/homebrew/bin/nvim"
+    },
+    {
+      "name": "kittyPath",
+      "title": "Kitty Path",
+      "description": "Path to the kitty binary (used when no nvim server is running)",
+      "type": "textfield",
+      "required": false,
+      "default": "/Applications/kitty.app/Contents/MacOS/kitty"
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "^1.93.2"
+  },
+  "devDependencies": {
+    "@raycast/utils": "^1.19.1",
+    "@types/node": "20.8.10",
+    "@types/react": "18.3.3",
+    "typescript": "^5.4.5"
+  },
+  "scripts": {
+    "build": "ray build",
+    "dev": "ray develop",
+    "fix-lint": "ray lint --fix",
+    "lint": "ray lint",
+    "publish": "npx @raycast/api@latest publish"
+  }
+}
