@@ -1,6 +1,10 @@
 -- Ensure Homebrew binaries are available (for rg, etc.)
 vim.env.PATH = "/opt/homebrew/bin:" .. "/Users/sjurgemeyer/Library/Python/3.9/bin:" .. vim.env.PATH
 
+-- Register a named server socket so external tools (e.g. the Raycast nvim-file-search
+-- extension) can open files here via: nvim --server /tmp/nvim.sock --remote-tab <file>
+vim.fn.serverstart("/tmp/nvim.sock")
+
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
