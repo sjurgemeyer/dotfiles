@@ -42,7 +42,11 @@ return {
 					},
 				},
 			},
-			-- pickers = {}
+			pickers = {
+			    find_files = {
+			      find_command = { "fd", "--hidden" }
+			    },
+			},
 			extensions = {
 				["ui-select"] = {
 					require("telescope.themes").get_dropdown(),
@@ -62,45 +66,37 @@ return {
 		require("telescope").load_extension("git_file_history")
 
 		local builtin = require("telescope.builtin")
-		vim.keymap.set("n", "<leader><leader>h", builtin.help_tags, { desc = "Search [H]elp" })
-		vim.keymap.set("n", "<leader><leader>k", builtin.keymaps, { desc = "Search [K]eymaps" })
-		vim.keymap.set("n", "<leader><leader>f", builtin.find_files, { desc = "Search [F]iles" })
-		vim.keymap.set("n", "<leader><leader>s", "<Cmd>Telescope frecency<CR>", { desc = "Search Frecency" })
-		vim.keymap.set("n", "<leader><leader>t", builtin.builtin, { desc = "Search Select [T]elescope" })
-		vim.keymap.set("n", "<leader><leader>w", builtin.grep_string, { desc = "Search current [W]ord" })
-		vim.keymap.set("n", "<leader><leader>g", function()
-				builtin.live_grep({ additional_args = { "--hidden" } })
-			end, { desc = "Search by [G]rep" })
-		vim.keymap.set("n", "<leader><leader>d", builtin.diagnostics, { desc = "Search [D]iagnostics" })
-		vim.keymap.set("n", "<leader><leader>r", builtin.resume, { desc = "Search [R]esume" })
-		vim.keymap.set("n", "<leader><leader>s.", builtin.oldfiles, { desc = 'Search Recent Files ("." for repeat)' })
-		vim.keymap.set("n", "<leader><leader>a", builtin.buffers, { desc = "[ ] Find open buffers" })
-		vim.keymap.set("n", "<leader><leader>p", ":Telescope lazy_plugins<CR>", { desc = "[P]lugin Config" })
-		vim.keymap.set("n", "<leader><leader>u", ":Telescope undo<CR>", { desc = "[U]ndo tree" })
-		vim.keymap.set("n", "<leader><leader>c", ":Telescope git_file_history<CR>", { desc = "Search [C]ommits" })
-		vim.keymap.set("n", "<leader><leader>n", ":Telescope notify<CR>", { desc = "Search [N]otifications" })
 
-		-- fuzzy finder within file
-		vim.keymap.set("n", "<leader>/", function()
-			-- You can pass additional configuration to telescope to change theme, layout, etc.
-			builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-				winblend = 10,
-				previewer = false,
-			}))
-		end, { desc = "[/] Fuzzily search in current buffer" })
-
-		-- Also possible to pass additional configuration options.
-		--  See `:help telescope.builtin.live_grep()` for information about particular keys
-		vim.keymap.set("n", "<leader><leader>/", function()
-			builtin.live_grep({
-				grep_open_files = true,
-				prompt_title = "Live Grep in Open Files",
-			})
-		end, { desc = "Search [/] in Open Buffers" })
-
-		-- Shortcut for searching neovim configuration files
-		vim.keymap.set("n", "<leader><leader>n", function()
-			builtin.find_files({ cwd = vim.fn.stdpath("config") })
-		end, { desc = "Search [N]eovim config" })
+		local wk = require("which-key")
+		wk.add({
+			{ "<leader><leader>.", builtin.oldfiles, desc = 'Recent Files ("." for repeat)', mode = "n", icon = "" },
+			{ "<leader><leader>b", builtin.buffers, desc = "Find Open buffers", mode = "n", icon = "󰈙" },
+			{ "<leader><leader>c", ":Telescope git_file_history<CR>", desc = "Find [C]ommits", mode = "n", icon = "󰊢" },
+			{ "<leader><leader>d", builtin.diagnostics, desc = "Search [D]iagnostics", mode = "n", icon = "󰒡" },
+			{ "<leader><leader>f", builtin.find_files, desc = "Find [F]iles", mode = "n", icon = "󰱼" },
+			{ "<leader><leader>g", function() builtin.live_grep({ additional_args = { "--hidden" } }) end, desc = "Search by [G]rep", mode = "n", icon = "󰍉" },
+			{ "<leader><leader>h", builtin.help_tags, desc = "Find [H]elp topics", mode = "n", icon = "󰘥" },
+			{ "<leader><leader>k", builtin.keymaps, desc = "Search [K]eymaps", mode = "n", icon = "󰌌" },
+			{ "<leader><leader>n", ":Telescope notify<CR>", desc = "Search [N]otifications", mode = "n", icon = "󰂚" },
+			{ "<leader><leader>p", ":Telescope lazy_plugins<CR>", desc = "Find [P]lugin Config", mode = "n", icon = "󰏓" },
+			{ "<leader><leader>r", builtin.resume, desc = "Search [R]esume", mode = "n", icon = "󰑓" },
+			{ "<leader><leader>s", "<Cmd>Telescope frecency<CR>", desc = "Find by Frecency", mode = "n", icon = "󰙄" },
+			{ "<leader><leader>t", builtin.builtin, desc = "Find [T]elescope functions", mode = "n", icon = "󰹢" },
+			{ "<leader><leader>u", ":Telescope undo<CR>", desc = "Search [U]ndo tree", mode = "n", icon = "󰕍" },
+			{ "<leader><leader>v", function() builtin.find_files({ cwd = vim.fn.stdpath("config") }) end, desc = "Search [N]eovim config", mode = "n", icon = "" },
+			{ "<leader><leader>w", builtin.grep_string, desc = "Search current [W]ord", mode = "n", icon = "󰬶" },
+			{ "<leader>/", function()
+				builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+					winblend = 10,
+					previewer = false,
+				}))
+			end, desc = "Fuzzily search in current buffer", mode = "n", icon = "󰊄" },
+			{ "<leader><leader>/", function()
+				builtin.live_grep({
+					grep_open_files = true,
+					prompt_title = "Live Grep in Open Files",
+				})
+			end, desc = "Search [/] in Open Buffers", mode = "n", icon = "󰺮" },
+		})
 	end,
 }

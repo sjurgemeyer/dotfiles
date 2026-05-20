@@ -4,29 +4,36 @@ return
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy", -- Sets the loading event to 'VeryLazy'
-		spec= {
-			-- Create heading descriptions
-			{ "<leader>c", group = "[C]ode" },
-			{ "<leader>d", group = "[D]ocument" },
-			{ "<leader>e", group = "[E]xecute" },
-			{ "<leader>g", group = "[G]o" },
-			{ "<leader><leader>", group = "Search" },
-			{ "<leader>o", group = "[O]cto"},
-			{ "<leader>p", group = "[P]ull Request"},
-			{ "<leader>t", group = "[T]erminal" },
-			{ "<leader>tg", group = "Lazy[G]it" },
-			{ "<leader>tt", group = "[T]erminal" },
-			{ "t", group = "[T]abs" },
-			{ "t_", hidden = true },
-			{ "tm", group = "[T]ab [M]ove" },
-			{ "tm_", hidden = true },
-			{ "vv", group = "Expand code block select" },
-			{ "vv_", hidden = true },
-		},
 		opts = {
 			preset = "helix",
 		},
 		init = function()
+			local wk = require("which-key")
+			wk.add({
+				-- Create heading descriptions
+				{ "<leader>c", group = "[C]ode", icon = "󰘦" },
+				{ "<leader>d", group = "[D]ocument", icon = "󰈙" },
+				{ "<leader>e", group = "[E]xecute", icon = "󰜎" },
+				{ "<leader>g", group = "[G]it", icon = "", mode="n" },
+				{ "<leader><leader>", group = "Search", icon = "󰍉" },
+				{ "<leader>o", group = "[O]cto", icon = "" },
+				{ "<leader>p", group = "[P]ull Request", icon = "󰓼" },
+				{ "<leader>s", group = "[S]QL", icon="" },
+				{ "<leader>t", group = "[T]erminal", icon="" },
+				{ "<leader>tg", group = "Lazy[G]it", icon = "󰊢" },
+				{ "<leader>tt", group = "[T]erminal", icon = "󰆍" },
+				{ "g", group = "[G]o", icon = "󰆾" },
+				{ "gr", group = "LSP Commands", icon = "󰅩" },
+				{ "t", group = "[T]abs", icon = "󰓉" },
+				{ "t_", hidden = true },
+				{ "tm", group = "[T]ab [M]ove", icon = "󰁮" },
+				{ "tm_", hidden = true },
+				{ "vv", group = "Expand code block select", icon = "󰔤" },
+				{ "vv_", hidden = true },
+			})
+
+
+
 			-- Friendly group names for the prefixes octo uses on its
 			-- buffer-local mappings. Octo sets `desc` on every leaf keymap, so
 			-- which-key auto-discovers those — these entries just give the

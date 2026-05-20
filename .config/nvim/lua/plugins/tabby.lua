@@ -4,27 +4,21 @@ return {
 	event = "VimEnter",
 	dependencies = "nvim-tree/nvim-web-devicons",
 	config = function()
-		vim.keymap.set("n", "<leader>ta", ":$tabnew<CR>", { noremap = true, desc = "New Tab" })
-		vim.keymap.set("n", "<leader>tc", ":tabclose<CR>", { noremap = true, desc = "Close Tab" })
-		vim.keymap.set("n", "<leader>to", ":tabonly<CR>", { noremap = true, desc = "Close all other tabs" })
-		vim.keymap.set("n", "<Right>", ":tabn<CR>", { noremap = true, desc = "Next Tab" })
-		vim.keymap.set("n", "<leader>tn", ":tabn<CR>", { noremap = true, desc = "Next Tab" })
-		vim.keymap.set("n", "<Left>", ":tabp<CR>", { noremap = true, desc = "Previous Tab" })
-		vim.keymap.set("n", "<leaader>tn", ":tabp<CR>", { noremap = true, desc = "Previous Tab" })
-		-- move current tab to previous position
-		vim.api.nvim_set_keymap(
-			"n",
-			"tmp",
-			":-tabmove<CR>",
-			{ noremap = true, desc = "Move current tab to previous position" }
-		)
-		-- move current tab to next position
-		vim.api.nvim_set_keymap(
-			"n",
-			"tmn",
-			":+tabmove<CR>",
-			{ noremap = true, desc = "Move current tab to next position" }
-		)
+
+		local wk = require("which-key")
+		wk.add({
+			{ "<leader>t", group = "[T]abs", icon = "󰓩" },
+			{ "<leader>ta", ":$tabnew<CR>", desc = "New Tab", mode = "n", icon = "󰓊" },
+			{ "<leader>tc", ":tabclose<CR>", desc = "Close Tab", mode = "n", icon = "󰓋" },
+			{ "<leader>to", ":tabonly<CR>", desc = "Close all other tabs", mode = "n", icon = "󰅖" },
+			{ "<Right>", ":tabn<CR>", desc = "Next Tab", mode = "n", icon = "󰜴" },
+			{ "<leader>tn", ":tabn<CR>", desc = "Next Tab", mode = "n", icon = "󰜴" },
+			{ "<Left>", ":tabp<CR>", desc = "Previous Tab", mode = "n", icon = "󰜱" },
+			{ "<leader>tp", ":tabp<CR>", desc = "Previous Tab", mode = "n", icon = "󰜱" },
+			{ "<leader>tm", group = "[T]ab [M]ove", icon = "󰓩" },
+			{ "<leader>tmp", ":-tabmove<CR>", desc = "Move current tab to previous position", mode = "n", icon = "󰁍" },
+			{ "<leader>tmn", ":+tabmove<CR>", desc = "Move current tab to next position", mode = "n", icon = "󰁔" },
+		})
 		--
 		local theme = {
 

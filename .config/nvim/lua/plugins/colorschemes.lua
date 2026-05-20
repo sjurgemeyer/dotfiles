@@ -164,7 +164,7 @@ return {
 	{
 		"caenrique/nvim-maximize-window-toggle",
 		config = function()
-			vim.keymap.set("n", "<CR>", ":ToggleOnly<CR>")
+			vim.keymap.set("n", "<S-CR>", ":ToggleOnly<CR>")
 		end,
 	},
 	-- highlight RGB colors in files

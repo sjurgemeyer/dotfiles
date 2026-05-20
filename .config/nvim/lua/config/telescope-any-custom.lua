@@ -189,8 +189,10 @@ local telescope_any = create_telescope_any({
 	winnr = vim.api.nvim_get_current_win(),
 	bufnr = vim.api.nvim_get_current_buf(),
 })
-vim.api.nvim_set_keymap("n", "<leader><leader><leader>", "", {
-	noremap = true,
-	silent = true,
-	callback = telescope_any,
-})
+vim.keymap.set("n", "<leader><leader><leader>", telescope_any, { desc = "Search Any" })
+
+-- vim.api.nvim_set_keymap("n", "<leader><leader><leader>", "Any mode", {
+-- 	noremap = true,
+-- 	silent = true,
+-- 	callback = telescope_any,
+-- })

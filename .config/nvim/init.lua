@@ -3,7 +3,7 @@ vim.env.PATH = "/opt/homebrew/bin:" .. "/Users/sjurgemeyer/Library/Python/3.9/bi
 
 -- Register a named server socket so external tools (e.g. the Raycast nvim-file-search
 -- extension) can open files here via: nvim --server /tmp/nvim.sock --remote-tab <file>
-vim.fn.serverstart("/tmp/nvim.sock")
+--vim.fn.serverstart("/tmp/nvim.sock")
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
@@ -82,12 +82,6 @@ vim.api.nvim_set_keymap("n", ";", ":", { noremap = true })
 vim.api.nvim_set_keymap("n", ":", ";", { noremap = true })
 vim.api.nvim_set_keymap("v", ";", ":", { noremap = true })
 vim.api.nvim_set_keymap("v", ":", ";", { noremap = true })
-vim.api.nvim_set_keymap(
-	"n",
-	"<space>sb",
-	":Telescope file_browser path=%:p:h select_buffer=true<CR>",
-	{ noremap = true, desc = "File [B]rowser" }
-)
 vim.api.nvim_set_keymap("v", "<F5>", ":SnipRun<CR>", { noremap = true, silent = false, desc = "Execute code" })
 vim.api.nvim_set_keymap("n", "<F5>", ":%SnipRun<CR>", { noremap = true, silent = false, desc = "Execute code" })
 vim.api.nvim_set_keymap(
@@ -143,7 +137,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins")
 require("config/alpha")
 require("config/telescope-any-custom")
-vim.cmd("colorscheme oasis-abyss")
+vim.cmd("colorscheme oasis-starlight")
 vim.api.nvim_create_autocmd("VimEnter", {
     once = true,
     callback = function()

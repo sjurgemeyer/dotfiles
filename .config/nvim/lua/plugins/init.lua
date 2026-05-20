@@ -2,28 +2,34 @@ return {
 	"mikesmithgh/kitty-scrollback.nvim", {},
 	"knubie/vim-kitty-navigator", {}, 
 	{"sindrets/diffview.nvim", 
-		config = function()
-			vim.keymap.set("n", "<leader>go", ":DiffviewOpen<CR>", { desc = "[G]it Diff [O]pen" })
-			vim.keymap.set("n", "<leader>gc", ":DiffviewOpen<CR>", { desc = "[G]it Diff [C]lose"})
-		end
-	},
-	{
-		"chrisgrieser/nvim-spider",
-		keys = {
-			{ "w", "<cmd>lua require('spider').motion('w')<CR>", mode = { "n", "o", "x" } },
-			{ "e", "<cmd>lua require('spider').motion('e')<CR>", mode = { "n", "o", "x" } },
-			{ "b", "<cmd>lua require('spider').motion('b')<CR>", mode = { "n", "o", "x" } },
-			{ "ge", "<cmd>lua require('spider').motion('ge')<CR>", mode = { "n", "o", "x" } },
+		dependencies = {
+			"folke/which-key.nvim",
 		},
 		config = function()
-			require("spider").setup({
-				skipInsignificantPunctuation = true,
-				subwordMovement = false,
-				consistentOperatorPending = false, -- see the README for details
-				customPatterns = {},
+			wk = require("which-key")
+			wk.add({
+				{"<leader>go", ":DiffviewOpen<CR>", desc = "[G]it Diff [O]pen", mode="n", icon="" },
+				{"<leader>gc", ":DiffviewOpen<CR>", desc = "[G]it Diff [C]lose", mode="n" , icon="" }
 			})
 		end
 	},
+	-- {
+	-- 	"chrisgrieser/nvim-spider",
+	-- 	keys = {
+	-- 		{ "w", "<cmd>lua require('spider').motion('w')<CR>", mode = { "n", "o", "x" } },
+	-- 		{ "e", "<cmd>lua require('spider').motion('e')<CR>", mode = { "n", "o", "x" } },
+	-- 		{ "b", "<cmd>lua require('spider').motion('b')<CR>", mode = { "n", "o", "x" } },
+	-- 		{ "ge", "<cmd>lua require('spider').motion('ge')<CR>", mode = { "n", "o", "x" } },
+	-- 	},
+	-- 	config = function()
+	-- 		require("spider").setup({
+	-- 			skipInsignificantPunctuation = true,
+	-- 			subwordMovement = false,
+	-- 			consistentOperatorPending = false, -- see the README for details
+	-- 			customPatterns = {},
+	-- 		})
+	-- 	end
+	-- },
 	-- quick navigation of buffers
 	{
 	  "leath-dub/snipe.nvim",
@@ -104,6 +110,26 @@ return {
 		config = function()
 			require("textcase").setup({})
 			require("telescope").load_extension("textcase")
+			-- Giving shortcuts better labels
+			local wk = require("which-key")
+			wk.add({
+				-- Create heading descriptions
+				{ "ga", group = "Case Manipulation", icon = "" },
+				{ "gac", name = "camelCase", icon = "" },
+				{ "gaC", group = "camelCase (LSP)", icon = "" },
+				{ "gad", group = "dash-case", icon = "" },
+				{ "gaD", group = "dash-case (LSP)", icon = "" },
+				{ "gal", group = "lower case", icon = "󰬵" },
+				{ "gaL", group = "lower case (LSP)", icon = "󰬵" },
+				{ "gan", group = "CONSTANT_CASE", icon = "" },
+				{ "gaN", group = "CONSTANT_CASE (LSP)", icon = "" },
+				{ "gap", group = "PascalCase", icon = "" },
+				{ "gaP", group = "PascalCase (LSP)", icon = "" },
+				{ "gas", group = "snake_case", icon = "" },
+				{ "gaS", group = "snake_case (LSP)", icon = "" },
+				{ "gau", group = "UPPER CASE", icon = "" },
+				{ "gaU", group = "UPPER CASE (LSP)", icon = "" },
+			})
 		end,
 		keys = {
 			"ga", -- Default invocation prefix

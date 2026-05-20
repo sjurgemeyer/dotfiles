@@ -7,9 +7,23 @@ local divider_line =
 
 -- https://www.patorjk.com/software/taag/
 
+local header_colors = {
+	"#AA7700", "#A86F00", "#A56600", "#A35E00", "#A05500",
+	"#9E4D00", "#9B4400", "#993C00", "#973300", "#942B00",
+	"#922200", "#8F1A00", "#8D1100", "#8A0900", "#880000",
+}
+local header_colors_alt = {
+	"#1E641E", "#215D25", "#24562C", "#284F33", "#2B473B",
+	"#2E4042", "#313949", "#353250", "#382B57", "#3B245E",
+	"#3E1D65", "#41156D", "#450E74", "#48077B", "#4B0082",
+}
+for i, color in ipairs(header_colors_alt) do
+	vim.api.nvim_set_hl(0, "AlphaGrad" .. i, { fg = color })
+end
+
 local default_header = {
 
-	type = "text",
+	type = "group",
 -- val = {
 -- [[  .S_sSSs      sSSs    sSSs_sSSs     .S    S.    .S   .S_SsS_S.   ]],
 -- [[ .SS~YS%%b    d%%SP   d%%SP~YS%%b   .SS    SS.  .SS  .SS~S*S~SS.  ]],
@@ -118,24 +132,40 @@ local default_header = {
 -- [[ |  \_| |______ |_____|   \/   __|__ |  |  |]]
 --
 -- 	},
+-- val = {
+-- [[                                :                                         ]],
+-- [[  L.                     ,;    t#,                                        ]],
+-- [[  EW:        ,ft       f#i    ;##W.              t                        ]],
+-- [[  E##;       t#E     .E#t    :#L:WE              Ej            ..       : ]],
+-- [[  E###t      t#E    i#W,    .KG  ,#D  t      .DD.E#,          ,W,     .Et ]],
+-- [[  E#fE#f     t#E   L#D.     EE    ;#f EK:   ,WK. E#t         t##,    ,W#t ]],
+-- [[  E#t D#G    t#E :K#Wfff;  f#.     t#iE#t  i#D   E#t        L###,   j###t ]],
+-- [[  E#t  f#E.  t#E i##WLLLLt :#G     GK E#t j#f    E#t      .E#j##,  G#fE#t ]],
+-- [[  E#t   t#K: t#E  .E#L      ;#L   LW. E#tL#i     E#t     ;WW; ##,:K#i E#t ]],
+-- [[  E#t    ;#W,t#E    f#E:     t#f f#:  E#WW,      E#t    j#E.  ##f#W,  E#t ]],
+-- [[  E#t     :K#D#E     ,WW;     f#D#;   E#K:       E#t  .D#L    ###K:   E#t ]],
+-- [[  E#t      .E##E      .D#;     G#t    ED.        E#t :K#t     ##D.    E#t ]],
+-- [[  ..         G#E        tt      t     t          E#t ...      #G      ..  ]],
+-- [[              fE                                 ,;.          j           ]],
+-- [[               ,                                                          ]],
+-- 			},
 val = {
-
- [[                                :                                         ]],
- [[  L.                     ,;    t#,                                        ]],
- [[  EW:        ,ft       f#i    ;##W.              t                        ]],
- [[  E##;       t#E     .E#t    :#L:WE              Ej            ..       : ]],
- [[  E###t      t#E    i#W,    .KG  ,#D  t      .DD.E#,          ,W,     .Et ]],
- [[  E#fE#f     t#E   L#D.     EE    ;#f EK:   ,WK. E#t         t##,    ,W#t ]],
- [[  E#t D#G    t#E :K#Wfff;  f#.     t#iE#t  i#D   E#t        L###,   j###t ]],
- [[  E#t  f#E.  t#E i##WLLLLt :#G     GK E#t j#f    E#t      .E#j##,  G#fE#t ]],
- [[  E#t   t#K: t#E  .E#L      ;#L   LW. E#tL#i     E#t     ;WW; ##,:K#i E#t ]],
- [[  E#t    ;#W,t#E    f#E:     t#f f#:  E#WW,      E#t    j#E.  ##f#W,  E#t ]],
- [[  E#t     :K#D#E     ,WW;     f#D#;   E#K:       E#t  .D#L    ###K:   E#t ]],
- [[  E#t      .E##E      .D#;     G#t    ED.        E#t :K#t     ##D.    E#t ]],
- [[  ..         G#E        tt      t     t          E#t ...      #G      ..  ]],
- [[              fE                                 ,;.          j           ]],
- [[               ,                                                          ]],
-			},
+		{ type = "text", val = [[                                :                                         ]], opts = { hl = "AlphaGrad1",  shrink_margin = false } },
+		{ type = "text", val = [[  █.                     ,;    ██,                                        ]], opts = { hl = "AlphaGrad2",  shrink_margin = false } },
+		{ type = "text", val = [[  ██:        ,██       ███    ;███.              █                        ]], opts = { hl = "AlphaGrad3",  shrink_margin = false } },
+		{ type = "text", val = [[  ███;       ███     .███    :██:██              ██            ..       : ]], opts = { hl = "AlphaGrad4",  shrink_margin = false } },
+		{ type = "text", val = [[  █████      ███    ███,    .██  ,██  █      .██.██,          ,█,     .██ ]], opts = { hl = "AlphaGrad5",  shrink_margin = false } },
+		{ type = "text", val = [[  ██████     ███   ███.     ██    ;██ ██:   ,██. ███         ███,    ,███ ]], opts = { hl = "AlphaGrad6",  shrink_margin = false } },
+		{ type = "text", val = [[  ███ ███    ███ :██████;  ██.     ██████  ███   ███        ████,   █████ ]], opts = { hl = "AlphaGrad7",  shrink_margin = false } },
+		{ type = "text", val = [[  ███  ███.  ███ █████████ :██     ██ ███ ███    ███      .█████,  ██████ ]], opts = { hl = "AlphaGrad8",  shrink_margin = false } },
+		{ type = "text", val = [[  ███   ███: ███  .███      ;██   ██. ██████     ███     ;██; ██,:███ ███ ]], opts = { hl = "AlphaGrad9",  shrink_margin = false } },
+		{ type = "text", val = [[  ███    ;██,███    ███:     ███ ██:  ████,      ███    ███.  █████,  ███ ]], opts = { hl = "AlphaGrad10", shrink_margin = false } },
+		{ type = "text", val = [[  ███     :█████     ,██;     ████;   ███:       ███  .███    ████:   ███ ]], opts = { hl = "AlphaGrad11", shrink_margin = false } },
+		{ type = "text", val = [[  ███      .████      .██;     ███    ██.        ███ :███     ███.    ███ ]], opts = { hl = "AlphaGrad12", shrink_margin = false } },
+		{ type = "text", val = [[  ..         ███        ██      █     █          ███ ...      ██      ..  ]], opts = { hl = "AlphaGrad13", shrink_margin = false } },
+		{ type = "text", val = [[              ██                                 ,;.          █           ]], opts = { hl = "AlphaGrad14", shrink_margin = false } },
+		{ type = "text", val = [[               ,                                                          ]], opts = { hl = "AlphaGrad15", shrink_margin = false } },
+	},
 -- 			val = {
 --
 -- -- [[ @@@  @@@  @@@@@@@@   @@@@@@   @@@  @@@  @@@  @@@@@@@@@@    ]],
@@ -161,9 +191,7 @@ val = {
 -- -- 		[[                                                    ]],
 -- -- 	},
 	opts = {
-		hl = "Structure",
 		shrink_margin = false,
-		-- wrap = "overflow";
 	},
 }
 
