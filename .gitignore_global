@@ -3,3 +3,5 @@
 *.orig
 **/*.class
 **/.tags
+
+**/.claude/settings.local.json

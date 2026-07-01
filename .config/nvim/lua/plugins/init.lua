@@ -1,6 +1,7 @@
 return {
 	"mikesmithgh/kitty-scrollback.nvim", {},
 	"knubie/vim-kitty-navigator", {}, 
+	"navarasu/onedark.nvim", {},
 	{"sindrets/diffview.nvim", 
 		dependencies = {
 			"folke/which-key.nvim",
@@ -189,6 +190,7 @@ return {
 			--  - ci'  - [C]hange [I]nside [']quote
 			require("mini.ai").setup({ n_lines = 500 })
 			require("mini.files").setup()
+			require("mini.misc").setup()
 			-- require("mini.icons")setup()
 
 			-- Toggle mini.files
@@ -258,6 +260,7 @@ return {
 		    enabled = true,
 		    backend = "kitty",
 		},
+		dashboard = require("config.dashboard"),
 	    },
 	},
 }

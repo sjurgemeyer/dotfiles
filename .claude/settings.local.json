@@ -12,7 +12,24 @@
       "Bash(echo \"---exit:$?---\")",
       "Bash(kitty --version)",
       "Bash(kitty @ --to unix:/tmp/kitty ls)",
-      "Bash(chmod +x *)"
+      "Bash(chmod +x *)",
+      "Read(//Users/sjurgemeyer/.local/share/nvim/themery/**)",
+      "Read(//Users/sjurgemeyer/.local/share/nvim/lazy/themery.nvim/lua/themery/**)",
+      "Bash(cd ~/.local/share/nvim/lazy/oasis.nvim 2>/dev/null && echo \"PWD: $\\(pwd\\)\" && echo \"=== DiffText / DiffChange / DiffviewDiff defs ===\" && rg -n -i \"DiffText|DiffChange|DiffAdd|DiffviewDiff\" --glob '*.lua' | head -40)",
+      "Bash(fd -i starlight -e lua -x rg -n -i \"core|fg ?=\" {})",
+      "Bash(mdfind \"kind:application\" -name kitty)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(/Applications/kitty.app/Contents/MacOS/kitty --help)",
+      "Bash(fd -t d alpha ~/.local/share/nvim/lazy 2>/dev/null; fd -t d alpha ~/.config/nvim 2>/dev/null; find ~/.local/share/nvim -maxdepth 3 -iname \"*alpha*\" 2>/dev/null)",
+      "Bash(nvim --version)",
+      "Bash(nvim --headless -c 'luafile /Users/sjurgemeyer/projects/dotfiles/.config/nvim/lua/config/alpha.lua' -c 'qa')",
+      "Bash(nvim --headless -u .config/nvim/init.lua -c Alpha -c redraw -c 'lua vim.defer_fn\\(function\\(\\) local lines = vim.api.nvim_buf_get_lines\\(0, 0, -1, false\\); vim.fn.writefile\\(lines, \"/tmp/alpha_lines.txt\"\\); vim.cmd\\(\"qa!\"\\) end, 300\\)')",
+      "Bash(nvim --headless -u .config/nvim/init.lua -c 'set columns=120' -c Alpha -c redraw -c 'lua vim.defer_fn\\(function\\(\\) local lines = vim.api.nvim_buf_get_lines\\(0, 0, -1, false\\); vim.fn.writefile\\(lines, \"/tmp/alpha_lines2.txt\"\\); vim.cmd\\(\"qa!\"\\) end, 300\\)')",
+      "Bash(nvim --headless -u .config/nvim/init.lua -c Alpha -c redraw -c 'lua vim.defer_fn\\(function\\(\\) *)",
+      "Bash(nvim --headless -u .config/nvim/init.lua -c 'set columns=140' -c 'lua require\\(\"snacks\"\\).dashboard\\(\\)' -c redraw -c 'lua vim.defer_fn\\(function\\(\\) local lines = vim.api.nvim_buf_get_lines\\(0, 0, -1, false\\); vim.fn.writefile\\(lines, \"/tmp/dash_lines.txt\"\\); vim.cmd\\(\"qa!\"\\) end, 500\\)')",
+      "Bash(nvim --headless -u .config/nvim/init.lua -c 'set columns=140' -c 'lua vim.defer_fn\\(function\\(\\) vim.cmd\\(\"qa!\"\\) end, 700\\)')",
+      "Bash(nvim --headless -u .config/nvim/init.lua -c 'set columns=140' -c 'lua require\\(\"snacks\"\\).dashboard\\(\\)' -c redraw -c 'lua vim.defer_fn\\(function\\(\\) *)",
+      "Bash(nvim --headless -u .config/nvim/init.lua -c 'lua *)"
     ]
   }
 }

@@ -62,6 +62,8 @@ alias xx=exit
  alias ga='git add'
  alias gaa='git add --all'
  
+autoload -Uz compinit
+compinit
  
  ###################### Generic Shell stuff ###########################
  alias dot='cd $DOTFILES_DIR'
