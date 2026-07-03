@@ -29,7 +29,14 @@
       "Bash(nvim --headless -u .config/nvim/init.lua -c 'set columns=140' -c 'lua require\\(\"snacks\"\\).dashboard\\(\\)' -c redraw -c 'lua vim.defer_fn\\(function\\(\\) local lines = vim.api.nvim_buf_get_lines\\(0, 0, -1, false\\); vim.fn.writefile\\(lines, \"/tmp/dash_lines.txt\"\\); vim.cmd\\(\"qa!\"\\) end, 500\\)')",
       "Bash(nvim --headless -u .config/nvim/init.lua -c 'set columns=140' -c 'lua vim.defer_fn\\(function\\(\\) vim.cmd\\(\"qa!\"\\) end, 700\\)')",
       "Bash(nvim --headless -u .config/nvim/init.lua -c 'set columns=140' -c 'lua require\\(\"snacks\"\\).dashboard\\(\\)' -c redraw -c 'lua vim.defer_fn\\(function\\(\\) *)",
-      "Bash(nvim --headless -u .config/nvim/init.lua -c 'lua *)"
+      "Bash(nvim --headless -u .config/nvim/init.lua -c 'lua *)",
+      "Bash(gh api *)",
+      "Bash(ls -la ~/.otherFunctions 2>/dev/null || echo \"File not found in home\")",
+      "Bash(ls -la /opt/homebrew/opt/nvm/ 2>/dev/null | head -5)",
+      "Bash(dscl . -read /Users/sjurgemeyer UserShell)",
+      "Bash(bash --version)",
+      "WebFetch(domain:github.com)",
+      "Bash(mkdir -p /Users/sjurgemeyer/.claude/plans 2>&1; ls /Users/sjurgemeyer/.claude/plans 2>&1)"
     ]
   }
 }

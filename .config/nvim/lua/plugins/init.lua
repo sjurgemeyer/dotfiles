@@ -164,8 +164,24 @@ return {
 				timeout_ms = 500,
 				lsp_fallback = true,
 			},
+			formatters = {
+				sqlfluff = {
+					-- dbt's templater can't read from stdin, so write the
+					-- buffer to disk and format the real file instead.
+					stdin = false,
+				},
+			},
 			formatters_by_ft = {
 				lua = { "stylua" },
+				-- Use sqlfluff when the project enforces it (dbt projects with a
+				-- .sqlfluff config), otherwise fall back to sqlfmt, which is
+				-- Jinja-safe but doesn't understand a dbt project's own rules.
+				sql = function(bufnr)
+					if vim.fs.root(bufnr, { ".sqlfluff" }) then
+						return { "sqlfluff" }
+					end
+					return { "sqlfmt" }
+				end,
 				-- Conform can also run multiple formatters sequentially
 				-- python = { "isort", "black" },
 				--

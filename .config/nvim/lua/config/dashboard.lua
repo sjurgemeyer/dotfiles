@@ -3,9 +3,9 @@
 
 local header_lines = {
 	"                                :                                         ",
-	"  █.                     ,;    ██,                                        ",
-	"  ██:        ,██       ███    ;███.              █                        ",
-	"  ███;       ███     .███    :██:██              ██            ..       : ",
+	"  █.                     ,;     █,                                        ",
+	"  ██:         :█       ███    ;███.              █                        ",
+	"  ███;        ██     .███    :██:██              ██            ..       : ",
 	"  █████      ███    ███,    .██  ,██  █      .██.██,          ,█,     .██ ",
 	"  ██████     ███   ███.     ██    ;██ ██:   ,██. ███         ███,    ,███ ",
 	"  ███ ███    ███ :██████;  ██.     ██████  ███   ███        ████,   █████ ",
@@ -13,10 +13,9 @@ local header_lines = {
 	"  ███   ███: ███  .███      ;██   ██. ██████     ███     ;██; ██,:███ ███ ",
 	"  ███    ;██,███    ███:     ███ ██:  ████,      ███    ███.  █████,  ███ ",
 	"  ███     :█████     ,██;     ████;   ███:       ███  .███    ████:   ███ ",
-	"  ███      .████      .██;     ███    ██.        ███ :███     ███.    ███ ",
-	"  ..         ███        ██      █     █          ███ ...      ██      ..  ",
-	"              ██                                 ,;.          █           ",
-	"               ,                                                          ",
+	"  :██      .████      .██;     ███    ██.        ███ :███     ███.    ███ ",
+	"   .█       .███        ██      █     █          ██ ..█       █       .█ ",
+	"    :         .█         :      :     :          █.   :                : ",
 }
 
 -- Amber-to-indigo gradient, top to bottom.
@@ -65,12 +64,16 @@ end
 -- renders, not when this file is first required -- at require-time (while
 -- lazy.nvim is still scanning plugin specs) nvim-web-devicons isn't loaded
 -- yet, so the lookup would silently fail and every icon would come up blank.
+-- snacks runs a ":"-prefixed action via vim.cmd() directly (not as simulated
+-- keystrokes), so it must NOT include a trailing "<CR>" -- that would just be
+-- literal text appended to the command, e.g. `:e path<CR>` tries to open a
+-- file named "...<CR>".
 local function bookmarks()
 	return {
-		{ icon = file_icon("init.lua"), key = "V", desc = "init.lua", action = ":e ~/.config/nvim/init.lua<CR>" },
-		{ icon = file_icon("init.lua"), key = "P", desc = "plugins/init.lua", action = ":e ~/.config/nvim/lua/plugins/init.lua<CR>" },
-		{ icon = file_icon(".zshrc"), key = "Z", desc = ".zshrc", action = ":e ~/.zshrc<CR>" },
-		{ icon = file_icon("kitty.conf"), key = "K", desc = "kitty.conf", action = ":e ~/.config/kitty/kitty.conf<CR>" },
+		{ icon = file_icon("init.lua"), key = "V", desc = "init.lua", action = ":e ~/.config/nvim/init.lua" },
+		{ icon = file_icon("init.lua"), key = "P", desc = "plugins/init.lua", action = ":e ~/.config/nvim/lua/plugins/init.lua" },
+		{ icon = file_icon(".zshrc"), key = "Z", desc = ".zshrc", action = ":e ~/.zshrc" },
+		{ icon = file_icon("kitty.conf"), key = "K", desc = "kitty.conf", action = ":e ~/.config/kitty/kitty.conf" },
 	}
 end
 
@@ -80,13 +83,24 @@ vim.api.nvim_create_autocmd("DirChanged", {
 	end,
 })
 
+-- nests under the existing "<leader>g" ("[G]it") which-key group in
+-- plugins/which.lua. Note this puts a non-git action under the Git group --
+-- picked "gd" specifically as requested, over plain "gd" (which is Vim's
+-- built-in goto-declaration mapping).
+vim.keymap.set("n", "<leader>gd", function()
+	require("snacks").dashboard()
+end, { desc = "Open Dashboard" })
+
+-- must be >= the header's line width (74 chars): snacks applies a different,
+-- per-line centering formula to any rendered line wider than `width`, so a
+-- narrower pane here would misalign the header relative to everything else
+-- even though the header is internally self-consistent.
+local PANE_WIDTH = 74
+local PANE_GAP = 4
+
 return {
-	-- must be >= the header's line width (74 chars): snacks applies a
-	-- different, per-line centering formula to any rendered line wider than
-	-- `width`, so a narrower pane here would misalign the header relative to
-	-- everything else even though the header is internally self-consistent.
-	width = 74,
-	pane_gap = 4,
+	width = PANE_WIDTH,
+	pane_gap = PANE_GAP,
 	formats = {
 		header = function(item)
 			return { item.header, hl = "DashboardHeaderGrad" .. item.grad }
@@ -94,8 +108,8 @@ return {
 	},
 	sections = {
 		header_items,
-		{ icon = " ", desc = "New file", key = "e", action = ":ene <CR>", padding = 1 },
-		function()
+		{ icon = " ", desc = "New file", key = "e", action = ":ene", padding = 1 },
+		function(self)
 			-- so "MRU" (all files) doesn't just repeat what "MRU <cwd>" already
 			-- shows, exclude anything in the cwd list -- keeping the same 5-item
 			-- limit by filtering rather than slicing the cwd list off the front.
@@ -108,10 +122,19 @@ return {
 					break
 				end
 			end
+
+			-- when the window is too narrow for 2 panes, snacks folds pane 2's
+			-- items back into pane 1 (a single stacked column) rather than
+			-- erroring or clipping -- but ROW1_OFFSET, which exists purely to
+			-- vertically line pane 2 up with row 1 when they're side by side,
+			-- would then just be dead space above the second "MRU" section.
+			local max_panes = math.max(1, math.floor((self._size.width + PANE_GAP) / (PANE_WIDTH + PANE_GAP)))
+			local row1_offset = max_panes > 1 and ROW1_OFFSET or 0
+
 			return {
 				{ title = "MRU " .. vim.fn.getcwd(), padding = 1 },
 				{ section = "recent_files", cwd = true, limit = 5, padding = 1 },
-				{ pane = 2, padding = ROW1_OFFSET },
+				{ pane = 2, padding = row1_offset },
 				{ pane = 2, title = "MRU", padding = 1 },
 				{
 					pane = 2,

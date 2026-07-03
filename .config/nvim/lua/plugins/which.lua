@@ -23,6 +23,9 @@ return
 				{ "<leader>tg", group = "Lazy[G]it", icon = "󰊢" },
 				{ "<leader>tt", group = "[T]erminal", icon = "󰆍" },
 				{ "g", group = "[G]o", icon = "󰆾" },
+				-- documentation only (no rhs) -- doesn't create/override a mapping,
+				-- just reserves the slot in the menu so it's visible as taken.
+				{ "gd", desc = "Goto definition/declaration (built-in)", icon = "󰆾" },
 				{ "gr", group = "LSP Commands", icon = "󰅩" },
 				{ "t", group = "[T]abs", icon = "󰓉" },
 				{ "t_", hidden = true },
