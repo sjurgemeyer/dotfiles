@@ -136,6 +136,7 @@ alias dbtf=/Users/sjurgemeyer/.local/bin/dbt
 #
 
 source $DOTFILES_DIR/cli/prreview.sh
+[ -f $DOTFILES_DIR/cli/wt.sh ] && source $DOTFILES_DIR/cli/wt.sh
 export GITHUB_TOKEN=$(gh auth token)
 
 eval "$(atuin init zsh)"
@@ -146,3 +147,6 @@ echo "Startup time: ${elapsed}ms"
 
 # Cortex CLI completion (disable via /settings in cortex)
 [[ -s ~/.zsh/completions/cortex.zsh ]] && source ~/.zsh/completions/cortex.zsh
+
+# Auto-activate .venv/.env if this shell started inside a wtm worktree.
+type wt_autoactivate >/dev/null 2>&1 && wt_autoactivate

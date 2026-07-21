@@ -1,0 +1,235 @@
+# wt — git worktree helper that wraps wtm (worktree manager). bash + zsh.
+#
+# Worktrees live as sibling directories under a wtm-managed bare repo
+# "container" (the parent of the git common dir), nested by their full branch
+# name — e.g. branch feat/foo lives at <container>/feat/foo. `wtm` itself only
+# runs from that container, but `wt` is meant to be run from anywhere inside the
+# repo, so it derives the container and cd's for you — hence a sourced function,
+# not a standalone script (a subprocess can't change the parent shell's cwd).
+#
+#   wt <name> [base]   Go to worktree <name>. <name> is the full worktree name
+#                      (e.g. feat/foo); a unique trailing segment (foo) also
+#                      resolves. If it doesn't exist yet:
+#                        - branch exists  -> check it out
+#                        - otherwise      -> confirm, then create from <base>
+#                      <base> defaults to "main". After landing, activates the
+#                      worktree's .venv and .env, and (inside kitty) opens the
+#                      three-pane "Code" tab (nvim / claude / terminal).
+#   wt list            List worktrees (wtm list).
+#   wt delete <name>   Delete a worktree (wtm delete; add --force to force).
+#
+# Knobs:  WT_NO_CODE=1        don't open the kitty Code tab
+#         WT_AUTO_ACTIVATE=0  don't auto-activate .venv/.env in new worktree shells
+
+# Resolve the wtm bare-repo container for the current git repo.
+# Prints the absolute container path; returns non-zero if we're not inside a
+# wtm-managed (bare) repo.
+_wt_container() {
+  local common container
+  common=$(git rev-parse --git-common-dir 2>/dev/null) || return 1
+  # git may hand back a relative path (e.g. ".bare") when cwd is the container.
+  case "$common" in
+    /*) ;;
+    *) common="$PWD/$common" ;;
+  esac
+  container=$(cd "$(dirname "$common")" 2>/dev/null && pwd) || return 1
+  # wtm requires the container to be a bare repository.
+  [ "$(git -C "$container" config --get core.bare 2>/dev/null)" = "true" ] || return 1
+  printf '%s\n' "$container"
+}
+
+# Registered worktree directories (absolute), excluding the bare entry.
+_wt_paths() {
+  local container="$1"
+  git -C "$container" worktree list --porcelain 2>/dev/null \
+    | awk '/^worktree /{print $2}' \
+    | while IFS= read -r p; do
+        [ "$p" = "$container" ] && continue
+        [ "$p" = "$container/.bare" ] && continue
+        printf '%s\n' "$p"
+      done
+}
+
+# Resolve an existing worktree matching $2: exact relative path, or a unique
+# trailing path segment. Prints its absolute path on success (rc 0). rc 1 = no
+# match; rc 2 = ambiguous (candidates printed to stderr).
+_wt_find() {
+  local container="$1" name="$2" p leaf match count=0
+  if [ -d "$container/$name" ]; then
+    printf '%s\n' "$container/$name"
+    return 0
+  fi
+  while IFS= read -r p; do
+    leaf="${p##*/}"
+    if [ "$leaf" = "$name" ]; then
+      match="$p"
+      count=$((count + 1))
+    fi
+  done < <(_wt_paths "$container")
+  if [ "$count" -eq 1 ]; then
+    printf '%s\n' "$match"
+    return 0
+  elif [ "$count" -gt 1 ]; then
+    printf "wt: '%s' is ambiguous; use the full name:\n" "$name" >&2
+    while IFS= read -r p; do
+      leaf="${p##*/}"
+      [ "$leaf" = "$name" ] && printf '  %s\n' "${p#$container/}" >&2
+    done < <(_wt_paths "$container")
+    return 2
+  fi
+  return 1
+}
+
+# Activate the current directory's Python venv and load its .env.
+# wtm's post_create hook has already finished by this point (wtm runs it
+# synchronously during create/checkout). Always returns 0.
+_wt_activate() {
+  [ -f .venv/bin/activate ] && source .venv/bin/activate
+  if [ -f .env ]; then
+    # Auto-export so the values are actually usable as environment variables.
+    set -a
+    source .env
+    set +a
+  fi
+  return 0
+}
+
+# Open the kitty three-pane "Code" tab for the current worktree. No-op unless
+# we're inside kitty and it's enabled. If a Code tab for this worktree already
+# exists, focus it instead of stacking a duplicate.
+_wt_open_code() {
+  [ "${WT_NO_CODE:-0}" = 0 ] || return 0
+  [ -n "$KITTY_WINDOW_ID" ] || return 0
+  command -v kitty >/dev/null 2>&1 || return 0
+  local dotfiles="${DOTFILES_DIR:-$HOME/projects/dotfiles}"
+  local proj="${PWD##*/}"
+  if kitty @ focus-tab --match "title:^Code: ${proj}$" >/dev/null 2>&1; then
+    return 0
+  fi
+  "$dotfiles/kitty/new-coding-tab.sh"
+}
+
+# Navigate to (creating/checking out as needed) worktree $1, base branch $2.
+_wt_go() {
+  local name="$1" base="${2:-main}" container target reply found rc
+  container=$(_wt_container) || { printf 'wt: not inside a wtm-managed repo\n' >&2; return 1; }
+
+  # Already exists? Just go there.
+  found=$(_wt_find "$container" "$name")
+  rc=$?
+  if [ "$rc" -eq 0 ]; then
+    cd "$found" || return 1
+    _wt_activate
+    _wt_open_code
+    return 0
+  elif [ "$rc" -eq 2 ]; then
+    return 1   # ambiguous — message already printed
+  fi
+
+  # Doesn't exist yet — check out an existing branch, or offer to create.
+  target="$container/$name"
+  if git -C "$container" show-ref --verify --quiet "refs/heads/$name"; then
+    # Local branch exists but has no worktree — add one directly (wtm checkout
+    # only handles remote branches).
+    ( cd "$container" && git worktree add "$target" "$name" ) || return 1
+  elif [ -n "$(git -C "$container" ls-remote --heads origin "$name" 2>/dev/null)" ]; then
+    # Remote branch exists — let wtm check it out.
+    ( cd "$container" && wtm checkout "$name" ) || return 1
+  else
+    printf "Worktree '%s' does not exist. Create it from '%s'? [y/N] " "$name" "$base"
+    read -r reply
+    case "$reply" in
+      [yY]*) ;;
+      *) printf 'Aborted.\n'; return 1 ;;
+    esac
+    ( cd "$container" && wtm create "$name" --from "$base" --no-shell ) || return 1
+  fi
+
+  if [ ! -d "$target" ]; then
+    printf 'wt: expected worktree at %s but it was not created\n' "$target" >&2
+    return 1
+  fi
+
+  cd "$target" || return 1
+  _wt_activate
+  _wt_open_code
+}
+
+wt() {
+  local sub="$1" container here rc
+  case "$sub" in
+    list|ls)
+      shift
+      container=$(_wt_container) \
+        || { printf 'wt: not inside a wtm-managed repo\n' >&2; return 1; }
+      ( cd "$container" && wtm list "$@" )
+      ;;
+    delete|rm)
+      shift
+      container=$(_wt_container) \
+        || { printf 'wt: not inside a wtm-managed repo\n' >&2; return 1; }
+      here="$PWD"
+      ( cd "$container" && wtm delete "$@" )
+      rc=$?
+      # If we just deleted the worktree we were standing in, step out to the
+      # container so we're not left in a phantom directory.
+      [ -d "$here" ] || cd "$container"
+      return $rc
+      ;;
+    ""|-h|--help|help)
+      cat <<'EOF'
+wt — git worktree helper (wraps wtm)
+
+  wt <name> [base]   Go to worktree <name>; create or check it out if missing.
+                     New worktrees are created from <base> (default: main).
+                     Activates .venv/.env and opens the kitty Code tab.
+  wt list            List worktrees.
+  wt delete <name>   Delete a worktree (add --force to force).
+EOF
+      ;;
+    *)
+      _wt_go "$@"
+      ;;
+  esac
+}
+
+# Auto-activate .venv/.env when an interactive shell starts inside a worktree.
+# This is what gives every code-view pane (and any shell opened in a worktree)
+# the venv + env, even though the shell rc rebuilds PATH on startup.
+wt_autoactivate() {
+  case $- in *i*) ;; *) return 0 ;; esac
+  [ "${WT_AUTO_ACTIVATE:-1}" = 1 ] || return 0
+  _wt_container >/dev/null 2>&1 || return 0                       # in a wtm repo?
+  git rev-parse --is-inside-work-tree >/dev/null 2>&1 || return 0 # a worktree, not the bare root
+  _wt_activate
+}
+
+# ---- completion --------------------------------------------------------------
+if [ -n "$BASH_VERSION" ]; then
+  _wt_complete_bash() {
+    local cur="${COMP_WORDS[COMP_CWORD]}" container names
+    [ "$COMP_CWORD" -eq 1 ] || return 0
+    names="list delete"
+    container=$(_wt_container 2>/dev/null)
+    if [ -n "$container" ]; then
+      names="$names $(_wt_paths "$container" | sed "s#^$container/##")"
+    fi
+    COMPREPLY=( $(compgen -W "$names" -- "$cur") )
+  }
+  complete -F _wt_complete_bash wt
+elif [ -n "$ZSH_VERSION" ]; then
+  # Wrapped in eval so bash never parses the zsh-only syntax below.
+  eval '
+    _wt() {
+      if (( CURRENT == 2 )); then
+        local container; container=$(_wt_container 2>/dev/null)
+        local -a names
+        if [[ -n "$container" ]]; then
+          names=(${(f)"$(_wt_paths "$container" | sed "s#^$container/##")"})
+        fi
+        _alternative "commands:command:(list delete)" "worktrees:worktree:(${names})"
+      fi
+    }
+    (( $+functions[compdef] )) && compdef _wt wt
+  '
+fi

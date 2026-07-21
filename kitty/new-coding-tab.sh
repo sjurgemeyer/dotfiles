@@ -20,10 +20,13 @@ PROJECT_CWD="$PWD"
 PROJECT_NAME="$(basename "$PROJECT_CWD")"
 
 # New tab, full-width nvim window. Capture its window id.
+# --copy-env carries the caller's environment (e.g. an activated .venv and
+# variables sourced from .env by `wt`) into every pane.
 NVIM_ID=$(kitty @ launch \
     --type=tab \
     --tab-title="Code: $PROJECT_NAME" \
     --cwd="$PROJECT_CWD" \
+    --copy-env \
     nvim)
 
 # Switch this tab to the splits layout
@@ -36,12 +39,14 @@ kitty @ goto-layout --match="id:$NVIM_ID" splits
 TERM_ID=$(kitty @ launch \
  --location=hsplit \
  --bias=10 \
+ --copy-env \
  --cwd="$PROJECT_CWD")
 
 kitty @ focus-window --match="id:$NVIM_ID" 
 # Vertical split of nvim: adds claude to the right
 CLAUDE_ID=$(kitty @ launch --location=vsplit \
     --cwd="$PROJECT_CWD" \
+    --copy-env \
     --env=PATH=/opt/homebrew/bin:/usr/bin:/bin:$HOME/.local/bin \
 claude)
 
