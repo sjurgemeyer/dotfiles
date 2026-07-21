@@ -1,4 +1,6 @@
 start_time=$(date +%s%N)
+# self-correct $SHELL — see .bashrc for why this is needed
+export SHELL=/bin/zsh
 setopt NO_BEEP
 source <(echo "$(navi widget zsh)")
 export PROJECT_DIR=$HOME/projects
@@ -67,6 +69,7 @@ compinit
  
  ###################### Generic Shell stuff ###########################
  alias dot='cd $DOTFILES_DIR'
+ alias tobash='exec bash'
  alias mkdir='mkdir -p' #create intermediate directories
  # mkdir and cd
  mkcd () { mkdir -p "$@" && cd "$@"; }
@@ -95,6 +98,9 @@ eval "$(navi widget zsh)"
  eval "$(starship init zsh)"
 #  
 #  
+# rustup - keg-only brew formula, cargo/rustc don't resolve without this
+export PATH="/opt/homebrew/opt/rustup/bin:$PATH"
+
 # bun - typescript
 # bun completions adds ~ 25ms
 #  [ -s "/Users/sjurgemeyer/.bun/_bun" ] && source "/Users/sjurgemeyer/.bun/_bun"

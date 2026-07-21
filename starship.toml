@@ -7,10 +7,25 @@ add_newline = false
 [line_break]
 disabled = true
 
-[java]
-symbol = " "
+# No format override here — the live prompt uses starship's default module
+# set (language versions, etc.). Username/hostname/aws are hidden explicitly
+# since they'd otherwise appear in SSH sessions or other edge cases (aws
+# profile names are often set to the user's email, which reads as a username).
+[username]
 disabled = true
 
+[hostname]
+disabled = true
+
+[aws]
+disabled = true
+
+[directory]
+truncation_length = 1
+
+[java]
+symbol = " "
+disabled = true
 
 [git_branch]
 style = "yellow"
@@ -20,5 +35,8 @@ stashed = ""
 modified = "𝚫"
 style = "red"
 
+# Duration is shown on flyline's PS1_FINAL/RPS1_FINAL redraw instead, so it
+# doesn't clutter the live prompt (see cli/flyline-settings.sh).
 [cmd_duration]
 style = "red"
+disabled = true

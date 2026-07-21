@@ -36,7 +36,11 @@
       "Bash(dscl . -read /Users/sjurgemeyer UserShell)",
       "Bash(bash --version)",
       "WebFetch(domain:github.com)",
-      "Bash(mkdir -p /Users/sjurgemeyer/.claude/plans 2>&1; ls /Users/sjurgemeyer/.claude/plans 2>&1)"
+      "Bash(mkdir -p /Users/sjurgemeyer/.claude/plans 2>&1; ls /Users/sjurgemeyer/.claude/plans 2>&1)",
+      "Bash(rg -li \"eloise\" ~/Documents/Notes/Transcripts/ 2>/dev/null)",
+      "Bash(rg -il \"power ?bi\" ~/Documents/Notes/Transcripts/ 2>/dev/null)",
+      "Bash(wtm --help)",
+      "Bash(echo \"---bun wtm location---\"; cat /Users/sjurgemeyer/.bun/bin/wtm 2>/dev/null | head -5; echo; echo \"---find wtm source---\"; fd -HI 'wtm' /Users/sjurgemeyer/.bun 2>/dev/null | head; echo \"---projects dirs---\"; ls -la /Users/sjurgemeyer/projects | head -30)"
     ]
   }
 }

@@ -13,6 +13,19 @@ vim.g.maplocalleader = " "
 vim.wo.wrap = false
 -- Make line numbers default
 vim.opt.number = true
+vim.o.confirm = true
+
+-- Override :bd to use Snacks.bufdelete()
+vim.api.nvim_create_user_command("SnacksBd", function(opts)
+  require("snacks").bufdelete()
+end, { nargs = "*" })
+-- Wark around since user commands can't directly override lowercase names. This expands bd to a different command
+vim.cmd([[cnoreabbrev <expr> bd (getcmdtype() == ':' && getcmdline() == 'bd') ? 'SnacksBd' : 'bd']])
+
+-- Global indentation defaults
+vim.opt.tabstop = 4      -- Number of spaces that a <Tab> in the file counts for
+vim.opt.shiftwidth = 4   -- Number of spaces to use for each step of (auto)indent
+vim.opt.expandtab = true -- Convert tabs to spaces
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = "a"
@@ -140,7 +153,6 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins")
-require("config/telescope-any-custom")
 vim.cmd("colorscheme oasis-starlight")
 -- require('onedark').setup {
 --     style = 'darker'
@@ -169,19 +181,46 @@ vim.keymap.set("n", "<leader>oo", function()
     vim.fn.system({ "open", "obsidian://open?path=" .. encoded_path })
 end, { desc = "Open in [O]bsidian" })
 
-vim.api.nvim_create_autocmd("LspAttach", {
-    callback = function(event)
-        local map = function(keys, func, desc)
-            vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
-        end
+-- LSP keymaps, set globally (not scoped to LspAttach). Neovim ships several
+-- of these as built-in defaults (gd is not one of them, but gD/gri/grt/grr/
+-- gO/grn/gra/grx are) and registers them globally, not per-buffer, with a
+-- `desc` that's just the Lua call itself (e.g. "vim.lsp.buf.references()").
+-- Since those globals exist in every buffer regardless of whether an LSP
+-- client is attached, a buffer-local override only wins in buffers that
+-- have actually seen an LspAttach — everywhere else the ugly built-in text
+-- still shows in which-key. Mapping globally overrides the
+-- built-ins everywhere; the underlying vim.lsp.buf functions already no-op
+-- gracefully when no client is attached.
+local function lsp_map(mode, keys, func, desc)
+    vim.keymap.set(mode, keys, func, { desc = "LSP: " .. desc })
+end
 
-        map("gd", vim.lsp.buf.definition, "Go to definition")
-        map("gr", vim.lsp.buf.references, "Go to references")
-        map("K", vim.lsp.buf.hover, "Hover documentation")
-        map("<leader>cr", vim.lsp.buf.rename, "Rename")
-        map("<leader>ca", vim.lsp.buf.code_action, "Code action")
-    end,
-})
+-- Go-to navigation
+lsp_map("n", "gd", vim.lsp.buf.definition, "Go to definition")
+lsp_map("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
+lsp_map("n", "gri", vim.lsp.buf.implementation, "Go to implementation")
+lsp_map("n", "grt", vim.lsp.buf.type_definition, "Go to type definition")
+lsp_map("n", "grr", vim.lsp.buf.references, "Go to references")
+lsp_map("n", "gO", vim.lsp.buf.document_symbol, "Document symbols")
+lsp_map("n", "grw", vim.lsp.buf.workspace_symbol, "Workspace symbols")
+lsp_map("n", "grx", vim.lsp.codelens.run, "Run code lens")
+
+-- Actions
+lsp_map("n", "grn", vim.lsp.buf.rename, "Rename")
+lsp_map("n", "<leader>cr", vim.lsp.buf.rename, "Rename")
+lsp_map({ "n", "x" }, "gra", vim.lsp.buf.code_action, "Code action")
+lsp_map("n", "<leader>ca", vim.lsp.buf.code_action, "Code action")
+lsp_map("n", "<leader>cf", vim.lsp.buf.format, "Format buffer")
+lsp_map("n", "<leader>ci", vim.lsp.buf.incoming_calls, "Incoming calls")
+lsp_map("n", "<leader>co", vim.lsp.buf.outgoing_calls, "Outgoing calls")
+
+-- Docs / signatures
+lsp_map("n", "K", vim.lsp.buf.hover, "Hover documentation")
+lsp_map("n", "<leader>ck", vim.lsp.buf.signature_help, "Signature help")
+lsp_map("i", "<C-s>", vim.lsp.buf.signature_help, "Signature help")
+
+-- Diagnostics
+lsp_map("n", "<leader>de", vim.diagnostic.open_float, "Line diagnostics")
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
@@ -206,3 +245,13 @@ vim.lsp.config('markdown_oxide', {
 })
 vim.lsp.enable('markdown_oxide')
 vim.lsp.enable('pyright')
+
+-- dbt Language Server: https://github.com/j-clemons/dbt-language-server
+-- No built-in nvim config for this one, so cmd/filetypes/root_markers are
+-- defined here in full rather than just enabled.
+vim.lsp.config('dbt', {
+    cmd = { 'dbt-language-server' },
+    filetypes = { 'sql', 'yaml' },
+    root_markers = { 'dbt_project.yml' },
+})
+vim.lsp.enable('dbt')

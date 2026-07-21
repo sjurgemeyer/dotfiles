@@ -37,6 +37,12 @@ sudo ln -s ~/projects/dotfiles/.zshrc ~/.zshrc
 rm -Rf ~/.oh-my-zsh/themes/shaun.zsh-theme
 sudo ln -s ~/projects/dotfiles/.oh-my-zsh/themes/shaun.zsh-theme ~/.oh-my-zsh/themes/shaun.zsh-theme
 
+#Bash / Flyline
+rm -Rf ~/.bashrc
+sudo ln -s ~/projects/dotfiles/.bashrc ~/.bashrc
+rm -Rf ~/.bash_profile
+sudo ln -s ~/projects/dotfiles/.bash_profile ~/.bash_profile
+
 #NPM
 rm -Rf ~/.npmrc
 sudo ln -s ~/projects/dotfiles/.npmrc ~/.npmrc

@@ -133,15 +133,7 @@
       "Edit(.claude/settings.local.json)",
       "Edit(**/.claude/settings.json)",
       "Edit(**/.claude/settings.local.json)",
-      "Write(~/.claude/settings.json)",
-      "Write(~/.claude/settings.local.json)",
-      "Write(~/.claude/CLAUDE.md)",
-      "Write(~/projects/dotfiles/.claude/**)",
-      "Write(.claude/settings.json)",
-      "Write(.claude/settings.local.json)",
-      "Write(**/.claude/settings.json)",
-      "Write(**/.claude/settings.local.json)",
-      "Write(~/Documents/Notes/generated-docs/**)",
+      "Edit(~/Documents/Notes/generated-docs/**)",
       "mcp__claude_ai_Atlassian__getConfluencePage",
       "mcp__claude_ai_Atlassian__getConfluencePageDescendants",
       "mcp__claude_ai_Atlassian__getConfluenceSpaces",
@@ -198,7 +190,6 @@
       "/tmp"
     ]
   },
-  "model": "sonnet",
   "hooks": {
     "SessionStart": [
       {
@@ -227,7 +218,8 @@
   },
   "enabledPlugins": {
     "github@claude-plugins-official": true,
-    "pyright-lsp@claude-plugins-official": true
+    "pyright-lsp@claude-plugins-official": true,
+    "rust-analyzer-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {

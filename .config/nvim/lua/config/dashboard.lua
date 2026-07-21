@@ -2,20 +2,20 @@
 -- for side-by-side "panes" of content rather than a single vertical stack.
 
 local header_lines = {
-	"                                :                                         ",
-	"  █.                     ,;     █,                                        ",
+	"                                                                          ",
+	"  █.                    .:      █,                                        ",
 	"  ██:         :█       ███    ;███.              █                        ",
 	"  ███;        ██     .███    :██:██              ██            ..       : ",
-	"  █████      ███    ███,    .██  ,██  █      .██.██,          ,█,     .██ ",
-	"  ██████     ███   ███.     ██    ;██ ██:   ,██. ███         ███,    ,███ ",
+	"  █████      ███    ███,    .██  ,██  █      .██ ██,          ,█,     .██ ",
+	"  ██████     ███   ███.     ██    ;██ ██:   ,██..███         ███,    ,███ ",
 	"  ███ ███    ███ :██████;  ██.     ██████  ███   ███        ████,   █████ ",
 	"  ███  ███.  ███ █████████ :██     ██ ███ ███    ███      .█████,  ██████ ",
-	"  ███   ███: ███  .███      ;██   ██. ██████     ███     ;██; ██,:███ ███ ",
-	"  ███    ;██,███    ███:     ███ ██:  ████,      ███    ███.  █████,  ███ ",
-	"  ███     :█████     ,██;     ████;   ███:       ███  .███    ████:   ███ ",
-	"  :██      .████      .██;     ███    ██.        ███ :███     ███.    ███ ",
-	"   .█       .███        ██      █     █          ██ ..█       █       .█ ",
-	"    :         .█         :      :     :          █.   :                : ",
+	"  ███   ███: ███  .███      ;██   ██. ██████     ███:    ;██; ███:███ ███ ",
+	"  ███    ;██,███    ███:     ███ ██:  ████,      ███    ███.   ████,  ███ ",
+	"  ███     :█████     ,██;     ████;   ███:       ███  .███     ███:   ███ ",
+	"  :██      .████      .██;     ███    ██.        ███ :███      ██.    ███ ",
+	"   .█       .███        ██      █     █          ██ ..█        █      .█ ",
+	"    :         .█         :      :     :          █.   :        :       : ",
 }
 
 -- Amber-to-indigo gradient, top to bottom.
@@ -72,7 +72,7 @@ local function bookmarks()
 	return {
 		{ icon = file_icon("init.lua"), key = "V", desc = "init.lua", action = ":e ~/.config/nvim/init.lua" },
 		{ icon = file_icon("init.lua"), key = "P", desc = "plugins/init.lua", action = ":e ~/.config/nvim/lua/plugins/init.lua" },
-		{ icon = file_icon(".zshrc"), key = "Z", desc = ".zshrc", action = ":e ~/.zshrc" },
+		{ icon = file_icon(".bashrc"), key = "Z", desc = ".zshrc", action = ":e ~/.bashrc" },
 		{ icon = file_icon("kitty.conf"), key = "K", desc = "kitty.conf", action = ":e ~/.config/kitty/kitty.conf" },
 	}
 end
@@ -87,7 +87,7 @@ vim.api.nvim_create_autocmd("DirChanged", {
 -- plugins/which.lua. Note this puts a non-git action under the Git group --
 -- picked "gd" specifically as requested, over plain "gd" (which is Vim's
 -- built-in goto-declaration mapping).
-vim.keymap.set("n", "<leader>gd", function()
+vim.keymap.set("n", "<leader>dd", function()
 	require("snacks").dashboard()
 end, { desc = "Open Dashboard" })
 
