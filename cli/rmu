@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+# rmu (rm undo) — fuzzy-pick a trashed file with fzf and restore it.
+#
+# trash-restore only accepts a numeric index (or exits without restoring on an
+# empty answer), even when a path narrows it down to a single match — so we
+# resolve the picked line to its index in trash-restore's own listing (a dry
+# run against /dev/null just prints the list and quits) and feed that index
+# back in to actually perform the restore.
+
+set -euo pipefail
+
+TRASH_LIST="${TRASH_LIST:-/opt/homebrew/opt/trash-cli/bin/trash-list}"
+TRASH_RESTORE="${TRASH_RESTORE:-/opt/homebrew/opt/trash-cli/bin/trash-restore}"
+
+command -v fzf >/dev/null 2>&1 || { echo "rmu: fzf is required" >&2; exit 1; }
+[ -x "$TRASH_LIST" ] || { echo "rmu: $TRASH_LIST not found" >&2; exit 1; }
+[ -x "$TRASH_RESTORE" ] || { echo "rmu: $TRASH_RESTORE not found" >&2; exit 1; }
+
+selection="$("$TRASH_LIST" | sort -r | fzf --prompt="Restore> " --header="Select a trashed file to restore" --no-sort)"
+[ -n "$selection" ] || exit 0
+
+date_time="$(awk '{print $1, $2}' <<<"$selection")"
+path="$(cut -d' ' -f3- <<<"$selection")"
+
+index="$("$TRASH_RESTORE" "$path" </dev/null 2>/dev/null | grep -F " $date_time $path" | head -1 | awk '{print $1}')"
+if [ -z "$index" ]; then
+  echo "rmu: couldn't find a matching trash entry for: $selection" >&2
+  exit 1
+fi
+
+echo "$index" | "$TRASH_RESTORE" "$path"
