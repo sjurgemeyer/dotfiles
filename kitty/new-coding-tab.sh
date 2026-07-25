@@ -11,6 +11,29 @@
 
 set -euo pipefail
 
+# Optional --model / --permission-mode are passed through to the claude pane.
+# --permission-mode defaults to "auto".
+MODEL=""
+PERM_MODE="auto"
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --model)
+      if [ $# -lt 2 ]; then echo "new-coding-tab: --model requires a value" >&2; exit 1; fi
+      MODEL="$2"; shift 2 ;;
+    --model=*) MODEL="${1#--model=}"; shift ;;
+    --permission-mode)
+      if [ $# -lt 2 ]; then echo "new-coding-tab: --permission-mode requires a value" >&2; exit 1; fi
+      PERM_MODE="$2"; shift 2 ;;
+    --permission-mode=*) PERM_MODE="${1#--permission-mode=}"; shift ;;
+    *) echo "new-coding-tab: unknown argument: $1" >&2; exit 1 ;;
+  esac
+done
+
+# Assemble the claude command: always set the permission mode, add --model only
+# when one was given.
+CLAUDE_CMD=(claude --permission-mode "$PERM_MODE")
+[ -n "$MODEL" ] && CLAUDE_CMD+=(--model "$MODEL")
+
 # Capture the originating cwd before we create a new tab. Once the new
 # tab becomes active, --cwd=current would resolve to the new tab's
 # shell cwd instead of the window we launched from. Requires the
@@ -48,5 +71,5 @@ CLAUDE_ID=$(kitty @ launch --location=vsplit \
     --cwd="$PROJECT_CWD" \
     --copy-env \
     --env=PATH=/opt/homebrew/bin:/usr/bin:/bin:$HOME/.local/bin \
-claude)
+    "${CLAUDE_CMD[@]}")
 

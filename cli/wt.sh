@@ -7,7 +7,8 @@
 # repo, so it derives the container and cd's for you — hence a sourced function,
 # not a standalone script (a subprocess can't change the parent shell's cwd).
 #
-#   wt <name> [base]   Go to worktree <name>. <name> is the full worktree name
+#   wt <name> [base] [--model <m>] [--permission-mode <p>]
+#                      Go to worktree <name>. <name> is the full worktree name
 #                      (e.g. feat/foo); a unique trailing segment (foo) also
 #                      resolves. If it doesn't exist yet:
 #                        - branch exists  -> check it out
@@ -15,8 +16,12 @@
 #                      <base> defaults to "main". After landing, activates the
 #                      worktree's .venv and .env, and (inside kitty) opens the
 #                      three-pane "Code" tab (nvim / claude / terminal).
+#                      --model <m> and --permission-mode <p> are passed through
+#                      to the claude pane; permission-mode defaults to "auto".
 #   wt list            List worktrees (wtm list).
-#   wt delete <name>   Delete a worktree (wtm delete; add --force to force).
+#   wt delete <name>   Delete a worktree and the matching local branch. Refuses
+#                      if the worktree's checked-out branch doesn't match its
+#                      path; --force skips that check and force-deletes.
 #
 # Knobs:  WT_NO_CODE=1        don't open the kitty Code tab
 #         WT_AUTO_ACTIVATE=0  don't auto-activate .venv/.env in new worktree shells
@@ -96,8 +101,11 @@ _wt_activate() {
 
 # Open the kitty three-pane "Code" tab for the current worktree. No-op unless
 # we're inside kitty and it's enabled. If a Code tab for this worktree already
-# exists, focus it instead of stacking a duplicate.
+# exists, focus it instead of stacking a duplicate. $1/$2, if set, are the model
+# and permission-mode to pass through to the claude pane (new-coding-tab.sh
+# defaults the permission mode to "auto" when none is forwarded).
 _wt_open_code() {
+  local model="$1" permmode="$2"
   [ "${WT_NO_CODE:-0}" = 0 ] || return 0
   [ -n "$KITTY_WINDOW_ID" ] || return 0
   command -v kitty >/dev/null 2>&1 || return 0
@@ -106,12 +114,36 @@ _wt_open_code() {
   if kitty @ focus-tab --match "title:^Code: ${proj}$" >/dev/null 2>&1; then
     return 0
   fi
-  "$dotfiles/kitty/new-coding-tab.sh"
+  local -a opts=()
+  [ -n "$model" ] && opts+=(--model "$model")
+  [ -n "$permmode" ] && opts+=(--permission-mode "$permmode")
+  "$dotfiles/kitty/new-coding-tab.sh" "${opts[@]}"
 }
 
-# Navigate to (creating/checking out as needed) worktree $1, base branch $2.
+# Navigate to (creating/checking out as needed) a worktree.
+# Usage: _wt_go <name> [base] [--model <model>] [--permission-mode <mode>]
+# (flags may appear anywhere)
 _wt_go() {
-  local name="$1" base="${2:-main}" container target reply found rc
+  local name="" base="" model="" permmode="" container target reply found rc
+  while [ $# -gt 0 ]; do
+    case "$1" in
+      --model)
+        if [ $# -lt 2 ]; then printf 'wt: --model requires a value\n' >&2; return 1; fi
+        model="$2"; shift 2 ;;
+      --model=*) model="${1#--model=}"; shift ;;
+      --permission-mode)
+        if [ $# -lt 2 ]; then printf 'wt: --permission-mode requires a value\n' >&2; return 1; fi
+        permmode="$2"; shift 2 ;;
+      --permission-mode=*) permmode="${1#--permission-mode=}"; shift ;;
+      *)
+        if [ -z "$name" ]; then name="$1"
+        elif [ -z "$base" ]; then base="$1"
+        fi
+        shift ;;
+    esac
+  done
+  [ -n "$base" ] || base="main"
+  if [ -z "$name" ]; then printf 'wt: worktree name required\n' >&2; return 1; fi
   container=$(_wt_container) || { printf 'wt: not inside a wtm-managed repo\n' >&2; return 1; }
 
   # Already exists? Just go there.
@@ -120,7 +152,7 @@ _wt_go() {
   if [ "$rc" -eq 0 ]; then
     cd "$found" || return 1
     _wt_activate
-    _wt_open_code
+    _wt_open_code "$model" "$permmode"
     return 0
   elif [ "$rc" -eq 2 ]; then
     return 1   # ambiguous — message already printed
@@ -152,7 +184,7 @@ _wt_go() {
 
   cd "$target" || return 1
   _wt_activate
-  _wt_open_code
+  _wt_open_code "$model" "$permmode"
 }
 
 wt() {
@@ -168,23 +200,68 @@ wt() {
       shift
       container=$(_wt_container) \
         || { printf 'wt: not inside a wtm-managed repo\n' >&2; return 1; }
+
+      # Pull out the worktree name and detect --force (which skips the
+      # branch/path safety check and force-deletes the branch).
+      local force=0 name="" arg wtpath relpath branch frc
+      for arg in "$@"; do
+        case "$arg" in
+          --force|-f) force=1 ;;
+          -*) ;;
+          *) [ -z "$name" ] && name="$arg" ;;
+        esac
+      done
+      if [ -z "$name" ]; then printf 'wt: delete requires a worktree name\n' >&2; return 1; fi
+
+      # Resolve the target worktree and the branch it currently has checked out.
+      wtpath=$(_wt_find "$container" "$name"); frc=$?
+      if [ "$frc" -ne 0 ]; then
+        [ "$frc" -eq 1 ] && printf "wt: no worktree matching '%s'\n" "$name" >&2
+        return 1   # frc 2 (ambiguous) already printed candidates
+      fi
+      relpath="${wtpath#$container/}"
+      branch=$(git -C "$wtpath" symbolic-ref --quiet --short HEAD 2>/dev/null)
+
+      # Safety: the checked-out branch must match the worktree's path, else we
+      # might delete an unrelated branch. --force skips this check.
+      if [ "$force" -eq 0 ] && [ "$branch" != "$relpath" ]; then
+        printf "wt: worktree '%s' is on branch '%s', which does not match its path.\n" \
+          "$relpath" "${branch:-<detached HEAD>}" >&2
+        printf "    Refusing to delete. Re-run with --force to override.\n" >&2
+        return 1
+      fi
+
       here="$PWD"
       ( cd "$container" && wtm delete "$@" )
       rc=$?
       # If we just deleted the worktree we were standing in, step out to the
       # container so we're not left in a phantom directory.
       [ -d "$here" ] || cd "$container"
+
+      # wtm removes the worktree but leaves its branch behind — delete it too.
+      # Use -D, not -d: wtm points the branch's upstream at a (usually absent)
+      # origin/<name>, so -d would spuriously report it unmerged and refuse. The
+      # branch/path match check above is what guards against deleting the wrong
+      # branch (and unpushed commits, if any, go with it).
+      if [ "$rc" -eq 0 ] && [ -n "$branch" ]; then
+        git -C "$container" branch -D "$branch"
+      fi
       return $rc
       ;;
     ""|-h|--help|help)
       cat <<'EOF'
 wt — git worktree helper (wraps wtm)
 
-  wt <name> [base]   Go to worktree <name>; create or check it out if missing.
+  wt <name> [base] [--model <m>] [--permission-mode <p>]
+                     Go to worktree <name>; create or check it out if missing.
                      New worktrees are created from <base> (default: main).
                      Activates .venv/.env and opens the kitty Code tab.
+                     --model <m> and --permission-mode <p> pass through to the
+                     claude pane; permission-mode defaults to "auto".
   wt list            List worktrees.
-  wt delete <name>   Delete a worktree (add --force to force).
+  wt delete <name>   Delete a worktree and its matching local branch.
+                     Refuses on a branch/path mismatch; --force skips the
+                     check and force-deletes.
 EOF
       ;;
     *)
