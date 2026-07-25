@@ -50,6 +50,7 @@
 	cf = commit --fixup
 	cauto = commit --automerge
     tc = commit -a -m \"Temp commit\"
+	pf = push --force-with-lease
 [hub]
 	protocol = https
 	host = git.target.com

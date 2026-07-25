@@ -58,6 +58,8 @@ sudo ln -s ~/projects/dotfiles/karabiner.json ~/.config/karabiner/karabiner.json
 # claude
 sudo rm -Rf ~/.claude/settings.json
 sudo ln -s ~/projects/dotfiles/claude/settings.json ~/.claude/settings.json
+sudo rm -Rf ~/.claude/CLAUDE.md
+sudo ln -s ~/projects/dotfiles/claude/CLAUDE.md ~/.claude/CLAUDE.md
 
 # lsd
 sudo rm -Rf ~/.config/lsd/

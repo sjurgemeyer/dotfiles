@@ -181,15 +181,14 @@
       "mcp__datadog__search_datadog_spans"
     ],
     "deny": [
-      "Bash(rm -rf *)",
-      "Bash(git push *)",
-      "Bash(git reset --hard *)"
+      "Bash(rm -rf *)"
     ],
     "additionalDirectories": [
       "~/projects",
       "/tmp"
     ]
   },
+  "model": "opus[1m]",
   "hooks": {
     "SessionStart": [
       {
