@@ -1,8 +1,8 @@
 
 function prreview  {
 
-header=$(printf '\033[1;36m%-35s\033[0m  \033[1;37m%-60s\033[0m  \033[1;33m%-18s\033[0m  \033[1;32m%-16s\033[0m  \033[1;35m%-12s\033[0m\n\033[2menter: open in browser  ·  ctrl-f: cycle filter [All]\033[0m' \
-  "REPO" "PR TITLE" "SUBMITTER" "UPDATED" "APPROVED")
+header=$(printf '\033[1;32m%-16s\033[0m  \033[1;36m%-35s\033[0m  \033[1;35m%-12s\033[0m  \033[1;33m%-18s\033[0m  \033[1;37m%-60s\033[0m\n\033[2menter: open in browser  ·  ctrl-f: cycle filter [All]\033[0m' \
+  "UPDATED" "REPO" "APPROVED" "SUBMITTER" "PR TITLE")
 
 local filter_state
 filter_state=$(mktemp)
@@ -10,9 +10,10 @@ echo 0 > "$filter_state"
 
 gh api --paginate user/subscriptions --jq '.[].full_name' | \
   while read -r repo; do
+    short_repo="${repo#*/}"
     gh pr list --repo "$repo" --state=open \
       --json title,updatedAt,author,url,reviewDecision \
-      --jq '.[] | ["'"$repo"'", .title, .author.login, .updatedAt, .reviewDecision, .url] | @tsv'
+      --jq '.[] | ["'"$short_repo"'", .title, .author.login, .updatedAt, .reviewDecision, .url] | @tsv'
   done | sort -t$'\t' -k4 -r | \
   awk -F'\t' 'BEGIN {
     e = sprintf("%c", 27);
@@ -30,12 +31,12 @@ gh api --paginate user/subscriptions --jq '.[].full_name' | \
     else if ($5 == "CHANGES_REQUESTED") { acolor = red; atext = "Changes Req" }
     else if ($5 == "REVIEW_REQUIRED")   { acolor = yellow; atext = "Review Req" }
     else                                 { acolor = gray; atext = "-" }
-    printf "%s%-35s%s  %s%-60s%s  %s%-18s%s  %s%-16s%s  %s%-12s%s\t%s\n",
-      cyan,   substr($1,1,35), reset,
-      white,  substr($2,1,60), reset,
-      yellow, substr($3,1,18), reset,
+    printf "%s%-16s%s  %s%-35s%s  %s%-12s%s  %s%-18s%s  %s%-60s%s\t%s\n",
       green,  substr($4,1,16), reset,
+      cyan,   substr($1,1,35), reset,
       acolor, atext, reset,
+      yellow, substr($3,1,18), reset,
+      white,  substr($2,1,60), reset,
       $6
   }' | \
   FZF_DEFAULT_OPTS= fzf --ansi --exact \

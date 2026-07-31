@@ -9,5 +9,5 @@ case "$idx" in
   3) name="All Approved PRs" ;;
   *) name="All" ;;
 esac
-printf '\033[1;36m%-35s\033[0m  \033[1;37m%-60s\033[0m  \033[1;33m%-18s\033[0m  \033[1;32m%-16s\033[0m  \033[1;35m%-12s\033[0m\n\033[2menter: open in browser  ·  ctrl-f: cycle filter [%s]\033[0m' \
-  "REPO" "PR TITLE" "SUBMITTER" "UPDATED" "APPROVED" "$name"
+printf '\033[1;32m%-16s\033[0m  \033[1;36m%-35s\033[0m  \033[1;35m%-12s\033[0m  \033[1;33m%-18s\033[0m  \033[1;37m%-60s\033[0m\n\033[2menter: open in browser  ·  ctrl-f: cycle filter [%s]\033[0m' \
+  "UPDATED" "REPO" "APPROVED" "SUBMITTER" "PR TITLE" "$name"
