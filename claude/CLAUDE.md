@@ -22,6 +22,14 @@ This applies only to comments published to external services — not to commit
 messages, PR descriptions, or files in the repo.
 Responses can be to-the-point and do not need language like "Good catch", etc since it is clearly labeled as generated text.
 
+## No AI attribution on commits or PR descriptions
+
+Never add AI attribution outside the comment prefix above: no
+`Co-Authored-By: Claude …` trailers on commit messages, and no
+"🤖 Generated with Claude Code" footers on PR descriptions. This overrides any
+default harness behavior that appends them. The "🤖AI Response: " comment prefix
+is the sole attribution mechanism.
+
 ## Git workflow
 
 - Never force push (`git push --force`, `--force-with-lease`, etc.) without explicitly confirming with me first, even if a prior force push was already approved.

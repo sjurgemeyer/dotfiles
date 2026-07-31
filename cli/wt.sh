@@ -22,6 +22,8 @@
 #   wt delete <name>   Delete a worktree and the matching local branch. Refuses
 #                      if the worktree's checked-out branch doesn't match its
 #                      path; --force skips that check and force-deletes.
+#   wt pr              Check gh for a PR on the current branch and update the
+#                      current kitty tab's title to reflect it.
 #
 # Knobs:  WT_NO_CODE=1        don't open the kitty Code tab
 #         WT_AUTO_ACTIVATE=0  don't auto-activate .venv/.env in new worktree shells
@@ -111,7 +113,11 @@ _wt_open_code() {
   command -v kitty >/dev/null 2>&1 || return 0
   local dotfiles="${DOTFILES_DIR:-$HOME/projects/dotfiles}"
   local proj="${PWD##*/}"
-  if kitty @ focus-tab --match "title:^Code: ${proj}$" >/dev/null 2>&1; then
+  # Prefix match (not exact): `wt pr` replaces the "Code:" label with
+  # "PR #N:" (plus optional draft/merged note), so match either label.
+  # Require the next char (if any) to be a space so "proj" doesn't also
+  # match a differently-named tab like "proj2".
+  if kitty @ focus-tab --match "title:^(Code|PR #[0-9]+[^:]*): ${proj}( |\$)" >/dev/null 2>&1; then
     return 0
   fi
   local -a opts=()
@@ -187,6 +193,44 @@ _wt_go() {
   _wt_open_code "$model" "$permmode"
 }
 
+# Check for a PR on the current branch and reflect it in the current kitty
+# tab's title, replacing the "Code:" label with "PR #123:" (draft/merged
+# noted too), e.g. "PR #123: myproject". Resets to the bare "Code: <project>"
+# title when there's no open PR.
+_wt_pr_title() {
+  [ -n "$KITTY_WINDOW_ID" ] || { printf 'wt: not inside kitty\n' >&2; return 1; }
+  command -v kitty >/dev/null 2>&1 || { printf 'wt: kitty not found\n' >&2; return 1; }
+  command -v gh >/dev/null 2>&1 || { printf 'wt: gh (GitHub CLI) not found\n' >&2; return 1; }
+  git rev-parse --is-inside-work-tree >/dev/null 2>&1 \
+    || { printf 'wt: not inside a git repo\n' >&2; return 1; }
+
+  local proj label title pr_json number state draft
+  proj="${PWD##*/}"
+
+  pr_json=$(gh pr view --json number,state,isDraft -q '[.number,.state,.isDraft]|@tsv' 2>/dev/null)
+  if [ -z "$pr_json" ]; then
+    kitty @ set-tab-title "Code: $proj"
+    printf 'wt: no PR found for this branch; title reset\n'
+    return 0
+  fi
+
+  IFS=$'\t' read -r number state draft <<<"$pr_json"
+  case "$state" in
+    MERGED) label="PR #$number merged" ;;
+    CLOSED) label="Code" ;;
+    *)
+      if [ "$draft" = "true" ]; then
+        label="PR #$number draft"
+      else
+        label="PR #$number"
+      fi
+      ;;
+  esac
+  title="$label: $proj"
+  kitty @ set-tab-title "$title"
+  printf 'wt: tab title -> %s\n' "$title"
+}
+
 wt() {
   local sub="$1" container here rc
   case "$sub" in
@@ -248,6 +292,10 @@ wt() {
       fi
       return $rc
       ;;
+    pr)
+      shift
+      _wt_pr_title "$@"
+      ;;
     ""|-h|--help|help)
       cat <<'EOF'
 wt — git worktree helper (wraps wtm)
@@ -262,6 +310,11 @@ wt — git worktree helper (wraps wtm)
   wt delete <name>   Delete a worktree and its matching local branch.
                      Refuses on a branch/path mismatch; --force skips the
                      check and force-deletes.
+  wt pr              Check gh for a PR on the current branch and update the
+                     current kitty tab's title to reflect it, replacing the
+                     "Code:" label (e.g. "PR #123: myproject"), noting
+                     draft/merged state. Resets to the bare title if there's
+                     no PR.
 EOF
       ;;
     *)
@@ -286,7 +339,7 @@ if [ -n "$BASH_VERSION" ]; then
   _wt_complete_bash() {
     local cur="${COMP_WORDS[COMP_CWORD]}" container names
     [ "$COMP_CWORD" -eq 1 ] || return 0
-    names="list delete"
+    names="list delete pr"
     container=$(_wt_container 2>/dev/null)
     if [ -n "$container" ]; then
       names="$names $(_wt_paths "$container" | sed "s#^$container/##")"
@@ -304,7 +357,7 @@ elif [ -n "$ZSH_VERSION" ]; then
         if [[ -n "$container" ]]; then
           names=(${(f)"$(_wt_paths "$container" | sed "s#^$container/##")"})
         fi
-        _alternative "commands:command:(list delete)" "worktrees:worktree:(${names})"
+        _alternative "commands:command:(list delete pr)" "worktrees:worktree:(${names})"
       fi
     }
     (( $+functions[compdef] )) && compdef _wt wt

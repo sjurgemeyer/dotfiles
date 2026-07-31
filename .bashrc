@@ -7,7 +7,7 @@ export SHELL=/opt/homebrew/bin/bash
 
 export PROJECT_DIR=$HOME/projects
 export DOTFILES_DIR=$PROJECT_DIR/dotfiles
-export PATH=$HOME/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/share/npm/bin:/opt/local/bin:/opt/local/sbin:/usr/local/sbin:/usr/local/groovy/bin:/usr/local/mysql/bin:/usr/local/tomcat/bin:/usr/local/scripts:/usr/local/gradle/bin:/usr/local/Cellar/ruby/2.0.0-p247/bin:$HOME/.node/bin:$HOME/app/dasht-2.0.0/bin:/usr/local/Cellar/ctags/5.8_1/bin/:~/Library/Python/3.9/bin:$DOTFILES_DIR/cli/:/usr/local/lib/docker/cli-plugins:/Applications/Docker.app/Contents//Resources/bin/:/Users/sjurgemeyer/nvim_nightly/bin/:$HOME/go/bin:/opt/homebrew/Cellar/dateutils/0.4.11/bin/:$PROJECT_DIR/screenpipe-scripts/:/opt/homebrew/bin:/.local/bin:$HOME/.local/bin:/Users/sjurgemeyer/Library/Python/3.9/bin:/opt/homebrew/opt/rustup/bin:$PATH
+export PATH=$HOME/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/share/npm/bin:/opt/local/bin:/opt/local/sbin:/usr/local/sbin:/usr/local/groovy/bin:/usr/local/mysql/bin:/usr/local/tomcat/bin:/usr/local/scripts:/usr/local/gradle/bin:/usr/local/Cellar/ruby/2.0.0-p247/bin:$HOME/.node/bin:$HOME/app/dasht-2.0.0/bin:/usr/local/Cellar/ctags/5.8_1/bin/:~/Library/Python/3.9/bin:$DOTFILES_DIR/cli/:/usr/local/lib/docker/cli-plugins:/Applications/Docker.app/Contents//Resources/bin/:/Users/sjurgemeyer/nvim_nightly/bin/:$HOME/go/bin:/opt/homebrew/Cellar/dateutils/0.4.11/bin/:$PROJECT_DIR/screenpipe-scripts/:/opt/homebrew/bin:/.local/bin:$HOME/.local/bin:/Users/sjurgemeyer/Library/Python/3.9/bin:/opt/homebrew/opt/rustup/bin:/opt/homebrew/opt/trash-cli/bin/:$PATH
 shopt -s autocd
 
 #VI/VIM defaults
@@ -19,6 +19,7 @@ alias cat=bat
 alias ls=lsd
 alias ll='lsd -la'
 alias rm='/opt/homebrew/opt/trash-cli/bin/trash'
+alias trash='/opt/homebrew/opt/trash-cli/bin/trash'
 
 alias ping='prettyping --nolegend'
 alias top=htop
