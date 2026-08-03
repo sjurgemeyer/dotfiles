@@ -17,6 +17,7 @@
   "cmp_luasnip": { "branch": "master", "commit": "98d9cb5c2c38532bd9bdb481067b20fea8f32e90" },
   "colortils.nvim": { "branch": "main", "commit": "948d4eddbd20c3e9eac79368dc50c7929d4fb823" },
   "conform.nvim": { "branch": "master", "commit": "619363c30309d29ffa631e67c8183f2a72caa373" },
+  "diffbandit.nvim": { "branch": "main", "commit": "207ef5718edb74161897eafb1cbe6f7832cda28b" },
   "diffview.nvim": { "branch": "main", "commit": "4516612fe98ff56ae0415a259ff6361a89419b0a" },
   "electron-vue.nvim": { "branch": "main", "commit": "ef77930afa68d61e13f480b9d89105431fcec28b" },
   "ember": { "branch": "main", "commit": "7365b8dede43a82ed1df741275b75333422e5402" },

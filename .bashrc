@@ -49,6 +49,7 @@ export DOTFILES_DIR=$PROJECT_DIR/dotfiles
 
 source ~/.otherFunctions
 source $DOTFILES_DIR/cli/json.sh
+source $DOTFILES_DIR/cli/prreview.sh
 [ -f $DOTFILES_DIR/cli/wt.sh ] && source $DOTFILES_DIR/cli/wt.sh
 
 alias serve='python -m SimpleHTTPServer'

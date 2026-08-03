@@ -13,9 +13,13 @@
 #                      resolves. If it doesn't exist yet:
 #                        - branch exists  -> check it out
 #                        - otherwise      -> confirm, then create from <base>
-#                      <base> defaults to "main". After landing, activates the
-#                      worktree's .venv and .env, and (inside kitty) opens the
-#                      three-pane "Code" tab (nvim / claude / terminal).
+#                      <base>, if not given explicitly, defaults to "main" —
+#                      unless you're currently inside a worktree (not the bare
+#                      container root), in which case it defaults to that
+#                      worktree's branch instead; declining that prompt offers
+#                      to create from "main" instead. After landing, activates
+#                      the worktree's .venv and .env, and (inside kitty) opens
+#                      the three-pane "Code" tab (nvim / claude / terminal).
 #                      --model <m> and --permission-mode <p> are passed through
 #                      to the claude pane; permission-mode defaults to "auto".
 #   wt list            List worktrees (wtm list).
@@ -120,10 +124,31 @@ _wt_open_code() {
   if kitty @ focus-tab --match "title:^(Code|PR #[0-9]+[^:]*): ${proj}( |\$)" >/dev/null 2>&1; then
     return 0
   fi
+
+  # If the tab we're running in has only this one window, it was almost
+  # certainly opened just to type this `wt` command — remember it so we can
+  # close it below, once the new Code tab exists, instead of leaving a bare
+  # extra tab behind.
+  local orig_tab_id="" orig_solo=0 info
+  if command -v jq >/dev/null 2>&1; then
+    info=$(kitty @ ls 2>/dev/null | jq -r --argjson wid "$KITTY_WINDOW_ID" '
+      [.[].tabs[] | select(.windows[]?.id == $wid)][0]
+      | if . == null then empty else "\(.id) \(.windows | length)" end
+    ' 2>/dev/null) || info=""
+    if [ -n "$info" ]; then
+      orig_tab_id="${info%% *}"
+      [ "${info##* }" = 1 ] && orig_solo=1
+    fi
+  fi
+
   local -a opts=()
   [ -n "$model" ] && opts+=(--model "$model")
   [ -n "$permmode" ] && opts+=(--permission-mode "$permmode")
   "$dotfiles/kitty/new-coding-tab.sh" "${opts[@]}"
+
+  if [ "$orig_solo" = 1 ]; then
+    kitty @ close-tab --match "id:$orig_tab_id" >/dev/null 2>&1 || true
+  fi
 }
 
 # Navigate to (creating/checking out as needed) a worktree.
@@ -131,6 +156,7 @@ _wt_open_code() {
 # (flags may appear anywhere)
 _wt_go() {
   local name="" base="" model="" permmode="" container target reply found rc
+  local base_explicit=0 cur_branch prompt_base offer_main_fallback
   while [ $# -gt 0 ]; do
     case "$1" in
       --model)
@@ -148,6 +174,7 @@ _wt_go() {
         shift ;;
     esac
   done
+  [ -n "$base" ] && base_explicit=1
   [ -n "$base" ] || base="main"
   if [ -z "$name" ]; then printf 'wt: worktree name required\n' >&2; return 1; fi
   container=$(_wt_container) || { printf 'wt: not inside a wtm-managed repo\n' >&2; return 1; }
@@ -174,11 +201,39 @@ _wt_go() {
     # Remote branch exists — let wtm check it out.
     ( cd "$container" && wtm checkout "$name" ) || return 1
   else
-    printf "Worktree '%s' does not exist. Create it from '%s'? [y/N] " "$name" "$base"
+    # If the caller didn't pin a base explicitly and we're inside a worktree
+    # (not the bare container root), default to branching off the current
+    # worktree's branch instead of main — that's usually what's wanted when
+    # starting a new worktree while already working on something. Declining
+    # falls back to offering main.
+    prompt_base="$base"
+    offer_main_fallback=0
+    if [ "$base_explicit" -eq 0 ] \
+       && [ "$(git rev-parse --is-bare-repository 2>/dev/null)" = "false" ]; then
+      cur_branch=$(git symbolic-ref --quiet --short HEAD 2>/dev/null)
+      if [ -n "$cur_branch" ] && [ "$cur_branch" != "$base" ]; then
+        prompt_base="$cur_branch"
+        offer_main_fallback=1
+      fi
+    fi
+
+    printf "Worktree '%s' does not exist. Create it from '%s'? [y/N] " "$name" "$prompt_base"
     read -r reply
     case "$reply" in
-      [yY]*) ;;
-      *) printf 'Aborted.\n'; return 1 ;;
+      [yY]*) base="$prompt_base" ;;
+      *)
+        if [ "$offer_main_fallback" -eq 1 ]; then
+          printf "Create it from '%s' instead? [y/N] " "$base"
+          read -r reply
+          case "$reply" in
+            [yY]*) ;;
+            *) printf 'Aborted.\n'; return 1 ;;
+          esac
+        else
+          printf 'Aborted.\n'
+          return 1
+        fi
+        ;;
     esac
     ( cd "$container" && wtm create "$name" --from "$base" --no-shell ) || return 1
   fi
@@ -302,10 +357,13 @@ wt — git worktree helper (wraps wtm)
 
   wt <name> [base] [--model <m>] [--permission-mode <p>]
                      Go to worktree <name>; create or check it out if missing.
-                     New worktrees are created from <base> (default: main).
-                     Activates .venv/.env and opens the kitty Code tab.
-                     --model <m> and --permission-mode <p> pass through to the
-                     claude pane; permission-mode defaults to "auto".
+                     New worktrees are created from <base> if given, else
+                     "main" — unless run from inside a worktree, in which
+                     case that worktree's branch is offered first (declining
+                     falls back to offering "main"). Activates .venv/.env and
+                     opens the kitty Code tab. --model <m> and
+                     --permission-mode <p> pass through to the claude pane;
+                     permission-mode defaults to "auto".
   wt list            List worktrees.
   wt delete <name>   Delete a worktree and its matching local branch.
                      Refuses on a branch/path mismatch; --force skips the
