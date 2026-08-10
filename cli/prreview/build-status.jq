@@ -21,4 +21,4 @@ def build_status:
       end
   end;
 
-.[] | select(.isDraft | not) | [$short_repo, .title, .author.login, .updatedAt, .reviewDecision, build_status, .mergeStateStatus, .baseRefName, .baseRefOid, .url] | join("")
+.[] | [$short_repo, .title, .author.login, .updatedAt, .reviewDecision, build_status, .mergeStateStatus, .baseRefName, .baseRefOid, (.isDraft | tostring), .url] | join("")

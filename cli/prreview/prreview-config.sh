@@ -23,6 +23,10 @@ PRREVIEW_SHOW_BUILD=true
 PRREVIEW_SHOW_APPROVAL=true
 PRREVIEW_SHOW_UPTODATE=true
 PRREVIEW_SHOW_UNRESOLVED=true
+
+# Base URL for linking Jira ticket references found in PR titles, e.g.
+# "[EDP-854]" links to "\$PRREVIEW_JIRA_URL/EDP-854". Leave empty to disable.
+PRREVIEW_JIRA_URL=""
 EOF
 fi
 
@@ -33,6 +37,7 @@ PRREVIEW_SHOW_BUILD=true
 PRREVIEW_SHOW_APPROVAL=true
 PRREVIEW_SHOW_UPTODATE=true
 PRREVIEW_SHOW_UNRESOLVED=true
+PRREVIEW_JIRA_URL=""
 
 # shellcheck disable=SC1090
 . "$PRREVIEW_CONF_FILE"

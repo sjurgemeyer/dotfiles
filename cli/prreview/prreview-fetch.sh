@@ -23,7 +23,7 @@ fi | \
     gh pr list --repo "$repo" --state=open \
       --json title,updatedAt,author,url,reviewDecision,isDraft,statusCheckRollup,mergeStateStatus,baseRefName,baseRefOid | \
     jq --arg short_repo "$short_repo" -r -f "$prreview_dir/build-status.jq" | \
-    while IFS=$'\x1f' read -r f_repo f_title f_author f_updated f_review f_build f_merge f_baseref f_baseoid f_url; do
+    while IFS=$'\x1f' read -r f_repo f_title f_author f_updated f_review f_build f_merge f_baseref f_baseoid f_isdraft f_url; do
       if [ "$PRREVIEW_SHOW_UPTODATE" = "true" ]; then
         cache_key=$(printf '%s\t%s\t' "$repo" "$f_baseref")
         cache_line=$(grep -F -m1 "$cache_key" "$branch_tip_cache" 2>/dev/null)
@@ -53,10 +53,11 @@ fi | \
         unresolved="false"
       fi
 
-      printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' "$f_repo" "$f_title" "$f_author" "$f_updated" "$f_review" "$f_build" "$behind_flag" "$unresolved" "$f_url"
+      printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' "$f_repo" "$f_title" "$f_author" "$f_updated" "$f_review" "$f_build" "$behind_flag" "$unresolved" "$f_isdraft" "$f_url"
     done
   done | sort -t$'\t' -k4 -r | \
   awk -F'\t' -v w_upd="$w_upd" -v w_repo="$w_repo" -v w_status="$w_status" -v w_sub="$w_sub" -v w_title="$w_title" \
       -v show_build="$PRREVIEW_SHOW_BUILD" -v show_approval="$PRREVIEW_SHOW_APPROVAL" \
       -v show_uptodate="$PRREVIEW_SHOW_UPTODATE" -v show_unresolved="$PRREVIEW_SHOW_UNRESOLVED" \
+      -v jira_url="$PRREVIEW_JIRA_URL" \
       -f "$prreview_dir/format-rows.awk"

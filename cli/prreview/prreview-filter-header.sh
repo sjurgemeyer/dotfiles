@@ -14,6 +14,8 @@ case "$idx" in
   2) name="My Approved PRs" ;;
   3) name="All Approved PRs" ;;
   4) name="Others' PRs" ;;
+  5) name="Drafts" ;;
+  6) name="My Drafts" ;;
   *) name="All" ;;
 esac
 last_updated=$(cat "$cache_dir/last_updated" 2>/dev/null)
