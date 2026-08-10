@@ -22,15 +22,23 @@
 #                      the three-pane "Code" tab (nvim / claude / terminal).
 #                      --model <m> and --permission-mode <p> are passed through
 #                      to the claude pane; permission-mode defaults to "auto".
-#   wt list            List worktrees (wtm list).
-#   wt delete <name>   Delete a worktree and the matching local branch. Refuses
+#   wt list            Table of every worktree: directory, lock flag, checked-out
+#                      branch, last commit date + subject, and the branch's PR if
+#                      GitHub has one (green open, gray draft, purple merged or
+#                      closed). Newest commit first. Built straight from git +
+#                      gh rather than `wtm list`, which only prints paths.
+#   wt delete <name> [-f|--force]
+#                      Delete a worktree and the matching local branch. Refuses
 #                      if the worktree's checked-out branch doesn't match its
-#                      path; --force skips that check and force-deletes.
+#                      path, or if the worktree is locked (supacode locks the
+#                      ones it manages). -f/--force skips the branch check,
+#                      unlocks first, and force-deletes.
 #   wt pr              Check gh for a PR on the current branch and update the
 #                      current kitty tab's title to reflect it.
 #
 # Knobs:  WT_NO_CODE=1        don't open the kitty Code tab
 #         WT_AUTO_ACTIVATE=0  don't auto-activate .venv/.env in new worktree shells
+#         WT_LIST_NO_PR=1     skip the gh lookup in `wt list` (offline / faster)
 
 # Resolve the wtm bare-repo container for the current git repo.
 # Prints the absolute container path; returns non-zero if we're not inside a
@@ -43,7 +51,9 @@ _wt_container() {
     /*) ;;
     *) common="$PWD/$common" ;;
   esac
-  container=$(cd "$(dirname "$common")" 2>/dev/null && pwd) || return 1
+  # -P (physical path): `git worktree list` reports symlink-resolved paths, and
+  # we strip this prefix off them to get a worktree's relative name.
+  container=$(cd "$(dirname "$common")" 2>/dev/null && pwd -P) || return 1
   # wtm requires the container to be a bare repository.
   [ "$(git -C "$container" config --get core.bare 2>/dev/null)" = "true" ] || return 1
   printf '%s\n' "$container"
@@ -59,6 +69,165 @@ _wt_paths() {
         [ "$p" = "$container/.bare" ] && continue
         printf '%s\n' "$p"
       done
+}
+
+# Print a worktree's lock reason (possibly empty) and return 0 if it's locked;
+# return 1 if it isn't. supacode locks every worktree it adopts, writing a JSON
+# reason like {"owner":"supacode",...} — git then refuses to remove the
+# worktree at all (even `remove --force`, which is all wtm passes through), so
+# `wt delete --force` unlocks first.
+# NB: don't name a local "path" here — in zsh that's tied to $PATH.
+_wt_lock_reason() {
+  local container="$1" wtpath="$2"
+  git -C "$container" worktree list --porcelain 2>/dev/null \
+    | awk -v target="$wtpath" '
+        $1 == "worktree" { cur = substr($0, 10) }
+        cur == target && $1 == "locked" {
+          found = 1
+          if (length($0) > 7) reason = substr($0, 8)
+          exit
+        }
+        END { if (found) { print reason; exit 0 } else exit 1 }
+      '
+}
+
+# ---- wt list -----------------------------------------------------------------
+# Column widths (the message column takes whatever's left over).
+_WT_LIST_W_DIR=26
+_WT_LIST_W_BRANCH=28
+_WT_LIST_W_DATE=14
+_WT_LIST_W_PR=13
+_WT_LIST_W_MSG_MIN=20
+# How many PRs to pull when matching branches. GitHub returns them newest-first,
+# so a branch whose PR is older than this window shows a blank PR column.
+_WT_LIST_PR_LIMIT=300
+
+# One record per worktree from `git worktree list --porcelain`, as
+# dir<US>branch<US>locked<US>sha. Skips the bare container entry.
+_wt_list_records() {
+  local container="$1"
+  git -C "$container" worktree list --porcelain 2>/dev/null \
+    | awk -v container="$container" '
+        function emit(   dir) {
+          if (wtpath == "" || wtpath == container || wtpath == container "/.bare") return
+          # Plain prefix strip, not sub() — the container path is a literal, and
+          # any "." in it would otherwise act as a regex wildcard.
+          dir = (substr(wtpath, 1, length(container) + 1) == container "/") \
+                  ? substr(wtpath, length(container) + 2) : wtpath
+          printf "%s\037%s\037%s\037%s\n", dir, branch, locked, head
+        }
+        $1 == "worktree" { emit(); wtpath = substr($0, 10); branch = ""; locked = ""; head = "" }
+        $1 == "HEAD"     { head = $2 }
+        $1 == "branch"   { branch = substr($0, 8); sub("^refs/heads/", "", branch) }
+        $1 == "detached" { branch = "(detached)" }
+        $1 == "locked"   { locked = "1" }
+        END { emit() }
+      '
+}
+
+# Render the worktree table. Everything is joined inside a single awk pass over
+# a tagged stream — C records (commit metadata), then P records (pull requests),
+# then W records (the worktrees themselves) — so the whole listing costs one
+# `git worktree list`, one `git log` and one `gh pr list` regardless of how many
+# worktrees there are. Fields are \037-delimited because commit subjects can
+# contain tabs.
+_wt_list() {
+  local container="$1" cols msgw dirw branchw avail
+  cols="${COLUMNS:-0}"
+  [ "$cols" -gt 0 ] 2>/dev/null || cols=$(tput cols 2>/dev/null) || cols=120
+  [ "$cols" -gt 0 ] 2>/dev/null || cols=120
+
+  # A row is: dir + 1 + lock(1) + 2 + branch + 2 + date + 2 + message + 2 + pr,
+  # so the columns and gutters cost dir+branch+date+pr+message+10. Give the
+  # message whatever's left, borrowing from the two widest columns rather than
+  # letting the row run past the terminal and wrap.
+  dirw=$_WT_LIST_W_DIR
+  branchw=$_WT_LIST_W_BRANCH
+  avail=$((cols - _WT_LIST_W_DATE - _WT_LIST_W_PR - 10))
+  while [ $((avail - dirw - branchw)) -lt "$_WT_LIST_W_MSG_MIN" ]; do
+    if [ "$branchw" -gt "$dirw" ] && [ "$branchw" -gt 12 ]; then
+      branchw=$((branchw - 1))
+    elif [ "$dirw" -gt 12 ]; then
+      dirw=$((dirw - 1))
+    else
+      break   # already as tight as it goes; the message takes the hit
+    fi
+  done
+  msgw=$((avail - dirw - branchw))
+  [ "$msgw" -ge 1 ] || msgw=1
+
+  local records
+  records=$(_wt_list_records "$container")
+  if [ -z "$records" ]; then
+    printf 'wt: no worktrees\n' >&2
+    return 0
+  fi
+
+  # Header. The unlabelled single-column gap after DIRECTORY is the lock flag.
+  printf '\033[90m%-*s    %-*s  %-*s  %-*s  %s\033[0m\n' \
+    "$dirw" "DIRECTORY" \
+    "$branchw" "BRANCH" \
+    "$_WT_LIST_W_DATE" "LAST COMMIT" \
+    "$msgw" "MESSAGE" "PR"
+
+  {
+    # C: commit metadata for every checked-out HEAD, in one git call. The revs
+    # go in on stdin rather than as arguments — zsh doesn't word-split an
+    # unquoted expansion, so a "$shas" variable would arrive as a single rev.
+    printf '%s\n' "$records" | awk -F'\037' '{ print $4 }' | sort -u \
+      | git -C "$container" log --no-walk=unsorted --stdin \
+          --format="C%x1f%H%x1f%cr%x1f%ct%x1f%s" 2>/dev/null
+
+    # P: pull requests keyed by head branch. Best-effort — no gh, no auth or no
+    # network just leaves the column blank.
+    if [ "${WT_LIST_NO_PR:-0}" = 0 ] && command -v gh >/dev/null 2>&1; then
+      ( cd "$container" && gh pr list --state all --limit "$_WT_LIST_PR_LIMIT" \
+          --json number,state,isDraft,headRefName \
+          --jq '.[] | ["P", .headRefName, (.number|tostring), .state, (.isDraft|tostring)] | join("\u001f")' 2>/dev/null )
+    fi
+
+    printf '%s\n' "$records" | awk '{ print "W\037" $0 }'
+  } | awk -F'\037' \
+        -v w_dir="$dirw" -v w_branch="$branchw" \
+        -v w_date="$_WT_LIST_W_DATE" -v w_pr="$_WT_LIST_W_PR" -v w_msg="$msgw" '
+      function pad(s, n,   d) { d = n - length(s); return d > 0 ? s sprintf("%*s", d, "") : s }
+      function fit(s, n) { return pad(substr(s, 1, n), n) }
+      BEGIN {
+        e = sprintf("%c", 27)
+        cyan = e "[36m"; yellow = e "[33m"; green = e "[32m"
+        white = e "[37m"; gray = e "[90m"; purple = e "[38;5;99m"; reset = e "[0m"
+        lock_icon = "\xef\x80\xa3"
+      }
+      $1 == "C" { rel[$2] = $3; ts[$2] = $4; subj[$2] = $5; next }
+      $1 == "P" {
+        # Newest first from gh, so keep the first PR seen for a branch unless a
+        # later one is still open — an open PR is what you care about.
+        if (!($2 in num) || ($4 == "OPEN" && state[$2] != "OPEN")) {
+          num[$2] = $3; state[$2] = $4; draft[$2] = $5
+        }
+        next
+      }
+      {
+        dir = $2; branch = $3; locked = $4; sha = $5
+        lock_cell = locked == "1" ? yellow lock_icon reset : " "
+
+        if (branch in num) {
+          if (state[branch] == "OPEN" && draft[branch] == "true") { pc = gray;   pl = "#" num[branch] " draft" }
+          else if (state[branch] == "OPEN")                       { pc = green;  pl = "#" num[branch] }
+          else if (state[branch] == "MERGED")                     { pc = purple; pl = "#" num[branch] " merged" }
+          else                                                     { pc = purple; pl = "#" num[branch] " closed" }
+        } else { pc = gray; pl = "" }
+        pr_cell = pc pad(substr(pl, 1, w_pr), w_pr) reset
+
+        printf "%s\037%s%s%s %s  %s%s%s  %s%s%s  %s%s%s  %s\n",
+          (sha in ts ? ts[sha] : 0),
+          cyan, fit(dir, w_dir), reset, lock_cell,
+          yellow, fit(branch, w_branch), reset,
+          green, fit(rel[sha], w_date), reset,
+          white, fit(subj[sha], w_msg), reset,
+          pr_cell
+      }
+    ' | sort -t"$(printf '\037')" -k1,1nr | cut -d"$(printf '\037')" -f2-
 }
 
 # Resolve an existing worktree matching $2: exact relative path, or a unique
@@ -293,7 +462,7 @@ wt() {
       shift
       container=$(_wt_container) \
         || { printf 'wt: not inside a wtm-managed repo\n' >&2; return 1; }
-      ( cd "$container" && wtm list "$@" )
+      _wt_list "$container"
       ;;
     delete|rm)
       shift
@@ -301,8 +470,8 @@ wt() {
         || { printf 'wt: not inside a wtm-managed repo\n' >&2; return 1; }
 
       # Pull out the worktree name and detect --force (which skips the
-      # branch/path safety check and force-deletes the branch).
-      local force=0 name="" arg wtpath relpath branch frc
+      # branch/path safety check, breaks any lock, and force-deletes).
+      local force=0 name="" arg wtpath relpath branch frc reason
       for arg in "$@"; do
         case "$arg" in
           --force|-f) force=1 ;;
@@ -330,8 +499,26 @@ wt() {
         return 1
       fi
 
+      # Locked worktrees (supacode locks the ones it manages) can't be removed
+      # by wtm at all: it only ever passes a single --force to `git worktree
+      # remove`, and git needs `-f -f` to break a lock. Unlock first instead.
+      if reason=$(_wt_lock_reason "$container" "$wtpath"); then
+        if [ "$force" -eq 0 ]; then
+          printf "wt: worktree '%s' is locked%s.\n" "$relpath" \
+            "${reason:+ (${reason})}" >&2
+          printf "    Refusing to delete. Re-run with --force to break the lock.\n" >&2
+          return 1
+        fi
+        git -C "$container" worktree unlock "$wtpath" || return 1
+      fi
+
       here="$PWD"
-      ( cd "$container" && wtm delete "$@" )
+      # Build wtm's args ourselves rather than forwarding "$@": wtm only
+      # recognises the long --force (not -f), and its flag parser swallows the
+      # next bare word as the flag's value, so --force has to come last.
+      local -a wtm_args=("$relpath")
+      [ "$force" -eq 1 ] && wtm_args+=(--force)
+      ( cd "$container" && wtm delete "${wtm_args[@]}" )
       rc=$?
       # If we just deleted the worktree we were standing in, step out to the
       # container so we're not left in a phantom directory.
@@ -364,10 +551,14 @@ wt — git worktree helper (wraps wtm)
                      opens the kitty Code tab. --model <m> and
                      --permission-mode <p> pass through to the claude pane;
                      permission-mode defaults to "auto".
-  wt list            List worktrees.
-  wt delete <name>   Delete a worktree and its matching local branch.
-                     Refuses on a branch/path mismatch; --force skips the
-                     check and force-deletes.
+  wt list            Table of every worktree: directory, lock flag, branch,
+                     last commit date + subject, and the branch's PR (green
+                     open, gray draft, purple merged/closed), newest first.
+  wt delete <name> [-f|--force]
+                     Delete a worktree and its matching local branch.
+                     Refuses on a branch/path mismatch, or if the worktree
+                     is locked; -f/--force skips the check, unlocks, and
+                     force-deletes.
   wt pr              Check gh for a PR on the current branch and update the
                      current kitty tab's title to reflect it, replacing the
                      "Code:" label (e.g. "PR #123: myproject"), noting
