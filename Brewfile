@@ -1,4 +1,5 @@
 brew "astro"
+brew "azure-cli"
 brew "bash"
 brew "bash-completion@2"
 brew "bat"

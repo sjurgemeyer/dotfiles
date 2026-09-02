@@ -51,6 +51,7 @@ source ~/.otherFunctions
 source $DOTFILES_DIR/cli/json.sh
 source $DOTFILES_DIR/cli/prreview.sh
 [ -f $DOTFILES_DIR/cli/wt.sh ] && source $DOTFILES_DIR/cli/wt.sh
+[ -f $DOTFILES_DIR/cli/adgroups.sh ] && source $DOTFILES_DIR/cli/adgroups.sh
 
 alias serve='python -m SimpleHTTPServer'
 

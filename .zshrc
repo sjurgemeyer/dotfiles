@@ -137,6 +137,7 @@ alias dbtf=/Users/sjurgemeyer/.local/bin/dbt
 
 source $DOTFILES_DIR/cli/prreview.sh
 [ -f $DOTFILES_DIR/cli/wt.sh ] && source $DOTFILES_DIR/cli/wt.sh
+[ -f $DOTFILES_DIR/cli/adgroups.sh ] && source $DOTFILES_DIR/cli/adgroups.sh
 export GITHUB_TOKEN=$(gh auth token)
 
 eval "$(atuin init zsh)"
