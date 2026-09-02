@@ -98,6 +98,9 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 
 # TODO: bash completion for cortex CLI — investigate (zsh version sourced ~/.zsh/completions/cortex.zsh)
+alias afdev='eval "$(aws configure export-credentials --profile dev --format env)" && flowrs run'
+alias afqa='eval "$(aws configure export-credentials --profile qa --format env)" && flowrs run'
+alias afprod='eval "$(aws configure export-credentials --profile prod --format env)" && flowrs run'
 
 end_time=$(date +%s%N)
 elapsed=$(( (end_time - start_time) / 1000000 ))

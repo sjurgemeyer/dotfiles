@@ -24,6 +24,7 @@ header=$(sh "$HOME/projects/dotfiles/cli/prreview/prreview-filter-header.sh" "$f
 
 if [[ -s "$cache_file" ]]; then
   cat "$cache_file"
+  sh "$HOME/projects/dotfiles/cli/prreview/prreview-maybe-refresh.sh" "$cache_dir" "$W_UPDATED" "$W_REPO" "$W_STATUS" "$W_SUBMITTER" "$W_TITLE" > /dev/null 2>&1
 else
   sh "$HOME/projects/dotfiles/cli/prreview/prreview-refresh.sh" "$cache_dir" "$W_UPDATED" "$W_REPO" "$W_STATUS" "$W_SUBMITTER" "$W_TITLE"
 fi | \

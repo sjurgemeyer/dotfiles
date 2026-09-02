@@ -39,6 +39,33 @@ is the sole attribution mechanism.
   - Follow-up commits on an already-open PR (e.g. responding to review comments) do not need to be squashed.
   - If unsure which approach applies in a given situation, ask me rather than guessing.
 
+## Code comments describe the present, not the past
+
+Comments and docstrings explain the code as it currently stands. They must not
+reference previous state or the change that produced them: no "this replaces
+X", "previously we…", "we used to…", "stronger than the old approach", "before
+this existed…", or notes about what was removed, renamed, or migrated. That
+framing goes stale as soon as the thing it contrasts with is forgotten, and it
+sends readers hunting for context that no longer exists. Write as though the
+current design were the only one there has ever been.
+
+This applies to file headers and docstrings as much as to inline comments, and
+to test docstrings — a test explains what invariant it protects, not the bug
+that prompted it or how the bug was found.
+
+Keep the **why** in the code when it isn't obvious, phrased against present-day
+constraints rather than history:
+
+- Good: "CircleCI leaves `pipeline.git.tag` empty on a UI-run pipeline, so match
+  on the ref name."
+- Bad: "We switched from tag filters to ref-name filters because the spike
+  showed tag filters never matched."
+
+Narrative context — why a change was made, what it replaced, what went wrong
+along the way — belongs in the commit message, the PR description, and any plan
+doc. Those stay reachable from the code through `git blame` and the ticket
+reference, so nothing is lost by keeping them out of the source.
+
 ## CLI tool preferences
 
 When a shell command is genuinely needed (i.e. the built-in Grep/Glob/Read/Edit tools don't fit), always default to the modern replacements — never reach for `grep` or `find` first:
