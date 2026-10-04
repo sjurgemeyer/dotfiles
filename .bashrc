@@ -128,3 +128,6 @@ gpr() {
 # Auto-activate .venv/.env if this shell started inside a wtm worktree.
 # (Placed last so it runs after every PATH modification above.)
 type wt_autoactivate >/dev/null 2>&1 && wt_autoactivate
+
+# Flyline - enhanced Bash experience
+enable flyline 2>/dev/null || enable -f "/Users/sjurgemeyer/.local/lib/libflyline.dylib" flyline

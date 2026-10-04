@@ -35,6 +35,9 @@ vim.opt.showmode = false
 
 -- Sync clipboard between OS and Neovim.
 vim.opt.clipboard = "unnamedplus"
+if vim.env.SSH_TTY then
+	require("config.remote")
+end
 
 -- Enable break indent
 vim.opt.breakindent = true

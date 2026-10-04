@@ -1,6 +1,8 @@
 return {
-  "mikesmithgh/kitty-scrollback.nvim", {},
-  "knubie/vim-kitty-navigator", {}, 
+  -- Both drive the local kitty via `kitten @`, which isn't reachable over SSH
+  -- (config.remote covers navigation there).
+  { "mikesmithgh/kitty-scrollback.nvim", cond = vim.env.SSH_TTY == nil },
+  { "knubie/vim-kitty-navigator", cond = vim.env.SSH_TTY == nil },
   "navarasu/onedark.nvim", {},
   -- better completion windows
   "onsails/lspkind.nvim",

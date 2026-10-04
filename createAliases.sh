@@ -5,8 +5,8 @@ mkdir -p ~/.vimundo
 mkdir -p ~/.hammerspoon
 rm -Rf ~/.hammerspoon/init.lua
 sudo ln -s ~/projects/dotfiles/init.lua ~/.hammerspoon/init.lua
-rm -Rf ~/.hammerspoon/Spoons/
-sudo ln -s ~/projects/dotfiles/hammerspoon/Spoons/ ~/.hammerspoon/Spoons/
+rm -Rf ~/.hammerspoon/Spoons
+sudo ln -s ~/projects/dotfiles/hammerspoon/Spoons ~/.hammerspoon/Spoons
 rm -Rf ~/.hammerspoon/hammerspoon
 sudo ln -s ~/projects/dotfiles/hammerspoon ~/.hammerspoon/hammerspoon
 
@@ -62,5 +62,5 @@ sudo rm -Rf ~/.claude/CLAUDE.md
 sudo ln -s ~/projects/dotfiles/claude/CLAUDE.md ~/.claude/CLAUDE.md
 
 # lsd
-sudo rm -Rf ~/.config/lsd/
+sudo rm -Rf ~/.config/lsd
 sudo ln -s ~/projects/dotfiles/.config/lsd ~/.config/lsd
