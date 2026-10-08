@@ -92,6 +92,10 @@ eval "$(starship init bash)"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
+# SDKMAN - java/gradle/etc. version manager
+export SDKMAN_DIR="$HOME/.sdkman"
+[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+
 #  # pyenv - adds ~200ms
 # export PYENV_ROOT="$HOME/.pyenv"
 # [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
